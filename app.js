@@ -1,4 +1,4 @@
-console.log("hello js");
+alert('Privet!')
 function change() {
 	var x = Math.floor(Math.random() * 256); // range is 0-255
 	var y = Math.floor(Math.random() * 256);
