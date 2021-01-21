@@ -1,9 +1,8 @@
 "use strict"
 
+//____Tabs_________//
 const tabsBtn = document.querySelectorAll(".tabs__nav-btn");
 const tabsItems = document.querySelectorAll(".intro_1")
-
-
 
 tabsBtn.forEach(function(item) {
     item.addEventListener("click", function() {
@@ -27,7 +26,55 @@ tabsBtn.forEach(function(item) {
          }
     });
 });
-document.querySelector('.tabs__nav-btn:nth-child(3)').click();
+document.querySelector('.tabs__nav-btn:nth-child(1)').click();
+//____Tabs_________//
+
+//____Change Color_________//
+let color1 = document.querySelector(".color1");
+let color4 = document.querySelector(".color4");
+
+color1.forEach(function(item) {
+	item.addEventListener("click", function(){
+		color4.style = item.getAttribute('style');
+		
+	});	
+	});
+
+function changeColor(){
+	let x = 260;
+	let y = 100;
+	let z = 60;
+
+	let a  = x - 140;
+	 
+	let b = y/2 ;
+	let c = z+90 ; if (c >= 100) { c = c - 100};
+	
+	pan.style.background = `hsl(${x}, ${y}%, ${z}%)`;
+	pan1.style.background = `hsl(${a}, ${b}%, ${c}%)`;
+	//pan1.style.background = `hsl(" + a + "," + b +" % ," + c +" %)`;
+//	`hsla(${hue},${saturation}%,${lightness}%,${alpha})`	
+};
+changeColor();
+console.log(pan1.style.background);
+
+function generateHslaColors (saturation, lightness, alpha, amount) {
+	let colors = []
+	let huedelta = Math.trunc(360 / amount)
+  
+	for (let i = 0; i < amount; i++) {
+	  let hue = i * huedelta
+	  colors.push(`hsla(${hue},${saturation}%,${lightness}%,${alpha})`)
+	}
+  
+	return colors
+  }
+
+	/*let x = 256 / 4;
+	let y = Math.floor(256 / 2);
+	let z = Math.floor(256 / 3);*/
+	
+
 
 
 
