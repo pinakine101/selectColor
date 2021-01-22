@@ -1,4 +1,12 @@
 "use strict"
+/*Plan
+1. Сделать выбор цвета по клику на цвете
+2. Функция добавить/убрать блока
+3. Выпадающее меню для меню
+4. Кнопка "canculate color"
+5. Сверстать все страницы
+6. Добавить функционал поска по сайту
+*/
 
 //____Tabs_________//
 const tabsBtn = document.querySelectorAll(".tabs__nav-btn");
@@ -28,9 +36,7 @@ tabsBtn.forEach(function(item) {
 });
 document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 //____Tabs_________//
-/*Plan
-1. Сделать выбор цвета по клику на цвете
-2. Функция добавления цвета
+
 
 //____Change Color_________//
 
@@ -44,11 +50,20 @@ color1.forEach(function(item) {
 	});	
 	});
 	function myFunction() {
-    var x = document.createElement("INPUT");
+    let x = document.createElement("INPUT");
     x.setAttribute("type", "color");
     document.body.appendChild(x);
 }*/
-
+//tabsItems.forEach(function(item) {
+	item.addEventListener("click", function() {
+	let x = document.createElement("INPUT");
+	x.setAttribute("type", "color");
+	document.body.appendChild(x);
+	});	
+	
+console.log(x)
+	
+	
 function changeColor(){
 	let x = 260;
 	let y = 100;

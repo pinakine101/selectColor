@@ -93,7 +93,7 @@ h1 {
     top: 0;
     left: 0;
     z-index: 1000;
-    margin-top: 8px:
+    margin-top: 78px;
 }
 .tabs__nav {
     display: flex;
@@ -125,7 +125,7 @@ h1 {
     display: flex;
     width: 100%;
     margin-top: 0px;
-	height:900px ;
+	height:700px ;
     position: relative;
 }
 
