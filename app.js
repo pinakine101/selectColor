@@ -28,9 +28,13 @@ tabsBtn.forEach(function(item) {
 });
 document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 //____Tabs_________//
+/*Plan
+1. Сделать выбор цвета по клику на цвете
+2. Функция добавления цвета
 
 //____Change Color_________//
-let color1 = document.querySelector(".color1");
+
+/*let color1 = document.querySelector(".color1");
 let color4 = document.querySelector(".color4");
 
 color1.forEach(function(item) {
@@ -39,6 +43,11 @@ color1.forEach(function(item) {
 		
 	});	
 	});
+	function myFunction() {
+    var x = document.createElement("INPUT");
+    x.setAttribute("type", "color");
+    document.body.appendChild(x);
+}*/
 
 function changeColor(){
 	let x = 260;
