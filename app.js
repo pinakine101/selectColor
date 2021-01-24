@@ -9,8 +9,8 @@
 */
 
 //____Tabs_________//
-const tabsBtn = document.querySelectorAll(".tabs__nav-btn");
-const tabsItems = document.querySelectorAll(".intro_1")
+let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
+let intro_1 = document.querySelectorAll(".intro_1")
 
 tabsBtn.forEach(function(item) {
     item.addEventListener("click", function() {
@@ -25,7 +25,7 @@ tabsBtn.forEach(function(item) {
                 item.classList.remove('active');
             });
 
-            tabsItems.forEach(function(item){
+            intro_1.forEach(function(item){
                 item.classList.remove('active');
             });
 
@@ -37,6 +37,32 @@ tabsBtn.forEach(function(item) {
 document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 //____Tabs_________//
 
+let color1 = document.querySelectorAll(".color1");
+
+intro_1.forEach(function(item) {
+    item.addEventListener("click", function() {
+		$('#colorSelector').ColorPicker({
+			color: '#0000ff',
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#colorSelector div').css('backgroundColor', '#' + hex);
+			}
+		});
+ });
+});
+
+ 	
+		//let x = color1;
+		// document.body.appendChild(x);
+		
+		//});
 
 //____Change Color_________//
 
@@ -54,17 +80,11 @@ color1.forEach(function(item) {
     x.setAttribute("type", "color");
     document.body.appendChild(x);
 }*/
-//tabsItems.forEach(function(item) {
-	item.addEventListener("click", function() {
-	let x = document.createElement("INPUT");
-	x.setAttribute("type", "color");
-	document.body.appendChild(x);
-	});	
-	
-console.log(x)
+
+
 	
 	
-function changeColor(){
+/*function changeColor(){
 	let x = 260;
 	let y = 100;
 	let z = 60;
@@ -98,10 +118,6 @@ function generateHslaColors (saturation, lightness, alpha, amount) {
 	let y = Math.floor(256 / 2);
 	let z = Math.floor(256 / 3);*/
 	
-
-
-
-
 /*function change() {
 	var x = Math.floor(Math.random() * 256); // range is 0-255
 	var y = Math.floor(Math.random() * 256);
@@ -110,5 +126,4 @@ function generateHslaColors (saturation, lightness, alpha, amount) {
 
 	document.body.style.background=thergb;
 }
-
-// JavaScript Document*/
+*/
