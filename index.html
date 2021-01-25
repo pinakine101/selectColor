@@ -3,8 +3,9 @@
     <head>
         <meta charset="utf-8">
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="/CSS/style.css" />
-            <link rel="stylesheet" media="screen" type="text/css" href="/CSS/colorpicker.css" />
+            <link rel="stylesheet" href="/css/style.css" />
+            <link rel="stylesheet" href="css/colorpicker.css" type="text/css" />
+            
 
 <title>Select color</title>
     </head>
@@ -41,10 +42,9 @@
     </header>
 
 <div class="intro">
-    <!-- <button onclick="myFunction()">Try it</button> -->
+    
             <div class="intro_1" id="спальня">
-                <div class="color1" > </div>
-                <div class="color2" > </div>
+                <div class="color1" id = "color1"></div>
             </div>
             <div class="intro_1" id="гостинная">
                 <div class="color2" ></div>
@@ -67,11 +67,13 @@
             <div class="intro_1"  id="Туалет">
                 <div class="color1"></div>
             </div>
+            <input type="button" id="selectcolor" value="Изменить цвет">
         </div>
             
-       <script src="app.js"></script>
-       <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-       <script src="colorpicker.js"></script>
+       <script src="js/app.js"></script>
+       <script type="text/javascript" src="js/jquery.js"></script>
+       <script type="text/javascript" src="js/colorpicker.js"></script>
+       
     </body>
 </html>
 

@@ -37,32 +37,16 @@ tabsBtn.forEach(function(item) {
 document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 //____Tabs_________//
 
+let color1 = document.querySelectorAll(".color1");
+let box = document.getElementsByTagName('div')[0];
 
-$(document).ready(function(){
-	$('#selectcolor').ColorPicker({
-	  color: '#53ccd0',
-	  onShow: function (cp) {
-		  $(cp).fadeIn(500);
-		  return false;
-	  },
-	  onHide: function (cp) {
-		  $(cp).fadeOut(500);
-		  return false;
-	  },
-	  onChange: function (hsb, hex, rgb) {
-		  $('#color1').css('backgroundColor', '#' + hex);
-	  }
-	});
-  });
-
-
-// intro_1.forEach(function(color1) {
-//     color1.addEventListener("click", function() {
-// 		color1.setAttribute("type", "color");
+intro_1.forEach(function(color1) {
+    color1.addEventListener("click", function() {
+		color1.setAttribute("type", "color");
 		
-// 			console.log(color1);	
-//  });
-// });
+			console.log(color1);	
+ });
+});
 //let x = document.getElementById('blue');	
 		//x.setAttribute("type", "color");
 		
@@ -131,4 +115,5 @@ function generateHslaColors (saturation, lightness, alpha, amount) {
 	var thergb = "rgb(" + x + "," + y + "," + z + ")"; 
 
 	document.body.style.background=thergb;
-
+}
+*/
