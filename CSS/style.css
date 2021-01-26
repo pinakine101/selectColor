@@ -18,15 +18,17 @@ h1 {
     color: #8a8a8a;
 }
 input {
-    padding: 0;
-    margin: 0;
+    padding: 0 !important;
+    margin: 0 !important;
     border: 0 !important; 
    }
+
    input:focus {
     border:0;
     padding: 0;
     margin: 0;
   }
+
 *,
 *:before,
 *:after {
@@ -140,20 +142,20 @@ input {
 }
 
 .intro_1 {
-    display: inline-flex;
+    padding-top:20px;
+    display: flex;
 }
 .intro_1.active {
-    display: flex;
+    padding-top:20px;
     width: 100%;
-    height: 100%;
-
+    height: 500px;
 }
 .color1 {
-    
-    background-color: #a1b4ff;
+    padding-top:570px;
+   
     width: 100%;
-    height: 50%;
-    border: 30px #ffffff;
+    height: 500px;
+   
 }
 .color2 {
     background-color: #ffa385;
@@ -249,67 +251,5 @@ input {
 .over4:hover{
     border: 7px solid #000000;
 }
-
-
-/*
-https://progi.pro/kak-obrabativat-alfa-v-ruchnom-rezhime-nalozheniya-overlay-10358380
-
-
-outputRed = (foregroundRed * foregroundAlpha) + (backgroundRed * (1.0 - foregroundAlpha));
-
-
-struct Color
-{
-    int R;
-    int G;
-    int B;
-    int A;
-};
-
-
-Color Blend(Color c1, Color c2)
-{
-    Color result;
-    double a1 = c1.A / 255.0;
-    double a2 = c2.A / 255.0;
-
-
-
-    result.R = (int) (a1 * c1.R + a2 * (1 - a1) * c2.R);
-    result.G = (int) (a1 * c1.G + a2 * (1 - a1) * c2.G);
-    result.B = (int) (a1 * c1.B + a2 * (1 - a1) * c2.B);
-    result.A = (int) (255 * (a1 + a2 * (1 - a1)));
-    return result;
-}
-
-
-
-void Example()
-{
-    Color c1;
-    c1.R = 255;
-    c1.G = 0;
-    c1.B = 0;
-    c1.A = 100;
-
-
-
-    Color c2;
-    c2.R = 255;
-    c2.G = 255;
-    c2.B = 255;
-
-
-
-    Color blended = Blend(c1, c2);
-    int x = 50;
-    int y = 100;
-
-
-
-    // Pretend function that draws a pixel at (x, y) with rgb values
-    DrawPixel(x, y, blended.R, blended.G, blended.B);
-}
-*/
 
 

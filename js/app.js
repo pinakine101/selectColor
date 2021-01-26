@@ -35,16 +35,18 @@ tabsBtn.forEach(function(item) {
     });
 });
 document.querySelector('.tabs__nav-btn:nth-child(1)').click();
+
 //____Tabs_________//
 
 let color1 = document.querySelectorAll(".color1");
-let box = document.getElementsByTagName('div')[0];
+
+document.getElementById("selectcolor").input = false;
 
 intro_1.forEach(function(color1) {
     color1.addEventListener("click", function() {
+
 		color1.setAttribute("type", "color");
-		
-			console.log(color1);	
+		console.log(color1);	
  });
 });
 //let x = document.getElementById('blue');	
