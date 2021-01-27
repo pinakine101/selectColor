@@ -38,17 +38,55 @@ document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 
 //____Tabs_________//
 
-let color1 = document.querySelectorAll(".color1");
+// let col1 = document.querySelector('.color1');
+// console.log(col1.background-color);
 
-document.getElementById("selectcolor").input = false;
 
-intro_1.forEach(function(color1) {
-    color1.addEventListener("click", function() {
 
-		color1.setAttribute("type", "color");
-		console.log(color1);	
- });
-});
+// $('.intro_1').on('Right click',  function() {
+// 					$('.color1').ColorPicker({
+// 			  color:'#8c8df8',
+// 			  onChange: function (hsb, hex, rgb) {
+// 				  $('.color1').css('backgroundColor', '#' + hex + rgb +hsb);
+// 			  }
+// 			});
+// 		  });
+	
+	
+ $(document).ready(function() {
+			$(document).bind("contextmenu",function(e){
+					return false;
+				});
+		$(".intro1").mousedown(function(e){
+				//to block browsers default right click
+				if( e.button == 2 ) {
+		
+					$("#contextMenu").css("left", e.pageX);
+					$("#contextMenu").css("top", e.pageY);
+					$("#contextMenu").fadeIn(50, startFocusOut());
+				}
+			  });
+
+			  function startFocusOut() {
+				$(document).on("click", function () {   
+					$("#contextMenu").hide(50);
+					$(document).off("click");           
+				});
+			}
+	});
+	//https://jsfiddle.net/PCLwU/1/
+
+// let color1 = document.querySelectorAll(".color1");
+
+// document.getElementById("selectcolor").input = false;
+
+// intro_1.forEach(function(color1) {
+//     color1.addEventListener("click", function() {
+
+// 		color1.setAttribute("type", "color");
+// 		console.log(color1);	
+//  });
+// });
 //let x = document.getElementById('blue');	
 		//x.setAttribute("type", "color");
 		
@@ -88,7 +126,7 @@ color1.forEach(function(item) {
 	
 	pan.style.background = `hsl(${x}, ${y}%, ${z}%)`;
 	pan1.style.background = `hsl(${a}, ${b}%, ${c}%)`;
-	//pan1.style.background = `hsl(" + a + "," + b +" % ," + c +" %)`;
+	pan1.style.background = `hsl(" + a + "," + b +" % ," + c +" %)`;
 //	`hsla(${hue},${saturation}%,${lightness}%,${alpha})`	
 };
 changeColor();
@@ -108,14 +146,12 @@ function generateHslaColors (saturation, lightness, alpha, amount) {
 
 	/*let x = 256 / 4;
 	let y = Math.floor(256 / 2);
-	let z = Math.floor(256 / 3);*/
+	let z = Math.floor(256 / 3);
 	
-/*function change() {
+function change() {
 	var x = Math.floor(Math.random() * 256); // range is 0-255
 	var y = Math.floor(Math.random() * 256);
 	var z = Math.floor(Math.random() * 256);
 	var thergb = "rgb(" + x + "," + y + "," + z + ")"; 
 
-	document.body.style.background=thergb;
-}
-*/
+	document.body.style.background=thergb;*/

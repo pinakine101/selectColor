@@ -4,6 +4,10 @@
         <meta charset="utf-8">
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="/css/style.css" />
+            <link rel="stylesheet" href="css/colorpicker.css" type="text/css" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+            <script type="text/javascript" src="js/colorpicker.js"></script>
+           
          
             
 
@@ -40,11 +44,15 @@
       </nav>
     </div>
     </header>
-
-<div class="intro">
     
+<div class="intro">
+                     
+            
             <div class="intro_1" id="спальня">
-                <input  class="color1" type="color" id="selectcolor" value="#a1b4ff">
+                <div class="contextMenu" id='contextMenu'>
+                    <div class="context" ></div>
+                 </div>
+                <div class="color1" ></div>
             </div>
             <div class="intro_1" id="гостинная">
                 <div class="color2" ></div>
@@ -53,7 +61,7 @@
                 <div class="color3" ></div>
             </div>
             <div class="intro_1" id="Детская">
-                <div class="color1"></div>
+                <div class="color2"></div>
             </div>
             <div class="intro_1"  id="Кабинет">
                 <div class="color4"></div>
@@ -71,7 +79,6 @@
         </div>
             
        <script src="js/app.js"></script>
-       
       
        
     </body>
