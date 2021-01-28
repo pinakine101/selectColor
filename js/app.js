@@ -38,42 +38,67 @@ document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 
 //____Tabs_________//
 
+// if (document.addEventListener) { // IE >= 9; other browsers
+// 	document.addEventListener('contextmenu', function(e) {
+// 		contextColor();
+// 		e.preventDefault();
+// 	}, false);
+// } else { // IE < 9
+// 	document.attachEvent('oncontextmenu', function() {
+// 		document.querySelector('.contextMenu').style.display = 'none';
+// 		window.event.returnValue = false;
+// 	});
+// }
+let col = $('.color1').css('backgroundColor');
+console.log(col)
+let H = 120;
+let S = 50;
+let B = 30;
+
+$('.intro_1').mousemove (function(e){
+	    $('#box').css({
+			"position":"absolute","left":e.pageX+"px","top":e.pageY+"px"
+    });
+});
+
+$('.box').on('mouseover',  function() {
+						$('.box').ColorPicker({
+					eventName: 'contextmenu',
+				  color:({h:H, s:S, b:B}),
+				  onChange: function (hsb, hex, rgb) {
+					  $('.color1').css('backgroundColor', '#' + hex);
+									  }
+					
+				});
+			  });
 // let col1 = document.querySelector('.color1');
 // console.log(col1.background-color);
 
 
 
-// $('.intro_1').on('Right click',  function() {
-// 					$('.color1').ColorPicker({
-// 			  color:'#8c8df8',
-// 			  onChange: function (hsb, hex, rgb) {
-// 				  $('.color1').css('backgroundColor', '#' + hex + rgb +hsb);
-// 			  }
-// 			});
-// 		  });
 	
 	
- $(document).ready(function() {
-			$(document).bind("contextmenu",function(e){
-					return false;
-				});
-		$(".intro1").mousedown(function(e){
-				//to block browsers default right click
-				if( e.button == 2 ) {
+//  $(document).ready(function() {
+// 			$(document).bind("contextmenu",function(e){
+// 					return false;
+// 				});
+// 		$(".intro1").mousedown(function(e){
+// 				//to block browsers default right click
+// 				if( e.button == 2 ) {
 		
-					$("#contextMenu").css("left", e.pageX);
-					$("#contextMenu").css("top", e.pageY);
-					$("#contextMenu").fadeIn(50, startFocusOut());
-				}
-			  });
+// 					$("#contextMenu").css("left", e.pageX);
+// 					$("#contextMenu").css("top", e.pageY);
+// 					$("#contextMenu").fadeIn(50, startFocusOut());
+// 				}
+// 			  });
 
-			  function startFocusOut() {
-				$(document).on("click", function () {   
-					$("#contextMenu").hide(50);
-					$(document).off("click");           
-				});
-			}
-	});
+// 			  function startFocusOut() {
+// 				$(document).on("click", function () {   
+// 					$("#contextMenu").hide(50);
+// 					$(document).off("click");           
+// 				});
+// 			}
+// 	});
 	//https://jsfiddle.net/PCLwU/1/
 
 // let color1 = document.querySelectorAll(".color1");

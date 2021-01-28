@@ -5,6 +5,9 @@ body {
     font-size: 14px;
     color:#FFFFFF;
     -webkit-font-smoothing: antialiased;
+    width: auto;
+    height: auto;
+    overflow-x: hidden;
 }
 h1 {
     font-family: 'Roboto', sans-serif;
@@ -133,6 +136,15 @@ input {
 
 /*intro
 =================*/
+.box {
+    display:block;
+    position: absolute;
+   z-index: 900;
+    width: 10px;
+    height: 10px;
+    background-color:#ffa385;
+    opacity: .001;
+}
 .intro {
     display: inline-flex;
     width: 100%;
@@ -143,14 +155,17 @@ input {
 
 .intro_1 {
     padding-top:20px;
-    display: flex;
+    display:inline-flex;
 }
 .intro_1.active {
     padding-top:20px;
     width: 100%;
     height: 500px;
 }
-#contextMenu {
+.contextMenu {
+    position: absolute;
+    z-index: 200;
+    display: none;
     width: 200px;
     height: 200px;
     background-color:#d1d1d1;
