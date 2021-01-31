@@ -1,6 +1,7 @@
 "use strict"
 /*Plan
 1. Сделать выбор цвета по клику на цвете
+1.1   выбор образца цвета по движению мыши
 2. Функция добавить/убрать блока
 3. Выпадающее меню для меню
 4. Кнопка "canculate color"
@@ -9,6 +10,7 @@
 */
 
 //____Tabs_________//
+
 let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
 let intro_1 = document.querySelectorAll(".intro_1")
 
@@ -36,7 +38,69 @@ tabsBtn.forEach(function(item) {
 });
 document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 
-//____Tabs_________//
+
+
+let colors = document.querySelectorAll(".color1");
+
+colors.forEach(function(item1) {
+	item1.addEventListener("click", function() {
+	console.log('спасибо');
+ });
+ });
+// $('.color1').forEach(function() {
+
+				
+			
+
+// 		let colId = it;
+// 		let colorId =document.getAttribute(data-color);
+// 		let colId = document.querySelector(colorId);
+// 		console.log(colId)
+// 	});
+
+
+
+
+
+
+let H = 120;
+let S = 50;
+let B = 30;
+
+
+
+
+// $('.intro_1').mousemove (function(e){
+// 	$('.box').css({
+// 		"position":"absolute","left":e.pageX+"px","top":e.pageY+"px"
+// });
+$('.intro').contextmenu (function contextMenu (e){
+	
+		$('.box').css({"position":"absolute",
+		"left":e.pageX+"px","top":e.pageY+"px" });
+		$("body").on("contextmenu", false);
+$('.box').ColorPicker({
+	eventName: 'mouseover',
+	color:({h:H, s:S, b:B}),
+	onChange: function (hsb, hex, rgb) {
+	$('.color1').css('backgroundColor', '#' + hex);
+		 }
+	});
+});
+
+
+// $('.box').on('mouseover',  function() {
+// 			$('.box').ColorPicker({
+// 				eventName: 'contextmenu',
+// 				color:({h:H, s:S, b:B}),
+// 				onChange: function (hsb, hex, rgb) {
+// 				$('.color1').css('backgroundColor', '#' + hex);
+// 					 }
+// 				});
+// 			});
+		
+// let col1 = document.querySelector('.color1');
+// console.log(col1.background-color);
 
 // if (document.addEventListener) { // IE >= 9; other browsers
 // 	document.addEventListener('contextmenu', function(e) {
@@ -49,31 +113,6 @@ document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 // 		window.event.returnValue = false;
 // 	});
 // }
-let col = $('.color1').css('backgroundColor');
-console.log(col)
-let H = 120;
-let S = 50;
-let B = 30;
-
-$('.intro_1').mousemove (function(e){
-	    $('#box').css({
-			"position":"absolute","left":e.pageX+"px","top":e.pageY+"px"
-    });
-});
-
-$('.box').on('mouseover',  function() {
-						$('.box').ColorPicker({
-					eventName: 'contextmenu',
-				  color:({h:H, s:S, b:B}),
-				  onChange: function (hsb, hex, rgb) {
-					  $('.color1').css('backgroundColor', '#' + hex);
-									  }
-					
-				});
-			  });
-// let col1 = document.querySelector('.color1');
-// console.log(col1.background-color);
-
 
 
 	
@@ -134,12 +173,9 @@ color1.forEach(function(item) {
     let x = document.createElement("INPUT");
     x.setAttribute("type", "color");
     document.body.appendChild(x);
-}*/
-
-
+}
 	
-	
-/*function changeColor(){
+function changeColor(){
 	let x = 260;
 	let y = 100;
 	let z = 60;
@@ -179,4 +215,4 @@ function change() {
 	var z = Math.floor(Math.random() * 256);
 	var thergb = "rgb(" + x + "," + y + "," + z + ")"; 
 
-	document.body.style.background=thergb;*/
+	//document.body.style.background=thergb;*/
