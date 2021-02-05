@@ -40,17 +40,87 @@ document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 
 
 
-let colors = document.querySelectorAll(".color1");
 
-colors.forEach(function(item1) {
-	item1.addEventListener("click", function() {
-	console.log('спасибо');
- });
- });
+
+// let colors = document.querySelectorAll('.color');
+// console.log(colors);
+
+let H, S, B;
+
+
+// pan1.style.background = `hsl(" + a + "," + b +" % ," + c +" %)`;
+//pan1.style.background = `hsl(${a}, ${b}%, ${c}%)`;
+let activeColorOn = document.querySelectorAll('.color');
+
+
+$(activeColorOn).on("contextmenu", false);
+
+
+
+function colorPick(e) {
+	$('#colorpickerHolder').css({
+		"position":"absolute","left":e.pageX+"px","top":e.pageY+"px"
+	});
+	
+		let span = e.target;
+	let box = $('#colorpickerHolder');
+			$('#colorpickerHolder').ColorPicker({
+				flat: true,
+		    eventName: 'click',
+			color: ({h:100, s:50, b:50}),
+			onChange: function(hsb, hex, rgb) {
+		$(span).css('backgroundColor', '#' + hex,);
+			}
+	});
+console.log(span);
+};
+
+activeColorOn.forEach(function(id) {
+	id.addEventListener("click", colorPick);
+	});
+		
+// 	if (!span) return; // (2)
+
+//  if (!span.contains(span)) return; // (3)
+ 
+	
+
+// activeColorOn.forEach(id => {
+// 			id.addEventListener("contextmenu", colorPick);
+// 	});
+	 
+
+	// id = e.target.closest('span'); // (1)
+
+// if (!span) return; // (2)
+
+// if (!span.contains(span)) return; // (3)
+// return span;
+
+
+		// ColorPickerOn(); // (4)
+	  	// 	$('.box').css({
+		// 	"position":"absolute","left":event.pageX+"px","top":event.pageY+"px"
+		// });
+
+	// 	function ColorPickerOn(){
+	// 				$(span).ColorPicker({
+	// 			// eventName: 'contextmenu',
+	// 			color:({h:H, s:S, b:B}),
+	// 			onChange: function (hsb, hex, rgb) {
+	// 		$(span).css('backgroundColor', '#' + hex);
+	// 		}
+	// 			});
+	// 		}
+	// 	console.log(span);
+	// 	});
+	// });
+		
+	
+
+
+
 // $('.color1').forEach(function() {
-
-				
-			
 
 // 		let colId = it;
 // 		let colorId =document.getAttribute(data-color);
@@ -61,32 +131,19 @@ colors.forEach(function(item1) {
 
 
 
-
-
-let H = 120;
-let S = 50;
-let B = 30;
-
-
-
-
-// $('.intro_1').mousemove (function(e){
-// 	$('.box').css({
-// 		"position":"absolute","left":e.pageX+"px","top":e.pageY+"px"
-// });
-$('.intro').contextmenu (function contextMenu (e){
+// $('.intro').contextmenu (function contextMenu (e){
 	
-		$('.box').css({"position":"absolute",
-		"left":e.pageX+"px","top":e.pageY+"px" });
-		$("body").on("contextmenu", false);
-$('.box').ColorPicker({
-	eventName: 'mouseover',
-	color:({h:H, s:S, b:B}),
-	onChange: function (hsb, hex, rgb) {
-	$('.color1').css('backgroundColor', '#' + hex);
-		 }
-	});
-});
+// 		$('.box').css({"position":"absolute",
+// 		"left":e.pageX+"px","top":e.pageY+"px" });
+// 		$("body").on("contextmenu", false);
+// $('.box').ColorPicker({
+// 	eventName: 'mouseover',
+// 	color:({h:H, s:S, b:B}),
+// 	onChange: function (hsb, hex, rgb) {
+// 	$('.color1').css('backgroundColor', '#' + hex);
+// 		 }
+// 	});
+// });
 
 
 // $('.box').on('mouseover',  function() {

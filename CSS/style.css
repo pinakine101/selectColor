@@ -136,14 +136,12 @@ input {
 
 /*intro
 =================*/
-.box {
+#colorpickerHolder {
     display:block;
     position: absolute;
    z-index: 900;
-    width: 10px;
-    height: 10px;
-    background-color:#ffa385;
-    opacity: .001;
+   
+   
 }
 .intro {
     display: inline-flex;
@@ -151,11 +149,13 @@ input {
     margin-top: 0px;
 	height:700px ;
     position: relative;
+    background-color: #8c8df8;
 }
 
 .intro_1 {
     padding-top:20px;
     display:inline-flex;
+    background-color: #8c8df8;
 }
 .intro_1.active {
     padding-top:20px;
@@ -176,19 +176,19 @@ input {
     background-color:#8a8a8a;
 
 }
-.color1 {
-  
-    background-color: #8c8df8;
+.color {
+    position: relative;
     width: 100%;
-    height: 500px;
-   
-}
-.color2 {
-    background-color: #ffa385;
-    width: 100%;
-    height: 50%
+    height: 510px;
 }
 
+#color1 {
+    background-color: #8c8df8;
+}
+
+#color2 {
+    background-color: #ffa385;
+}
 .color3 {
     background-color: #8a0700;
     width: 100%;
