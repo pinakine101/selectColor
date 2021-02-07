@@ -40,53 +40,94 @@ document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 
 
 
-let colors = document.querySelectorAll(".color1");
-
-colors.forEach(function(item1) {
-	item1.addEventListener("click", function() {
-	console.log('спасибо');
- });
- });
-// $('.color1').forEach(function() {
-
-				
-			
-
-// 		let colId = it;
-// 		let colorId =document.getAttribute(data-color);
-// 		let colId = document.querySelector(colorId);
-// 		console.log(colId)
-// 	});
 
 
-
-
-
-
-let H = 120;
-let S = 50;
-let B = 30;
-
-
-
-
-// $('.intro_1').mousemove (function(e){
-// 	$('.box').css({
-// 		"position":"absolute","left":e.pageX+"px","top":e.pageY+"px"
-// });
-$('.intro').contextmenu (function contextMenu (e){
+// colors.forEach(function(item) {
+// 	item.addEventListener("click", function() {
+// 		let colorId = item;
+// 		item = document.getElementById(colorId);
+// 		console.log(colorId);
 	
-		$('.box').css({"position":"absolute",
-		"left":e.pageX+"px","top":e.pageY+"px" });
-		$("body").on("contextmenu", false);
-$('.box').ColorPicker({
-	eventName: 'mouseover',
-	color:({h:H, s:S, b:B}),
-	onChange: function (hsb, hex, rgb) {
-	$('.color1').css('backgroundColor', '#' + hex);
-		 }
-	});
+//  });
+//  });
+
+
+// let H = 120;
+// let S = 50;
+// let B = 30;
+
+$("body").on("contextmenu", false);	
+
+let colorsActive = document.querySelectorAll('.color');
+
+// colorsActive.forEach(function(item) {
+// 	item.removeEventListener("click" , conMen);
+// 	console.log(item);
+// });
+// let i =0;
+// const deletLisener = (e) => {
+// 	i++;
+// 	if(i>1){
+// 		e.removeEventListener("contextmenu", deletLisener);
+// 	}
+// }
+
+colorsActive.forEach(function(item) {
+	item.addEventListener("contextmenu", colorPick)
+		
+		// let currentColor = item;
+
+        //  if( ! currentColor.conMen() )
+        //  {
+
+        //     item.forEach(function(item){
+        //         item.remove(conMen);
+		// 	});
+		// 	item.forEach(conMen);
+		// }
+		
 });
+$(span).css('background-color')
+function colorPick(e){
+	let span = e.target;
+
+	
+
+		console.log(activeColor);
+		
+	$('.boxColorPick').css({"position":"absolute",
+		"left":e.clientX+"px","top":e.clientY+"px" });
+
+	$('.boxColorPick').ColorPicker({
+		// layout:'hex',
+
+		// flat: true,
+		eventName: 'mouseover',
+		color:({h:H, s:S, b:B}),
+		onChange: function (hsb, hex, rgb) {
+			
+			$(span).css('backgroundColor', '#' + hex);
+			// $(el).colpickHide();
+			 }
+		});
+		
+		console.log(span);
+		return span;
+
+};
+// 
+$(function() {
+	$(span).each(function(indx, el){
+	let activeColor = $(span).css('background-color'),
+			[r,g,b] = activeColor.match(/\d+/g);
+			$(this).text([r,g,b])
+		});
+	});
+// 		item.addEventListener("click");
+// 		colpickHide();
+// 	});		
+		 
+
 
 
 // $('.box').on('mouseover',  function() {

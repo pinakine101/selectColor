@@ -136,14 +136,13 @@ input {
 
 /*intro
 =================*/
-.box {
-    display:block;
+.boxColorPick {
+   width: 10px;
+   height: 10px;
     position: absolute;
-   z-index: 900;
-    width: 10px;
-    height: 10px;
-    background-color:#ffa385;
-    opacity: .001;
+    z-index: 900;
+    background-color:#d1d1d1;
+    opacity: 1;
 }
 .intro {
     display: inline-flex;
@@ -176,19 +175,22 @@ input {
     background-color:#8a8a8a;
 
 }
-.color1 {
-  
-    background-color: #8c8df8;
+.color {
+    /* background-color: #8c8df8; */
     width: 100%;
     height: 500px;
-   
 }
-.color2 {
-    background-color: #ffa385;
+#color1 {
     width: 100%;
-    height: 50%
+    height: 500px;
+    background-color: #8c8df8;
 }
 
+#color2 {
+    width: 100%;
+    height: 500px;
+    background-color: #ffa385;
+}
 .color3 {
     background-color: #8a0700;
     width: 100%;
