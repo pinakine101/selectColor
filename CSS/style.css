@@ -7,7 +7,7 @@ body {
     -webkit-font-smoothing: antialiased;
     width: auto;
     height: auto;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 h1 {
     font-family: 'Roboto', sans-serif;
@@ -136,147 +136,67 @@ input {
 
 /*intro
 =================*/
-#colorpickerHolder {
-    display:block;
-    position: absolute;
-   z-index: 900;
-   
+.colorpickerHolder {
+    
+     position: absolute;
    
 }
 .intro {
-    display: inline-flex;
+    display:flex;
     width: 100%;
-    margin-top: 0px;
-	height:700px ;
-    position: relative;
-    background-color: #8c8df8;
-}
-
-.intro_1 {
+     }
+/* .intro_1 {
+    
+    /* height: 500px; 
     padding-top:20px;
-    display:inline-flex;
-    background-color: #8c8df8;
-}
+    overflow-x:hidden; 
+   } */
 .intro_1.active {
+    width: 100%;
+    height: 700px; 
     padding-top:20px;
-    width: 100%;
-    height: 500px;
+    overflow:hidden;
 }
-.contextMenu {
-    position: absolute;
-    z-index: 200;
-    display: none;
-    width: 200px;
-    height: 200px;
-    background-color:#d1d1d1;
 
-}
-.context {
-    height: 200px;
-    background-color:#8a8a8a;
-
-}
 .color {
-    position: relative;
+    display: flex;
     width: 100%;
-    height: 510px;
+    overflow: auto;
+    resize: vertical;
+    
+}
+.color.active {
+    border: 3px solid #ffffff;
 }
 
 #color1 {
-    background-color: #8c8df8;
+    background-color: rgb(144, 8, 255);
+    height: 30%;
 }
 
 #color2 {
-    background-color: #ffa385;
+    background-color: rgb(100, 200, 150);
+    height: 35%;
+    resize: none;
+    
+    
 }
-.color3 {
+#color3 {
     background-color: #8a0700;
-    width: 100%;
-    height: 100%;
+    height: 30%;
+  
 }
-.color4 {
+  
+
+#color4 {
     background-color: #003d47;
-    width: 100%;
-    height: 100%;
-}
-    /*intro2
-=============*/
-.intro_2 {
-    display: none;
-    margin: 0;
-    width:50%;
-    position: absolute;
-    top:0;
-    right:0;
-    z-index: 1;
+    height: 35%;
+    
+    
+
 
 }
 
-/*Column
-====================*/
-.column_conteiner {
-    margin-top: 175px;
-    height: 994px;
-    width: 100%;
-    justify-content: space-between;
-    overflow-y: scroll;
 
-}
-
-.column_items {
-    width: 2500px;
-    height: 100%;
-    display: flex;
-    margin-bottom: 21px;
-
-}
-.column1 {
-    width: 300px;
-    background: rgba(150, 255, 255, .25);
-}
-.column2 {
-
-    width: 300px;
-        background: rgba(255, 100, 255, .25);
-}
-.column3 {
-
-    width: 300px;
-
-    background: rgba(255, 190, 255, .25);
-}
-.column4 {
-
-    width: 300px;
-    background: rgba(255, 255, 200, .25);
-}
-.over1 {
-    height: 52.7%;
-}
-.over2 {
-    height: 9.2%;
-}
-.over3 {
-    height: 4.8%;
-}
-.over4 {
-    height: 33.3%;
-}
-
-
-
-
-.over1:hover{
-    border: 7px solid #000000;
-}
-.over2:hover{
-    border: 7px solid #000000;
-}
-.over3:hover{
-    border: 7px solid #000000;
-}
-.over4:hover{
-    border: 7px solid #000000;
-}
 
 

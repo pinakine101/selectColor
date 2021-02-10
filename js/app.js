@@ -1,12 +1,12 @@
 "use strict"
 /*Plan
-1. Сделать выбор цвета по клику на цвете
-1.1   выбор образца цвета по движению мыши
-2. Функция добавить/убрать блока
-3. Выпадающее меню для меню
-4. Кнопка "canculate color"
-5. Сверстать все страницы
-6. Добавить функционал поска по сайту
+1. Сделать выбор цвета по клику на цвете - DONE
+2   выбор образца цвета по движению мыши
+3. Функция добавить/убрать блока
+4. Выпадающее меню для меню
+5. Кнопка "canculate color"
+6. Сверстать все страницы
+7. Добавить функционал поиска по сайту
 */
 
 //____Tabs_________//
@@ -14,12 +14,26 @@
 let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
 let intro_1 = document.querySelectorAll(".intro_1")
 
+// $('.intro').each(function() {
+// 	let ths = $(this);
+// 	ths.find('.intro_1').not(':first').hide();
+// 	ths.find('.tabs__nav-btn').click(function() {
+// 		ths.find('.tabs__nav-btn').removeClass('active').eq($(this).index()).addClass('active');
+// 		ths.find('.intro_1').hide().eq($(this).index()).fadeIn()
+// 	}).eq(0).addClass('active');
+// });
+
 tabsBtn.forEach(function(item) {
-    item.addEventListener("click", function() {
+    item.addEventListener("click", function activeTab() {
         let currentBtn = item;
         let tabId = currentBtn.getAttribute ("data-tab");
         let currentTab = document.querySelector(tabId);
-
+		let colors = document.querySelectorAll('.color');
+	
+		// colors.forEach(function(item){
+		// 	item.classList.remove('active');
+		// });
+		
          if( ! currentBtn.classList.contains('active') )
          {
 
@@ -31,245 +45,95 @@ tabsBtn.forEach(function(item) {
                 item.classList.remove('active');
             });
 
+			colors.forEach(function(item){
+                item.classList.remove('active');
+            });
+
             currentBtn.classList.add('active');
             currentTab.classList.add('active');
+			
+			return currentBtn;
          }
     });
 });
+
 document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 
+let deleteElement = function(){
+	$('.colorpickerHolder').remove();
+};
+
+let colors = document.querySelectorAll('.color');
+
+colors.forEach(function(color) {
+	color.addEventListener("contextmenu", colorPicker);
+	color.addEventListener("mouseover", deleteElement);
+});
+
+$(colors).on("contextmenu", false);
 
 
+function colorPicker(e) {
+	
+	const contextBox = document.createElement('ColPick');
+	contextBox.classList.add('colorpickerHolder');
+	document.querySelector('body').append(contextBox);
+	
+	let span = e.target;
+	let box = $('.colorpickerHolder');
+	let spanColor = $(span).css('backgroundColor');
+	let col = rgb2hex(spanColor);
+	
+	function rgb2hex(rgb) {
+    rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+    function hex(x) {
+        return ("0" + parseInt(x).toString(16)).slice(-2);
+    }
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	};
 
-
-// let colors = document.querySelectorAll('.color');
-// console.log(colors);
-
-let H, S, B;
-
-
-// pan1.style.background = `hsl(" + a + "," + b +" % ," + c +" %)`;
-//pan1.style.background = `hsl(${a}, ${b}%, ${c}%)`;
-let activeColorOn = document.querySelectorAll('.color');
-
-
-$(activeColorOn).on("contextmenu", false);
-
-
-
-function colorPick(e) {
-	$('#colorpickerHolder').css({
+	$(box).css({
 		"position":"absolute","left":e.pageX+"px","top":e.pageY+"px"
 	});
-	
-		let span = e.target;
-	let box = $('#colorpickerHolder');
-			$('#colorpickerHolder').ColorPicker({
-				flat: true,
-		    eventName: 'click',
-			color: ({h:100, s:50, b:50}),
-			onChange: function(hsb, hex, rgb) {
+
+	$(box).ColorPicker({
+		flat: true,
+		color: col,
+		onChange: function(hsb, hex, rgb) {
 		$(span).css('backgroundColor', '#' + hex,);
-			}
+		}
 	});
-console.log(span);
-};
-
-activeColorOn.forEach(function(id) {
-	id.addEventListener("click", colorPick);
-	});
-		
-// 	if (!span) return; // (2)
-
-//  if (!span.contains(span)) return; // (3)
- 
-	
-
-// activeColorOn.forEach(id => {
-// 			id.addEventListener("contextmenu", colorPick);
-// 	});
-	 
-
-	// id = e.target.closest('span'); // (1)
-
-// if (!span) return; // (2)
-
-// if (!span.contains(span)) return; // (3)
-// return span;
-
-
-		// ColorPickerOn(); // (4)
-	  	// 	$('.box').css({
-		// 	"position":"absolute","left":event.pageX+"px","top":event.pageY+"px"
-		// });
-
-	// 	function ColorPickerOn(){
-	// 				$(span).ColorPicker({
-	// 			// eventName: 'contextmenu',
-	// 			color:({h:H, s:S, b:B}),
-	// 			onChange: function (hsb, hex, rgb) {
-	// 		$(span).css('backgroundColor', '#' + hex);
-	// 		}
-	// 			});
-	// 		}
-	// 	console.log(span);
-	// 	});
-	// });
-		
-	
-
-
-
-// $('.color1').forEach(function() {
-
-// 		let colId = it;
-// 		let colorId =document.getAttribute(data-color);
-// 		let colId = document.querySelector(colorId);
-// 		console.log(colId)
-// 	});
-
-
-
-
-// $('.intro').contextmenu (function contextMenu (e){
-	
-// 		$('.box').css({"position":"absolute",
-// 		"left":e.pageX+"px","top":e.pageY+"px" });
-// 		$("body").on("contextmenu", false);
-// $('.box').ColorPicker({
-// 	eventName: 'mouseover',
-// 	color:({h:H, s:S, b:B}),
-// 	onChange: function (hsb, hex, rgb) {
-// 	$('.color1').css('backgroundColor', '#' + hex);
-// 		 }
-// 	});
-// });
-
-
-// $('.box').on('mouseover',  function() {
-// 			$('.box').ColorPicker({
-// 				eventName: 'contextmenu',
-// 				color:({h:H, s:S, b:B}),
-// 				onChange: function (hsb, hex, rgb) {
-// 				$('.color1').css('backgroundColor', '#' + hex);
-// 					 }
-// 				});
-// 			});
-		
-// let col1 = document.querySelector('.color1');
-// console.log(col1.background-color);
-
-// if (document.addEventListener) { // IE >= 9; other browsers
-// 	document.addEventListener('contextmenu', function(e) {
-// 		contextColor();
-// 		e.preventDefault();
-// 	}, false);
-// } else { // IE < 9
-// 	document.attachEvent('oncontextmenu', function() {
-// 		document.querySelector('.contextMenu').style.display = 'none';
-// 		window.event.returnValue = false;
-// 	});
-// }
-
-
-	
-	
-//  $(document).ready(function() {
-// 			$(document).bind("contextmenu",function(e){
-// 					return false;
-// 				});
-// 		$(".intro1").mousedown(function(e){
-// 				//to block browsers default right click
-// 				if( e.button == 2 ) {
-		
-// 					$("#contextMenu").css("left", e.pageX);
-// 					$("#contextMenu").css("top", e.pageY);
-// 					$("#contextMenu").fadeIn(50, startFocusOut());
-// 				}
-// 			  });
-
-// 			  function startFocusOut() {
-// 				$(document).on("click", function () {   
-// 					$("#contextMenu").hide(50);
-// 					$(document).off("click");           
-// 				});
-// 			}
-// 	});
-	//https://jsfiddle.net/PCLwU/1/
-
-// let color1 = document.querySelectorAll(".color1");
-
-// document.getElementById("selectcolor").input = false;
-
-// intro_1.forEach(function(color1) {
-//     color1.addEventListener("click", function() {
-
-// 		color1.setAttribute("type", "color");
-// 		console.log(color1);	
-//  });
-// });
-//let x = document.getElementById('blue');	
-		//x.setAttribute("type", "color");
-		
-
- 	
-		
-
-//____Change Color_________//
-
-/*let color1 = document.querySelector(".color1");
-let color4 = document.querySelector(".color4");
-
-color1.forEach(function(item) {
-	item.addEventListener("click", function(){
-		color4.style = item.getAttribute('style');
-		
-	});	
-	});
-	function myFunction() {
-    let x = document.createElement("INPUT");
-    x.setAttribute("type", "color");
-    document.body.appendChild(x);
+	console.log(rgb2hex(spanColor));
 }
-	
-function changeColor(){
-	let x = 260;
-	let y = 100;
-	let z = 60;
 
-	let a  = x - 140;
-	 
-	let b = y/2 ;
-	let c = z+90 ; if (c >= 100) { c = c - 100};
-	
-	pan.style.background = `hsl(${x}, ${y}%, ${z}%)`;
-	pan1.style.background = `hsl(${a}, ${b}%, ${c}%)`;
-	pan1.style.background = `hsl(" + a + "," + b +" % ," + c +" %)`;
-//	`hsla(${hue},${saturation}%,${lightness}%,${alpha})`	
-};
-changeColor();
-console.log(pan1.style.background);
+		
+	colors.forEach(function(color) {
+		color.addEventListener("click", function (){
+			let colorAct = color;
 
-function generateHslaColors (saturation, lightness, alpha, amount) {
-	let colors = []
-	let huedelta = Math.trunc(360 / amount)
-  
-	for (let i = 0; i < amount; i++) {
-	  let hue = i * huedelta
-	  colors.push(`hsla(${hue},${saturation}%,${lightness}%,${alpha})`)
-	}
-  
-	return colors
-  }
+			 if( ! color.classList.contains("active") )
+			 {
+				colors.forEach(function(color){
+					color.classList.remove('active');
+				});
+				};
+				colorAct.classList.add('active');	
+				
+				console.log(colorAct);
+				return colorAct;
+			});
+			color.addEventListener("mouseout", function (){
+				colors.forEach(function(color){
+					color.classList.remove('active');
+				});
+		});
+	});
 
-	/*let x = 256 / 4;
-	let y = Math.floor(256 / 2);
-	let z = Math.floor(256 / 3);
-	
-function change() {
-	var x = Math.floor(Math.random() * 256); // range is 0-255
-	var y = Math.floor(Math.random() * 256);
-	var z = Math.floor(Math.random() * 256);
-	var thergb = "rgb(" + x + "," + y + "," + z + ")"; 
 
-	//document.body.style.background=thergb;*/
+
+		// $(function() {
+		// 	$(colors).click(function() {
+		// 		$(colors).removeClass("activeCol");         
+		// 		$(this).toggleClass("activeCol");
+		// 	})
+		// });
