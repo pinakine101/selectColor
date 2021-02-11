@@ -57,6 +57,7 @@ tabsBtn.forEach(function(item) {
     });
 });
 
+
 document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 
 let deleteElement = function(){
@@ -69,6 +70,7 @@ colors.forEach(function(color) {
 	color.addEventListener("contextmenu", colorPicker);
 	color.addEventListener("mouseover", deleteElement);
 });
+
 
 $(colors).on("contextmenu", false);
 
