@@ -9,19 +9,10 @@
 7. Добавить функционал поиска по сайту
 */
 
-//____Tabs_________//
+//_______Tabs_________//
 
 let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
 let intro_1 = document.querySelectorAll(".intro_1")
-
-// $('.intro').each(function() {
-// 	let ths = $(this);
-// 	ths.find('.intro_1').not(':first').hide();
-// 	ths.find('.tabs__nav-btn').click(function() {
-// 		ths.find('.tabs__nav-btn').removeClass('active').eq($(this).index()).addClass('active');
-// 		ths.find('.intro_1').hide().eq($(this).index()).fadeIn()
-// 	}).eq(0).addClass('active');
-// });
 
 tabsBtn.forEach(function (item) {
 	item.addEventListener("click", function activeTab() {
@@ -30,11 +21,7 @@ tabsBtn.forEach(function (item) {
 		let currentTab = document.querySelector(tabId);
 		let colors = document.querySelectorAll('.color');
 
-		// colors.forEach(function(item){
-		// 	item.classList.remove('active');
-		// });
-
-		if (!currentBtn.classList.contains('active')) {
+			if (!currentBtn.classList.contains('active')) {
 
 			tabsBtn.forEach(function (item) {
 				item.classList.remove('active');
@@ -51,13 +38,13 @@ tabsBtn.forEach(function (item) {
 			currentBtn.classList.add('active');
 			currentTab.classList.add('active');
 
-			return currentBtn;
 		}
 	});
 });
+document.querySelector('.tabs__nav-btn:nth-child(3)').click();
 
 
-document.querySelector('.tabs__nav-btn:nth-child(1)').click();
+//______ColorPicker_________//
 
 let deleteElement = function () {
 	$('.colorpickerHolder').remove();
@@ -70,31 +57,22 @@ colors.forEach(function (color) {
 	color.addEventListener("mouseover", deleteElement);
 });
 
-
 $(colors).on("contextmenu", false);
-
 
 function colorPicker(e) {
 
 	const contextBox = document.createElement('ColPick');
 	contextBox.classList.add('colorpickerHolder');
 	document.querySelector('body').append(contextBox);
-
 	let span = e.target;
 	let box = $('.colorpickerHolder');
 	let spanColor = $(span).css('backgroundColor');
 	let col = rgb2hex(spanColor);
 
-	function rgb2hex(rgb) {
-		rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+	function rgb2hex (color) { return "#"+(color.match(/\b(\d+)\b/g).map(function(digit)
+	{ return ('0' + parseInt(digit).toString(16)).slice(-2) })).join(''); };
 
-		function hex(x) {
-			return ("0" + parseInt(x).toString(16)).slice(-2);
-		}
-		return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-	};
-
-	$(box).css({
+		$(box).css({
 		"position": "absolute",
 		"left": e.pageX + "px",
 		"top": e.pageY + "px"
@@ -107,77 +85,188 @@ function colorPicker(e) {
 			$(span).css('backgroundColor', '#' + hex, );
 		}
 	});
-	// console.log(rgb2hex(spanColor));
 }
 
+//______Active Color_________//
 
 colors.forEach(function (color) {
-	color.addEventListener("click", function () {
-		let colorAct = color;
-
+	color.addEventListener("click", function select() {
+		
 		if (!color.classList.contains("active")) {
 			colors.forEach(function (color) {
 				color.classList.remove('active');
 			});
 		};
-		colorAct.classList.add('active');
-
-		// console.log(colorAct);
-		return colorAct;
+		color.classList.add('active');
 	});
-	color.addEventListener("mouseout", function () {
+	color.addEventListener("dblclick", function () {
 		colors.forEach(function (color) {
 			color.classList.remove('active');
 		});
 	});
 });
 
+//______ChangeColor_________//
+
+// function generateHslaColors (saturation, lightness, alpha, amount) {
+// 	let colors = []
+// 	let huedelta = Math.trunc(360 / amount)
+  
+// 	for (let i = 0; i < amount; i++) {
+// 	  let hue = i * huedelta
+// 	  colors.push(`hsla(${hue},${saturation}%,${lightness}%,${alpha})`)
+// 	}
+  
+// 	return colors
+// };
+// movieDB.movies.forEach((film, i) => {
+//     movieList.innerHTML += `
+//     <li class="promo__interactive-item">${i+1} ${film}
+//                             <div class="delete"></div>
+//                             </li>
+//     `;
+
+// // });
+const root = colors;
+
+function setTheme(color) {
+	// Convert hex to RGB first
+	let r = 0,
+	  g = 0,
+	  b = 0;
+	if (color.length == 4) {
+	  r = "0x" + color[1] + color[1];
+	  g = "0x" + color[2] + color[2];
+	  b = "0x" + color[3] + color[3];
+	} else if (color.length == 7) {
+	  r = "0x" + color[1] + color[2];
+	  g = "0x" + color[3] + color[4];
+	  b = "0x" + color[5] + color[6];
+	}
+	// Then to HSL
+	r /= 255;
+	g /= 255;
+	b /= 255;
+	let cmin = Math.min(r, g, b),
+	  cmax = Math.max(r, g, b),
+	  delta = cmax - cmin,
+	  h = 0,
+	  s = 0,
+	  l = 0;
+  
+	if (delta == 0) h = 0;
+	else if (cmax == r) h = ((g - b) / delta) % 6;
+	else if (cmax == g) h = (b - r) / delta + 2;
+	else h = (r - g) / delta + 4;
+  
+	h = Math.round(h * 60);
+  
+	if (h < 0) h += 360;
+  
+	l = (cmax + cmin) / 2;
+	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+	s = +(s * 100).toFixed(1);
+	l = +(l * 100).toFixed(1);
+  
+   root.style.setProperty(`--primary-color-h`, h);
+   root.style.setProperty(`--primary-color-s`, s + "%");
+   root.style.setProperty(`--primary-color-l`, l + "%");
+   root.style.setProperty (" --primary-color-light", "50%");
+   
+  };
+	
+  const setDarkTheme = () => {
+	
+	
+	
+  };
+
+
+function changeColorLeft(){
+	setDarkTheme();
+			console.log(setDarkTheme());
+	 };
+	
+
+ // 	
+			// $(item).each(function(indx, el){
+			// 	let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+			// 	 r =+r+ 15;
+			// 	 g = +g+ 15;
+			// 	 b =+b+ 15;
+			// 	item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+			// 	rgb2Hsl(item);
+			// 	console.log (item);
+			// 		});
+			
+					// $(item).each(function(indx, el){
+						
+					// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
+					// 	 h -= 15;
+					// 	 s = +s+ 15;
+					// 	 l =+l+ 15;
+					// 	item.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+					// 	rgb2Hsl(color);
+					// 	console.log (item);
+					// 		});
+
+// rgbToHsl();
+// let	x = 100,
+// 	y = 50,
+// 	z = 50;
+// let = ChangedColor;
+// ChangedColor = `hsl(${x}, ${y}%, ${z}%)`;
+
+	
+
+//______Swip_________//
+
 let clickStartX = 0;
 let clickStartY = 0;
 let clickEndX = 0;
 let clickEndY = 0;
 
-let gesuredZone = document.querySelectorAll('.color');
-
-
 
 colors.forEach(function(color) { 
 
 	color.addEventListener('mousedown', function(event) {
-		clickStartX = event.pageX;
-		clickStartY = event.pageY;
-		console.log(event)
+		clickStartX = event.clientX;
+		clickStartY = event.clientY;
+		// console.log(event)
 	}, false);
 
 	color.addEventListener('mouseup', function(event) {
-		clickEndX = event.pageX;
-		clickEndY = event.pageY;
+		clickEndX = event.clientX;
+		clickEndY = event.clientY;
 		handleGesure();
-		console.log(event)
+		// console.log(event)
 	}, false); 
-
-	function handleGesure() {
-		let swiped = 'swiped:';
-		if (clickEndX < clickStartX   &&  clickEndY - clickStartY < 150 ) {
-			console.log(swiped + 'left!')
-		}
-		if (clickEndX > clickStartX  &&  clickEndY - clickStartY < 150) {
-			console.log(swiped + 'right!');}
-		
-		if (clickEndY > clickStartY && clickEndX - clickStartX < 150) {
-			console.log(swiped + 'down!')
-		}
-		if (clickEndY < clickStartY && clickStartX - clickEndX < 150) { 
-			console.log(swiped + 'up!');
-		}
-		// if (touchendY == touchstartY) {
-		// 	alert('tap!');
-		// }
-	}
 });
 
-var initialPoint;
-var finalPoint;
+function handleGesure() {
+		var xAbs = Math.abs(clickStartX - clickEndX);
+		var yAbs = Math.abs(clickStartY - clickEndY);
+		if (xAbs > 10 || yAbs > 10) {
+			if (xAbs > yAbs) {
+				if (clickEndX <clickStartX) {
+					changeColorLeft();
+					
+					 console.log('left!');
+				} else {
+					console.log('right!');/*СВАЙП ВПРАВО*/
+				}
+			} else {
+				if (clickEndY < clickStartY) {
+					console.log('up!');
+				} else {
+					console.log('down!');
+				}
+			}
+		}
+};
+
+let initialPoint;
+let finalPoint;
 colors.forEach(function (color) {
 	color.addEventListener('touchstart', function (event) {
 		event.preventDefault();
@@ -208,8 +297,4 @@ colors.forEach(function (color) {
 		}
 	}, false);
 });
-
-
-
-
 
