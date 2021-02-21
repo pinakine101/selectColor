@@ -90,10 +90,12 @@ colorsActive.forEach(function(item) {
 $(span).css('background-color')
 function colorPick(e){
 	let span = e.target;
-
+	let activeColor = $(span).css('background-color'),
 	
-
 		console.log(activeColor);
+
+
+
 		
 	$('.boxColorPick').css({"position":"absolute",
 		"left":e.clientX+"px","top":e.clientY+"px" });
@@ -112,17 +114,10 @@ function colorPick(e){
 		});
 		
 		console.log(span);
-		return span;
+		
 
 };
 // 
-$(function() {
-	$(span).each(function(indx, el){
-	let activeColor = $(span).css('background-color'),
-			[r,g,b] = activeColor.match(/\d+/g);
-			$(this).text([r,g,b])
-		});
-	});
 // 		item.addEventListener("click");
 // 		colpickHide();
 // 	});		
