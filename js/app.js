@@ -105,22 +105,10 @@ colors.forEach(function (color) {
 		});
 	});
 });
-<<<<<<< HEAD
-$(span).css('background-color')
-function colorPick(e){
-	let span = e.target;
-	let activeColor = $(span).css('background-color'),
-	
-		console.log(activeColor);
-
-
-
-		
-	$('.boxColorPick').css({"position":"absolute",
-		"left":e.clientX+"px","top":e.clientY+"px" });
-=======
 
 //______ChangeColor_________//
+
+
 
 // function generateHslaColors (saturation, lightness, alpha, amount) {
 // 	let colors = []
@@ -133,15 +121,8 @@ function colorPick(e){
   
 // 	return colors
 // };
-// movieDB.movies.forEach((film, i) => {
-//     movieList.innerHTML += `
-//     <li class="promo__interactive-item">${i+1} ${film}
-//                             <div class="delete"></div>
-//                             </li>
-//     `;
-
 // // });
-const root = colors;
+const root = document.documentElement;
 
 function setTheme(color) {
 	// Convert hex to RGB first
@@ -185,78 +166,41 @@ function setTheme(color) {
    root.style.setProperty(`--primary-color-h`, h);
    root.style.setProperty(`--primary-color-s`, s + "%");
    root.style.setProperty(`--primary-color-l`, l + "%");
-   root.style.setProperty (" --primary-color-light", "50%");
-   
+//    return h,s,l;
   };
-	
-  const setDarkTheme = () => {
-	
-	
-	
-  };
+function changeColorLeft (item){
+	let colAct = document.querySelector('.color.active');
 
->>>>>>> 155babfb9b1755095f34b3ebb884b58506eeef9a
-
-function changeColorLeft(){
-	setDarkTheme();
-			console.log(setDarkTheme());
-	 };
-	
-
- // 	
-			// $(item).each(function(indx, el){
-			// 	let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-			// 	 r =+r+ 15;
-			// 	 g = +g+ 15;
-			// 	 b =+b+ 15;
-			// 	item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-			// 	rgb2Hsl(item);
-			// 	console.log (item);
-			// 		});
-			
-<<<<<<< HEAD
-			$(span).css('backgroundColor', '#' + hex);
-			// $(el).colpickHide();
-			 }
-		});
-		
-		console.log(span);
-		
-
-};
-// 
-// 		item.addEventListener("click");
-// 		colpickHide();
-// 	});		
+	$(colAct).each(function(indx, el){
+		$(el).css("backgroundColor").style.setProperty(' --primary-color--dark', el.target)
+	  });
+	// 		$(colAct).each(function(indx, el){
+	// 			let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+	// 			 r =+r+ 15;
+	// 			 g = +g+ 15;
+	// 			 b =+b+ 15;
+	// 			 colAct.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+				
+				console.log (colAct);
+					};
 		 
+	// let colAct = document.querySelector('.color.active');
+	// colAct.classList.add('.color4');
+	// console.log(colAct);
 
 
-
-// $('.box').on('mouseover',  function() {
-// 			$('.box').ColorPicker({
-// 				eventName: 'contextmenu',
-// 				color:({h:H, s:S, b:B}),
-// 				onChange: function (hsb, hex, rgb) {
-// 				$('.color1').css('backgroundColor', '#' + hex);
-// 					 }
-// 				});
-// 			});
-		
-// let col1 = document.querySelector('.color1');
-// console.log(col1.background-color);
-
-// if (document.addEventListener) { // IE >= 9; other browsers
-// 	document.addEventListener('contextmenu', function(e) {
-// 		contextColor();
-// 		e.preventDefault();
-// 	}, false);
-// } else { // IE < 9
-// 	document.attachEvent('oncontextmenu', function() {
-// 		document.querySelector('.contextMenu').style.display = 'none';
-// 		window.event.returnValue = false;
-// 	});
-// }
-=======
+	// $(function  changeColorLeft(item){
+	// 	$(item).each(function(indx, el){
+	// 		let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+	// 		 r =+r+ 150;
+	// 		 g = +g+ 15;
+	// 		 b =+b+ 15;
+	// 		item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+			
+	// 		console.log (item);
+	// 			});
+	//  });
+	
 					// $(item).each(function(indx, el){
 						
 					// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
@@ -276,7 +220,6 @@ function changeColorLeft(){
 // ChangedColor = `hsl(${x}, ${y}%, ${z}%)`;
 
 	
->>>>>>> 155babfb9b1755095f34b3ebb884b58506eeef9a
 
 //______Swip_________//
 
