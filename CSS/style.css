@@ -185,8 +185,8 @@ input {
     
 }
 #color3 {
-    background-color: var(--primary-color--light);
-    height: 30%;
+    background-color:  rgb(144, 8, 255);
+    height: 35%;
   
 }
   
@@ -196,8 +196,14 @@ input {
     height: 35%;
     
 }
+
+
+.color--dark {
+    background-color: var(--primary-color--dark);
+}
+
 :root {
-    --primary-color: hsl(0, 100%, 50%);
+   
     --primary-color-h: 0;
     --primary-color-s: 50%;
     --primary-color-l: 50%;
@@ -207,7 +213,5 @@ input {
     --primary-color--light: hsl(var(--primary-color-h),  calc(var(--primary-color-s) + 3%), var(--primary-color-l) );
   
     /* darken */ 
-    --primary-color--dark: hsl(var(--primary-color-h), var(--primary-color-s), calc(var(--primary-color-l) - 20%));
+    --primary-color--dark: hsl(var(--primary-color-h), var(--primary-color-s), calc(var(--primary-color-l) - 25%));
 }
-
-
