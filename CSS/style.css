@@ -160,13 +160,26 @@ input {
     overflow-x:hidden;
 }
 
+:root {
+    --primary-color-h: 0;
+    --primary-color-s: 50%;
+    --primary-color-l: 50%;
+    --darken: 0%;
+    --primary-color: hsl(var(--primary-color-h), var( --primary-color-s), calc(var(--primary-color-l) + var(--darken)));
+    --primary-colorH: hsl(calc(var(--primary-color-h) + 10), var( --primary-color-s), var(--primary-color-l));
+  }
+
+  #color4 {
+    background-color: var(--primary-color);
+    height: 35%;
+}
 .color {
     display: flex;
 
     width: 100%;
     overflow: auto;
     resize: vertical;
-    background-color: var(--primary-color);
+    
     
     
 }
@@ -175,7 +188,7 @@ input {
 }
 
 #color1 {
-    background-color: hsl(144, 80%, 20%);
+    background-color: hsl(14, 80%, 20%);
     height: 30%;
 }
 
@@ -187,30 +200,15 @@ input {
     
 }
 #color3 {
-    background-color:  hsl(144, 8%, 50%);
+    background-color:var(--primary-colorH);
     height: 35%;
-  
 }
   
-:root {
-   
-    --primary-color-h: 60;
-    --primary-color-s: 50%;
-    --primary-color-l: 50%;
-    --primary-color: hsl(var(—primary-color-h), var(--primary-color-s), var(--primary-color-l));
-    
-    /* lighten */
-    --primary-color--light: hsl(var(--primary-color-h),  calc(var(--primary-color-s) + 3%), var(--primary-color-l) );
-  
-    /* darken */ 
-    --primary-color--dark: hsl(var(--primary-color-h), var(--primary-color-s), calc(var(--primary-color-l) - 25%));
-}
 
-#color4 {
-    background-color: var(--primary-color--light);
-    height: 35%;
-    
-}
+
+
+
+
 
 
 

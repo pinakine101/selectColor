@@ -106,6 +106,33 @@ colors.forEach(function (color) {
 	});
 });
 
+//______ChangeColor_________//
+
+function changeColorLeft (){
+// let colAct = document.querySelector('#color4');
+	let colAct = document.querySelector('.color.active');
+	
+	let colHSL = document.documentElement.style.setProperty('--darken',"15%");
+	// colHSL += + 10;
+	colAct.style.backgroundColor = colHSL;
+	
+		
+		console.log (colAct);	
+
+			// $(colAct).each(function(indx, el){
+			// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
+			// 	 h =+h+ 10;
+			// 	 s = +s+ 10;
+			// 	 l =+l+ 10;
+			// 	 colAct.style.backgroundColor = `rgb(${h}, ${s}, ${l})`;
+			// 	console.log (colAct);
+			// 		});
+				};
+	
+	
+
+
+
 //______Swip_________//
 
 let clickStartX = 0;
@@ -131,13 +158,13 @@ colors.forEach(function(color) {
 	}, false); 
 });
 
-function handleGesure(e) {
+function handleGesure() {
 		var xAbs = Math.abs(clickStartX - clickEndX);
 		var yAbs = Math.abs(clickStartY - clickEndY);
 		if (xAbs > 10 || yAbs > 10) {
 			if (xAbs > yAbs) {
 				if (clickEndX <clickStartX) {
-					changeColorLeft(e);
+					changeColorLeft();
 					
 					 console.log('left!');
 				} else {
@@ -155,83 +182,76 @@ function handleGesure(e) {
 
 
 
-//______ChangeColor_________//
 
 
 
 // function generateHslaColors (saturation, lightness, alpha, amount) {
-// 	let colors = []
+// 	let colorsQ = []
 // 	let huedelta = Math.trunc(360 / amount)
   
 // 	for (let i = 0; i < amount; i++) {
 // 	  let hue = i * huedelta
-// 	  colors.push(`hsla(${hue},${saturation}%,${lightness}%,${alpha})`)
+// 	  colorsQ.style.backgroundColor = `hsla(${hue},${saturation}%,${lightness}%,${alpha})`;
 // 	}
   
-// 	return colors
+// 	console.log(colorsQ);
 // };
-// // });
+// generateHslaColors(100, 50, 50);
 
 
-function setTheme(color) {
-	// Convert hex to RGB first
-	let r = 0,
-	  g = 0,
-	  b = 0;
-	if (color.length == 4) {
-	  r = "0x" + color[1] + color[1];
-	  g = "0x" + color[2] + color[2];
-	  b = "0x" + color[3] + color[3];
-	} else if (color.length == 7) {
-	  r = "0x" + color[1] + color[2];
-	  g = "0x" + color[3] + color[4];
-	  b = "0x" + color[5] + color[6];
-	}
-	// Then to HSL
-	r /= 255;
-	g /= 255;
-	b /= 255;
-	let cmin = Math.min(r, g, b),
-	  cmax = Math.max(r, g, b),
-	  delta = cmax - cmin,
-	  h = 0,
-	  s = 0,
-	  l = 0;
+// function setTheme(H, inputType) {
+// 	// Convert hex to RGB first
+// 	let r = 0, g = 0, b = 0;
+// 	// if (H.length == 4) {
+// 	//   r = "0x" + H[1] + H[1];
+// 	//   g = "0x" + H[2] + H[2];
+// 	//   b = "0x" + H[3] + H[3];
+// 	// } else if (H.length == 7) {
+// 	//   r = "0x" + H[1] + H[2];
+// 	//   g = "0x" + H[3] + H[4];
+// 	//   b = "0x" + H[5] + H[6];
+// 	// }
+// 	// Then to HSL
+// 	r /= 255;
+// 	g /= 255;
+// 	b /= 255;
+// 	let cmin = Math.min(r,g,b),
+// 		cmax = Math.max(r,g,b),
+// 		delta = cmax - cmin,
+// 		h = 0,
+// 		s = 0,
+// 		l = 0;
   
-	if (delta == 0) h = 0;
-	else if (cmax == r) h = ((g - b) / delta) % 6;
-	else if (cmax == g) h = (b - r) / delta + 2;
-	else h = (r - g) / delta + 4;
+// 	if (delta == 0)
+// 	  h = 0;
+// 	else if (cmax == r)
+// 	  h = ((g - b) / delta) % 6;
+// 	else if (cmax == g)
+// 	  h = (b - r) / delta + 2;
+// 	else
+// 	  h = (r - g) / delta + 4;
   
-	h = Math.round(h * 60);
+// 	h = Math.round(h * 60);
   
-	if (h < 0) h += 360;
+// 	if (h < 0)
+// 	  h += 360;
   
-	l = (cmax + cmin) / 2;
-	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-	s = +(s * 100).toFixed(1);
-	l = +(l * 100).toFixed(1);
-  
-//    root.style.setProperty(`--primary-color-h`, h);
-//    root.style.setProperty(`--primary-color-s`, s + "%");
-//    root.style.setProperty(`--primary-color-l`, l + "%");
-  
-
-  };
+// 	l = (cmax + cmin) / 2;
+// 	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+// 	s = +(s * 100).toFixed(1);
+// 	l = +(l * 100).toFixed(1);
+	
+// 	document.documentElement.style.setProperty(`--${inputType}-color-h`, h);
+// 	document.documentElement.style.setProperty(`--${inputType}-color-s`, s + '%');
+// 	document.documentElement.style.setProperty(`--${inputType}-color-l`, l + '%');
+//   }
 
 //   console.log(setTheme(colors))
 
 
-let root = document.documentElement;
-function changeColorLeft (){
+
 	
-	let colAct = document.querySelector('.color.active');
-	// let r = 0,
-	// 	 g =  15,
-	// 	 b = 15;
-	// 	 setTheme(hsl)
-	colAct.root.style.setProperty(' --primary-color--dark',"100%")
-	
+
 
 	// $(colAct).each(function(indx, el){
 	// 	$(el).css("backgroundColor").style.setProperty(' --primary-color--dark', el.target)
@@ -245,25 +265,13 @@ function changeColorLeft (){
 			// 	//  b =+b+ 15;
 			// 	 colAct.style.backgroundColor = color;
 				//  colAct.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-				 console.log (colAct);	
-					};
 
 	// let colAct = document.querySelector('.color.active');
 	// colAct.classList.add('.color4');
 	// console.log(colAct);
 
 
-	// $(function  changeColorLeft(item){
-	// 	$(item).each(function(indx, el){
-	// 		let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-	// 		 r =+r+ 150;
-	// 		 g = +g+ 15;
-	// 		 b =+b+ 15;
-	// 		item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-			
-	// 		console.log (item);
-	// 			});
-	//  });
+	//
 	
 					// $(item).each(function(indx, el){
 						
@@ -282,39 +290,3 @@ function changeColorLeft (){
 // 	z = 50;
 // let = ChangedColor;
 // ChangedColor = `hsl(${x}, ${y}%, ${z}%)`;
-
-// let initialPoint;
-// let finalPoint;
-// colors.forEach(function (color) {
-// 	color.addEventListener('touchstart', function (event) {
-// 		event.preventDefault();
-// 		event.stopPropagation();
-// 		initialPoint = event.changedTouches[0];
-// 	}, false);
-
-// 	color.addEventListener('touchend', function (event) {
-// 		event.preventDefault();
-// 		event.stopPropagation();
-// 		finalPoint = event.changedTouches[0];
-// 		var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
-// 		var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
-// 		if (xAbs > 10 || yAbs > 10) {
-// 			if (xAbs > yAbs) {
-// 				if (finalPoint.pageX < initialPoint.pageX) {
-// 					console.log('left!');
-// 				} else {
-// 					console.log('right!');/*СВАЙП ВПРАВО*/
-// 				}
-// 			} else {
-// 				if (finalPoint.pageY < initialPoint.pageY) {
-// 					console.log('up!');
-// 				} else {
-// 					console.log('down!');
-// 				}
-// 			}
-// 		}
-// 	}, false);
-// });
-
-
-
