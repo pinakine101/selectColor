@@ -166,8 +166,6 @@ input {
     width: 100%;
     overflow: auto;
     resize: vertical;
-    background-color: var(--primary-color);
-    
     
 }
 .color.active {
@@ -175,45 +173,59 @@ input {
 }
 
 #color1 {
-    background-color: hsl(144, 80%, 20%);
+    background-color: rgb(144, 8, 255);
     height: 30%;
 }
 
 #color2 {
-    background-color: hsl(100, 50%, 80%);
+    background-color: rgb(100, 200, 150);
     height: 35%;
     resize: none;
     
     
 }
 #color3 {
-    background-color:  hsl(144, 8%, 50%);
+    background-color:  rgb(144, 8, 255);
     height: 35%;
   
 }
   
-:root {
+
+ /* {
+    background-color: var(--primary-color--dark);
+    height: 35%;
+    
+} */
+
+
+/* .color--dark {
+    background-color: var(--primary-color--dark);
+} */
+
+/*:root {
    
-    --primary-color-h: 60;
+    --primary-color-h: 0;
     --primary-color-s: 50%;
     --primary-color-l: 50%;
     --primary-color: hsl(var(—primary-color-h), var(--primary-color-s), var(--primary-color-l));
     
-    /* lighten */
+  
     --primary-color--light: hsl(var(--primary-color-h),  calc(var(--primary-color-s) + 3%), var(--primary-color-l) );
   
-    /* darken */ 
+ 
     --primary-color--dark: hsl(var(--primary-color-h), var(--primary-color-s), calc(var(--primary-color-l) - 25%));
-}
+}*/
 
-#color4 {
-    background-color: var(--primary-color--light);
-    height: 35%;
+
+:root {
+    /* :root is a clever way of saying "the outer-most element" */
     
-}
-
-
-
-
-
-
+    --footer-color: #ff4545; /* the default */
+  }
+  
+.color4 {
+    width: 100px;
+    height: 500px;
+    margin-top: 20px;
+    background-color: var(--footer-color);
+  }
