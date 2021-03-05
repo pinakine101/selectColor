@@ -106,31 +106,6 @@ colors.forEach(function (color) {
 	});
 });
 
-//______ChangeColor_________//
-
-function changeColorLeft (){
-// let colAct = document.querySelector('#color4');
-	let colAct = document.querySelector('.color.active');
-	
-	let colHSL = document.documentElement.style.setProperty('--darken',"15%");
-	// colHSL += + 10;
-	colAct.style.backgroundColor = colHSL;
-	
-		
-		console.log (colAct);	
-
-			// $(colAct).each(function(indx, el){
-			// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
-			// 	 h =+h+ 10;
-			// 	 s = +s+ 10;
-			// 	 l =+l+ 10;
-			// 	 colAct.style.backgroundColor = `rgb(${h}, ${s}, ${l})`;
-			// 	console.log (colAct);
-			// 		});
-				};
-	
-	
-
 
 
 //______Swip_________//
@@ -168,6 +143,7 @@ function handleGesure() {
 					
 					 console.log('left!');
 				} else {
+					changeColorLeft (+100, +20, +20)
 					console.log('right!');/*СВАЙП ВПРАВО*/
 				}
 			} else {
@@ -181,6 +157,145 @@ function handleGesure() {
 };
 
 
+// var initialPoint;
+// var finalPoint;
+// colors.forEach(function (color) {
+// 	color.addEventListener('touchstart', function (event) {
+// 		event.preventDefault();
+// 		event.stopPropagation();
+// 		initialPoint = event.changedTouches[0];
+// 	}, false);
+
+// 	color.addEventListener('touchend', function (event) {
+// 		event.preventDefault();
+// 		event.stopPropagation();
+// 		finalPoint = event.changedTouches[0];
+// 		var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
+// 		var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
+// 		if (xAbs > 10 || yAbs > 10) {
+// 			if (xAbs > yAbs) {
+// 				if (finalPoint.pageX < initialPoint.pageX) {
+// 					changeColorLeft();
+// 					console.log('left!');
+// 				} else {
+// 					console.log('right!');/*СВАЙП ВПРАВО*/
+// 				}
+// 			} else {
+// 				if (finalPoint.pageY < initialPoint.pageY) {
+// 					console.log('up!');
+// 				} else {
+// 					console.log('down!');
+// 				}
+// 			}
+// 		}
+// 	}, false);
+// });
+
+/*______ChangeColor____________________
+из выбранного цвета генерируется массив цветов в 
+девяти параметрах тона и в 9 параметрах цвета_*/
+
+function changeColorLeft (h, s, l){	
+		
+		$('.color.active').each(function(indx, el) {
+
+			let colAct = document.querySelector('.color.active');
+			let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+			let colHsl = RGB2HSL(r, g, b);
+			let regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
+			let res = regexp.exec(colHsl).slice(1);
+			h = res[0];
+			s = res[1];
+			l = res[2]
+
+			colAct.style.backgroundColor = `hsl(${res[0]}, ${res[1]}%, ${res[2]}%)`;
+			console.log (colAct);
+			return h, s, l;
+		});
+};
+
+	//  let coco = RGB2HSL(r,g,b);
+
+	//  function rgb2hex (color) { return "#"+(color.match(/\b(\d+)\b/g).map(function(digit)
+	//  { return ('0' + parseInt(digit).toString(16)).slice(-2) })).join(''); };
+	 
+	function RGB2HSL(r, g, b){
+			
+		r /= 255;
+		g /= 255;
+		b /= 255;
+		let cmin = Math.min(r,g,b),
+			cmax = Math.max(r,g,b),
+			delta = cmax - cmin,
+			h = 0,
+			s = 0,
+			l = 0;
+	  
+		if (delta == 0)
+		  h = 0;
+		else if (cmax == r)
+		  h = ((g - b) / delta) % 6;
+		else if (cmax == g)
+		  h = (b - r) / delta + 2;
+		else
+		  h = (r - g) / delta + 4;
+	  
+		h = Math.round(h * 60);
+	  
+		if (h < 0)
+		  h += 360;
+	  
+		l = (cmax + cmin) / 2;
+		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+		s = +(s * 100).toFixed(1);
+		l = +(l * 100).toFixed(1);
+		
+		return "hsl(" + h + "," + s + "%," + l + "%)";
+
+	};
+
+	
+// let colAct = document.querySelector('.color.active');
+ 
+// let  coco = RGB2HSL(colAct);
+
+// coco = `hsl(${4}, ${54}%, ${45}%)`;
+
+// colActh = 360, s = 100, l = 50
+
+
+
+// let h = 360, s = 100, l = 50 ;
+
+// function randomInteger(min, max) {
+// 	// случайное число от min до (max+1)
+// 	let rand = min + Math.random() * (max  - min);
+// 	return Math.floor(rand);
+//   }
+//   function randomInteger2(min, max, e, r) {
+// 	// случайное число от min до (max+1)
+// 	let rand = min + Math.random() * (max  - min) + (r-e);
+// 	return Math.floor(rand);
+//   }
+
+// h = randomInteger2(20, 50, 80, 90);
+
+
+// if (h >= 30 && h <=100) {
+// 	s -=  10,
+// 	l -= 20;
+	
+// };
+
+// colAct.style.background = `hsl(${h}, ${s}%, ${l}%)`;
+// // 					/
+// 					console.log (h, s, l);
+// 				// 		});
+// };
+		
+		
+	
+	
 
 
 
@@ -212,34 +327,7 @@ function handleGesure() {
 // 	//   b = "0x" + H[5] + H[6];
 // 	// }
 // 	// Then to HSL
-// 	r /= 255;
-// 	g /= 255;
-// 	b /= 255;
-// 	let cmin = Math.min(r,g,b),
-// 		cmax = Math.max(r,g,b),
-// 		delta = cmax - cmin,
-// 		h = 0,
-// 		s = 0,
-// 		l = 0;
-  
-// 	if (delta == 0)
-// 	  h = 0;
-// 	else if (cmax == r)
-// 	  h = ((g - b) / delta) % 6;
-// 	else if (cmax == g)
-// 	  h = (b - r) / delta + 2;
-// 	else
-// 	  h = (r - g) / delta + 4;
-  
-// 	h = Math.round(h * 60);
-  
-// 	if (h < 0)
-// 	  h += 360;
-  
-// 	l = (cmax + cmin) / 2;
-// 	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-// 	s = +(s * 100).toFixed(1);
-// 	l = +(l * 100).toFixed(1);
+//
 	
 // 	document.documentElement.style.setProperty(`--${inputType}-color-h`, h);
 // 	document.documentElement.style.setProperty(`--${inputType}-color-s`, s + '%');
