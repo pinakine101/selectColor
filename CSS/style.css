@@ -162,13 +162,13 @@ h1 {
 
 
 #color1 {
-    background-color: rgb(260 ,280, 220);
+    background-color: hsl(260 ,50%, 50%);
     height: 30%;
 }
 
 #color2 {
-    background-color:rgb(210, 110, 220);
-    height: 35%;
+    /* background-color:rgb(210, 110, 220); */
+    height: 15%;
   
 }
 
@@ -184,11 +184,11 @@ h1 {
 
 
 #color5 {
-    background-color: rgb(260, 180, 220);
+    background-color: rgb(168, 163, 132);
     height: 35%;
 }
 #color6 {
-    background-color:rgb(250, 190, 50);
+    background-color:rgb(180, 134, 233);
     height: 35%;
 }
 

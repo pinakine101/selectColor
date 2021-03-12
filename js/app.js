@@ -1,7 +1,7 @@
 "use strict"
 /*Plan
 1. Сделать выбор цвета по клику на цвете - DONE
-2   выбор образца цвета по движению мыши
+2   выбор образца цвета по движению мыши - DONE
 3. Функция добавить/убрать блока
 4. Выпадающее меню для меню
 5. Кнопка "canculate color"
@@ -41,7 +41,7 @@ tabsBtn.forEach(function (item) {
 		}
 	});
 });
-document.querySelector('.tabs__nav-btn:nth-child(3)').click();
+document.querySelector('.tabs__nav-btn:nth-child(1)').click();
 
 
 //______ColorPicker_________//
@@ -139,11 +139,12 @@ function handleGesure() {
 		if (xAbs > 10 || yAbs > 10) {
 			if (xAbs > yAbs) {
 				if (clickEndX <clickStartX) {
+					
 					changeColorLeft();
 					
 					 console.log('left!');
 				} else {
-					changeColorLeft (+100, +20, +20)
+				 changeColorLeft (colAct)
 					console.log('right!');/*СВАЙП ВПРАВО*/
 				}
 			} else {
@@ -191,23 +192,60 @@ function handleGesure() {
 // 	}, false);
 // });
 
-/*______ChangeColor____________________
+/*______CalcColor____________________
 из выбранного цвета генерируется массив цветов в 
 девяти параметрах тона и в 9 параметрах цвета_*/
+let color1 = document.querySelector('#color1');
+
+document.addEventListener("DOMContentLoaded", function() {
+	
+	let h = randomInteger(1, 170);
+	let s = randomInteger(50,100);
+	let l = randomInteger(50,100);
+
+	let a = h-30, b = s+50, c= l-10;
+	
+	if (h >= 30 && h <=100) {
+		s -=  10,
+		l -= 20;
+	};
+	// color1.style.background = `rgb(${h}, ${s}, ${l})`;
+	color1.style.background = `hsl(${h}, ${s}%, ${l}%)`;
+	let intro_1 = document.querySelectorAll('.intro_1');
+	
+	intro_1.innerHTML +=  `<span class="color" id ="color2" ></span>`;
+	
+	// intro_1.classList.add('#color2');
+	color2.style.background = `hsl(${a}, ${b}%, ${c}%)`;
+	console.log(color2);
+  });
+
+function calcColor (h, s, l){	
+		
+	$('.color.active').each(function(indx, el) {
+
+		let colAct = document.querySelector('.color.active');
+		const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+		const colHsl = RGB2HSL(r, g, b);
+		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
+		let res = regexp.exec(colHsl).slice(1);
+		h =  res[0] = + res[0] + 10;
+		colAct.style.backgroundColor = `hsl(${res[0]}, ${res[1]}%, ${res[2]}%)`;
+		console.log (colAct);
+		return h, s, l;
+	});
+};
 
 function changeColorLeft (h, s, l){	
 		
 		$('.color.active').each(function(indx, el) {
 
 			let colAct = document.querySelector('.color.active');
-			let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-			let colHsl = RGB2HSL(r, g, b);
-			let regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
+			const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+			const colHsl = RGB2HSL(r, g, b);
+			const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
 			let res = regexp.exec(colHsl).slice(1);
-			h = res[0];
-			s = res[1];
-			l = res[2]
-
+			h =  res[0] = + res[0] + 10;
 			colAct.style.backgroundColor = `hsl(${res[0]}, ${res[1]}%, ${res[2]}%)`;
 			console.log (colAct);
 			return h, s, l;
@@ -267,11 +305,11 @@ function changeColorLeft (h, s, l){
 
 // let h = 360, s = 100, l = 50 ;
 
-// function randomInteger(min, max) {
-// 	// случайное число от min до (max+1)
-// 	let rand = min + Math.random() * (max  - min);
-// 	return Math.floor(rand);
-//   }
+function randomInteger(min, max) {
+	// случайное число от min до (max+1)
+	let rand = min + Math.random() * (max  - min);
+	return Math.floor(rand);
+}
 //   function randomInteger2(min, max, e, r) {
 // 	// случайное число от min до (max+1)
 // 	let rand = min + Math.random() * (max  - min) + (r-e);
