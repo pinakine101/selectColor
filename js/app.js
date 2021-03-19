@@ -13,13 +13,20 @@
 
 let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
 let intro_1 = document.querySelectorAll(".intro_1")
+let colors = document.querySelectorAll('span');
+let butt = document.querySelector('.butt');
 
 tabsBtn.forEach(function (item) {
 	item.addEventListener("click", function activeTab() {
 		let currentBtn = item;
 		let tabId = currentBtn.getAttribute("data-tab");
 		let currentTab = document.querySelector(tabId);
-		let colors = document.querySelectorAll('.color');
+		butt.addEventListener('click',()=> {
+			createGamma2();
+			console.log(tabId);});
+		
+		// let colors = document.querySelectorAll('.color');
+		
 
 			if (!currentBtn.classList.contains('active')) {
 
@@ -41,7 +48,8 @@ tabsBtn.forEach(function (item) {
 		}
 	});
 });
-document.querySelector('.tabs__nav-btn:nth-child(1)').click();
+// document.querySelector('.tabs__nav-btn:nth-child(2)').click();
+document.querySelector('.tabs__nav-btn').click();
 
 
 //______ColorPicker_________//
@@ -50,7 +58,7 @@ let deleteElement = function () {
 	$('.colorpickerHolder').remove();
 };
 
-let colors = document.querySelectorAll('.color');
+
 
 colors.forEach(function (color) {
 	color.addEventListener("contextmenu", colorPicker);
@@ -195,62 +203,122 @@ function handleGesure() {
 /*______CalcColor____________________
 из выбранного цвета генерируется массив цветов в 
 девяти параметрах тона и в 9 параметрах цвета_*/
-let color1 = document.querySelector('#color1');
+let colorActive = document.querySelector('span.active');
+let color1 = document.querySelector('.color1');
+let color2 = document.querySelector('.color2');
+let color3 = document.querySelector('.color3');
+let color4 = document.querySelector('.color4');
+let color5 = document.querySelector('#color5');
+let color6 = document.querySelector('#color6');
 
-document.addEventListener("DOMContentLoaded", function() {
+// let intro_1Active = document.querySelector('.tabs__nav-btn.active');
+
+// butt.addEventListener('click',()=> {
 	
-	let h = randomInteger(1, 170);
-	let s = randomInteger(50,100);
-	let l = randomInteger(50,100);
+// console.log(intro_1Active)});
+
+// document.addEventListener("DOMContentLoaded", 
+function createGamma(h, s, l) {
+	
+	 h = randomInteger(100, 170);
+	 s = randomInteger(50,100);
+	 l = randomInteger(50,100);
 
 	let a = h-30, b = s+50, c= l-10;
+	let d = h-20, e = s-20, f= l-5;
+	let H1 = h-50, S1 = s+10, L1= l+10;
+	let H2 = h+20, S2 = s-5, L2= l+5;
 	
 	if (h >= 30 && h <=100) {
 		s -=  10,
 		l -= 20;
 	};
-	// color1.style.background = `rgb(${h}, ${s}, ${l})`;
-	color1.style.background = `hsl(${h}, ${s}%, ${l}%)`;
-	let intro_1 = document.querySelectorAll('.intro_1');
 	
-	intro_1.innerHTML +=  `<span class="color" id ="color2" ></span>`;
 	
-	// intro_1.classList.add('#color2');
-	color2.style.background = `hsl(${a}, ${b}%, ${c}%)`;
-	console.log(color2);
-  });
+	color4.style.background = `hsl(${d}, ${e}%, ${f}%)`;
+	color3.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
+	
+  };
 
-function calcColor (h, s, l){	
+  function createGamma2(h, s, l) {
+	
+	h = randomInteger(100, 170);
+	s = randomInteger(50,100);
+	l = randomInteger(50,100);
+
+   let a = h-30, b = s+50, c= l-10;
+   let d = h-20, e = s-20, f= l-5;
+   let H1 = h-50, S1 = s+10, L1= l+10;
+   let H2 = h+20, S2 = s-5, L2= l+5;
+   
+   if (h >= 30 && h <=100) {
+	   s -=  10,
+	   l -= 20;
+   };
+   
+   color1.style.background = `hsl(${h}, ${s}%, ${l}%)`;
+   color2.style.background = `hsl(${a}, ${b}%, ${c}%)`;
+   };
+//   createGamma();
+//сделать так что бы при загрузке таба запускалась фунция.
+
+function calcColor (){	
 		
-	$('.color.active').each(function(indx, el) {
+	$('span.active').each(function (indx, el) {
 
-		let colAct = document.querySelector('.color.active');
+		let colAct = document.querySelector('span.active');
 		const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
 		const colHsl = RGB2HSL(r, g, b);
 		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
 		let res = regexp.exec(colHsl).slice(1);
-		h =  res[0] = + res[0] + 10;
-		colAct.style.backgroundColor = `hsl(${res[0]}, ${res[1]}%, ${res[2]}%)`;
-		console.log (colAct);
-		return h, s, l;
+
+		let H = res[0],
+		S = res[1],
+		L = res[2];
+	
+		let H1 = +res[0]+ 150,
+		S1 = +res[1]+ 10,
+		L1 = res[2] -5;
+
+		if (H1 >= 30 && H1 <=100) {
+			S1 -=  10,
+			L1 -= 10;
+		};
+
+		let H2 = res[0] - 10,
+		S2 = +res[1]+ 10,
+		L2 = res[2] -20;
+
+		let H3 = +res[0]+ 50,
+		S3 = +res[1]+ 10,
+		L3 = res[2] -20;
+	
+		color1.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
+		color2.style.background = `hsl(${H2}, ${S2}%, ${L2}%)`;
+	 	color3.style.background = `hsl(${H3}, ${S3}%, ${L3}%)`;
+		color4.style.background = `hsl(${H1}, ${S2}%, ${L1}%)`;
+		
+		colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
+		return H, S, L, H1, S1, L1;
+		
 	});
 };
 
-function changeColorLeft (h, s, l){	
+// function changeColorLeft (h, s, l){	
 		
-		$('.color.active').each(function(indx, el) {
+// 		$('.color.active').each(function(indx, el) {
 
-			let colAct = document.querySelector('.color.active');
-			const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-			const colHsl = RGB2HSL(r, g, b);
-			const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
-			let res = regexp.exec(colHsl).slice(1);
-			h =  res[0] = + res[0] + 10;
-			colAct.style.backgroundColor = `hsl(${res[0]}, ${res[1]}%, ${res[2]}%)`;
-			console.log (colAct);
-			return h, s, l;
-		});
-};
+// 			let colAct = document.querySelector('.color.active');
+// 			const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+// 			const colHsl = RGB2HSL(r, g, b);
+// 			const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
+// 			let res = regexp.exec(colHsl).slice(1);
+// 			h =  res[0] = + res[0] + 10;
+// 			colAct.style.backgroundColor = `hsl(${res[0]}, ${res[1]}%, ${res[2]}%)`;
+// 			console.log (colAct);
+// 			return h, s, l;
+// 		});
+// };
 
 	//  let coco = RGB2HSL(r,g,b);
 

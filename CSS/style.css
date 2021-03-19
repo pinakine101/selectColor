@@ -148,7 +148,15 @@ h1 {
     padding-top:20px;
     overflow-x:hidden;
 }
-
+.butt {
+    display: flex;
+position:absolute;
+margin-left:95%;
+margin-top: 10%;
+width: 20px;
+height:20px;
+border: 2px solid #8f8f8f;
+}
 .color {
     display: flex;
     width: 100%;
@@ -156,28 +164,36 @@ h1 {
     resize: vertical;
   
 }
-.color.active {
+span.active {
     border: 2px solid #8f8f8f;
+    
 }  
-
-
-#color1 {
-    background-color: hsl(260 ,50%, 50%);
-    height: 30%;
+span {
+    display: flex;
+    width: 100%;
+    overflow: auto;
+    resize: vertical;
 }
 
-#color2 {
-    /* background-color:rgb(210, 110, 220); */
+.color1 {
+    background-color:rgb(160, 180, 220);
+    height: 30%;
+    
+}
+
+.color2 {
+    background-color:rgb(111, 37, 143);
     height: 15%;
+   
   
 }
 
-#color3 {
+.color3 {
     background-color:rgb(160, 180, 220);
     height: 35%;
 }
 
-#color4 {
+.color4 {
     background-color:rgb(160, 120, 210);;
     height: 35%;
 }
