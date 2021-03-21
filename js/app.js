@@ -106,6 +106,33 @@ colors.forEach(function (color) {
 	});
 });
 
+//______ChangeColor_________//
+
+function changeColorLeft (){
+// let colAct = document.querySelector('#color4');
+	let colAct = document.querySelector('.color.active');
+	
+	let colHSL = document.documentElement.style.setProperty('--darken',"15%");
+	// colHSL += + 10;
+	colAct.style.backgroundColor = colHSL;
+	
+		
+		console.log (colAct);	
+
+			// $(colAct).each(function(indx, el){
+			// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
+			// 	 h =+h+ 10;
+			// 	 s = +s+ 10;
+			// 	 l =+l+ 10;
+			// 	 colAct.style.backgroundColor = `rgb(${h}, ${s}, ${l})`;
+			// 	console.log (colAct);
+			// 		});
+				};
+	
+	
+
+
+
 //______Swip_________//
 
 let clickStartX = 0;
@@ -131,13 +158,13 @@ colors.forEach(function(color) {
 	}, false); 
 });
 
-function handleGesure(e) {
+function handleGesure() {
 		var xAbs = Math.abs(clickStartX - clickEndX);
 		var yAbs = Math.abs(clickStartY - clickEndY);
 		if (xAbs > 10 || yAbs > 10) {
 			if (xAbs > yAbs) {
 				if (clickEndX <clickStartX) {
-					changeColorLeft(e);
+					changeColorLeft();
 					
 					 console.log('left!');
 				} else {
@@ -155,16 +182,111 @@ function handleGesure(e) {
 
 
 
-//______ChangeColor_________//
 
 
 
+// function generateHslaColors (saturation, lightness, alpha, amount) {
+// 	let colorsQ = []
+// 	let huedelta = Math.trunc(360 / amount)
+  
+// 	for (let i = 0; i < amount; i++) {
+// 	  let hue = i * huedelta
+// 	  colorsQ.style.backgroundColor = `hsla(${hue},${saturation}%,${lightness}%,${alpha})`;
+// 	}
+  
+// 	console.log(colorsQ);
+// };
+// generateHslaColors(100, 50, 50);
 
 
-let input = document.querySelector('input')
-let color4 = document.querySelector('#color4')
+// function setTheme(H, inputType) {
+// 	// Convert hex to RGB first
+// 	let r = 0, g = 0, b = 0;
+// 	// if (H.length == 4) {
+// 	//   r = "0x" + H[1] + H[1];
+// 	//   g = "0x" + H[2] + H[2];
+// 	//   b = "0x" + H[3] + H[3];
+// 	// } else if (H.length == 7) {
+// 	//   r = "0x" + H[1] + H[2];
+// 	//   g = "0x" + H[3] + H[4];
+// 	//   b = "0x" + H[5] + H[6];
+// 	// }
+// 	// Then to HSL
+// 	r /= 255;
+// 	g /= 255;
+// 	b /= 255;
+// 	let cmin = Math.min(r,g,b),
+// 		cmax = Math.max(r,g,b),
+// 		delta = cmax - cmin,
+// 		h = 0,
+// 		s = 0,
+// 		l = 0;
+  
+// 	if (delta == 0)
+// 	  h = 0;
+// 	else if (cmax == r)
+// 	  h = ((g - b) / delta) % 6;
+// 	else if (cmax == g)
+// 	  h = (b - r) / delta + 2;
+// 	else
+// 	  h = (r - g) / delta + 4;
+  
+// 	h = Math.round(h * 60);
+  
+// 	if (h < 0)
+// 	  h += 360;
+  
+// 	l = (cmax + cmin) / 2;
+// 	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+// 	s = +(s * 100).toFixed(1);
+// 	l = +(l * 100).toFixed(1);
+	
+// 	document.documentElement.style.setProperty(`--${inputType}-color-h`, h);
+// 	document.documentElement.style.setProperty(`--${inputType}-color-s`, s + '%');
+// 	document.documentElement.style.setProperty(`--${inputType}-color-l`, l + '%');
+//   }
 
-input.addEventListener('change', function(){
-	color4.style.setProperty('--footer-color', input.value)
-  })
-console.log(color4);
+//   console.log(setTheme(colors))
+
+
+
+	
+
+
+	// $(colAct).each(function(indx, el){
+	// 	$(el).css("backgroundColor").style.setProperty(' --primary-color--dark', el.target)
+	//   });
+			// $(colAct).each(function(indx, el){
+			// 	let  color = root.setProperty(' --primary-color--dark', item);
+			// 	// let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+			// 	setTheme();
+			// 	//  r =+r+ 15;
+			// 	//  g = +g+ 15;
+			// 	//  b =+b+ 15;
+			// 	 colAct.style.backgroundColor = color;
+				//  colAct.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+	// let colAct = document.querySelector('.color.active');
+	// colAct.classList.add('.color4');
+	// console.log(colAct);
+
+
+	//
+	
+					// $(item).each(function(indx, el){
+						
+					// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
+					// 	 h -= 15;
+					// 	 s = +s+ 15;
+					// 	 l =+l+ 15;
+					// 	item.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+					// 	rgb2Hsl(color);
+					// 	console.log (item);
+					// 		});
+
+// rgbToHsl();
+// let	x = 100,
+// 	y = 50,
+// 	z = 50;
+// let = ChangedColor;
+// ChangedColor = `hsl(${x}, ${y}%, ${z}%)`;
