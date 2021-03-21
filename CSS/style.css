@@ -20,17 +20,6 @@ h1 {
     font-size: 30px;
     color: #8a8a8a;
 }
-input {
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 0 !important; 
-   }
-
-   input:focus {
-    border:0;
-    padding: 0;
-    margin: 0;
-  }
 
 *,
 *:before,
@@ -159,51 +148,70 @@ input {
     padding-top:20px;
     overflow-x:hidden;
 }
-
-:root {
-    --primary-color-h: 0;
-    --primary-color-s: 50%;
-    --primary-color-l: 50%;
-    --darken: 0%;
-    --primary-color: hsl(var(--primary-color-h), var( --primary-color-s), calc(var(--primary-color-l) + var(--darken)));
-    --primary-colorH: hsl(calc(var(--primary-color-h) + 10), var( --primary-color-s), var(--primary-color-l));
-  }
-
-  #color4 {
-    background-color: var(--primary-color);
-    height: 35%;
+.butt {
+    display: flex;
+position:absolute;
+margin-left:95%;
+margin-top: 10%;
+width: 20px;
+height:20px;
+border: 2px solid #8f8f8f;
 }
 .color {
     display: flex;
-
     width: 100%;
     overflow: auto;
     resize: vertical;
-    
-    
-    
+  
 }
-.color.active {
-    border: 3px solid #ffffff;
+span.active {
+    border: 2px solid #8f8f8f;
+    
+}  
+span {
+    display: flex;
+    width: 100%;
+    overflow: auto;
+    resize: vertical;
 }
 
-#color1 {
-    background-color: hsl(14, 80%, 20%);
+.color1 {
+    background-color:rgb(160, 180, 220);
     height: 30%;
+    
 }
 
+.color2 {
+    background-color:rgb(111, 37, 143);
+    height: 15%;
+   
+  
+}
+
+.color3 {
+    background-color:rgb(160, 180, 220);
+    height: 35%;
+}
+
+<<<<<<< HEAD
 #color2 {
     background-color: rgb(100, 200, 150);
-    height: 35%;
-    resize: none;
-    
-    
-}
-#color3 {
-    background-color:var(--primary-colorH);
+=======
+.color4 {
+    background-color:rgb(160, 120, 210);;
     height: 35%;
 }
-  
+
+
+#color5 {
+    background-color: rgb(168, 163, 132);
+>>>>>>> 19da686131979773a81549e9f1c29f7ebd7b6f15
+    height: 35%;
+}
+#color6 {
+    background-color:rgb(180, 134, 233);
+    height: 35%;
+}
 
 
 
