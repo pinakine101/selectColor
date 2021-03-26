@@ -165,7 +165,7 @@ border: 2px solid #8f8f8f;
   
 }
 span.active {
-    border: 2px solid #8f8f8f;
+    border: 2px solid #e4e4e4;
     
 }  
 span {
@@ -176,36 +176,23 @@ span {
 }
 
 .color1 {
-    background-color:rgb(160, 180, 220);
-    height: 30%;
-    
+    background-color:rgb(196, 210, 235);
+    height: 52.7%;
 }
 
 .color2 {
-    background-color:rgb(111, 37, 143);
-    height: 15%;
-   
-  
+    background-color:rgb(137, 175, 159);
+    height: 9.2%;
 }
 
 .color3 {
-    background-color:rgb(160, 180, 220);
-    height: 35%;
+    background-color:rgb(201, 202, 138);
+    height: 4.8%;
 }
 
 .color4 {
-    background-color:rgb(160, 120, 210);;
-    height: 35%;
-}
-
-
-#color5 {
-    background-color: rgb(168, 163, 132);
-    height: 35%;
-}
-#color6 {
-    background-color:rgb(180, 134, 233);
-    height: 35%;
+    background-color:rgb(62, 63, 77);;
+    height: 33.3%;
 }
 
 
