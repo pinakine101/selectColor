@@ -123,24 +123,111 @@ h1 {
     background-color: #fecd57;
 }
 
+/* contaiter buttons*/
+.container_buttons {
+    /* justify-content: space-between; */
+    display: table;
+    position:absolute;
+    margin-left: 96%;
+    margin-top: 5%;
+    width: 30px;
+    height:300px;
+    /* justify-content: center; */
+   
+    /* border: 1px solid #8f8f8f; */
+   
+}
+
+.butt {
+   
+    position:relative;
+    display: flex;
+    fill: rgb(251, 245, 245);
+    width: 100%;
+    height: 25px;
+    margin-bottom: 25px;
+    justify-content: center;
+    align-items:center;
+    transition-property: fill;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    -webkit-filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+  filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+}
+.butt:hover{
+    /* fill: rgb(163, 237, 255); */
+   fill: #5cfaff;
+}
+.butt:active{
+    fill: rgb(251, 217, 65);
+    
+}
+.icon {
+   
+    position:relative;
+    display: flex;
+    fill: rgb(251, 245, 245);
+    width:100%;
+    height: 28px;
+    margin-bottom: 25px;
+    justify-content: center;
+    align-items:center;
+    -webkit-filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+  filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+}
+
+
+.icon:hover{
+    animation-name: scale;
+    animation-duration: 3000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+@keyframes scale {
+    20%  { transform: scale(0.8); }
+}
+.icon:active{
+    /* -webkit-animation: rotate 6s linear infinite; */
+   
+    animation-name: spin;
+    animation-duration: 400ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
 /*intro
 =================*/
 
 .colorpickerHolder {
     
      position: absolute;
+     
 
 }
+
+
 .intro {
     display:flex;
     width: 100%;
      }
-/* .intro_1 {
-    
-    /* height: 500px; 
+
+ .intro_1 {
+    display:flex;
+    width: 100%;
+    height: 700px; 
     padding-top:20px;
     overflow-x:hidden; 
-   } */
+   }
+
 .intro_1.active {
 
     width: 100%;
@@ -148,22 +235,14 @@ h1 {
     padding-top:20px;
     overflow-x:hidden;
 }
-.butt {
-    display: flex;
-position:absolute;
-margin-left:95%;
-margin-top: 10%;
-width: 20px;
-height:20px;
-border: 2px solid #8f8f8f;
-}
-.color {
+
+/* .color {
     display: flex;
     width: 100%;
     overflow: auto;
     resize: vertical;
   
-}
+} */
 span.active {
     border: 2px solid #e4e4e4;
     

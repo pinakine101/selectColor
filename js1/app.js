@@ -8,13 +8,16 @@
 6. Сверстать все страницы
 7. Добавить функционал поиска по сайту
 */
-
+*/задачи на 01 04: переделать табы, второй клик по спану убирает актив*/
 
 
 let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
-let intro_1 = document.querySelectorAll(".intro_1")
+// let intro_1 = document.querySelectorAll(".intro_1");
+let tabsContent = document.querySelectorAll(".intro_1");
+let tabsNav = document.querySelector(".tabs__nav");
+
 let colors = document.querySelectorAll('span');
-let butt = document.querySelector('.butt');
+let butt = document.querySelector('.icon');
 
 let spa = document.querySelector('#Спальня');
 let gost = document.querySelector('#Гостинная');
@@ -30,42 +33,88 @@ let dets = document.querySelector('#Детская');
 
 let res;
 let actColor = document.querySelector('intro_1.active');
-let dd = $('intro_1.active').children('.color1');
+// let dd = $('intro_1.active').children('.color1');
 
 butt.addEventListener('click',()=> {
-	 fillColor();
+	 loadColor ();
 	;});
 
 
 //_______Tabs_________//
 
-tabsBtn.forEach(function (item) {
-	item.addEventListener("click", function activeTab() {
-		let currentBtn = item;
-		let tabId = currentBtn.getAttribute("data-tab");
-		let currentTab = document.querySelector(tabId);
-
-			if (!currentBtn.classList.contains('active')) {
-               
-			tabsBtn.forEach(function (item) {
-				item.classList.remove('active');
-			});
-			intro_1.forEach(function (item) {
-				item.classList.remove('active');
-			});
-			colors.forEach(function (item) {
-				item.classList.remove('active');
-			});
-          	currentBtn.classList.add('active');
-			currentTab.classList.add('active');
-		}
+function hideTabContent() {
+	tabsContent.forEach(item => {
+		item.style.display = 'none';
 	});
+	tabsBtn.forEach(item => {
+		item.classList.remove('active');
+	});
+};
+
+function showTabsContent(i){
+	tabsContent[i].style.display = 'block'; 
+	tabsBtn[i].classList.add('active');
+};
+
+
+hideTabContent();
+showTabsContent(0);
+
+let isCalled = false;
+tabsNav.addEventListener('click', (event) =>{
+	const target = event.target;
+
+	if (target && target.classList.contains('tabs__nav-btn')) {
+		tabsBtn.forEach((item, i) => {
+			if (target == item) {
+				hideTabContent();
+				showTabsContent(i);
+				if (item.classList.contains('active')){
+					if(!isCalled) {
+						isCalled = true;
+						loadColor ()}};
+			};
+		});
+	};
 });
-// document.querySelector('.tabs__nav-btn:nth-child(2)').click();
-document.querySelector('.tabs__nav-btn').click();
+
+// tabsBtn.forEach(function (item) {
+// 	item.addEventListener("click", function activeTab() {
+// 		let currentBtn = item;
+// 		let tabId = currentBtn.getAttribute("data-tab");
+// 		let currentTab = document.querySelector(tabId);
+
+// 			if (!currentBtn.classList.contains('active')) {
+               
+// 			tabsBtn.forEach(function (item) {
+// 				item.classList.remove('active');
+// 			});
+// 			intro_1.forEach(function (item) {
+// 				item.classList.remove('active');
+// 			});
+// 			colors.forEach(function (item) {
+// 				item.classList.remove('active');
+// 			});
+//           	currentBtn.classList.add('active');
+// 			currentTab.classList.add('active');
+// 		}
+// 	});
+// });
+// // document.querySelector('.tabs__nav-btn:nth-child(2)').click();
+// document.querySelector('.tabs__nav-btn').click();
 
 
 //______ColorPicker_________//
+let inputColor = document.querySelector('.colorpickerHolder');
+
+function hideInput(){
+	inputColor.style.display = 'none';
+}
+hideInput();
+
+function showInput(){
+	inputColor.style.display = 'block';
+}
 
 let deleteColPick = function () {
 	$('.colorpickerHolder').remove();
@@ -73,16 +122,18 @@ let deleteColPick = function () {
 
 colors.forEach(function (color) {
 	color.addEventListener("contextmenu", colorPicker);
-	color.addEventListener("mouseover", deleteColPick);
+	color.addEventListener("mouseup", deleteColPick);
+	
 });
 
 $(colors).on("contextmenu", false);
 
 function colorPicker(e) {
 
-	const contextBox = document.createElement('ColPick');
+	const contextBox = document.createElement('div');
 	contextBox.classList.add('colorpickerHolder');
 	document.querySelector('body').append(contextBox);
+
 	let span = e.target;
 	let box = $('.colorpickerHolder');
 	let spanColor = $(span).css('backgroundColor');
@@ -100,6 +151,7 @@ function colorPicker(e) {
 	$(box).ColorPicker({
 		flat: true,
 		color: col,
+		onSubmit: deleteColPick,
 		onChange: function (hsb, hex, rgb) {
 			$(span).css('backgroundColor', '#' + hex, );
 		}
@@ -112,11 +164,15 @@ colors.forEach(function (color) {
 	color.addEventListener("click", function select() {
 		
 		if (!color.classList.contains("active")) {
-			colors.forEach(function (color) {
+			colors.forEach(function (color, i) {
 				color.classList.remove('active');
+				if (i > 1){
+					color.classList.remove('active');
+				}
 			});
 		};
 		color.classList.add('active');
+		
 	});
 	color.addEventListener("contextmenu", function () {
 		colors.forEach(function (color) {
@@ -124,31 +180,21 @@ colors.forEach(function (color) {
 		});
 	});
 });
-var isCalled = false;
-tabsBtn.forEach((item)=>{
+
+
+tabsBtn.forEach((item,)=>{
     item.addEventListener("click", ()=>{
-        $('.intro_1.active').children('.color1').addClass('active');
+        // $('.intro_1.active').children('.color1').addClass('active');
         if (item.classList.contains('active')){
             if(!isCalled) {
                 isCalled = true;
                 loadColor ()}};
         });
-
-        // if (spa.classList.contains('active')) { 
-        //     if(!isCalled) {
-        //         isCalled = true;
-        //         loadColor ()}};
-        
-        // if (gost.classList.contains('active')) { 
-        //     if(!isCalled) {
-        //         isCalled = true;
-        //         loadColor ()}};
     });
-// });
-// // 
-// tabsBtn.addEventListener("clik", ()=>{ actColor.target.classList.add('active') });
-// console.log(dd);
+
 document.querySelector('.color1').classList.add('active');
+
+
 /*______CalcColor____________________
 из выбранного цвета генерируется массив цветов в 
 девяти параметрах тона и в 9 параметрах цвета_*/
@@ -200,21 +246,21 @@ function randomInteger2(min, max) {
 function loadColor (){
    let calcCol = fillColor();
 
-    // let kar = calc();
-    // let rand = randomInteger2(100, 350);
-    // let gamma = $('.intro_1.active').children();
+    let kar = calc();
+    let rand = randomInteger2(100, 350);
+    let gamma = $('.intro_1').children();
 
-        // if (spa.classList.contains('active')) { 
-        //     gamma[0].style.background = `hsl(${[kar[0]-150]}, ${kar[1]+10}%, ${kar[2]-10}%)`;
-        //     gamma[1].style.background = `hsl(${rand}, ${kar[1]+20}%, ${kar[2]-20}%)`;
-        //     gamma[2].style.background = `hsl(${rand}, ${kar[1]+10}%, ${kar[2]+10}%)`;
-        //     gamma[3].style.background = `hsl(${rand}, ${kar[1]-20}%, ${kar[2]+5}%)`;
+        if (tabsBtn[0].classList.contains('active')) { 
+            gamma[0].style.background = `hsl(${[kar[0]-150]}, ${kar[1]+10}%, ${kar[2]-10}%)`;
+            gamma[1].style.background = `hsl(${rand}, ${kar[1]+20}%, ${kar[2]-20}%)`;
+            gamma[2].style.background = `hsl(${rand}, ${kar[1]+10}%, ${kar[2]+10}%)`;
+            gamma[3].style.background = `hsl(${rand}, ${kar[1]-20}%, ${kar[2]+5}%)`;
     
-        // }
-        // if (gost.classList.contains('active')){
-        // gamma[0].style.background = `hsl(${rand}, ${kar[1]+20}%, ${kar[2]+10}%)`;
-        // gamma[1].style.background = `hsl(${rand}, ${kar[1]-20}%, ${kar[2]+10}%)`;
-        // };
+        }
+        if (tabsBtn[1].classList.contains('active')){
+        gamma[0].style.background = `hsl(${rand}, ${kar[1]+20}%, ${kar[2]+10}%)`;
+        gamma[1].style.background = `hsl(${rand}, ${kar[1]-20}%, ${kar[2]+10}%)`;
+        };
        
         console.log( calcCol)
 };
@@ -225,22 +271,25 @@ function fillColor (){
        
     let kar = splitColor();
     let rand = randomInteger2(2, 360);
-    let gamma = $('.intro_1.active').children();
+
+	
+		
+		let gamma = $('.intro_1').children();
+	
+    
   
-        if (spa.classList.contains('active')) { 
+        if (tabsBtn[0].classList.contains('active')) { 
 		gamma[0].style.background = `hsl(${[kar[0]-150]}, ${kar[1]+10}%, ${kar[2]-10}%)`;
 		gamma[1].style.background = `hsl(${rand}, ${kar[1]+20}%, ${kar[2]-20}%)`;
         gamma[2].style.background = `hsl(${rand}, ${kar[1]+10}%, ${kar[2]+10}%)`;
         gamma[3].style.background = `hsl(${rand}, ${kar[1]-20}%, ${kar[2]+5}%)`;
-
-		
         }
-        if (gost.classList.contains('active')){
-            gamma[0].style.background = `hsl(${[rand]}, ${kar[1]+5}%, ${kar[2]-20}%)`;
-            gamma[1].style.background = `hsl(${rand}, ${kar[1]-15}%, ${kar[2]-4}%)`;
-            gamma[2].style.background = `hsl(${rand}, ${kar[1]+10}%, ${kar[2]+15}%)`;
-            gamma[3].style.background = `hsl(${rand}, ${kar[1]-5}%, ${kar[2]+5}%)`;
-    
+
+        if (tabsBtn[1].classList.contains('active')){
+            gamma[4].style.background = `hsl(${[rand]}, ${kar[1]+5}%, ${kar[2]-20}%)`;
+            gamma[5].style.background = `hsl(${rand}, ${kar[1]-15}%, ${kar[2]-4}%)`;
+            gamma[6].style.background = `hsl(${rand}, ${kar[1]+10}%, ${kar[2]+15}%)`;
+            gamma[7].style.background = `hsl(${rand}, ${kar[1]-5}%, ${kar[2]+5}%)`;
         };
    
         colorActive.style.background = `hsl(${kar[0]}, ${kar[1]}%, ${kar[2]}%)`;
@@ -313,23 +362,7 @@ function changeColorLeft(){
         colorActive.style.background = `hsl(${HSL[0]}, ${HSL[1]}%, ${HSL[2]-2}%)`;
  };
 
- function changeColorRight(){	
-    let HSL = splitColor();
-    let colorActive =  document.querySelector('span.active');
-        colorActive.style.background = `hsl(${HSL[0]}, ${HSL[1]}%, ${+HSL[2]+2}%)`;
- };
-
- function changeColorUp(){	
-    let HSL = splitColor();
-    let colorActive =  document.querySelector('span.active');
-        colorActive.style.background = `hsl(${HSL[0]}, ${+HSL[1]+6}%, ${HSL[2]}%)`;
- };
-
- function changeColorDown(){	
-    let HSL = splitColor();
-    let colorActive =  document.querySelector('span.active');
-    colorActive.style.backgroundColor = `hsl(${HSL[0]}, ${HSL[1]-6}%, ${HSL[2]}%)`;
- };
+ 
 
 function handleGesure() {
    
@@ -359,39 +392,39 @@ function handleGesure() {
 
 
     
-var initialPoint;
-var finalPoint;
-colors.forEach(function (color) {
-	color.addEventListener('touchstart', function (event) {
-		event.preventDefault();
-		event.stopPropagation();
-		initialPoint = event.changedTouches[0];
-	}, false);
+// var initialPoint;
+// var finalPoint;
+// colors.forEach(function (color) {
+// 	color.addEventListener('touchstart', function (event) {
+// 		event.preventDefault();
+// 		event.stopPropagation();
+// 		initialPoint = event.changedTouches[0];
+// 	}, false);
 
-	color.addEventListener('touchend', function (event) {
-		event.preventDefault();
-		event.stopPropagation();
-		finalPoint = event.changedTouches[0];
-		var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
-		var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
-		if (xAbs > 10 || yAbs > 10) {
-			if (xAbs > yAbs) {
-				if (finalPoint.pageX < initialPoint.pageX) {
-					changeColorLeft();
-					console.log('left!');
-				} else {
-					console.log('right!');/*СВАЙП ВПРАВО*/
-				}
-			} else {
-				if (finalPoint.pageY < initialPoint.pageY) {
-					console.log('up!');
-				} else {
-					console.log('down!');
-				}
-			}
-		}
-	}, false);
-});
+// 	color.addEventListener('touchend', function (event) {
+// 		event.preventDefault();
+// 		event.stopPropagation();
+// 		finalPoint = event.changedTouches[0];
+// 		var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
+// 		var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
+// 		if (xAbs > 10 || yAbs > 10) {
+// 			if (xAbs > yAbs) {
+// 				if (finalPoint.pageX < initialPoint.pageX) {
+// 					changeColorLeft();
+// 					console.log('left!');
+// 				} else {
+// 					console.log('right!');/*СВАЙП ВПРАВО*/
+// 				}
+// 			} else {
+// 				if (finalPoint.pageY < initialPoint.pageY) {
+// 					console.log('up!');
+// 				} else {
+// 					console.log('down!');
+// 				}
+// 			}
+// 		}
+// 	}, false);
+// });
 
 
 
