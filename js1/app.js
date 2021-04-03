@@ -21,13 +21,12 @@ tabsBtn.forEach(function (item) {
 		let currentBtn = item;
 		let tabId = currentBtn.getAttribute("data-tab");
 		let currentTab = document.querySelector(tabId);
-		butt.addEventListener('click',()=> {
-			createGamma2();
-			console.log(tabId);});
-		
-		// let colors = document.querySelectorAll('.color');
-		
 
+		
+			console.log(tabId);
+			
+		// });
+		// let colors = document.querySelectorAll('.color');
 			if (!currentBtn.classList.contains('active')) {
 
 			tabsBtn.forEach(function (item) {
@@ -48,9 +47,9 @@ tabsBtn.forEach(function (item) {
 		}
 	});
 });
-// document.querySelector('.tabs__nav-btn:nth-child(2)').click();
-document.querySelector('.tabs__nav-btn').click();
-
+document.querySelector('.tabs__nav-btn:nth-child(1)').click();
+// document.querySelector('.tabs__nav-btn').click();
+butt.addEventListener('click', activeTab());
 
 //______ColorPicker_________//
 
