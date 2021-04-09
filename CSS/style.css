@@ -1,13 +1,17 @@
 /* CSS Document */
+html {
+    width: 100%;
+    height:100%;
+}
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color:#FFFFFF;
     -webkit-font-smoothing: antialiased;
-    width: auto;
-    height: auto;
-    /* overflow-x: hidden; */
+    width: 100%;
+    height:100%;
+    
 }
 h1 {
     font-family: 'Roboto', sans-serif;
@@ -128,6 +132,9 @@ h1 {
     /* justify-content: space-between; */
     display: table;
     position:absolute;
+    /* top: 0;
+    left: 0; */
+    z-index: 1001;
     margin-left: 96%;
     margin-top: 5%;
     width: 30px;
@@ -208,72 +215,75 @@ h1 {
 =================*/
 
 .colorpickerHolder {
-    
      position: absolute;
-     
-
 }
-
-
-.intro {
+/* .intro {
     display:flex;
     width: 100%;
-     }
+     } */
 
- .intro_1 {
+.intro_1 {
     display:flex;
-    width: 100%;
-    height: 700px; 
-    padding-top:20px;
-    overflow-x:hidden; 
-   }
-
-.intro_1.active {
-
-    width: 100%;
-    height: 700px; 
-    padding-top:20px;
-    overflow-x:hidden;
+    padding-top:18px;
+    flex-flow: column nowrap;
+    width: 99.8%;
+    height: 800px; 
+    border: 2px solid #2e2e2e;
+    background:rgb(172, 172, 172);
+    /* overflow-x: hidden; */
 }
 
-/* .color {
-    display: flex;
-    width: 100%;
-    overflow: auto;
-    resize: vertical;
-  
-} */
 span.active {
     border: 2px solid #e4e4e4;
-    
 }  
 span {
-    display: flex;
-    width: 100%;
-    overflow: auto;
-    resize: vertical;
+    width: 99.8%;
+    /* overflow: auto;
+    resize: vertical; */
 }
 
 .color1 {
-    background-color:rgb(196, 210, 235);
-    height: 52.7%;
+    /* order: 1; */
+    background-color:rgb(166, 255, 218);
+    flex-grow:  .31;
 }
-
 .color2 {
-    background-color:rgb(137, 175, 159);
-    height: 9.2%;
+    /* order:2; */
+    background-color:rgb(242, 166, 255);
+    flex-grow:1.41;
 }
-
 .color3 {
-    background-color:rgb(201, 202, 138);
-    height: 4.8%;
+    /* order: 3; */
+    flex-grow:.22;
+    background-color:rgb(59, 50, 18);
 }
 
 .color4 {
-    background-color:rgb(62, 63, 77);;
-    height: 33.3%;
+    /* order: 4; */
+    flex-grow:.09;
+    background-color:rgb(38, 42, 98);
 }
 
+.color5 {
+    /* order: 5; */
+    flex-grow:.76;
+    background-color:rgb(50, 146, 82);
+}
+.color6 {
+    /* order: 6; */
+    flex-grow:.36;
+    background-color:rgb(8, 177, 255);
+}
+.color7 {
+    /* order: 7; */
+    flex-grow:.17;
+    background-color:rgb(60, 17, 250);
+}
+.color8 {
+    /* order: 8; */
+    flex-grow:.59;
+    background-color:rgb(255, 58, 8);
+}
 
 
 

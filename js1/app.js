@@ -12,7 +12,7 @@
 
 
 let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
-// let intro_1 = document.querySelectorAll(".intro_1");
+let intro_1 = document.querySelectorAll(".intro_1");
 let tabsContent = document.querySelectorAll(".intro_1");
 let tabsNav = document.querySelector(".tabs__nav");
 
@@ -39,7 +39,16 @@ butt.addEventListener('click',()=> {
 	 loadColor ();
 	;});
 
+	$( function() {
+		$( ".intro_1" ).sortable();
+		$( ".intro_1" ).disableSelection();
+	  } );
 
+	  $( function() {
+		$( "span" ).resizable({
+		  containment: ".intro_1"
+		});
+	  } );
 //_______Tabs_________//
 
 function hideTabContent() {
@@ -52,7 +61,7 @@ function hideTabContent() {
 };
 
 function showTabsContent(i){
-	tabsContent[i].style.display = 'block'; 
+	tabsContent[i].style.display = 'flex'; 
 	tabsBtn[i].classList.add('active');
 };
 
@@ -78,43 +87,11 @@ tabsNav.addEventListener('click', (event) =>{
 	};
 });
 
-// tabsBtn.forEach(function (item) {
-// 	item.addEventListener("click", function activeTab() {
-// 		let currentBtn = item;
-// 		let tabId = currentBtn.getAttribute("data-tab");
-// 		let currentTab = document.querySelector(tabId);
 
-// 			if (!currentBtn.classList.contains('active')) {
-               
-// 			tabsBtn.forEach(function (item) {
-// 				item.classList.remove('active');
-// 			});
-// 			intro_1.forEach(function (item) {
-// 				item.classList.remove('active');
-// 			});
-// 			colors.forEach(function (item) {
-// 				item.classList.remove('active');
-// 			});
-//           	currentBtn.classList.add('active');
-// 			currentTab.classList.add('active');
-// 		}
-// 	});
-// });
-// // document.querySelector('.tabs__nav-btn:nth-child(2)').click();
-// document.querySelector('.tabs__nav-btn').click();
 
 
 //______ColorPicker_________//
-let inputColor = document.querySelector('.colorpickerHolder');
 
-function hideInput(){
-	inputColor.style.display = 'none';
-}
-hideInput();
-
-function showInput(){
-	inputColor.style.display = 'block';
-}
 
 let deleteColPick = function () {
 	$('.colorpickerHolder').remove();
@@ -123,10 +100,14 @@ let deleteColPick = function () {
 colors.forEach(function (color) {
 	color.addEventListener("contextmenu", colorPicker);
 	color.addEventListener("mouseup", deleteColPick);
-	
 });
 
-$(colors).on("contextmenu", false);
+tabsContent.forEach(function (color) {
+	color.addEventListener("contextmenu", colorPicker);
+	color.addEventListener("mouseup", deleteColPick);
+});
+$('.intro_1').on("contextmenu", false);
+
 
 function colorPicker(e) {
 
@@ -160,24 +141,18 @@ function colorPicker(e) {
 
 //______Active Color_________//
 
-colors.forEach(function (color) {
-	color.addEventListener("click", function select() {
-		
-		if (!color.classList.contains("active")) {
-			colors.forEach(function (color, i) {
-				color.classList.remove('active');
-				if (i > 1){
-					color.classList.remove('active');
-				}
+var isMenuShow = false;
+colors.forEach(function (item) {
+	item.addEventListener("click", function () {
+		if (!item.classList.contains("active")) {
+			colors.forEach(function (item) {
+				item.classList.remove('active');
 			});
 		};
-		color.classList.add('active');
-		
-	});
-	color.addEventListener("contextmenu", function () {
-		colors.forEach(function (color) {
-			color.classList.remove('active');
-		});
+		item.classList.add('active');
+		item.addEventListener("dblclick", function () {
+			item.classList.remove('active');
+		})
 	});
 });
 
@@ -378,14 +353,14 @@ function handleGesure() {
                     changeColorRight();
 					console.log('right!');/*СВАЙП ВПРАВО*/
 				}
-			} else {
-				if (clickEndY < clickStartY) {
-                    changeColorUp()
-					console.log('up!');
-				} else {
-                    changeColorDown()
-					console.log('down!');
-				}
+			// } else {
+			// 	if (clickEndY < clickStartY) {
+            //         changeColorUp()
+			// 		console.log('up!');
+			// 	} else {
+            //         changeColorDown()
+			// 		console.log('down!');
+			// 	}
 			}
 		}
     };
