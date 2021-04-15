@@ -1,16 +1,16 @@
 /* CSS Document */
-html {
+/* html {
     width: 100%;
     height:100%;
-}
+} */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color:#FFFFFF;
     -webkit-font-smoothing: antialiased;
-    width: 100%;
-    height:100%;
+    width: auto;
+    height:auto;
     
 }
 h1 {
@@ -148,12 +148,26 @@ h1 {
 .butt {
    
     position:relative;
+    /* display: flex; */
+    fill: rgb(251, 245, 245);
+    width: 100%;
+    height: 25px;
+    margin-bottom: 25px;
+    align-items:center;
+    transition-property: fill;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    -webkit-filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+  filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+}
+.buttRotate90 {
+    transform:rotate(90deg);
+    position:relative;
     display: flex;
     fill: rgb(251, 245, 245);
     width: 100%;
     height: 25px;
     margin-bottom: 25px;
-    justify-content: center;
     align-items:center;
     transition-property: fill;
     transition-duration: 0.2s;
@@ -167,6 +181,7 @@ h1 {
 }
 .butt:active{
     fill: rgb(251, 217, 65);
+    transform: translate(1px, 1px);
     
 }
 .icon {
@@ -202,7 +217,9 @@ h1 {
     animation-timing-function: linear; 
 }
 
-
+input {
+    border: 2px solid #ffffff;
+}
 @keyframes spin {
     from {
         transform:rotate(0deg);
@@ -217,80 +234,109 @@ h1 {
 .colorpickerHolder {
      position: absolute;
 }
-/* .intro {
-    display:flex;
-    width: 100%;
-     } */
+.intro {
+    display:flex; 
+     width: 100%;
+     }
 
 .intro_1 {
-    display:flex;
+    display:none;
     padding-top:18px;
-    flex-flow: column nowrap;
-    width: 99.8%;
-    height: 800px; 
+    flex-flow:column nowrap;
+    width:100%;
+    height: 790px; 
     border: 2px solid #2e2e2e;
     background:rgb(172, 172, 172);
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
+    /* overflow: hidden; */
 }
-
+.row {
+    display:flex;
+    padding-top:18px;
+    flex-flow:row nowrap;
+    width:100%;
+    height: 790px; 
+    border: 2px solid #2e2e2e;
+    background:rgb(172, 172, 172);
+    overflow-y: hidden;
+    /* overflow: hidden; */
+}
 span.active {
-    border: 2px solid #e4e4e4;
-}  
-span {
-    width: 99.8%;
+    border: 2px solid #ffffff;
     /* overflow: auto;
-    resize: vertical; */
-}
+    resize:both; */
+}  
+
+
+/* span {
+   /* width: 100%;
+   height: 100%; */
+  /* display:revert; */
+ 
+
 
 .color1 {
-    /* order: 1; */
+    order: 1;
+    /* display:none; */
     background-color:rgb(166, 255, 218);
-    flex-grow:  .31;
+    /* height: 7.8%;
+    width: 100%; */
+    flex-grow: 7.8;
+    /* flex-grow: 1; */
 }
 .color2 {
-    /* order:2; */
+     /* display:block; */
+    order:2;
     background-color:rgb(242, 166, 255);
-    flex-grow:1.41;
+    /* height:35.4%; */
+    flex-grow:35.4;
+    /* flex-grow:1; */
 }
 .color3 {
-    /* order: 3; */
-    flex-grow:.22;
+    /* display:block; */
+    order:3;
+    /* height: 5.7%; */
+    flex-grow:5.7;
+    /* flex-grow:1; */
     background-color:rgb(59, 50, 18);
 }
 
 .color4 {
-    /* order: 4; */
-    flex-grow:.09;
+    order:4;
+    /* display:none; */
+    /* height: 2.3%; */
+    flex-grow:2.3;
     background-color:rgb(38, 42, 98);
 }
 
 .color5 {
-    /* order: 5; */
-    flex-grow:.76;
+    order:5;
+    /* height: 19%; */
+    /* display:block; */
+    flex-grow:19;
     background-color:rgb(50, 146, 82);
 }
 .color6 {
-    /* order: 6; */
-    flex-grow:.36;
+    order:6;
+    /* display:none; */
+    /* height: 9.1%; */
+    flex-grow:9.1;
     background-color:rgb(8, 177, 255);
 }
 .color7 {
-    /* order: 7; */
-    flex-grow:.17;
+    order:7;
+    /* display:none; */
+    /* height: 4.4%; */
+    flex-grow:4.4;
     background-color:rgb(60, 17, 250);
 }
 .color8 {
-    /* order: 8; */
-    flex-grow:.59;
+    order:8;
+    /* display:none; */
+    /* height: 15%; */
+    flex-grow:15;
     background-color:rgb(255, 58, 8);
 }
-
-
-
-
-
-
-
 
 
 
