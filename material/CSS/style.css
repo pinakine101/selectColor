@@ -1,0 +1,206 @@
+/* CSS Document */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color:#FFFFFF;
+    -webkit-font-smoothing: antialiased;
+}
+h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 40px;
+    color:#7a7a7a;
+   
+}
+ h2, h3, h4, h5, h6{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 40px;
+    color:#b8b8b8;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+/*Сontainer
+=======================*/
+.container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;}
+
+.ContainerH {
+    width: 100%;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    display: inline-flex;
+    height: 63px;
+    background-color: #FFFFFF;
+    align-items: center;
+}
+
+/*Header
+=======================*/
+.header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color:#333333;
+}
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    align-items:center;
+    flex-wrap: wrap;
+}
+.finder_box {
+    width: 15%;
+    height: 20px;
+    background-color: #606060;
+}
+
+/*Nav
+====================*/
+.nav{
+    display: flex;
+        font-size: 15px;
+    text-transform: uppercase;
+}
+.nav__link {
+    margin-left: 50px;
+    color:#fff;
+    opacity: .65;
+    text-decoration: none;
+    transition: opacity .2s
+    linear;
+}
+.nav__link:first-child {
+    margin: 0;
+}
+.nav__link:hover{
+    text-decoration:underline;
+    opacity: 1;
+}
+
+/*tabs
+==========*/
+.tabs__nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #000000;
+    align-items: center;
+    margin:0;
+}
+.tabs__nav-btn {
+    padding: 10px;
+    flex: 1 1 0;
+    text-align: center;
+    text-decoration: none;
+    background-color: #dbdbdb;
+    border-left: 2px solid #7d7d7d;
+    transition: background-color .1s linear;
+}
+.tabs__nav-btn:hover {
+    background-color: #bfbfbf;
+}
+.tabs__nav-btn.active {
+    background-color: #fecd57;
+}
+
+/*intro
+=================*/
+.intro {
+    display: flexbox;
+    width: 100%;
+    margin-top: 173px;
+    height: 500px;
+    position: relative;
+   
+}
+
+.intro_1 {
+    width: 100%;
+    height: 52.7%;
+    background-color: #a1b4ff;
+}
+.intro_2 {
+    width: 100%;
+    height: 9.2%;
+    background-color: #d93df8;
+}
+.intro_3 {
+    width: 100%;
+    height: 38.1%;
+    background-color: #d0fd09;
+}
+/*Column
+
+
+
+/*
+https://progi.pro/kak-obrabativat-alfa-v-ruchnom-rezhime-nalozheniya-overlay-10358380
+
+
+outputRed = (foregroundRed * foregroundAlpha) + (backgroundRed * (1.0 - foregroundAlpha));
+
+
+struct Color
+{
+    int R;
+    int G;
+    int B;
+    int A;
+};
+
+
+Color Blend(Color c1, Color c2)
+{
+    Color result;
+    double a1 = c1.A / 255.0;
+    double a2 = c2.A / 255.0;
+
+
+
+    result.R = (int) (a1 * c1.R + a2 * (1 - a1) * c2.R);
+    result.G = (int) (a1 * c1.G + a2 * (1 - a1) * c2.G);
+    result.B = (int) (a1 * c1.B + a2 * (1 - a1) * c2.B);
+    result.A = (int) (255 * (a1 + a2 * (1 - a1)));
+    return result;
+}
+
+
+
+void Example()
+{
+    Color c1;
+    c1.R = 255;
+    c1.G = 0;
+    c1.B = 0;
+    c1.A = 100;
+
+
+
+    Color c2;
+    c2.R = 255;
+    c2.G = 255;
+    c2.B = 255;
+
+
+
+    Color blended = Blend(c1, c2);
+    int x = 50;
+    int y = 100;
+
+
+
+    // Pretend function that draws a pixel at (x, y) with rgb values
+    DrawPixel(x, y, blended.R, blended.G, blended.B);
+}
+*/
+
+
