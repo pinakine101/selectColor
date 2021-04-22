@@ -217,9 +217,7 @@ h1 {
     animation-timing-function: linear; 
 }
 
-input {
-    border: 2px solid #ffffff;
-}
+
 @keyframes spin {
     from {
         transform:rotate(0deg);
@@ -259,12 +257,12 @@ input {
     border: 2px solid #2e2e2e;
     background:rgb(172, 172, 172);
     overflow-y: hidden;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 span.active {
     border: 2px solid #ffffff;
-    /* overflow: auto;
-    resize:both; */
+    overflow: auto;
+    resize:both;
 }  
 
 
@@ -276,7 +274,7 @@ span.active {
 
 
 .color1 {
-    order: 1;
+    /* order: 1; */
     /* display:none; */
     background-color:rgb(166, 255, 218);
     /* height: 7.8%;
@@ -286,7 +284,7 @@ span.active {
 }
 .color2 {
      /* display:block; */
-    order:2;
+    /* order:2; */
     background-color:rgb(242, 166, 255);
     /* height:35.4%; */
     flex-grow:35.4;
@@ -294,15 +292,15 @@ span.active {
 }
 .color3 {
     /* display:block; */
-    order:3;
+    /* order:3; */
     /* height: 5.7%; */
     flex-grow:5.7;
     /* flex-grow:1; */
-    background-color:rgb(59, 50, 18);
+    background-color:rgb(235, 189, 23);
 }
 
 .color4 {
-    order:4;
+    /* order:4; */
     /* display:none; */
     /* height: 2.3%; */
     flex-grow:2.3;
@@ -310,28 +308,28 @@ span.active {
 }
 
 .color5 {
-    order:5;
+    /* order:5; */
     /* height: 19%; */
     /* display:block; */
     flex-grow:19;
     background-color:rgb(50, 146, 82);
 }
 .color6 {
-    order:6;
+    /* order:6; */
     /* display:none; */
     /* height: 9.1%; */
     flex-grow:9.1;
     background-color:rgb(8, 177, 255);
 }
 .color7 {
-    order:7;
+    /* order:7; */
     /* display:none; */
     /* height: 4.4%; */
     flex-grow:4.4;
     background-color:rgb(60, 17, 250);
 }
 .color8 {
-    order:8;
+    /* order:8; */
     /* display:none; */
     /* height: 15%; */
     flex-grow:15;
