@@ -261,8 +261,8 @@ h1 {
 }
 span.active {
     border: 2px solid #ffffff;
-    overflow: auto;
-    resize:both;
+    /* overflow: auto;
+    resize:both; */
 }  
 
 

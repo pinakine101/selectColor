@@ -69,7 +69,16 @@ contButt[1].addEventListener('click', () => {
 	console.log('dd')
 	});
 
-
+	let arr = [
+		color1.style.display = 'block',
+		color2.style.display = 'block',
+		color3.style.display = 'block',
+		color4.style.display = 'block',
+		color5.style.display = 'block',
+		color6.style.display = 'block',
+		color7.style.display = 'block',
+		color8.style.display = 'block'
+	];
 
 
 
@@ -78,17 +87,13 @@ contButt[0].addEventListener('click',  () => {
 	intro_1.forEach((item, i) => {
 		if (tabsBtn[i].classList.contains('active')) {
 			var y = 0;
-			let arr = [
-				color1.style.display = 'block',
-				color2.style.display = 'block',
-				color3.style.display = 'block',
-				color4.style.display = 'block',
-				color5.style.display = 'block',
-				color6.style.display = 'block',
-				color7.style.display = 'block',
-				color8.style.display = 'block'
-			];
-				arr[y++ % arr.length];
+			
+			arr.forEach((e, i)=>{
+				for (i=0; i < arr.length; i++){
+					arr[i];
+				}
+			})
+				// arr[y++ % arr.length];
 		};
 		// newColor.innerHTML = 'newColor';
 		// document.appendChild(newColor);
