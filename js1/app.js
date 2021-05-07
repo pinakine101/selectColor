@@ -12,55 +12,48 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 
 let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
-// let intro_1 = document.querySelectorAll(".intro_1");
 let tabsContent = document.querySelectorAll(".intro_1");
 let tabsNav = document.querySelector(".tabs__nav");
-
 let intro_1 = document.querySelectorAll(".intro_1")
 let colors = document.querySelectorAll('span');
 let icon = document.querySelector('.icon');
 let contButt = document.querySelectorAll('.butt');
 
-let colAct = document.querySelector('span.active');
-let color1 = document.querySelector('.color1');
-let color2 = document.querySelector('.color2');
-let color3 = document.querySelector('.color3');
-let color4 = document.querySelector('.color4');
-let color5 = document.querySelector('.color5');
-let color6 = document.querySelector('.color6');
-let color7 = document.querySelector('.color7');
-let color8 = document.querySelector('.color8');
 
 //______Active Color_________//
 
-// var isMenuShow = false;
 intro_1.forEach(function (item){
-item.addEventListener('click', (e)=>{
-	const target = e.target;
-	if (!target.classList.contains("active")) {
-		let colors = document.querySelectorAll('span');
-		colors.forEach(function (item1) {
-						item1.classList.remove('active');
-					});
-				};
-				target.classList.toggle('active');
+	item.addEventListener('click', (e)=>{
+		const target = e.target;
+		if (!target.classList.contains("active")) {
+			let colors = document.querySelectorAll('span');
+			colors.forEach(function (item1) {
+				item1.classList.remove('active');
 			});
-		});
+		};
+		target.classList.toggle('active');
+	});
+});
 
 //_______Buttuns_______///
-icon.addEventListener('click', ()=>{
-	calcColor ();
-} );
 
-contButt[2].addEventListener('click', () => {
+icon.addEventListener('click', ()=>{
 	
-	contButt[2].classList.toggle('buttRotate90');
-			
-	intro_1.forEach((i) => {
-		i.classList.toggle('row');
+	calcColor ();
+	// console.log(result[0])
+});
+
+var y = 0;
+contButt[0].addEventListener('click',  () => {
+	let newColor = document.createElement('span');
+	intro_1.forEach((item, i) => {
+		if (tabsBtn[i].classList.contains('active')) {
+				newColor.classList.add(arr[y++ % arr.length ]);
+		};
+		$(newColor).insertAfter('span.active');
 	});
-	console.log('dd')
-} );
+
+});
 
 contButt[1].addEventListener('click', () => {
 	let colorActive = document.querySelector('span.active');
@@ -70,58 +63,24 @@ contButt[1].addEventListener('click', () => {
 	});
 
 	let arr = [
-		color1.style.display = 'block',
-		color2.style.display = 'block',
-		color3.style.display = 'block',
-		color4.style.display = 'block',
-		color5.style.display = 'block',
-		color6.style.display = 'block',
-		color7.style.display = 'block',
-		color8.style.display = 'block'
+		'color1',
+		'color2',
+		'color3',
+		'color4',
+		'color5',
+		'color6',
+		'color7',
+		'color8'
 	];
 
-
-
-contButt[0].addEventListener('click',  () => {
-	
-	intro_1.forEach((item, i) => {
-		if (tabsBtn[i].classList.contains('active')) {
-			var y = 0;
-			
-			arr.forEach((e, i)=>{
-				for (i=0; i < arr.length; i++){
-					arr[i];
-				}
-			})
-				// arr[y++ % arr.length];
-		};
-		// newColor.innerHTML = 'newColor';
-		// document.appendChild(newColor);
-		// intro_1[0].appendChild(newColor);
-		// $(newColor).insertAfter('span.active');
-		
-	});
+contButt[2].addEventListener('click', () => {
+		contButt[2].classList.toggle('buttRotate90');
+		intro_1.forEach((i) => {
+			i.classList.toggle('row');
+		});
+		console.log('dd')
 });
 
-// var y = 0;
-
-// contButt[0].addEventListener('click',  () => {
-// 	let newColor = document.createElement('span');
-// 	intro_1.forEach((item, i) => {
-// 		if (tabsBtn[i].classList.contains('active')) {
-// 				newColor.classList.add(arr[y++ % arr.length]);
-// 		};
-// 		// newColor.innerHTML = 'newColor';
-// 		// document.appendChild(newColor);
-// 		// intro_1[0].appendChild(newColor);
-// 		$(newColor).insertAfter('span.active');
-		
-// 	});
-// });
-			// случайное число от min до (max+1)
-		// let	block = blocks[Math.floor(Math.random()*blocks.length)];
-		// 	return Math.floor(block);
-	
 //_______Tabs_________//
 
 function hideTabContent() {
@@ -341,51 +300,91 @@ function handleGesure() {
    
 //    color1.style.background = `hsl(${h}, ${s}%, ${l}%)`;
 //    color2.style.background = `hsl(${a}, ${b}%, ${c}%)`;
-//    };
- 
 
-function calcColor (){	
-	let colAct = document.querySelector('span.active');
+//    };
+
+let result;
+
+function actColor () {
 	$('span.active').each(function (indx, el) {
 		const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
 		const colHsl = RGB2HSL(r, g, b);
 		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
-		let res = regexp.exec(colHsl).slice(1);
-
-		let H = res[0],
-		S = res[1],
-		L = res[2];
-	
-		let H1 = +H+ 150,
-		S1 = +S+ 10,
-		L1 = L -5;
-
-		let H2 = H - 10,
-		S2 = +S+ 10,
-		L2 = L -20;
-
-		let H3 = +H+ 50,
-		S3 = +S+ 10,
-		L3 = L -20;
-		
-		colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
-
-		color1.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
-		color2.style.background = `hsl(${H2}, ${S2}%, ${L2}%)`;
-	 	color3.style.background = `hsl(${H3}, ${S3}%, ${L3}%)`;
-		color4.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
-		color5.style.background = `hsl(${H2}, ${S2}%, ${L2}%)`;
-	 	color6.style.background = `hsl(${H3}, ${S3}%, ${L3}%)`;
-		color7.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
-		color8.style.background = `hsl(${H2}, ${S2}%, ${L2}%)`;
-	 	
-		
-		
-		
-		// return H, S, L, H1, S1, L1;
-		// console.log(target)
+		result = regexp.exec(colHsl).slice(1);
 	});
+}
+
+
+ function calcColor (){	
+
+	actColor ();
+
+	let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_2,L_3,L_4,L_5,L_6,L_7,L_8;
+
+	H = result[0];
+	S = result[1];
+	L = result[2];
+
+	// H_1 = +H+ 50;
+	// S_1 = +S+ 50;
+	// L_1 = +L+ 50;
+
+	// if (H > 1 && H < 360){
+	// 	H2 =  randomInteger(50, 254)
+	// 	H3 =  randomInteger(17, 242)
+	// };
+	// else {H = result[0];}
+
+	
+	// S2 = +S+ 10;
+	// L2 = L -20;
+	
+	// S3 = +S+ 10;
+	// L3 = L -20;
+
+	let colAct = document.querySelector('span.active');
+	intro_1.forEach((item, i) => {
+		if (tabsBtn[0].classList.contains('active')) {
+			H_1 = +H+ 100;
+			S_1 = +S+ 10;
+			L_1 = L -5;
+		};
+		if (tabsBtn[1].classList.contains('active')) {
+			H_1 = +H+ 50;
+			S_1 = +S+ 20;
+			L_1 = L -25;
+		};
+		if (tabsBtn[i].classList.contains('active')) {
+
+			let color1 = intro_1[i].querySelectorAll('.color1');
+			let color2 = intro_1[i].querySelectorAll('.color2');
+			let color3 = intro_1[i].querySelectorAll('.color3');
+			let color4 = intro_1[i].querySelectorAll('.color4');
+			let color5 = intro_1[i].querySelectorAll('.color5');
+			let color6 = intro_1[i].querySelectorAll('.color6');
+			let color7 = intro_1[i].querySelectorAll('.color7');
+			let color8 = intro_1[i].querySelectorAll('.color8');
+
+		
+	
+			color1.forEach((item) =>{item.style.background = `hsl(${H_1}, ${S_1}%, ${L_1}%)`;})
+			color2.forEach((item) =>{item.style.background = `hsl(${H_2}, ${S_2}%, ${L_2}%)`;})
+			color3.forEach((item) =>{item.style.background = `hsl(${H_3}, ${S_3}%, ${L_3}%)`;})
+			color4.forEach((item) =>{item.style.background = `hsl(${H_4}, ${S_4}%, ${L_4}%)`;})
+			color5.forEach((item) =>{item.style.background = `hsl(${H_5}, ${S_5}%, ${L_5}%)`;})
+			color6.forEach((item) =>{item.style.background = `hsl(${H_6}, ${S_6}%, ${L_6}%)`;})
+			color7.forEach((item) =>{item.style.background = `hsl(${H_7}, ${S_7}%, ${L_7}%)`;})
+			color8.forEach((item) =>{item.style.background = `hsl(${H_8}, ${S_8}%, ${L_8}%)`;})
+			colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
+
+			console.log( intro_1[0]);
+		};
+	
+	});
+	
 };
+
+
 
 function changeColorLeft (h, s, l){	
 		
@@ -452,8 +451,6 @@ function changeColorLeft (h, s, l){
 
 // colActh = 360, s = 100, l = 50
 
-
-
 // let h = 360, s = 100, l = 50 ;
 
 function randomInteger(min, max) {
@@ -476,17 +473,6 @@ function randomInteger(min, max) {
 	
 // };
 
-// colAct.style.background = `hsl(${h}, ${s}%, ${l}%)`;
-// // 					/
-// 					console.log (h, s, l);
-// 				// 		});
-// };
-		
-		
-	
-	
-
-
 
 
 // function generateHslaColors (saturation, lightness, alpha, amount) {
@@ -503,68 +489,5 @@ function randomInteger(min, max) {
 // generateHslaColors(100, 50, 50);
 
 
-// function setTheme(H, inputType) {
-// 	// Convert hex to RGB first
-// 	let r = 0, g = 0, b = 0;
-// 	// if (H.length == 4) {
-// 	//   r = "0x" + H[1] + H[1];
-// 	//   g = "0x" + H[2] + H[2];
-// 	//   b = "0x" + H[3] + H[3];
-// 	// } else if (H.length == 7) {
-// 	//   r = "0x" + H[1] + H[2];
-// 	//   g = "0x" + H[3] + H[4];
-// 	//   b = "0x" + H[5] + H[6];
-// 	// }
-// 	// Then to HSL
-//
 	
-// 	document.documentElement.style.setProperty(`--${inputType}-color-h`, h);
-// 	document.documentElement.style.setProperty(`--${inputType}-color-s`, s + '%');
-// 	document.documentElement.style.setProperty(`--${inputType}-color-l`, l + '%');
-//   }
-
-//   console.log(setTheme(colors))
-
-
-
-	
-
-
-	// $(colAct).each(function(indx, el){
-	// 	$(el).css("backgroundColor").style.setProperty(' --primary-color--dark', el.target)
-	//   });
-			// $(colAct).each(function(indx, el){
-			// 	let  color = root.setProperty(' --primary-color--dark', item);
-			// 	// let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-			// 	setTheme();
-			// 	//  r =+r+ 15;
-			// 	//  g = +g+ 15;
-			// 	//  b =+b+ 15;
-			// 	 colAct.style.backgroundColor = color;
-				//  colAct.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-
-	// let colAct = document.querySelector('.color.active');
-	// colAct.classList.add('.color4');
-	// console.log(colAct);
-
-
-	//
-	
-					// $(item).each(function(indx, el){
-						
-					// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
-					// 	 h -= 15;
-					// 	 s = +s+ 15;
-					// 	 l =+l+ 15;
-					// 	item.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
-					// 	rgb2Hsl(color);
-					// 	console.log (item);
-					// 		});
-
-// rgbToHsl();
-// let	x = 100,
-// 	y = 50,
-// 	z = 50;
-// let = ChangedColor;
-// ChangedColor = `hsl(${x}, ${y}%, ${z}%)`;
 });

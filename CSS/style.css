@@ -276,7 +276,7 @@ span.active {
 .color1 {
     /* order: 1; */
     /* display:none; */
-    background-color:rgb(166, 255, 218);
+    background-color:rgb(221, 251, 236);
     /* height: 7.8%;
     width: 100%; */
     flex-grow: 7.8;
@@ -285,7 +285,7 @@ span.active {
 .color2 {
      /* display:block; */
     /* order:2; */
-    background-color:rgb(242, 166, 255);
+    background-color:rgb(176, 202, 214);
     /* height:35.4%; */
     flex-grow:35.4;
     /* flex-grow:1; */
@@ -301,10 +301,10 @@ span.active {
 
 .color4 {
     /* order:4; */
-    /* display:none; */
+    display:none;
     /* height: 2.3%; */
     flex-grow:2.3;
-    background-color:rgb(38, 42, 98);
+    background-color:rgb(44, 34, 32);
 }
 
 .color5 {
@@ -312,7 +312,7 @@ span.active {
     /* height: 19%; */
     /* display:block; */
     flex-grow:19;
-    background-color:rgb(50, 146, 82);
+    background-color:rgb(54, 50, 41);
 }
 .color6 {
     /* order:6; */
