@@ -279,7 +279,7 @@ span.active {
     background-color:rgb(221, 251, 236);
     /* height: 7.8%;
     width: 100%; */
-    flex-grow: 7.8;
+    flex-grow: 35.4;
     /* flex-grow: 1; */
 }
 .color2 {
@@ -287,14 +287,14 @@ span.active {
     /* order:2; */
     background-color:rgb(176, 202, 214);
     /* height:35.4%; */
-    flex-grow:35.4;
+    flex-grow:4.4;
     /* flex-grow:1; */
 }
 .color3 {
     /* display:block; */
     /* order:3; */
     /* height: 5.7%; */
-    flex-grow:5.7;
+    flex-grow:19;
     /* flex-grow:1; */
     background-color:rgb(235, 189, 23);
 }
@@ -303,7 +303,7 @@ span.active {
     /* order:4; */
     display:none;
     /* height: 2.3%; */
-    flex-grow:2.3;
+    flex-grow:7.8;
     background-color:rgb(44, 34, 32);
 }
 
@@ -311,8 +311,8 @@ span.active {
     /* order:5; */
     /* height: 19%; */
     /* display:block; */
-    flex-grow:19;
-    background-color:rgb(54, 50, 41);
+    flex-grow:5.7;
+    background-color:rgb(33, 218, 58);
 }
 .color6 {
     /* order:6; */
@@ -325,7 +325,7 @@ span.active {
     /* order:7; */
     /* display:none; */
     /* height: 4.4%; */
-    flex-grow:4.4;
+    flex-grow:2.3;
     background-color:rgb(60, 17, 250);
 }
 .color8 {

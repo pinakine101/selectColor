@@ -23,6 +23,7 @@ let contButt = document.querySelectorAll('.butt');
 //______Active Color_________//
 
 intro_1.forEach(function (item){
+	
 	item.addEventListener('click', (e)=>{
 		const target = e.target;
 		if (!target.classList.contains("active")) {
@@ -38,17 +39,28 @@ intro_1.forEach(function (item){
 //_______Buttuns_______///
 
 icon.addEventListener('click', ()=>{
-	
-	calcColor ();
+	// showColorText ();
+	calcColor (showColorText);
 	// console.log(result[0])
 });
 
-var y = 0;
+let arr = [
+	'color1',
+	'color2',
+	'color3',
+	'color4',
+	'color5',
+	'color6',
+	'color7',
+	'color8'
+];
+
+var y = 2;
 contButt[0].addEventListener('click',  () => {
 	let newColor = document.createElement('span');
 	intro_1.forEach((item, i) => {
 		if (tabsBtn[i].classList.contains('active')) {
-				newColor.classList.add(arr[y++ % arr.length ]);
+				newColor.classList.add( arr [y++ % arr.length]);
 		};
 		$(newColor).insertAfter('span.active');
 	});
@@ -58,27 +70,15 @@ contButt[0].addEventListener('click',  () => {
 contButt[1].addEventListener('click', () => {
 	let colorActive = document.querySelector('span.active');
 	colorActive.style.display = 'none'; 
-	// colAct.remove()
-	console.log('dd')
-	});
+		});
 
-	let arr = [
-		'color1',
-		'color2',
-		'color3',
-		'color4',
-		'color5',
-		'color6',
-		'color7',
-		'color8'
-	];
-
+	
 contButt[2].addEventListener('click', () => {
 		contButt[2].classList.toggle('buttRotate90');
 		intro_1.forEach((i) => {
 			i.classList.toggle('row');
 		});
-		console.log('dd')
+		
 });
 
 //_______Tabs_________//
@@ -98,21 +98,24 @@ function showTabsContent(i){
 };
 
 hideTabContent();
-showTabsContent(0);
+showTabsContent(2);
 
 let isCalled = false;
+
 tabsNav.addEventListener('click', (event) =>{
 	const target = event.target;
-
+	calcColor()
 	if (target && target.classList.contains('tabs__nav-btn')) {
 		tabsBtn.forEach((item, i) => {
 			if (target == item) {
 				hideTabContent();
 				showTabsContent(i);
-				// if (item.classList.contains('active')){
+				// if (!tabsBtn[i].classList.contains('active')){
 				// 	if(!isCalled) {
 				// 		isCalled = true;
-				// 		createGamma()}};
+				// 		calcColor()}
+				// 	else };
+				// 		console.log(isCalled)
 			};
 		});
 	};
@@ -122,6 +125,7 @@ tabsNav.addEventListener('click', (event) =>{
 
 let deleteColPick = function () {
 	$('.colorpickerHolder').remove();
+	showColorText ();
 };
 
 intro_1.forEach(function (color) {
@@ -130,6 +134,12 @@ intro_1.forEach(function (color) {
 });
 
 $(intro_1).on("contextmenu", false);
+
+function rgb2hex (color) { 
+	return "#"+(color.match(/\b(\d+)\b/g).map(function(digit) { 
+		return ('0' + parseInt(digit).toString(16)).slice(-2) 
+	})).join(''); 
+};
 
 function colorPicker(e) {
 	
@@ -142,11 +152,7 @@ function colorPicker(e) {
 	let col = rgb2hex(spanColor);
 	
 
-	function rgb2hex (color) { 
-		return "#"+(color.match(/\b(\d+)\b/g).map(function(digit) { 
-			return ('0' + parseInt(digit).toString(16)).slice(-2) 
-		})).join(''); 
-	};
+	
 
 		$(box).css({
 		"position": "absolute",
@@ -258,7 +264,7 @@ function handleGesure() {
 	
 // console.log(intro_1Active)});
 
-// document.addEventListener("DOMContentLoaded", 
+
 // function createGamma(h, s, l) {
 	
 // 	 h = randomInteger(100, 170);
@@ -270,10 +276,10 @@ function handleGesure() {
 // 	let H1 = h-50, S1 = s+10, L1= l+10;
 // 	let H2 = h+20, S2 = s-5, L2= l+5;
 	
-// 	if (h >= 30 && h <=100) {
-// 		s -=  10,
-// 		l -= 20;
-// 	};
+// 	// if (h >= 30 && h <=100) {
+// 	// 	s -=  10,
+// 	// 	l -= 20;
+// 	// };
 	
 	
 // 	color1.style.background = `hsl(${H}, ${S}%, ${L}%)`;
@@ -282,31 +288,13 @@ function handleGesure() {
 	
 //   };
 
-//   function createGamma2(h, s, l) {
-	
-// 	h = randomInteger(100, 170);
-// 	s = randomInteger(50,100);
-// 	l = randomInteger(50,100);
 
-//    let a = h-30, b = s+50, c= l-10;
-//    let d = h-20, e = s-20, f= l-5;
-//    let H1 = h-50, S1 = s+10, L1= l+10;
-//    let H2 = h+20, S2 = s-5, L2= l+5;
-   
-//    if (h >= 30 && h <=100) {
-// 	   s -=  10,
-// 	   l -= 20;
-//    };
-   
-//    color1.style.background = `hsl(${h}, ${s}%, ${l}%)`;
-//    color2.style.background = `hsl(${a}, ${b}%, ${c}%)`;
-
-//    };
 
 let result;
 
 function actColor () {
-	$('span.active').each(function (indx, el) {
+	
+	$(colors).each(function (indx, el) {
 		const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
 		const colHsl = RGB2HSL(r, g, b);
 		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
@@ -314,46 +302,58 @@ function actColor () {
 	});
 }
 
+function showColorText (){
+	intro_1.forEach((item, i) => {
+		if (tabsBtn[i].classList.contains('active')) {
+			let color = intro_1[i].querySelectorAll('span');
+			$(color).each(function (i, el) {
+			let  item = $(el).css("backgroundColor");
+			let col = rgb2hex(item)
+			$(this).text(col);
+			})
+		};	
+	});
+};
+// showColorText ();
 
  function calcColor (){	
-
+	
 	actColor ();
-
+	
 	let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_2,L_3,L_4,L_5,L_6,L_7,L_8;
 
-	H = result[0];
-	S = result[1];
-	L = result[2];
+	// H = result[0];
+	// S = result[1];
+	// L = result[2];
 
-	// H_1 = +H+ 50;
+	// H_1 = +H+ 150;
 	// S_1 = +S+ 50;
 	// L_1 = +L+ 50;
-
-	// if (H > 1 && H < 360){
-	// 	H2 =  randomInteger(50, 254)
-	// 	H3 =  randomInteger(17, 242)
-	// };
-	// else {H = result[0];}
-
-	
-	// S2 = +S+ 10;
-	// L2 = L -20;
-	
-	// S3 = +S+ 10;
-	// L3 = L -20;
 
 	let colAct = document.querySelector('span.active');
 	intro_1.forEach((item, i) => {
 		if (tabsBtn[0].classList.contains('active')) {
-			H_1 = +H+ 100;
-			S_1 = +S+ 10;
-			L_1 = L -5;
+			H_1 = 200;	S_1 = 50;	L_1 = 90;
+			H_2 = 80;	S_2 =  20;	L_2 = 50;
+			H_3 =  50;	S_3 = 10;	L_3 = 50;
 		};
 		if (tabsBtn[1].classList.contains('active')) {
-			H_1 = +H+ 50;
-			S_1 = +S+ 20;
-			L_1 = L -25;
+			H_1 = 100;	S_1 = 50;	L_1 = 90;
+			H_2 = 30;	S_2 = 20;	L_2 = 50;
+			H_3 =  150;	S_3 = 10;	L_3 = 50;
 		};
+		if (tabsBtn[2].classList.contains('active')) {
+			H_1 = 50;	S_1 = 50;	L_1 = 90;
+			H_2 = 180;	S_2 = 20;	L_2 = 50;
+			H_3 =  250;	S_3 = 10;	L_3 = 50;
+		};
+
+		if (tabsBtn[3].classList.contains('active')) {
+			H_1 = 20;	S_1 = 50;	L_1 = 90;
+			H_2 = 80;	S_2 = 20;	L_2 = 50;
+			H_3 =  170;	S_3 = 10;	L_3 = 50;
+		};
+
 		if (tabsBtn[i].classList.contains('active')) {
 
 			let color1 = intro_1[i].querySelectorAll('.color1');
@@ -375,16 +375,14 @@ function actColor () {
 			color6.forEach((item) =>{item.style.background = `hsl(${H_6}, ${S_6}%, ${L_6}%)`;})
 			color7.forEach((item) =>{item.style.background = `hsl(${H_7}, ${S_7}%, ${L_7}%)`;})
 			color8.forEach((item) =>{item.style.background = `hsl(${H_8}, ${S_8}%, ${L_8}%)`;})
-			colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
-
-			console.log( intro_1[0]);
+			// colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
 		};
 	
 	});
 	
 };
 
-
+calcColor (showColorText);
 
 function changeColorLeft (h, s, l){	
 		
