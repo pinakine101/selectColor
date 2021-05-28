@@ -270,7 +270,14 @@ span.active {
    /* width: 100%;
    height: 100%; */
   /* display:revert; */
- 
+ .sorter {
+     margin: 0;
+     width: 30px;
+     height: 30px;
+     background-color:#7d7d7d;
+     z-index: 1000;
+     position: absolute;
+ }
 
 
 .color1 {

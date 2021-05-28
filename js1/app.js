@@ -39,8 +39,9 @@ intro_1.forEach(function (item){
 //_______Buttuns_______///
 
 icon.addEventListener('click', ()=>{
-	// showColorText ();
-	actColor ()
+	
+	actColor ();
+	
 	// console.log(result[0])
 });
 
@@ -63,7 +64,7 @@ contButt[0].addEventListener('click',  () => {
 	intro_1.forEach((item, i) => {
 		if (tabsBtn[i].classList.contains('active')) {
 				newColor.classList.add( arr [y++ % arr.length]);
-				newColor.style.background = arrColor [x++ % arrColor.length];
+				newColor.style.background =  arrTon [a++ % arrTon.length];
 		};
 		$(newColor).insertAfter('span.active');
 	});
@@ -101,7 +102,7 @@ function showTabsContent(i){
 };
 
 hideTabContent();
-showTabsContent(2);
+showTabsContent(0);
 
 let isCalled = false; 
 
@@ -272,6 +273,11 @@ function handleGesure() {
 // 		}
 // 	}, false);
 // });
+/*_________Sortable____________*/
+// $( function() {
+//     $(".intro_1").sortable();
+//     $(".intro_1").disableSelection();
+//   } );
 
 /*______CalcColor____________________
 из выбранного цвета генерируется массив цветов в 
@@ -292,13 +298,16 @@ function actColor () {
 
 let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_2,L_3,L_4,L_5,L_6,L_7,L_8;
 
+
+
 		H = result[0];
 		S = result[1];
 		L = result[2];
 
-		H_1 = +H+ 10;
-		S_1 = +S+ 5;
-		L_1 = +L+ 8;
+		H_1 = 20;
+		S_1 =  50;
+		L_1 =  20;
+		
 
 		H_2 = +H_1+ 10;
 		S_2 = +S_1+ 50;
@@ -343,6 +352,17 @@ let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_
 				let color7 = intro_1[i].querySelectorAll('.color7');
 				let color8 = intro_1[i].querySelectorAll('.color8');
 
+				arrColor = [
+					`hsl(${H_1}, ${S_1}%, ${L_1}%)`,
+					`hsl(${H_2}, ${S_2}%, ${L_2}%)`,
+					`hsl(${H_3}, ${S_3}%, ${L_3}%)`,
+					`hsl(${H_4}, ${S_4}%, ${L_4}%)`,
+					`hsl(${H_5}, ${S_5}%, ${L_5}%)`,
+					`hsl(${H_6}, ${S_6}%, ${L_6}%)`,
+					`hsl(${H_7}, ${S_7}%, ${L_7}%)`,
+					`hsl(${H_8}, ${S_8}%, ${L_8}%)`
+				];
+
 				color1.forEach((item) =>{item.style.background = `hsl(${H_1}, ${S_1}%, ${L_1}%)`;})
 				color2.forEach((item) =>{item.style.background = `hsl(${H_2}, ${S_2}%, ${L_2}%)`;})
 				color3.forEach((item) =>{item.style.background = `hsl(${H_3}, ${S_3}%, ${L_3}%)`;})
@@ -374,57 +394,51 @@ showColorText ();
 
 let arrColor;
 
- function calcColor (){	
-	
-let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_2,L_3,L_4,L_5,L_6,L_7,L_8;
+function randomInteger1(min, max) {
+		// случайное число от min до (max+1)
+		let rand = min + Math.random() * (max  - min);
+		return Math.floor(rand);
+	  }
 
+function randomInteger(min, max) {
+	return Math.random() * (max - min) + min;
+}
+
+
+
+class ColorType {
+	constructor (Hue, Sat, Light) {
+		this.Hue = Hue;
+		this.Sat = Sat;
+		this.Light = Light;
+	}
+	calcTone(a, b, c, d) {
+		this.Hue =  randomInteger(a, b);
+		if (this.Hue > a && this.Hue <b) {this.Sat = c, this.Light = d}
+
+		let ren = `hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`;
+		return ren;
+	}
 	
+}
+
+let a=3;
+let arrTon;
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+  
+function calcColor (){	
 
 	intro_1.forEach((item, i) => {
-		if (tabsBtn[0].classList.contains('active')) {
-			H_1 = 200;	S_1 = 50;	L_1 = 90;
-			H_2 = 80;	S_2 =  20;	L_2 = 50;
-			H_3 =  50;	S_3 = 10;	L_3 = 50;
-			H_4 =  50;	S_4 = 10;	L_4 = 50;
-			H_5 =  50;	S_5 = 10;	L_5 = 50;
-			H_6 =  50;	S_6 = 10;	L_6 = 50;
-			H_7 =  50;	S_7 = 10;	L_7 = 50;
-			H_8 =  50;	S_8 = 10;	L_8 = 50;
-		};
-		if (tabsBtn[1].classList.contains('active')) {
-			H_1 = 100;	S_1 = 50;	L_1 = 90;
-			H_2 = 30;	S_2 = 20;	L_2 = 50;
-			H_3 =  150;	S_3 = 10;	L_3 = 50;
-			H_4 =  310;	S_4 = 10;	L_4 = 50;
-			H_5 =  200;	S_5 = 10;	L_5 = 50;
-			H_6 =  350;	S_6 = 10;	L_6 = 50;
-			H_7 =  250;	S_7 = 10;	L_7 = 50;
-			H_8 =  150;	S_8 = 10;	L_8 = 50;
-		};
-		if (tabsBtn[2].classList.contains('active')) {
-			H_1 = 50;	S_1 = 50;	L_1 = 90;
-			H_2 = 180;	S_2 = 20;	L_2 = 50;
-			H_3 =  250;	S_3 = 10;	L_3 = 50;
-			H_4 =  98;	S_4 = 10;	L_4 = 50;
-			H_5 =  76;	S_5 = 10;	L_5 = 50;
-			H_6 =  156;	S_6 = 10;	L_6 = 50;
-			H_7 =  300;	S_7 = 10;	L_7 = 50;
-			H_8 =  40;	S_8 = 10;	L_8 = 50;
-		};
-
-		if (tabsBtn[3].classList.contains('active')) {
-			H_1 = 20;	S_1 = 50;	L_1 = 90;
-			H_2 = 80;	S_2 = 20;	L_2 = 50;
-			H_3 =  170;	S_3 = 10;	L_3 = 50;
-			H_4 =  34;	S_4 = 10;	L_4 = 50;
-			H_5 =  22;	S_5 = 10;	L_5 = 50;
-			H_6 =  12;	S_6 = 10;	L_6 = 50;
-			H_7 =  23;	S_7 = 10;	L_7 = 50;
-			H_8 =  89;	S_8 = 10;	L_8 = 50;
-		};
 
 		if (tabsBtn[i].classList.contains('active')) {
-
 			let color1 = intro_1[i].querySelectorAll('.color1');
 			let color2 = intro_1[i].querySelectorAll('.color2');
 			let color3 = intro_1[i].querySelectorAll('.color3');
@@ -432,28 +446,60 @@ let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_
 			let color5 = intro_1[i].querySelectorAll('.color5');
 			let color6 = intro_1[i].querySelectorAll('.color6');
 			let color7 = intro_1[i].querySelectorAll('.color7');
-			let color8 = intro_1[i].querySelectorAll('.color8');
+			let color8 = intro_1[i].querySelectorAll('.color8'); 
 
-		arrColor = [
-			`hsl(${H_1}, ${S_1}%, ${L_1}%)`,
-			`hsl(${H_2}, ${S_2}%, ${L_2}%)`,
-			`hsl(${H_3}, ${S_3}%, ${L_3}%)`,
-			`hsl(${H_4}, ${S_4}%, ${L_4}%)`,
-			`hsl(${H_5}, ${S_5}%, ${L_5}%)`,
-			`hsl(${H_6}, ${S_6}%, ${L_6}%)`,
-			`hsl(${H_7}, ${S_7}%, ${L_7}%)`,
-			`hsl(${H_8}, ${S_8}%, ${L_8}%)`
-		];
+			arrTon = [
+				new ColorType().calcTone(0, 40, 100, 97),
+				new ColorType().calcTone(40, 96, 100, 92),
+				new ColorType().calcTone(96, 153, 100, 94),
+				new ColorType().calcTone(153, 200, 100, 96),
+				new ColorType().calcTone(200,  20, 100, 97),
+				new ColorType().calcTone(281, 324, 100, 98),
+				// new ColorType().calcTone(200, 250, 40, 90)
+			];
+			
+			// shuffleArray(arrTon);
 
-			color1.forEach((item) =>{item.style.background = `hsl(${H_1}, ${S_1}%, ${L_1}%)`;})
-			color2.forEach((item) =>{item.style.background = `hsl(${H_2}, ${S_2}%, ${L_2}%)`;})
-			color3.forEach((item) =>{item.style.background = `hsl(${H_3}, ${S_3}%, ${L_3}%)`;})
-			color4.forEach((item) =>{item.style.background = `hsl(${H_4}, ${S_4}%, ${L_4}%)`;})
-			color5.forEach((item) =>{item.style.background = `hsl(${H_5}, ${S_5}%, ${L_5}%)`;})
-			color6.forEach((item) =>{item.style.background = `hsl(${H_6}, ${S_6}%, ${L_6}%)`;})
-			color7.forEach((item) =>{item.style.background = `hsl(${H_7}, ${S_7}%, ${L_7}%)`;})
-			color8.forEach((item) =>{item.style.background = `hsl(${H_8}, ${S_8}%, ${L_8}%)`;})
-			// colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
+			color1.forEach((item) =>{
+				if (tabsBtn[0].classList.contains('active')) {
+					item.style.background = arrTon [a++ % arrTon.length]};
+				})
+
+			color2.forEach((item) =>{
+				if (tabsBtn[0].classList.contains('active')) {
+					item.style.background =  arrTon [a++ % arrTon.length]};
+				})
+		
+			color3.forEach((item) =>{
+				if (tabsBtn[0].classList.contains('active')) {
+					item.style.background =  arrTon [a++ % arrTon.length]};
+				})
+			
+			color4.forEach((item) =>{
+				if (tabsBtn[0].classList.contains('active')) {
+					item.style.background =  arrTon [a++ % arrTon.length]};
+				})
+			color5.forEach((item) =>{
+				if (tabsBtn[0].classList.contains('active')) {
+					item.style.background =  arrTon [a++ % arrTon.length]};
+				})
+			color6.forEach((item) =>{
+				if (tabsBtn[0].classList.contains('active')) {
+					item.style.background =  arrTon [a++ % arrTon.length]};
+				})
+			color7.forEach((item) =>{
+				if (tabsBtn[0].classList.contains('active')) {
+					item.style.background =  arrTon [a++ % arrTon.length]};
+				})
+			color8.forEach((item) =>{
+				if (tabsBtn[0].classList.contains('active')) {
+					item.style.background =  arrTon [a++ % arrTon.length]};
+				})
+			colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
+
+			arrColor = [
+				arrTon [a++ % arrTon.length]
+			];
 		};
 		
 	});
@@ -462,7 +508,9 @@ let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_
 };
 
 calcColor ();
-
+window.addEventListener('mousewheel', ()=>{
+	calcColor ();
+});
 function changeColorLeft (h, s, l){	
 		
 		$('.color.active').each(function(indx, el) {
@@ -519,7 +567,12 @@ function changeColorLeft (h, s, l){
 
 	};
 
-	
+	// ХОРОШАЯ ГАММА 
+			// H_2 = H_1 - 100; S_2 = 100;	L_2 =  L_1 + 3;
+			// H_3 = H_1 - 180;	S_3 = 32;	L_3 = 14;
+
+
+
 // let colAct = document.querySelector('.color.active');
  
 // let  coco = RGB2HSL(colAct);
@@ -530,11 +583,6 @@ function changeColorLeft (h, s, l){
 
 // let h = 360, s = 100, l = 50 ;
 
-function randomInteger(min, max) {
-	// случайное число от min до (max+1)
-	let rand = min + Math.random() * (max  - min);
-	return Math.floor(rand);
-}
 //   function randomInteger2(min, max, e, r) {
 // 	// случайное число от min до (max+1)
 // 	let rand = min + Math.random() * (max  - min) + (r-e);
