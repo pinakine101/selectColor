@@ -39,8 +39,8 @@ intro_1.forEach(function (item){
 //_______Buttuns_______///
 
 icon.addEventListener('click', ()=>{
+	calcColor ()
 	
-	actColor ();
 	
 	// console.log(result[0])
 });
@@ -55,6 +55,9 @@ let arr = [
 	'color7',
 	'color8'
 ];
+// for (let q = 0; q < arr.length; q++) {
+// 	alert( arr[q]);
+// 	 };
 
 var y = 3;
 var x = 3;
@@ -63,8 +66,11 @@ contButt[0].addEventListener('click',  () => {
 	let newColor = document.createElement('span');
 	intro_1.forEach((item, i) => {
 		if (tabsBtn[i].classList.contains('active')) {
-				newColor.classList.add( arr [y++ % arr.length]);
-				newColor.style.background =  arrTon [a++ % arrTon.length];
+			for (let key in arr) {
+				newColor.style.background = arr[key];
+			}
+			// newColor.classList.add( arr [y++ % arr.length]);
+			newColor.style.background =  arrTon [-a % arrTon.length];
 		};
 		$(newColor).insertAfter('span.active');
 	});
@@ -81,6 +87,8 @@ contButt[2].addEventListener('click', () => {
 		contButt[2].classList.toggle('buttRotate90');
 		intro_1.forEach((i) => {
 			i.classList.toggle('row');
+			if (i.classList.contains('row')){axisSort = 'x'} else {axisSort = 'y'};
+			console.log(axisSort);
 		});
 		
 });
@@ -190,6 +198,7 @@ function colorPicker(e) {
 		}
 	});
 }
+
 //______Swip_________//
 
 let clickStartX = 0;
@@ -212,6 +221,24 @@ colors.forEach(function(color) {
 		// console.log(event)
 	}, false); 
 });
+
+let axisSort = 'y';
+
+
+window.addEventListener('mousemove', function (event){
+	if (event.clientX > 0 && event.clientX <50 
+		|| event.clientY > 130 && event.clientY <180) {
+		document.documentElement.style.cursor = "move";
+		$(function () {
+			$('span').sortable( {"disabled": false, axis: axisSort});
+			} );
+	} else  {document.documentElement.style.cursor = "default";
+	$(function () {
+		$('span').sortable( {"disabled": true });
+		} );
+	};
+}) ;
+
 
 function handleGesure() {
 		var xAbs = Math.abs(clickStartX - clickEndX);
@@ -273,18 +300,10 @@ function handleGesure() {
 // 		}
 // 	}, false);
 // });
-/*_________Sortable____________*/
-// $( function() {
-//     $(".intro_1").sortable();
-//     $(".intro_1").disableSelection();
-//   } );
 
 /*______CalcColor____________________
 из выбранного цвета генерируется массив цветов в 
 8 параметрах тона и в 8 параметрах цвета_*/
-
-
-
 
 let result;
 
@@ -297,8 +316,6 @@ function actColor () {
 		result = regexp.exec(colHsl).slice(1);
 
 let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_2,L_3,L_4,L_5,L_6,L_7,L_8;
-
-
 
 		H = result[0];
 		S = result[1];
@@ -404,25 +421,28 @@ function randomInteger(min, max) {
 	return Math.random() * (max - min) + min;
 }
 
-
-
 class ColorType {
 	constructor (Hue, Sat, Light) {
 		this.Hue = Hue;
 		this.Sat = Sat;
 		this.Light = Light;
 	}
+	
 	calcTone(a, b, c, d) {
 		this.Hue =  randomInteger(a, b);
 		if (this.Hue > a && this.Hue <b) {this.Sat = c, this.Light = d}
 
-		let ren = `hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`;
-		return ren;
-	}
+		let ren = [
+			`hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`,
+			`hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`
+		];
+		let tonn = ren [a++ % ren.length]
+		return tonn;
+	};
 	
 }
 
-let a=3;
+let a = 1;
 let arrTon;
 
 function shuffleArray(array) {
@@ -449,21 +469,26 @@ function calcColor (){
 			let color8 = intro_1[i].querySelectorAll('.color8'); 
 
 			arrTon = [
-				new ColorType().calcTone(0, 40, 100, 97),
-				new ColorType().calcTone(40, 96, 100, 92),
-				new ColorType().calcTone(96, 153, 100, 94),
-				new ColorType().calcTone(153, 200, 100, 96),
-				new ColorType().calcTone(200,  20, 100, 97),
-				new ColorType().calcTone(281, 324, 100, 98),
-				// new ColorType().calcTone(200, 250, 40, 90)
+				[new ColorType().calcTone(0, 40, 100, 17)],
+				[new ColorType().calcTone(40, 96, 100, 22)],
+				[new ColorType().calcTone(96, 153, 100, 34)],
+				[new ColorType().calcTone(153, 200, 100, 46)]
+				[new ColorType().calcTone(200, 281, 100, 57)],
+				[new ColorType().calcTone(281, 324, 100, 68)],
+				[new ColorType().calcTone(200, 281, 100, 77)],
+				[new ColorType().calcTone(281, 324, 100, 88)]
 			];
 			
-			// shuffleArray(arrTon);
-
+			
+			
+			 
 			color1.forEach((item) =>{
 				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background = arrTon [a++ % arrTon.length]};
+					item.style.background = new ColorType().calcTone(0, 240, 100, 17);
+				console.log(item) };
+				
 				})
+				
 
 			color2.forEach((item) =>{
 				if (tabsBtn[0].classList.contains('active')) {
@@ -495,11 +520,11 @@ function calcColor (){
 				if (tabsBtn[0].classList.contains('active')) {
 					item.style.background =  arrTon [a++ % arrTon.length]};
 				})
-			colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
+			// colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
 
-			arrColor = [
-				arrTon [a++ % arrTon.length]
-			];
+			// arrColor = [
+			// 	arrTon [a++ % arrTon.length]
+			// ];
 		};
 		
 	});
@@ -508,9 +533,15 @@ function calcColor (){
 };
 
 calcColor ();
-window.addEventListener('mousewheel', ()=>{
-	calcColor ();
-});
+// window.addEventListener('mousewheel', ()=>{
+// 	calcColor ();
+// });
+
+// $(".intro_1").on('mousewheel', function(e){
+// 	calcColor ();
+// 	console.log(e);
+// })
+
 function changeColorLeft (h, s, l){	
 		
 		$('.color.active').each(function(indx, el) {
