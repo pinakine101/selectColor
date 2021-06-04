@@ -37,14 +37,6 @@ intro_1.forEach(function (item){
 });
 
 //_______Buttuns_______///
-
-icon.addEventListener('click', ()=>{
-	calcColor ()
-	
-	
-	// console.log(result[0])
-});
-
 let arr = [
 	'color1',
 	'color2',
@@ -55,6 +47,16 @@ let arr = [
 	'color7',
 	'color8'
 ];
+
+let t = -1;
+let t1 = 0;
+
+icon.addEventListener('click', ()=>{
+	// calcColor ();
+	actColorCalc ()
+});
+
+
 // for (let q = 0; q < arr.length; q++) {
 // 	alert( arr[q]);
 // 	 };
@@ -66,11 +68,9 @@ contButt[0].addEventListener('click',  () => {
 	let newColor = document.createElement('span');
 	intro_1.forEach((item, i) => {
 		if (tabsBtn[i].classList.contains('active')) {
-			for (let key in arr) {
-				newColor.style.background = arr[key];
-			}
-			// newColor.classList.add( arr [y++ % arr.length]);
-			newColor.style.background =  arrTon [-a % arrTon.length];
+			newColor.classList.add( arr [y++ % arr.length]);
+			newColor.style.background =  arrTon [a++ % arrTon.length];
+			console.log(arr[a])
 		};
 		$(newColor).insertAfter('span.active');
 	});
@@ -307,7 +307,7 @@ function handleGesure() {
 
 let result;
 
-function actColor () {
+function actColorCalc () {
 	
 	$('span.active').each(function (indx, el) {
 		const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
@@ -411,13 +411,13 @@ showColorText ();
 
 let arrColor;
 
-function randomInteger1(min, max) {
+function randomInteger(min, max) {
 		// случайное число от min до (max+1)
 		let rand = min + Math.random() * (max  - min);
 		return Math.floor(rand);
 	  }
 
-function randomInteger(min, max) {
+function randomInteger1(min, max) {
 	return Math.random() * (max - min) + min;
 }
 
@@ -431,19 +431,14 @@ class ColorType {
 	calcTone(a, b, c, d) {
 		this.Hue =  randomInteger(a, b);
 		if (this.Hue > a && this.Hue <b) {this.Sat = c, this.Light = d}
-
-		let ren = [
-			`hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`,
-			`hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`
-		];
-		let tonn = ren [a++ % ren.length]
-		return tonn;
+		let ren =`hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`;
+		return ren;
 	};
 	
 }
 
-let a = 1;
-let arrTon;
+let a = 0;
+let arrTon ;
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -453,7 +448,21 @@ function shuffleArray(array) {
         array[j] = temp;
     }
 }
-  
+
+arrTon = [
+	[new ColorType().calcTone(0, 40, 100, 97)],
+	[new ColorType().calcTone(40, 96, 100, 92)],
+	[new ColorType().calcTone(96, 153, 100, 94)],
+	[new ColorType().calcTone(153, 200, 100, 96)],
+	[new ColorType().calcTone(200, 281, 100, 97)],
+	[new ColorType().calcTone(281, 324, 100, 98)],
+	[new ColorType().calcTone(200, 281, 100, 97)],
+	[new ColorType().calcTone(281, 324, 100, 98)]
+];
+
+shuffleArray(arrTon); 
+
+
 function calcColor (){	
 
 	intro_1.forEach((item, i) => {
@@ -468,32 +477,27 @@ function calcColor (){
 			let color7 = intro_1[i].querySelectorAll('.color7');
 			let color8 = intro_1[i].querySelectorAll('.color8'); 
 
-			arrTon = [
-				[new ColorType().calcTone(0, 40, 100, 17)],
-				[new ColorType().calcTone(40, 96, 100, 22)],
-				[new ColorType().calcTone(96, 153, 100, 34)],
-				[new ColorType().calcTone(153, 200, 100, 46)]
-				[new ColorType().calcTone(200, 281, 100, 57)],
-				[new ColorType().calcTone(281, 324, 100, 68)],
-				[new ColorType().calcTone(200, 281, 100, 77)],
-				[new ColorType().calcTone(281, 324, 100, 88)]
-			];
 			
 			
-			
-			 
+					
+					
 			color1.forEach((item) =>{
 				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background = new ColorType().calcTone(0, 240, 100, 17);
-				console.log(item) };
+					 t =  randomInteger(0, 7);
+					// if (t >= arrTon.length) {t = 0};
+					item.style.background = arrTon[t];
+					console.log(t)
+				 };
 				
 				})
 				
 
 			color2.forEach((item) =>{
 				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background =  arrTon [a++ % arrTon.length]};
-				})
+					 t1++;
+					if (t1 >= arrTon.length) {t1 = 0};
+					item.style.background = arrTon[t1];
+				}});
 		
 			color3.forEach((item) =>{
 				if (tabsBtn[0].classList.contains('active')) {
