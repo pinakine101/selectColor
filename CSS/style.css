@@ -282,7 +282,7 @@ span.active {
 .color1 {
     /* order: 1; */
     /* display:none; */
-    /* background-color:rgb(221, 251, 236); */
+    background-color:rgb(221, 251, 236);
     /* height: 7.8%;
     width: 100%; */
     flex-grow: 35.4;

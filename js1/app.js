@@ -50,10 +50,11 @@ let arr = [
 
 let t = -1;
 let t1 = 0;
+let t2 = 1;
 
 icon.addEventListener('click', ()=>{
-	// calcColor ();
-	actColorCalc ()
+	calcColor ();
+	// actColorCalc ()
 });
 
 
@@ -115,8 +116,8 @@ showTabsContent(0);
 let isCalled = false; 
 
 let count = 0;
-let count1 = 0;
-let count2 = 0;
+let count1 = 1;
+let count2 = 2;
 let count3 = 0;
 let count4 = 0;
 let count5 = 0;
@@ -437,6 +438,26 @@ class ColorType {
 	
 }
 
+class colorGamma {
+	constructor (tabsBtn,  array) {
+		this.tabsBtn = tabsBtn;
+		// this.conter = conter;
+		this.array = array;
+	}
+	
+	fillColor() {
+		// this.conter++;
+		if(this.tabsBtn.classList.contains('active')){
+			
+			// if (this.conter >= this.array.length) {this.conter = 0};
+			let fill = this.array;
+			return fill;
+			}
+		// console.log(this.conter);
+		
+	}}
+
+
 let a = 0;
 let arrTon ;
 
@@ -450,17 +471,17 @@ function shuffleArray(array) {
 }
 
 arrTon = [
-	[new ColorType().calcTone(0, 40, 100, 97)],
-	[new ColorType().calcTone(40, 96, 100, 92)],
-	[new ColorType().calcTone(96, 153, 100, 94)],
-	[new ColorType().calcTone(153, 200, 100, 96)],
-	[new ColorType().calcTone(200, 281, 100, 97)],
-	[new ColorType().calcTone(281, 324, 100, 98)],
-	[new ColorType().calcTone(200, 281, 100, 97)],
+	[new ColorType().calcTone(0, 40, 100, 17)],
+	[new ColorType().calcTone(40, 96, 100, 22)],
+	[new ColorType().calcTone(96, 153, 100, 34)],
+	[new ColorType().calcTone(153, 200, 100, 46)],
+	[new ColorType().calcTone(200, 281, 100, 57)],
+	[new ColorType().calcTone(281, 324, 100, 68)],
+	[new ColorType().calcTone(200, 281, 100, 77)],
 	[new ColorType().calcTone(281, 324, 100, 98)]
 ];
 
-shuffleArray(arrTon); 
+// shuffleArray(arrTon); 
 
 
 function calcColor (){	
@@ -477,32 +498,34 @@ function calcColor (){
 			let color7 = intro_1[i].querySelectorAll('.color7');
 			let color8 = intro_1[i].querySelectorAll('.color8'); 
 
+			// t =  randomInteger(0, 7);
+			// count++;
+			// if (count >= arrTon.length) {count = 0};
+			count1++;
+			if (count1 >= arrTon.length) {count1 = 0};
+			count2++;
+			if (count2 >= arrTon.length) {count2 = 0};
+			function counter (a , b) {a++; if(a >= b.length) {a = 0}; return a, b}
+
 			
-			
-					
-					
+
 			color1.forEach((item) =>{
-				if (tabsBtn[0].classList.contains('active')) {
-					 t =  randomInteger(0, 7);
-					// if (t >= arrTon.length) {t = 0};
-					item.style.background = arrTon[t];
-					console.log(t)
-				 };
-				
-				})
-				
+				;
+				item.style.background =	new colorGamma(tabsBtn[0], counter(count, arrTon)).fillColor();
+				item.style.background =	new colorGamma(tabsBtn[1], arrTon[count]).fillColor();
+				console.log(count)
+			});
 
 			color2.forEach((item) =>{
-				if (tabsBtn[0].classList.contains('active')) {
-					 t1++;
-					if (t1 >= arrTon.length) {t1 = 0};
-					item.style.background = arrTon[t1];
-				}});
+				item.style.background =	new colorGamma(tabsBtn[0], arrTon[count1]).fillColor();
+				item.style.background =	new colorGamma(tabsBtn[1], arrTon[count1]).fillColor();
+				console.log(count1)
+			});
 		
 			color3.forEach((item) =>{
-				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background =  arrTon [a++ % arrTon.length]};
-				})
+				item.style.background =	new colorGamma(tabsBtn[0], arrTon[count2]).fillColor();
+				console.log(count2)
+			})
 			
 			color4.forEach((item) =>{
 				if (tabsBtn[0].classList.contains('active')) {
