@@ -53,8 +53,8 @@ let t1 = 0;
 let t2 = 1;
 
 icon.addEventListener('click', ()=>{
-	calcColor ();
-	// actColorCalc ()
+	// calcColor ();
+	actColorCalc ()
 });
 
 
@@ -63,7 +63,7 @@ icon.addEventListener('click', ()=>{
 // 	 };
 
 var y = 3;
-var x = 3;
+let a = 0;
 
 contButt[0].addEventListener('click',  () => {
 	let newColor = document.createElement('span');
@@ -115,9 +115,11 @@ showTabsContent(0);
 
 let isCalled = false; 
 
+
+
 let count = 0;
-let count1 = 1;
-let count2 = 2;
+let count1 = 0;
+let count2 = 0;
 let count3 = 0;
 let count4 = 0;
 let count5 = 0;
@@ -125,30 +127,18 @@ let count6 = 0;
 let count7 = 0;
 
 tabsNav.addEventListener('click', (event) =>{
+	
 	let target = event.target;
 	if (target && target.classList.contains('tabs__nav-btn')) {
+		
 		tabsBtn.forEach((item, i) => {
 			if (target == item) {
 				hideTabContent();
 				showTabsContent(i);
-				
-				if(tabsBtn[0].classList.contains('active')){ count ++;
-					if (count <2) {calcColor()}};
-				if(tabsBtn[1].classList.contains('active')){ count1 ++;
-					if (count1 <2) {calcColor()}};
-				if(tabsBtn[2].classList.contains('active')){ count2 ++;
-					if (count2 <2) {calcColor()}};
-				if(tabsBtn[3].classList.contains('active')){ count3 ++;
-					if (count3 <2) {calcColor()}};
-				if(tabsBtn[4].classList.contains('active')){ count4 ++;
-					if (count4 <2) {calcColor()}};
-				if(tabsBtn[5].classList.contains('active')){ count5 ++;
-					if (count5 <2) {calcColor()}};
-				if(tabsBtn[6].classList.contains('active')){ count6 ++;
-					if (count6 <2) {calcColor()}};
-				if(tabsBtn[7].classList.contains('active')){ count7 ++;
-					if (count7 <2) {calcColor()}};
-				
+			if(tabsBtn[0].classList.contains('active')&& count <0){count++; calcColor()};
+			if(tabsBtn[1].classList.contains('active')&& count1 <1){count1++; calcColor()};
+			if(tabsBtn[2].classList.contains('active')&& count2 <1){count2++; calcColor()};
+			
 			};
 		});
 	};
@@ -227,8 +217,8 @@ let axisSort = 'y';
 
 
 window.addEventListener('mousemove', function (event){
-	if (event.clientX > 0 && event.clientX <50 
-		|| event.clientY > 130 && event.clientY <180) {
+	if (event.clientX > 0 && event.clientX <30 
+		|| event.clientY > 115 && event.clientY <145) {
 		document.documentElement.style.cursor = "move";
 		$(function () {
 			$('span').sortable( {"disabled": false, axis: axisSort});
@@ -306,94 +296,99 @@ function handleGesure() {
 из выбранного цвета генерируется массив цветов в 
 8 параметрах тона и в 8 параметрах цвета_*/
 
-let result;
 
-function actColorCalc () {
+
+// function actColorCalc () {
 	
-	$('span.active').each(function (indx, el) {
-		const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-		const colHsl = RGB2HSL(r, g, b);
-		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
-		result = regexp.exec(colHsl).slice(1);
+// 	$('span.active').each(function (indx, el) {
+// 		const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+// 		const colHsl = RGB2HSL(r, g, b);
+// 		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
+// 		result = regexp.exec(colHsl).slice(1);
 
-let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_2,L_3,L_4,L_5,L_6,L_7,L_8;
+// let H,H_1,H_2,H_3,H_4,H_5,H_6,H_7,H_8,S,S_1,S_2,S_3,S_4,S_5,S_6,S_7,S_8,L,L_1,L_2,L_3,L_4,L_5,L_6,L_7,L_8;
 
-		H = result[0];
-		S = result[1];
-		L = result[2];
+// 		H = result[0];
+// 		S = result[1];
+// 		L = result[2];
 
-		H_1 = 20;
-		S_1 =  50;
-		L_1 =  20;
+// 		H_1 = 20;
+// 		S_1 =  50;
+// 		L_1 =  20;
 		
 
-		H_2 = +H_1+ 10;
-		S_2 = +S_1+ 50;
-		L_2 = +L_1+ 20;
+// 		H_2 = +H_1+ 10;
+// 		S_2 = +S_1+ 50;
+// 		L_2 = +L_1+ 20;
 
-		H_3 = +H+ 20;
-		S_3 = +S+ 40;
-		L_3 = +L+ 5;
+// 		H_3 = +H+ 20;
+// 		S_3 = +S+ 40;
+// 		L_3 = +L+ 5;
 
-		H_4 = +H+ 10;
-		S_4 = +S+ 70;
-		L_4 = +L+ 5;
+// 		H_4 = +H+ 10;
+// 		S_4 = +S+ 70;
+// 		L_4 = +L+ 5;
 
-		H_5 = +H+ 90;
-		S_5 = +S+ 10;
-		L_5 = +L+ 10;
+// 		H_5 = +H+ 90;
+// 		S_5 = +S+ 10;
+// 		L_5 = +L+ 10;
 
-		H_6 = +H+ 310;
-		S_6 = +S+ 20;
-		L_6 = +L+ 10;
+// 		H_6 = +H+ 310;
+// 		S_6 = +S+ 20;
+// 		L_6 = +L+ 10;
 
-		H_7 = +H+ 210;
-		S_7 = +S+ 10;
-		L_7 = +L+ 50;
+// 		H_7 = +H+ 210;
+// 		S_7 = +S+ 10;
+// 		L_7 = +L+ 50;
 
-		H_8 = +H+ 110;
-		S_8 = +S+ 50;
-		L_8 = +L+ 10;
+// 		H_8 = +H+ 110;
+// 		S_8 = +S+ 50;
+// 		L_8 = +L+ 10;
 
-		let colAct = document.querySelector('span.active');
+// 		let colAct = document.querySelector('span.active');
 
-		intro_1.forEach((item, i) => {
+// 		intro_1.forEach((item, i) => {
 			
-			if (tabsBtn[i].classList.contains('active')) {
+// 			if (tabsBtn[i].classList.contains('active')) {
 
-				let color1 = intro_1[i].querySelectorAll('.color1');
-				let color2 = intro_1[i].querySelectorAll('.color2');
-				let color3 = intro_1[i].querySelectorAll('.color3');
-				let color4 = intro_1[i].querySelectorAll('.color4');
-				let color5 = intro_1[i].querySelectorAll('.color5');
-				let color6 = intro_1[i].querySelectorAll('.color6');
-				let color7 = intro_1[i].querySelectorAll('.color7');
-				let color8 = intro_1[i].querySelectorAll('.color8');
+// 				let color1 = intro_1[i].querySelectorAll('.color1');
+// 				let color2 = intro_1[i].querySelectorAll('.color2');
+// 				let color3 = intro_1[i].querySelectorAll('.color3');
+// 				let color4 = intro_1[i].querySelectorAll('.color4');
+// 				let color5 = intro_1[i].querySelectorAll('.color5');
+// 				let color6 = intro_1[i].querySelectorAll('.color6');
+// 				let color7 = intro_1[i].querySelectorAll('.color7');
+// 				let color8 = intro_1[i].querySelectorAll('.color8');
 
-				arrColor = [
-					`hsl(${H_1}, ${S_1}%, ${L_1}%)`,
-					`hsl(${H_2}, ${S_2}%, ${L_2}%)`,
-					`hsl(${H_3}, ${S_3}%, ${L_3}%)`,
-					`hsl(${H_4}, ${S_4}%, ${L_4}%)`,
-					`hsl(${H_5}, ${S_5}%, ${L_5}%)`,
-					`hsl(${H_6}, ${S_6}%, ${L_6}%)`,
-					`hsl(${H_7}, ${S_7}%, ${L_7}%)`,
-					`hsl(${H_8}, ${S_8}%, ${L_8}%)`
-				];
+// 				arrColor = [
+// 					`hsl(${H_1}, ${S_1}%, ${L_1}%)`,
+// 					`hsl(${H_2}, ${S_2}%, ${L_2}%)`,
+// 					`hsl(${H_3}, ${S_3}%, ${L_3}%)`,
+// 					`hsl(${H_4}, ${S_4}%, ${L_4}%)`,
+// 					`hsl(${H_5}, ${S_5}%, ${L_5}%)`,
+// 					`hsl(${H_6}, ${S_6}%, ${L_6}%)`,
+// 					`hsl(${H_7}, ${S_7}%, ${L_7}%)`,
+// 					`hsl(${H_8}, ${S_8}%, ${L_8}%)`
+// 				];
 
-				color1.forEach((item) =>{item.style.background = `hsl(${H_1}, ${S_1}%, ${L_1}%)`;})
-				color2.forEach((item) =>{item.style.background = `hsl(${H_2}, ${S_2}%, ${L_2}%)`;})
-				color3.forEach((item) =>{item.style.background = `hsl(${H_3}, ${S_3}%, ${L_3}%)`;})
-				color4.forEach((item) =>{item.style.background = `hsl(${H_4}, ${S_4}%, ${L_4}%)`;})
-				color5.forEach((item) =>{item.style.background = `hsl(${H_5}, ${S_5}%, ${L_5}%)`;})
-				color6.forEach((item) =>{item.style.background = `hsl(${H_6}, ${S_6}%, ${L_6}%)`;})
-				color7.forEach((item) =>{item.style.background = `hsl(${H_7}, ${S_7}%, ${L_7}%)`;})
-				color8.forEach((item) =>{item.style.background = `hsl(${H_8}, ${S_8}%, ${L_8}%)`;})
-				colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
-		};
-	});
-	});
-};
+// 				color1.forEach((item) =>{
+// 					item.style.background =	new colorGamma(tabsBtn[0], arrTon[cou]).fillColor();
+// 					item.style.background =	new colorGamma(tabsBtn[1], arrTon[cou]).fillColor();
+// 					item.style.background =	new colorGamma(tabsBtn[2], arrTon[cou]).fillColor();})
+
+// 				color2.forEach((item) =>{item.style.background = `hsl(${H_2}, ${S_2}%, ${L_2}%)`;})
+// 				color3.forEach((item) =>{item.style.background = `hsl(${H_3}, ${S_3}%, ${L_3}%)`;})
+// 				color4.forEach((item) =>{item.style.background = `hsl(${H_4}, ${S_4}%, ${L_4}%)`;})
+// 				color5.forEach((item) =>{item.style.background = `hsl(${H_5}, ${S_5}%, ${L_5}%)`;})
+// 				color6.forEach((item) =>{item.style.background = `hsl(${H_6}, ${S_6}%, ${L_6}%)`;})
+// 				color7.forEach((item) =>{item.style.background = `hsl(${H_7}, ${S_7}%, ${L_7}%)`;})
+// 				color8.forEach((item) =>{item.style.background = `hsl(${H_8}, ${S_8}%, ${L_8}%)`;})
+// 				colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
+// 		};
+// 	});
+// 	});
+// };
+
 
 function showColorText (){
 	intro_1.forEach((item, i) => {
@@ -401,16 +396,15 @@ function showColorText (){
 			let color = intro_1[i].querySelectorAll('span');
 			$(color).each(function (i, el) {
 			let  item = $(el).css("backgroundColor");
-			let col = rgb2hex(item)
+			let col = rgb2hex(item);
+			$(this).css({'font-size':'15px', 'padding-left':'30px',  'padding-top':'30px' });
 			$(this).text(col);
 			})
 		};	
 	});
 };
 
-showColorText ();
 
-let arrColor;
 
 function randomInteger(min, max) {
 		// случайное число от min до (max+1)
@@ -422,6 +416,27 @@ function randomInteger1(min, max) {
 	return Math.random() * (max - min) + min;
 }
 
+
+class colorGamma {
+	constructor (tabsBtn,  array) {
+		this.tabsBtn = tabsBtn;
+		this.array = array;
+	}
+	fillColor() {
+		if(this.tabsBtn.classList.contains('active')){
+			return this.array;
+			}
+	}};
+
+// function shuffleArray(array) {
+//     for (var i = array.length - 1; i > 0; i--) {
+//         var j = Math.floor(Math.random() * (i + 1));
+//         var temp = array[i];
+//         array[i] = array[j];
+//         array[j] = temp;
+//     }
+// }
+
 class ColorType {
 	constructor (Hue, Sat, Light) {
 		this.Hue = Hue;
@@ -431,57 +446,41 @@ class ColorType {
 	
 	calcTone(a, b, c, d) {
 		this.Hue =  randomInteger(a, b);
-		if (this.Hue > a && this.Hue <b) {this.Sat = c, this.Light = d}
-		let ren =`hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`;
-		return ren;
+		if (this.Hue > a && this.Hue < b) {this.Sat = c, this.Light = d}
+		let res =`hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`;
+		return res;
 	};
 	
 }
 
-class colorGamma {
-	constructor (tabsBtn,  array) {
-		this.tabsBtn = tabsBtn;
-		// this.conter = conter;
-		this.array = array;
-	}
-	
-	fillColor() {
-		// this.conter++;
-		if(this.tabsBtn.classList.contains('active')){
-			
-			// if (this.conter >= this.array.length) {this.conter = 0};
-			let fill = this.array;
-			return fill;
-			}
-		// console.log(this.conter);
-		
-	}}
-
-
-let a = 0;
-let arrTon ;
-
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
-
-arrTon = [
+let arrTon = [
 	[new ColorType().calcTone(0, 40, 100, 17)],
-	[new ColorType().calcTone(40, 96, 100, 22)],
-	[new ColorType().calcTone(96, 153, 100, 34)],
-	[new ColorType().calcTone(153, 200, 100, 46)],
+	[new ColorType().calcTone(41, 96, 100, 22)],
+	[new ColorType().calcTone(97, 153, 100, 34)],
+	[new ColorType().calcTone(154, 200, 100, 46)],
 	[new ColorType().calcTone(200, 281, 100, 57)],
 	[new ColorType().calcTone(281, 324, 100, 68)],
-	[new ColorType().calcTone(200, 281, 100, 77)],
-	[new ColorType().calcTone(281, 324, 100, 98)]
+	[new ColorType().calcTone(325, 360, 100, 77)]
+	
 ];
 
-// shuffleArray(arrTon); 
+let arrTon2 = [
+	[new ColorType().calcTone(0, 40, 20, 97)],
+	[new ColorType().calcTone(41, 96, 20, 92)],
+	[new ColorType().calcTone(97, 153, 20, 94)],
+	[new ColorType().calcTone(154, 200, 20, 96)],
+	[new ColorType().calcTone(200, 281, 20, 97)],
+	[new ColorType().calcTone(281, 324, 90, 98)],
+	[new ColorType().calcTone(325, 360, 90, 97)]
+	
+];
+
+let cou = 0;
+let cou1 = 0;
+let cou2 = 1;
+
+
+
 
 
 function calcColor (){	
@@ -492,61 +491,36 @@ function calcColor (){
 			let color1 = intro_1[i].querySelectorAll('.color1');
 			let color2 = intro_1[i].querySelectorAll('.color2');
 			let color3 = intro_1[i].querySelectorAll('.color3');
-			let color4 = intro_1[i].querySelectorAll('.color4');
-			let color5 = intro_1[i].querySelectorAll('.color5');
-			let color6 = intro_1[i].querySelectorAll('.color6');
-			let color7 = intro_1[i].querySelectorAll('.color7');
-			let color8 = intro_1[i].querySelectorAll('.color8'); 
-
-			// t =  randomInteger(0, 7);
-			// count++;
-			// if (count >= arrTon.length) {count = 0};
-			count1++;
-			if (count1 >= arrTon.length) {count1 = 0};
-			count2++;
-			if (count2 >= arrTon.length) {count2 = 0};
-			function counter (a , b) {a++; if(a >= b.length) {a = 0}; return a, b}
-
+	
+			cou--;
+			if (cou < 0 ) {cou = 6};
+			cou1++;
+			if (cou1 >= arrTon.length) {cou1 = 0};
+			cou2++;
+			if (cou2 >= arrTon.length) {cou2 = 0};
 			
-
 			color1.forEach((item) =>{
-				;
-				item.style.background =	new colorGamma(tabsBtn[0], counter(count, arrTon)).fillColor();
-				item.style.background =	new colorGamma(tabsBtn[1], arrTon[count]).fillColor();
-				console.log(count)
+				item.style.background =	new colorGamma(tabsBtn[0], arrTon[cou]).fillColor();
+				item.style.background =	new colorGamma(tabsBtn[1], arrTon2[cou]).fillColor();
+				item.style.background =	new colorGamma(tabsBtn[2], arrTon[cou]).fillColor();
+				console.log(cou);
 			});
 
 			color2.forEach((item) =>{
-				item.style.background =	new colorGamma(tabsBtn[0], arrTon[count1]).fillColor();
-				item.style.background =	new colorGamma(tabsBtn[1], arrTon[count1]).fillColor();
-				console.log(count1)
+				item.style.background =	new colorGamma(tabsBtn[0], arrTon[cou1]).fillColor();
+				item.style.background =	new colorGamma(tabsBtn[1], arrTon2[cou1]).fillColor();
+				item.style.background =	new colorGamma(tabsBtn[2], arrTon[cou1]).fillColor();
+				console.log(cou1)
 			});
 		
 			color3.forEach((item) =>{
-				item.style.background =	new colorGamma(tabsBtn[0], arrTon[count2]).fillColor();
-				console.log(count2)
+				item.style.background =	new colorGamma(tabsBtn[0], arrTon[cou2]).fillColor();
+				item.style.background =	new colorGamma(tabsBtn[1], arrTon2[cou2]).fillColor();
+				item.style.background =	new colorGamma(tabsBtn[2], arrTon[cou2]).fillColor();
+				console.log(cou2)
 			})
 			
-			color4.forEach((item) =>{
-				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background =  arrTon [a++ % arrTon.length]};
-				})
-			color5.forEach((item) =>{
-				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background =  arrTon [a++ % arrTon.length]};
-				})
-			color6.forEach((item) =>{
-				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background =  arrTon [a++ % arrTon.length]};
-				})
-			color7.forEach((item) =>{
-				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background =  arrTon [a++ % arrTon.length]};
-				})
-			color8.forEach((item) =>{
-				if (tabsBtn[0].classList.contains('active')) {
-					item.style.background =  arrTon [a++ % arrTon.length]};
-				})
+			
 			// colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
 
 			// arrColor = [
@@ -560,9 +534,30 @@ function calcColor (){
 };
 
 calcColor ();
-// window.addEventListener('mousewheel', ()=>{
-// 	calcColor ();
+
+// ​$(window).ready(function(){
+//     $(intro_1).bind('mousewheel', function(e){
+//         if(e.originalEvent.wheelDelta /120 > 0) {
+// 			calcColor ();
+//             console.log('scrolling up !');
+//         }
+//         else{
+//             console.log('scrolling down !');
+//         }
+//     });
 // });
+window.addEventListener('mousewheel', (e)=>{
+	showColorText ();
+	 let wheelDelta = 0;
+	if(e.wheelDelta /120 > 0) {
+		calcColor ();
+		console.log('scrolling up !');
+	}
+	else{
+		calcColor ();
+		console.log('scrolling down !');
+	}
+});
 
 // $(".intro_1").on('mousewheel', function(e){
 // 	calcColor ();
