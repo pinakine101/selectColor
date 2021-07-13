@@ -238,6 +238,21 @@ h1 {
 .colorpickerHolder {
      position: absolute;
 }
+.textColor {
+    margin-left: 30px;
+    display: flex;
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #fffbfb;
+    -webkit-filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+    filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+    z-index: 1000;
+}
+
+.textColorHide {
+    display: none;
+}
 .intro {
     display:flex; 
      width: 100%;
