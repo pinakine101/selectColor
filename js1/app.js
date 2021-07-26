@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	let cou = 1;
 	let cou1 = 2;
 	let cou2 = 3;
+	let cou3 = 4;
+	let cou4 = 5;
 	let buff;
 	let textColor = document.createElement('textCol');
 
@@ -85,14 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	function gammaListPlus(){
 		counterPlus(arrTon);
-		cou++, cou1++, cou2++;
-		calcColor(cou, cou1, cou2)
+		cou++, cou1++, cou2++; cou3++; cou4++;
+		calcColor(cou, cou1, cou2, cou3, cou4)
 	};
 
 	function gammaListMinus(){
 		counterMinus(arrTon);
-		cou--, cou1--, cou2--;
-		calcColor(cou, cou1, cou2)
+		cou--, cou1--, cou2--; cou3--; cou4--;
+		calcColor(cou, cou1, cou2, cou3, cou4)
 	};
 
 	editButt[0].addEventListener('click', gammaListPlus);
@@ -261,20 +263,24 @@ document.addEventListener('DOMContentLoaded', () => {
 				l = result[2],
 				r;
 				r = 10;
-		let	ArrLig = [
-			- 5, - 10
-
+		
+		
+		let	ArrHue = [
+			result[0]-10,
+			result[0]-60,
+			result[0]-120
 			];
-			// document.querySelector('.color1').style.background = `hsl(${h }, ${s}%, ${l-r }%)`;
-			$('span.active').siblings('.color1').css("background", `hsl(${h }, ${s}%, ${ArrLig[1] }%)`);
-			console.log(l);
-			$('span.active').siblings('.color2').css("background", `hsl(${+h + 180}, ${+s + 200}%, ${l -= 10}%)`);
-			$('span.active').siblings('.color3').css("background", `hsl(${+h + 60}, ${s + 10}%, ${l}%)`);
-			$('span.active').siblings('.color4').css("background", `hsl(${+h + 10}, ${s + 10}%, ${l }%)`);
-			$('span.active').siblings('.color5').css("background", `hsl(${h}, ${s}%, ${l}%)`);
-			$('span.active').siblings('.color6').css("background", `hsl(${+h + 180}, ${+s + 200}%, ${l}%)`);
-			$('span.active').siblings('.color7').css("background", `hsl(${+h + 60}, ${s + 10}%, ${l}%)`);
-			$('span.active').siblings('.color8').css("background", `hsl(${+h + 10}, ${s + 10}%, ${l }%)`);
+			shuffleArray(ArrHue)
+			
+			$('span.active').siblings('.color1').css("background", `hsl(${ ArrHue[0] }, ${ result[1] }%, ${  result[2] }%)`);
+			$('span.active').siblings('.color2').css("background", `hsl(${ ArrHue[1] }, ${ result[1] }%, ${  result[2] }%)`);
+			$('span.active').siblings('.color3').css("background", `hsl(${ ArrHue[2] }, ${ result[1] }%, ${  result[2] }%)`);;
+			// $('span.active').siblings('.color4').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			// $('span.active').siblings('.color5').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			// $('span.active').siblings('.color6').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			// $('span.active').siblings('.color7').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			// $('span.active').siblings('.color8').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			
 
 
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
@@ -355,14 +361,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	};
 
-	function calcColor(a, b, c) {
+	function calcColor(a, b, c, d, e) {
 
 		intro_1.forEach((item, i) => {
 
 			let color1 = intro_1[i].querySelectorAll('.color1');
 			let color2 = intro_1[i].querySelectorAll('.color2');
 			let color3 = intro_1[i].querySelectorAll('.color3');
-
+			let color4 = intro_1[i].querySelectorAll('.color4');
+			let color5 = intro_1[i].querySelectorAll('.color5');
 				
 				
 
@@ -391,6 +398,19 @@ document.addEventListener('DOMContentLoaded', () => {
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[c]).fillColor();
 					console.log(c);
 				})
+				color4.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[d]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[d]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[d]).fillColor();
+					console.log(c);
+				})
+				color5.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[e]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[e]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[e]).fillColor();
+					console.log(c);
+				})
+			
 			};
 
 		});
@@ -412,6 +432,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (cou2 == a.length-1) {
 				cou2 = -1
 			};
+			if (cou3 == a.length-1) {
+				cou3 = -1
+			};
+			if (cou4 == a.length-1) {
+				cou4 = -1
+			};
 		};
 
 	function counterMinus(a) {
@@ -425,7 +451,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (cou2 == 0) {
 			cou2 = a.length
 		};
-		
+		if (cou3 == 0) {
+			cou4 = a.length
+		};
+		if (cou4 == 0) {
+			cou4 = a.length
+		};
 	}
 	
 	// function wheel() {
@@ -448,29 +479,33 @@ document.addEventListener('DOMContentLoaded', () => {
 	//______SORTABLE_______////
 
 	let axisSort = 'y';
-
+	
 	window.addEventListener('mousemove', function (event) {
+		
+	
 		if (event.clientX > 0 && event.clientX < 30 ||
 			event.clientY > 115 && event.clientY < 145) {
+				
 			document.documentElement.style.cursor = "move";
 			$(function () {
 				$('div').sortable({
 					"disabled": false,
 					axis: axisSort
 				});
-
 			});
+
 		} else {
 			document.documentElement.style.cursor = "default";
 			$(function () {
 				$('div').sortable({
 					"disabled": true
 				});
+				
 			});
 		};
 
 	});
-
+	
 ///____Convert RGB to HSL______////
 
 	function RGB2HSL(r, g, b) {
@@ -515,23 +550,28 @@ document.addEventListener('DOMContentLoaded', () => {
 	let clickEndX = 0;
 	let clickEndY = 0;
 
-	colors.forEach(function (item) {
+	intro_1.forEach(function (item) {
 		item.addEventListener('mouseover', (e) => {
-			const target = e.target;
-
-			target.addEventListener('mousedown', function (event) {
-				clickStartX = event.clientX;
-				clickStartY = event.clientY;
-				
-				// console.log(event)
-			}, false);
-
-			target.addEventListener('mouseup', function (event) {
-				clickEndX = event.clientX;
-				clickEndY = event.clientY;
-				handleGesure();
-				// console.log(event)
-			}, false);
+			
+					const target = e.target;
+		
+				target.addEventListener('mousedown', function (event) {
+					
+					clickStartX = event.clientX;
+					clickStartY = event.clientY;
+					
+					// console.log(event)
+				}, false);
+	
+				target.addEventListener('mouseup', function (event) {
+					
+					clickEndX = event.clientX;
+					clickEndY = event.clientY;
+					
+					handleGesure();
+					
+				}, false);
+			// }
 		});
 	});
 
@@ -540,10 +580,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		let yAbs = Math.abs(clickStartY - clickEndY);
 
 		if (xAbs >30 || yAbs > 30) {
+			
 			if (xAbs > yAbs) {
 				if (clickEndX < clickStartX) {
 					$('span.active').css('backgroundColor', 
-						`hsl(${result[0]}, ${result[1]}%, ${result[2] -= 5}%)`);
+						`hsl(${result[0]}, ${result[1]}%, ${result[2] -5}%)`);
 						console.log(result[2])
 						console.log('left')
 				} else {
@@ -559,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						console.log('up')
 				} else {
 					$('span.active').css('backgroundColor', 
-						`hsl(${result[0]}, ${result[1]-= 10}%, ${result[2] }%)`);
+						`hsl(${result[0]}, ${result[1]- 10}%, ${result[2] }%)`);
 						console.log('down')
 				}
 			}
