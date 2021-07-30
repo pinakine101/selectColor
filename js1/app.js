@@ -20,12 +20,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	let colors = document.querySelectorAll('span');
 	let icon = document.querySelector('.icon');
 	let editButt = document.querySelectorAll('.butt');
-	let cou = 1;
-	let cou1 = 2;
-	let cou2 = 3;
-	let cou3 = 4;
-	let cou4 = 5;
+
+	let result;
+
+	let cou1 = 0;
+	let cou2 = 1;
+	let cou3 = 2;
+	let cou4 = 3;
+	let cou5 = 4;
+	let cou6 = 5;
+	let cou7 = 6;
+	let cou8 = 7;
+
+
+	let H, H1, H2, H3, H4, H5, H6, H7, H8;
+	let S, S1, S2, S3, S4, S5, S6, S7, S8;
+	let L, L1, L2, L3, L4, L5, L6, L7, L8;
+			
+	
+
 	let buff;
+
 	let textColor = document.createElement('textCol');
 
 	function showColorText() {
@@ -34,17 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
 				const color = intro_1[i].querySelector('span.active');
 				$(color).each(function (i, el) {
 					const item = $(el).css("backgroundColor");
-					let col = rgb2hex(item);
-					buff = col;
+					buff = rgb2hex(item);
 				})
 			};
 		});
 	};
 
 	//______Active Color_________//
-
+	
 	intro_1.forEach(function (item) {
 		item.addEventListener('click', (e) => {
+
 			const target = e.target;
 			
 			if (!target.classList.contains("active")) {
@@ -57,10 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			showColorText();
 			textColor.innerHTML = `<p> ${buff}</p>`;
 			target.append(textColor);
-			editButt[0].removeEventListener('click', gammaListPlus);
-			editButt[1].removeEventListener('click', gammaListMinus);
-			editButt[0].addEventListener('click', actColorCalc);
-			sliceColor();
+			editButt[0].removeEventListener('click', calcCouPlus);
+			editButt[1].removeEventListener('click', calcCouMinus);
+			editButt[0].addEventListener('click', actCalcCouPus);
+			editButt[1].addEventListener('click', actCalcCouMinus);
+			window.removeEventListener('mousemove', sorTable);
+			
 		});
 	});
 
@@ -69,11 +86,26 @@ document.addEventListener('DOMContentLoaded', () => {
 			const target = e.target;
 			target.classList.remove('active');
 			textColor.remove();
-			editButt[0].addEventListener('click', gammaListPlus);
-			editButt[1].addEventListener('click', gammaListMinus);
+			editButt[0].addEventListener('click', calcCouPlus);
+			editButt[1].addEventListener('click', calcCouMinus);
+			editButt[0].removeEventListener('click', actCalcCouPus);
+			editButt[1].removeEventListener('click', actCalcCouMinus);
+			window.addEventListener('mousemove', sorTable);
 		});
 	});
 
+	function calcCouPlus(){
+		calcColor(counterPlus)
+	};
+	function calcCouMinus(){
+		calcColor(counterMinus)
+	};
+    function actCalcCouPus(){
+		actColorCalc(counterPlus)
+	};
+	function actCalcCouMinus(){
+		actColorCalc(counterMinus)
+	}
 	//_______Buttuns_______///
 
 	icon.addEventListener('click', () => {
@@ -85,20 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	});
 	
-	function gammaListPlus(){
-		counterPlus(arrTon);
-		cou++, cou1++, cou2++; cou3++; cou4++;
-		calcColor(cou, cou1, cou2, cou3, cou4)
-	};
-
-	function gammaListMinus(){
-		counterMinus(arrTon);
-		cou--, cou1--, cou2--; cou3--; cou4--;
-		calcColor(cou, cou1, cou2, cou3, cou4)
-	};
-
-	editButt[0].addEventListener('click', gammaListPlus);
-	editButt[1].addEventListener('click', gammaListMinus);
+	editButt[0].addEventListener('click', calcCouPlus);
+	editButt[1].addEventListener('click', calcCouMinus);
 
 	var y = 3;
 
@@ -116,17 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		intro_1.forEach((item, i) => {
 			if (tabsBtn[i].classList.contains('active')) {
-				if (y >= arryAddColor.length) {
-					y = 0
+				if (y >= arryAddColor.length-1) {
+					y = 1
 				};
-				let newColor = $(arryAddColor[y++]).insertAfter('span.active');
-				if (tabsBtn[0].classList.contains('active')) {
+				y++;
+				let newColor = $(arryAddColor[y]).insertAfter('span.active');
+				if (tabsBtn[0].classList.contains('active')){
 					$(newColor).css("background-color", `${arrTon[y]}`);
-				}
-				if (tabsBtn[1].classList.contains('active')) {
+				};
+				if (tabsBtn[1].classList.contains('active')){
 					$(newColor).css("background-color", `${arrTon2[y]}`);
-				}
-				console.log(y);
+				};
+
 			};
 		});
 	};
@@ -138,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	editButt[4].addEventListener('click', () => {
-		contButt[4].classList.toggle('buttRotate90');
+		editButt[4].classList.toggle('buttRotate90');
 		intro_1.forEach((i) => {
 			i.classList.toggle('row');
 			if (i.classList.contains('row')) {
@@ -186,13 +207,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function onClick(a){
 		a.addEventListener('click', ()=>{
-			calcColor(cou, cou1, cou2);
+			sliceColor();
+			calcColor(counterPlus);
 		},{once:true});
 	}
-	onClick(tabsBtn[1]);
-	onClick(tabsBtn[2]);
-	onClick(tabsBtn[3]);
-	onClick(tabsBtn[4]);
+		onClick(tabsBtn[1]);
+		onClick(tabsBtn[2]);
+		onClick(tabsBtn[3]);
+		onClick(tabsBtn[4]);
+		onClick(tabsBtn[5]);
+		onClick(tabsBtn[6]);
+		onClick(tabsBtn[7]);
+	
 
 	//______ColorPicker_________//
 
@@ -242,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	/*______CalcColor____________________
 	из выбранного цвета генерируется массив цветов в 
 	8 параметрах тона и в 8 параметрах цвета_*/
-	let result;
+
 
 	function sliceColor(){
 		$('span.active').each(function (indx, el) {
@@ -250,42 +276,54 @@ document.addEventListener('DOMContentLoaded', () => {
 				[r, g, b] = color.match(/\d+/g);
 			const colHsl = RGB2HSL(r, g, b);
 			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
-			// console.log(result)
+
 			return result;
 		});
 	};
-	
-	function actColorCalc() {
-			let i =0;
 
-			let h = result[0],
-				s = result[1],
-				l = result[2],
-				r;
-				r = 10;
+
 		
+
+	function actColorCalc(callback) {
+		sliceColor();
+		H = H1 = H2 = H3 = H4 = H5 = H6 = H7 = H8 = result[0]; 
+		S = S1 = S2 = S3 = S4 = S5 = S6 = S7 = S8 = result[1]; 
+		L = L1 = L2 = L3 = L4 = L5 = L6 = L7 = L8 = result[2];
+
 		
-		let	ArrHue = [
-			result[0]-10,
-			result[0]-60,
-			result[0]-120
-			];
-			shuffleArray(ArrHue)
-			
-			$('span.active').siblings('.color1').css("background", `hsl(${ ArrHue[0] }, ${ result[1] }%, ${  result[2] }%)`);
-			$('span.active').siblings('.color2').css("background", `hsl(${ ArrHue[1] }, ${ result[1] }%, ${  result[2] }%)`);
-			$('span.active').siblings('.color3').css("background", `hsl(${ ArrHue[2] }, ${ result[1] }%, ${  result[2] }%)`);;
-			// $('span.active').siblings('.color4').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
-			// $('span.active').siblings('.color5').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
-			// $('span.active').siblings('.color6').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
-			// $('span.active').siblings('.color7').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
-			// $('span.active').siblings('.color8').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
-			
+	let	arrHue = [
+		+H + 10, +H1 + 20, +H2 + 30, +H3 + 40, 
+		+H4 + 50, +H5 + 60, +H6 + 70, +H7 + 10
+		];
+	let	arrSat = [
+		+S + 10, +S1 +20, +S2 + +30, +S3 + 40, 
+		+S4 + 50, +S5 + 10, +S6 + 100, +S7 + 30
+	];
+	let	arrLight = [
+		+L + 10, +L1 +10, +L2 + 30, +L3 + 10, 
+		+L4 + 15, +L5 + 20, +L6 + 30, +L7 + 40
+		];
 
+		if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 < 4 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  + 10};
+		if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 > 100 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  - 50};
+		if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 < 20 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7  + 10};
+		if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 > 100 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7 - 50};
 
+			// shuffleArray(arrHue, arrSat, arrLight);
+			
+			$('span.active').siblings('.color1').css("background", `hsl(${ arrHue[ cou1 ] }, ${ arrSat[ cou1 ] }%, ${ arrLight[ cou1 ] }%)`);
+			$('span.active').siblings('.color2').css("background", `hsl(${ arrHue[ cou2 ] }, ${ arrSat[ cou2 ] }%, ${ arrLight[ cou2 ] }%)`);
+			$('span.active').siblings('.color3').css("background", `hsl(${ arrHue[ cou3 ] }, ${ arrSat[ cou3 ] }%, ${ arrLight[ cou3 ] }%)`);
+			$('span.active').siblings('.color4').css("background", `hsl(${ arrHue[ cou4 ] }, ${ arrSat[ cou4 ] }%, ${ arrLight[ cou4 ] }%)`);
+			$('span.active').siblings('.color5').css("background", `hsl(${ arrHue[ cou5 ] }, ${ arrSat[ cou5 ] }%, ${ arrLight[ cou5 ] }%)`);
+			$('span.active').siblings('.color6').css("background", `hsl(${ arrHue[ cou6 ] }, ${ arrSat[ cou6 ] }%, ${ arrLight[ cou6 ] }%)`);
+			$('span.active').siblings('.color7').css("background", `hsl(${ arrHue[ cou7 ] }, ${ arrSat[ cou7 ] }%, ${ arrLight[ cou7 ] }%)`);
+			$('span.active').siblings('.color8').css("background", `hsl(${ arrHue[ cou8 ] }, ${ arrSat[ cou8 ] }%, ${ arrLight[ cou8 ] }%)`);
+			
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
-			console.log(result[2]);
+			callback(arrHue, arrSat, arrLight);
+			// return arrHue, arrSat, arrLight;
 	};
 	// actColorCalc()
 
@@ -331,26 +369,52 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 	};
 
+	let arrLigth95 = [
+		[new ColorType().calcTone(0, 20, 5.1, 95)],
+		[new ColorType().calcTone(21, 48, 5.8, 45)],
+		[new ColorType().calcTone(49, 95, 16, 95)],
+		[new ColorType().calcTone(96, 153, 7, 45)],
+
+		[new ColorType().calcTone(154, 200, 5.88, 95)],
+		[new ColorType().calcTone(201, 240, 3.92, 45)],
+		[new ColorType().calcTone(241, 360, 3.92, 95)],
+		[new ColorType().calcTone(0,   1, 100, 45)]
+	];
+
 	let arrTon = [
 		[new ColorType().calcTone(0, 40, 100, 17)],
 		[new ColorType().calcTone(41, 96, 100, 22)],
 		[new ColorType().calcTone(97, 153, 100, 34)],
 		[new ColorType().calcTone(154, 200, 100, 46)],
+
 		[new ColorType().calcTone(200, 281, 100, 57)],
 		[new ColorType().calcTone(281, 324, 50, 68)],
-		[new ColorType().calcTone(325, 360, 100, 77)],
+		[new ColorType().calcTone(225, 350, 50, 57)],
+		[new ColorType().calcTone(125, 250, 30, 47)]
 	];
 
 	let arrTon2 = [
 		[new ColorType().calcTone(0, 40, 20, 57)],
 		[new ColorType().calcTone(41, 96, 20, 52)],
 		[new ColorType().calcTone(97, 153, 20, 54)],
-		[new ColorType().calcTone(154, 200, 20, 56)],
-		[new ColorType().calcTone(200, 281, 20, 57)],
-		[new ColorType().calcTone(281, 324, 20, 58)],
-		[new ColorType().calcTone(325, 360, 10, 57)]
+		[new ColorType().calcTone(154, 200, 10, 56)],
+
+		[new ColorType().calcTone(200, 281, 10, 57)],
+		[new ColorType().calcTone(281, 324, 10, 58)],
+		[new ColorType().calcTone(125, 260, 10, 37)],
+		[new ColorType().calcTone(225, 160, 15, 37)]
 	];
 
+	let spaRoomColor1 = [
+		arrLigth95[0],
+		arrLigth95[5],
+		arrTon[0],
+		arrTon[4],
+		arrTon2[2],
+		arrTon2[0],
+		arrTon2[1],
+		arrTon2[2]
+	];
 
 	function shuffleArray(array) {
 		for (var i = array.length - 1; i > 0; i--) {
@@ -361,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	};
 
-	function calcColor(a, b, c, d, e) {
+	function calcColor(callback) {
 
 		intro_1.forEach((item, i) => {
 
@@ -370,94 +434,185 @@ document.addEventListener('DOMContentLoaded', () => {
 			let color3 = intro_1[i].querySelectorAll('.color3');
 			let color4 = intro_1[i].querySelectorAll('.color4');
 			let color5 = intro_1[i].querySelectorAll('.color5');
-				
+			let color6 = intro_1[i].querySelectorAll('.color6');
+			let color7 = intro_1[i].querySelectorAll('.color7');
+			let color8 = intro_1[i].querySelectorAll('.color8');
 				
 
 			if (tabsBtn[i].classList.contains('active')) {
-
-				
-
+				callback(arrTon);
 				color1.forEach((item) => {
 					
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[a]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[a]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[a]).fillColor();
-					console.log(a);
+					item.style.background = new colorGamma(tabsBtn[0], spaRoomColor1[ cou1 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou1 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou1 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou1 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou1 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou1 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou1 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou1 ]).fillColor();
+					// console.log(a);
 				});
 
 				color2.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[b]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[b]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[b]).fillColor();
-					console.log(b);
+					item.style.background = new colorGamma(tabsBtn[0], arrTon2[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou2 ]).fillColor();
+					// console.log(b);
 				});
-
 				color3.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[c]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[c]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[c]).fillColor();
-					console.log(c);
-				})
+					item.style.background = new colorGamma(tabsBtn[0], arrTon2[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou3 ]).fillColor();
+					// console.log(c);
+				});
 				color4.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[d]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[d]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[d]).fillColor();
-					console.log(c);
-				})
+					item.style.background = new colorGamma(tabsBtn[0], arrTon2[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou4 ]).fillColor();
+					// console.log(d);
+				});
 				color5.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[e]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[e]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[e]).fillColor();
-					console.log(c);
-				})
-			
+					item.style.background = new colorGamma(tabsBtn[0], arrLigth95[ cou5 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou5 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou5 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou5 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou5 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou5 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou5 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou5 ]).fillColor();
+					// console.log(e);
+				});
+				color6.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[ cou6 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou6 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou6 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou6 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou6 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou6 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou6 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou6 ]).fillColor();
+					// console.log(f);
+				});
+				color7.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[ cou7 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou7 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou7 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou7 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou7 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou7 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou7 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou7 ]).fillColor();
+					// console.log(g);
+				});
+				color8.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou8 ]).fillColor();
+					// console.log(h);
+				});
 			};
-
 		});
 		// $('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 	};
 
-	calcColor(cou, cou1, cou2)
+	calcColor(counterPlus);
 	
 	//___COUNTER____///
 
+	
+
 	function counterPlus(a) {
+		cou1++; cou2++; cou3++; cou4++;  cou5++; cou6++; cou7++; cou8++;
 		
-			if (cou == a.length-1) {
-				cou =-1
+			if (cou1 > a.length-1) {
+				cou1 = 0
 			};
-			if (cou1 == a.length-1) {
-				cou1 = -1
+			if (cou2 > a.length-1) {
+				cou2 = 0
 			};
-			if (cou2 == a.length-1) {
-				cou2 = -1
+			if (cou3 > a.length-1) {
+				cou3 = 0
 			};
-			if (cou3 == a.length-1) {
-				cou3 = -1
+			if (cou4 > a.length-1) {
+				cou4 = 0
 			};
-			if (cou4 == a.length-1) {
-				cou4 = -1
+			if (cou5 > a.length-1) {
+				cou5 = 0
 			};
+			if (cou6 > a.length-1) {
+				cou6 = 0
+			};
+			if (cou7 > a.length-1) {
+				cou7 = 0
+			};
+			if (cou8 > a.length-1) {
+				cou8 = 0
+			};
+			console.log(cou1, cou2, cou3,'plus')
+			return a;
+			
 		};
 
 	function counterMinus(a) {
-		
-		if (cou == 0) {
-			cou = a.length 
+		cou1--; cou2--; cou3--; cou4--; cou5--; cou6--; cou7--;  cou8--;
+		if (cou1 < 0) {
+			cou1 = a.length-1 
 		};
-		if (cou1 == 0) {
-			cou1 = a.length
+		if (cou2 < 0) {
+			cou2 = a.length-1
 		};
-		if (cou2 == 0) {
-			cou2 = a.length
+		if (cou3 < 0) {
+			cou3 = a.length-1
 		};
-		if (cou3 == 0) {
-			cou4 = a.length
+		if (cou1 <0 )  {
+			cou1 = a.length-1
 		};
-		if (cou4 == 0) {
-			cou4 = a.length
+		if (cou2 <0 ) {
+			cou2 = a.length-1
 		};
+		if (cou3 <0 ) {
+			cou3 = a.length-1
+		};
+		if (cou4 <0) {
+			cou4 = a.length-1
+		};
+		if (cou5<0) {
+			cou5 = a.length-1
+		};
+		if (cou6 <0) {
+			cou6 = a.length-1
+		};
+		if (cou7 <0) {
+			cou7 = a.length-1
+		};
+		if (cou8<0) {
+			cou8 = a.length-1
+		};
+		console.log(cou1, cou2, cou3, 'minus');
+		return a;
 	}
+	// cou1, cou2, cou3, cou4, cou5, cou6, cou7, cou8,
 	
 	// function wheel() {
 		// window.addEventListener("mousewheel", function (e) {
@@ -479,13 +634,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	//______SORTABLE_______////
 
 	let axisSort = 'y';
-	
-	window.addEventListener('mousemove', function (event) {
-		
-	
+	function sorTable(event) {
 		if (event.clientX > 0 && event.clientX < 30 ||
 			event.clientY > 115 && event.clientY < 145) {
-				
 			document.documentElement.style.cursor = "move";
 			$(function () {
 				$('div').sortable({
@@ -493,18 +644,17 @@ document.addEventListener('DOMContentLoaded', () => {
 					axis: axisSort
 				});
 			});
-
 		} else {
 			document.documentElement.style.cursor = "default";
 			$(function () {
 				$('div').sortable({
 					"disabled": true
 				});
-				
 			});
 		};
+	};
 
-	});
+	window.addEventListener('mousemove', sorTable);
 	
 ///____Convert RGB to HSL______////
 
@@ -578,8 +728,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	function handleGesure() {
 		let xAbs = Math.abs(clickStartX - clickEndX);
 		let yAbs = Math.abs(clickStartY - clickEndY);
-
-		if (xAbs >30 || yAbs > 30) {
+		sliceColor();
+		if (xAbs >10 || yAbs > 10) {
 			
 			if (xAbs > yAbs) {
 				if (clickEndX < clickStartX) {
@@ -596,11 +746,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			} else {
 				if (clickEndY < clickStartY) {
 					$('span.active').css('backgroundColor', 
-						`hsl(${result[0]}, ${+result[1]+ 10}%, ${result[2] }%)`);
-						console.log('up')
+						`hsl(${+ result[0] + 3}, ${result[1]}%, ${result[2] }%)`);
+						console.log(result[0]);
+						console.log('up');
 				} else {
 					$('span.active').css('backgroundColor', 
-						`hsl(${result[0]}, ${result[1]- 10}%, ${result[2] }%)`);
+						`hsl(${-result[0] - 3}, ${result[1]}%, ${result[2] }%)`);
+						console.log(result[0])
 						console.log('down')
 				}
 			}
