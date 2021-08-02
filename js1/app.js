@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 	
 
-	let buff;
+	let textColorBuffer;
 
 	let textColor = document.createElement('textCol');
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const color = intro_1[i].querySelector('span.active');
 				$(color).each(function (i, el) {
 					const item = $(el).css("backgroundColor");
-					buff = rgb2hex(item);
+					textColorBuffer = rgb2hex(item);
 				})
 			};
 		});
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			textColor.classList.add('textColor');
 			target.classList.add('active');
 			showColorText();
-			textColor.innerHTML = `<p> ${buff}</p>`;
+			textColor.innerHTML = `<p> ${textColorBuffer} ${color1Text}</p>`;
 			target.append(textColor);
 			editButt[0].removeEventListener('click', calcCouPlus);
 			editButt[1].removeEventListener('click', calcCouMinus);
@@ -369,16 +369,158 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 	};
 
-	let arrLigth95 = [
-		[new ColorType().calcTone(0, 20, 5.1, 95)],
-		[new ColorType().calcTone(21, 48, 5.8, 45)],
-		[new ColorType().calcTone(49, 95, 16, 95)],
-		[new ColorType().calcTone(96, 153, 7, 45)],
+	let arryTable_1_Step = [
+		[new ColorType().calcTone(0,   20,  100,  97)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(0,   20,  33,   97)],
+		[new ColorType().calcTone(21,  48,  100,  97)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(21,  48,  33,   97)], 
+		[new ColorType().calcTone(49,  95,  100,  92)],   /*ЖЕЛТЫЙ*/
+		[new ColorType().calcTone(49,  95,  50,   92)], 
+		[new ColorType().calcTone(96,  158, 100,  95)],   /*ЗЕЛЕНЫЙ*/
+		[new ColorType().calcTone(96,  158, 75,   95)],
+		[new ColorType().calcTone(159, 200, 100,  96)],   /*БИРЮЗОВЫЙ*/
+		[new ColorType().calcTone(159, 200, 68,   96)],
+		[new ColorType().calcTone(201, 240, 100,  97)],   /*ГОЛУБОЙ*/
+		[new ColorType().calcTone(201, 240, 63,   97)],
+		[new ColorType().calcTone(241, 280, 100,  98)],   /*СИНИЙ*/
+		[new ColorType().calcTone(241, 280, 29,   97)],
+		[new ColorType().calcTone(280, 360, 100,  97)],    /*ФИОЛЕТОВЫЙ*/
+		[new ColorType().calcTone(280, 360, 33,   97)] 
+	];
+	
+	let arryTable_2_Step = [
+		[new ColorType().calcTone(0,   20,  100,  95)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(0,   20,  43,   93)],
+		[new ColorType().calcTone(21,  48,  100,  92)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(21,  48,  78,   91)], 
+		[new ColorType().calcTone(49,  95,  100,  78)],   /*ЖЕЛТЫЙ*/
+		[new ColorType().calcTone(49,  95,  53,   85)], 
+		[new ColorType().calcTone(96,  158, 100,  84)],   /*ЗЕЛЕНЫЙ*/
+		[new ColorType().calcTone(96,  158, 58,   86)],
+		[new ColorType().calcTone(159, 200, 100,  89)],   /*БИРЮЗОВЫЙ*/
+		[new ColorType().calcTone(159, 200, 66,   88)],
+		[new ColorType().calcTone(201, 240, 100,  92)],   /*ГОЛУБОЙ*/
+		[new ColorType().calcTone(201, 240, 55,   91)],
+		[new ColorType().calcTone(241, 280, 100,  96)],   /*СИНИЙ*/
+		[new ColorType().calcTone(241, 280, 33,   94)],
+		[new ColorType().calcTone(280, 360, 100,  95)],    /*ФИОЛЕТОВЫЙ*/
+		[new ColorType().calcTone(280, 360, 43,   93)] 
+	];
+	
+	
 
-		[new ColorType().calcTone(154, 200, 5.88, 95)],
-		[new ColorType().calcTone(201, 240, 3.92, 45)],
-		[new ColorType().calcTone(241, 360, 3.92, 95)],
-		[new ColorType().calcTone(0,   1, 100, 45)]
+	let arryTable_3_Step = [
+		[new ColorType().calcTone(0,   20,  100,  79)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(0,   20,  55,   78)],
+		[new ColorType().calcTone(21,  48,  100,  65)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(21,  48,  84,   69)], 
+		[new ColorType().calcTone(49,  95,  100,  50)],   /*ЖЕЛТЫЙ*/
+		[new ColorType().calcTone(49,  95,  53,   85)], 
+		[new ColorType().calcTone(96,  158, 100,  44)],   /*ЗЕЛЕНЫЙ*/
+		[new ColorType().calcTone(96,  158, 43,   63)],
+		[new ColorType().calcTone(159, 200, 100,  44)],   /*БИРЮЗОВЫЙ*/
+		[new ColorType().calcTone(159, 200, 59,   61)],
+		[new ColorType().calcTone(201, 240, 100,  70)],   /*ГОЛУБОЙ*/
+		[new ColorType().calcTone(201, 240, 70,   74)],
+		[new ColorType().calcTone(241, 280, 100,  85)],   /*СИНИЙ*/
+		[new ColorType().calcTone(241, 280, 50,   82)],
+		[new ColorType().calcTone(280, 360, 100,  81)],    /*ФИОЛЕТОВЫЙ*/
+		[new ColorType().calcTone(280, 360, 53,   89)] 
+	];
+	
+	let arryTable_4_Step = [
+		[new ColorType().calcTone(0,   20,  100,  46)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(0,   20,  28,   48)],
+		[new ColorType().calcTone(21,  48,  100,  42)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(21,  48,  34,   50)], 
+		[new ColorType().calcTone(49,  95,  100,  31)],   /*ЖЕЛТЫЙ*/
+		[new ColorType().calcTone(49,  95,  36,   41)], 
+		[new ColorType().calcTone(96,  158, 100,  32)],   /*ЗЕЛЕНЫЙ*/
+		[new ColorType().calcTone(96,  158, 26,   44)],
+		[new ColorType().calcTone(159, 200, 100,  33)],   /*БИРЮЗОВЫЙ*/
+		[new ColorType().calcTone(159, 200, 22,   47)],
+		[new ColorType().calcTone(201, 240, 100,  46)],   /*ГОЛУБОЙ*/
+		[new ColorType().calcTone(201, 240, 39,   52)],
+		[new ColorType().calcTone(241, 280, 100,  72)],   /*СИНИЙ*/
+		[new ColorType().calcTone(241, 280, 44,   55)],
+		[new ColorType().calcTone(280, 360, 100,  64)],    /*ФИОЛЕТОВЫЙ*/
+		[new ColorType().calcTone(280, 360, 33,   58)] 
+	];
+
+	let arryTable_5_Step = [
+		[new ColorType().calcTone(0,   20,  93,   43)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(0,   20,  34,   55)],
+		[new ColorType().calcTone(21,  48,  100,  36)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(21,  48,  38,   46)], 
+		[new ColorType().calcTone(49,  95,  100,  28)],   /*ЖЕЛТЫЙ*/
+		[new ColorType().calcTone(49,  95,  36,   39)], 
+		[new ColorType().calcTone(96,  158, 100,  29)],   /*ЗЕЛЕНЫЙ*/
+		[new ColorType().calcTone(96,  158, 33,   39)],
+		[new ColorType().calcTone(159, 200, 100,  27)],   /*БИРЮЗОВЫЙ*/
+		[new ColorType().calcTone(159, 200, 34,   40)],
+		[new ColorType().calcTone(201, 240, 100,  41)],   /*ГОЛУБОЙ*/
+		[new ColorType().calcTone(201, 240, 37,   48)],
+		[new ColorType().calcTone(241, 280, 100,  67)],   /*СИНИЙ*/
+		[new ColorType().calcTone(241, 280, 55,   63)],
+		[new ColorType().calcTone(280, 360, 100,  55)],    /*ФИОЛЕТОВЫЙ*/
+		[new ColorType().calcTone(280, 360, 41,   54)] 
+	];
+
+	let arryTable_6_Step = [
+		[new ColorType().calcTone(0,   20,  100,  22)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(0,   20,  31,   29)],
+		[new ColorType().calcTone(21,  48,  100,  23)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(21,  48,  36,   27)], 
+		[new ColorType().calcTone(49,  95,  100,  15)],   /*ЖЕЛТЫЙ*/
+		[new ColorType().calcTone(49,  95,  35,   22)], 
+		[new ColorType().calcTone(96,  158, 100,  16)],   /*ЗЕЛЕНЫЙ*/
+		[new ColorType().calcTone(96,  158, 33,   23)],
+		[new ColorType().calcTone(159, 200, 100,  17)],   /*БИРЮЗОВЫЙ*/
+		[new ColorType().calcTone(159, 200, 33,   24)],
+		[new ColorType().calcTone(201, 240, 100,  23)],   /*ГОЛУБОЙ*/
+		[new ColorType().calcTone(201, 240, 36,   27)],
+		[new ColorType().calcTone(241, 280, 100,  49)],   /*СИНИЙ*/
+		[new ColorType().calcTone(241, 280, 38,   36)],
+		[new ColorType().calcTone(280, 360, 100,  27)],    /*ФИОЛЕТОВЫЙ*/
+		[new ColorType().calcTone(280, 360, 35,   30)] 
+	];
+
+	let arryTable_7_Step = [
+		[new ColorType().calcTone(0,   20,  100,  14)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(0,   20,  31,   18)],
+		[new ColorType().calcTone(21,  48,  100,  13)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(21,  48,  33,   17)], 
+		[new ColorType().calcTone(49,  95,  100,  11)],   /*ЖЕЛТЫЙ*/
+		[new ColorType().calcTone(49,  95,  32,   14)], 
+		[new ColorType().calcTone(96,  158, 100,  11)],   /*ЗЕЛЕНЫЙ*/
+		[new ColorType().calcTone(96,  158, 32,   15)],
+		[new ColorType().calcTone(159, 200, 100,  11)],   /*БИРЮЗОВЫЙ*/
+		[new ColorType().calcTone(159, 200, 33,   16)],
+		[new ColorType().calcTone(201, 240, 100,  15)],   /*ГОЛУБОЙ*/
+		[new ColorType().calcTone(201, 240, 31,   18)],
+		[new ColorType().calcTone(241, 280, 100,  30)],   /*СИНИЙ*/
+		[new ColorType().calcTone(241, 280, 33,   23)],
+		[new ColorType().calcTone(280, 360, 100,  18)],    /*ФИОЛЕТОВЫЙ*/
+		[new ColorType().calcTone(280, 360, 32,   20)] 
+	];
+
+	let arryTable_8_Step = [
+		[new ColorType().calcTone(0,   20,  100,  9)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(0,   20,  35,   13)],
+		[new ColorType().calcTone(21,  48,  100,  9)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(21,  48,  34,   13)], 
+		[new ColorType().calcTone(49,  95,  100,  7)],   /*ЖЕЛТЫЙ*/
+		[new ColorType().calcTone(49,  95,  33,   11)], 
+		[new ColorType().calcTone(96,  158, 100,  7)],   /*ЗЕЛЕНЫЙ*/
+		[new ColorType().calcTone(96,  158, 33,   11)],
+		[new ColorType().calcTone(159, 200, 100,  7)],   /*БИРЮЗОВЫЙ*/
+		[new ColorType().calcTone(159, 200, 33,   11)],
+		[new ColorType().calcTone(201, 240, 100,  9)],   /*ГОЛУБОЙ*/
+		[new ColorType().calcTone(201, 240, 33,   12)],
+		[new ColorType().calcTone(241, 280, 100,  26)],   /*СИНИЙ*/
+		[new ColorType().calcTone(241, 280, 34,   18)],
+		[new ColorType().calcTone(280, 360, 100,  15)],    /*ФИОЛЕТОВЫЙ*/
+		[new ColorType().calcTone(280, 360, 26,   14)] 
 	];
 
 	let arrTon = [
@@ -406,14 +548,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	];
 
 	let spaRoomColor1 = [
-		arrLigth95[0],
-		arrLigth95[5],
-		arrTon[0],
-		arrTon[4],
-		arrTon2[2],
-		arrTon2[0],
-		arrTon2[1],
-		arrTon2[2]
+		arryTable_8_Step[0],
+		arryTable_1_Step[0],
+		arryTable_2_Step[0],
+		arryTable_3_Step[0],
+		arryTable_4_Step[0],
+		arryTable_5_Step[0],
+		arryTable_6_Step[0],
+		arryTable_8_Step[0],
 	];
 
 	function shuffleArray(array) {
@@ -424,6 +566,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			array[j] = temp;
 		}
 	};
+let color1Text; 
+let color2Text; 
 
 	function calcColor(callback) {
 
@@ -440,10 +584,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				
 
 			if (tabsBtn[i].classList.contains('active')) {
-				callback(arrTon);
+				callback(arryTable_1_Step);
 				color1.forEach((item) => {
-					
-					item.style.background = new colorGamma(tabsBtn[0], spaRoomColor1[ cou1 ]).fillColor();
+				
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_1_Step[ cou1 ]).fillColor() ;
 					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou1 ]).fillColor();
@@ -451,11 +595,13 @@ document.addEventListener('DOMContentLoaded', () => {
 					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou1 ]).fillColor();
+					item = color1Text;
+					color1Text = 'стены';
 					// console.log(a);
 				});
 
 				color2.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon2[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_2_Step[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou2 ]).fillColor();
@@ -463,10 +609,12 @@ document.addEventListener('DOMContentLoaded', () => {
 					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou2 ]).fillColor();
+					item = color2Text;
+					color2Text = 'аксесуары';
 					// console.log(b);
 				});
 				color3.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon2[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0],  arryTable_3_Step[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou3 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou3 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou3 ]).fillColor();
@@ -477,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					// console.log(c);
 				});
 				color4.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon2[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], spaRoomColor1[ cou4 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou4 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou4 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou4 ]).fillColor();
@@ -488,7 +636,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					// console.log(d);
 				});
 				color5.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrLigth95[ cou5 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_8_Step[ cou5 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou5 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou5 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou5 ]).fillColor();
@@ -499,7 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					// console.log(e);
 				});
 				color6.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[ cou6 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], spaRoomColor1[ cou6 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou6 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou6 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou6 ]).fillColor();

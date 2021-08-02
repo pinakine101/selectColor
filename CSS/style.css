@@ -304,66 +304,29 @@ span.active {
 
 
 .color1 {
-    /* order: 1; */
-    /* display:none; */
-    background-color:rgb(221, 251, 236);
-    /* height: 7.8%;
-    width: 100%; */
-    flex-grow: 35.4;
-    /* flex-grow: 1; */
+    flex-grow:7.8;
 }
 .color2 {
-     /* display:block; */
-    /* order:2; */
-    /* background-color:rgb(176, 202, 214); */
-    /* height:35.4%; */
-    flex-grow:4.4;
-    /* flex-grow:1; */
+    flex-grow: 35.4;
 }
 .color3 {
-    /* display:block; */
-    /* order:3; */
-    /* height: 5.7%; */
-    flex-grow:19;
-    /* flex-grow:1; */
-    /* background-color:rgb(235, 189, 23); */
-}
-
-.color4 {
-    /* order:4; */
-    /* display:none; */
-    /* height: 2.3%; */
-    flex-grow:7.8;
-    /* background-color:rgb(44, 34, 32); */
-}
-
-.color5 {
-    /* order:5; */
-    /* height: 19%; */
-    /* display:block; */
     flex-grow:5.7;
-    /* background-color:rgb(33, 218, 58); */
+}
+.color4 {
+    flex-grow:2.3;
+}
+.color5 {
+    flex-grow:19;
 }
 .color6 {
-    /* order:6; */
-    /* display:none; */
-    /* height: 9.1%; */
     flex-grow:9.1;
-    /* background-color:rgb(8, 177, 255); */
 }
 .color7 {
-    /* order:7; */
-    /* display:none; */
-    /* height: 4.4%; */
-    flex-grow:2.3;
-    /* background-color:rgb(60, 17, 250); */
+    flex-grow:4.4;
 }
 .color8 {
-    /* order:8; */
-    /* display:none; */
-    /* height: 15%; */
     flex-grow:15;
-    /* background-color:rgb(255, 58, 8); */
+   
 }
 
 /* Media
