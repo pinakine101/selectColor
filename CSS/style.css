@@ -59,8 +59,7 @@ p {
     box-sizing: border-box;
 }
 .header__logo {
-    padding-right: 40px;
-    margin-right: 80px;
+    
     align-items:center;
     display: flex;
     justify-content: space-between;
@@ -111,10 +110,10 @@ li {
     list-style: none;
 }
 .bnt_menu {
-    font-weight:lighter;
+    /* font-weight:lighter; */
     font-size:16px;
     text-decoration: none;
-    margin-left: 180px;
+    margin-left: 60px;
     color:#ffffff;
 }   
 /* .bnt_menu .menu{
