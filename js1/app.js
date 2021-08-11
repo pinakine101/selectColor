@@ -36,12 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	let H, H1, H2, H3, H4, H5, H6, H7, H8;
 	let S, S1, S2, S3, S4, S5, S6, S7, S8;
 	let L, L1, L2, L3, L4, L5, L6, L7, L8;
-			
+	
+	// function setHeiHeight() {
+	// 	$('.intro').css({
+	// 		height: $(window).height() + 'px'
+	// 	});
+	// }
+	// setHeiHeight(); // устанавливаем высоту окна при первой загрузке страницы
+	// $(window).resize( setHeiHeight ); // обновляем при изменении размеров окна
 	
 
 	let textColorBuffer;
-
-	let textColor = document.createElement('textCol');
 
 	function showColorText() {
 		intro_1.forEach((item, i) => {
@@ -49,15 +54,27 @@ document.addEventListener('DOMContentLoaded', () => {
 				const color = intro_1[i].querySelector('span.active');
 				$(color).each(function (i, el) {
 					const item = $(el).css("backgroundColor");
-					textColorBuffer = rgb2hex(item);
+					// textSpace = el.innerHTML;
+					// textColorBuffer = rgb2hex(item) +' '+	$(el).text();
+					textColorBuffer = rgb2hex(item) ;
+					
+			
+					// console.log(textColorBuffer);
 				})
 			};
 		});
 	};
 
 	//______Active Color_________//
+	let colorObj = [
+	'цвет потолка',
+	'цвет стен',
+	'цвет декора',	
+	]
+
+	let textColor = document.createElement('textCol');
 	
-	intro_1.forEach(function (item) {
+	intro_1.forEach(function (item, i) {
 		item.addEventListener('click', (e) => {
 
 			const target = e.target;
@@ -66,20 +83,31 @@ document.addEventListener('DOMContentLoaded', () => {
 				$(intro_1).children().removeClass('active');
 				textColor.classList.remove('textColor');
 			};
-
 			textColor.classList.add('textColor');
 			target.classList.add('active');
 			showColorText();
-			textColor.innerHTML = `<p> ${textColorBuffer} ${color1Text}</p>`;
+			
+			if (target.classList.contains('color1')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет потолка </p>`; };
+			if (target.classList.contains('color2')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет стен </p>`; };
+			if (target.classList.contains('color3')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет декора </p>`; };
+			if (target.classList.contains('color4')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет текстиля </p>`; };
+			if (target.classList.contains('color5')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет мебели </p>`; };
+			if (target.classList.contains('color6')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет аксессуаров </p>`; };
+			if (target.classList.contains('color7')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет ковра </p>`; };
+			if (target.classList.contains('color8')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет пола </p>`; };
 			target.append(textColor);
+			// target.append(textColorSpace);
+			
 			editButt[0].removeEventListener('click', calcCouPlus);
 			editButt[1].removeEventListener('click', calcCouMinus);
 			editButt[0].addEventListener('click', actCalcCouPus);
 			editButt[1].addEventListener('click', actCalcCouMinus);
 			window.removeEventListener('mousemove', sorTable);
-			
+
+			console.log(target)
 		});
 	});
+
 
 	intro_1.forEach(function (item) {
 		item.addEventListener('dblclick', (e) => {
@@ -548,14 +576,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	];
 
 	let spaRoomColor1 = [
-		arryTable_8_Step[0],
-		arryTable_1_Step[0],
+		arryTable_8_Step[3],
+		arryTable_1_Step[2],
 		arryTable_2_Step[0],
-		arryTable_3_Step[0],
-		arryTable_4_Step[0],
-		arryTable_5_Step[0],
+		arryTable_3_Step[10],
+		arryTable_4_Step[14],
+		arryTable_5_Step[5],
 		arryTable_6_Step[0],
-		arryTable_8_Step[0],
+		arryTable_8_Step[6],
 	];
 
 	function shuffleArray(array) {
@@ -595,9 +623,6 @@ let color2Text;
 					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou1 ]).fillColor();
-					item = color1Text;
-					color1Text = 'стены';
-					// console.log(a);
 				});
 
 				color2.forEach((item) => {
@@ -609,9 +634,6 @@ let color2Text;
 					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou2 ]).fillColor();
-					item = color2Text;
-					color2Text = 'аксесуары';
-					// console.log(b);
 				});
 				color3.forEach((item) => {
 					item.style.background = new colorGamma(tabsBtn[0],  arryTable_3_Step[ cou2 ]).fillColor();
@@ -622,7 +644,6 @@ let color2Text;
 					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou3 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou3 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou3 ]).fillColor();
-					// console.log(c);
 				});
 				color4.forEach((item) => {
 					item.style.background = new colorGamma(tabsBtn[0], spaRoomColor1[ cou4 ]).fillColor();
@@ -669,7 +690,7 @@ let color2Text;
 					// console.log(g);
 				});
 				color8.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_7_Step[ cou8 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou8 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou8 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou8 ]).fillColor();
@@ -677,7 +698,7 @@ let color2Text;
 					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou8 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou8 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou8 ]).fillColor();
-					// console.log(h);
+					console.log(cou8);
 				});
 			};
 		});
@@ -687,9 +708,6 @@ let color2Text;
 	calcColor(counterPlus);
 	
 	//___COUNTER____///
-
-	
-
 	function counterPlus(a) {
 		cou1++; cou2++; cou3++; cou4++;  cou5++; cou6++; cou7++; cou8++;
 		
