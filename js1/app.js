@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (target.classList.contains('color7')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет ковра </p>`; };
 			if (target.classList.contains('color8')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет пола </p>`; };
 			target.append(textColor);
-			// target.append(textColorSpace);
+			
 			
 			editButt[0].removeEventListener('click', calcCouPlus);
 			editButt[1].removeEventListener('click', calcCouMinus);
@@ -119,6 +119,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			editButt[0].removeEventListener('click', actCalcCouPus);
 			editButt[1].removeEventListener('click', actCalcCouMinus);
 			window.addEventListener('mousemove', sorTable);
+			navigator.clipboard.writeText(textColorBuffer); 
+			let copied = document.createElement('div');
+			copied.classList.add('copied');
+			document.querySelector('body').append(copied);
+			copied.innerHTML = `<p>${textColorBuffer} Copied!</p>`;
+			$(copied).css({
+				"left": e.pageX + "px",
+				"top": e.pageY + "px"
+				
+			});
+			function deleteCopied(){
+				copied.classList.remove('copied');
+			}
+			setTimeout(deleteCopied, 2000);
+			console.log(copied)
 		});
 	});
 
