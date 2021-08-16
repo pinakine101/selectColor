@@ -44,10 +44,10 @@ p {
 .container {
     /* display: flex; */
     width: 100%;
-   padding-left: 80px;
-   padding-right: 80px;
+   padding: 20px 80px;
+   /* padding-right: 80px;
    padding-bottom: 20px;
-   padding-top: 20px;
+   padding-top: 20px; */
    /* align-items:center;
    justify-content: space-between; */
     /* margin: 0 auto; */
@@ -73,6 +73,7 @@ p {
     align-items:center;
 }
 .buttOrderCosult{
+    cursor: pointer;
     font-family: 'Roboto';
     font-weight: 400;
     opacity: .9;
@@ -133,8 +134,8 @@ p {
     width: 100%;
     top: 0;
     left: 0;
-    background:#1f214e;
-    border: 1px solid #b7c4e4;
+    background:#2a2c4b;
+    /* border: 1px solid #b7c4e4; */
    
 }
 .tabs:hover{
@@ -151,6 +152,8 @@ p {
 } 
 .h1NavClass {
     text-decoration: none;
+    padding: 10px 0;
+    padding-left: 10px;
     width: 120px;
     font-weight:lighter;
     /* opacity: .85; */
@@ -161,8 +164,8 @@ p {
 .menu {
     display:none;
    /* padding-top: 20px; */
-    /* float: left; */
-    /* min-width: 160px; */
+    float: left;
+    min-width: 150px;
     /* outline: none; */
     position: absolute;
     z-index: 1110;
@@ -174,7 +177,7 @@ p {
 
 .menu_link {
    
-    padding: 20px 18px;
+    padding: 20px 12px;
     font-size: 12px;
     text-decoration: none;
     color:#000000;
@@ -216,12 +219,11 @@ p {
     background-color: #bfbfbf;
 }
 .tabs__nav-btn.active {
-    background-color: #d7f4fa;
+    background-color: #78e4fa;
 }
 
 /* contaiter buttons*/
 .container_buttons {
-    /* justify-content: space-between; */
     display: table;
     position:absolute;
     top: 0;
@@ -229,19 +231,13 @@ p {
     z-index: 1001;
     margin-top: 150px;
     margin-right: 80px;
-    /* margin-left: 96%;
-    margin-top: 5%; */
     width: 30px;
     height:300px;
-    /* justify-content: center; */
-   
-    /* border: 1px solid #8f8f8f; */
-   
 }
 
-.butt {
+.butt, .buttRotate90 {
    
-    position:relative;
+    position:relative, ;
     /* display: flex; */
     fill: rgb(251, 245, 245);
     width: 100%;
@@ -255,21 +251,9 @@ p {
 }
 .buttRotate90 {
     transform:rotate(90deg);
-    position:relative;
-    display: flex;
-    fill: rgb(251, 245, 245);
-    width: 100%;
-    height: 25px;
-    margin-bottom: 25px;
-    align-items:center;
-    transition-property: fill;
-    transition-duration: 0.2s;
-    transition-timing-function: linear;
-    -webkit-filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
-  filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+    /* align-items:center; */
 }
 .butt:hover{
-    /* fill: rgb(163, 237, 255); */
    fill: #5cfaff;
 }
 .butt:active{
@@ -310,7 +294,6 @@ p {
     animation-timing-function: linear; 
 }
 
-
 @keyframes spin {
     from {
         transform:rotate(0deg);
@@ -330,6 +313,7 @@ p {
     margin-left:30px;
     display: flex;
     font-weight:lighter;
+    width: 200px;
     /* position: absolute; */
     font-family: 'Ubundu', sans-serif;
     font-size: 20px;
@@ -360,7 +344,7 @@ p {
      height: 100vh;
      }
 
-.intro_1 {
+.intro_1{
     display:none;
     flex-flow:column nowrap;
     width:100%;
@@ -372,7 +356,6 @@ p {
     display:flex;
     flex-flow:row nowrap;
     width:100%;
-    border: 2px solid #2e2e2e;
     background:rgb(172, 172, 172);
     overflow-y: hidden;
     overflow: hidden;
@@ -409,7 +392,40 @@ span.active {
 }
 .burger {
     display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 15px 0px;
 }
+.burger_item {
+  
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color:#fff;
+    border: none;
+    position: relative;
+    font-size: 0;
+    color: transparent;
+}
+.burger_item::before,
+.burger_item::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    background-color: #fff;
+    border: none;
+    left:0;
+    z-index: 1;
+}
+.burger_item::after{
+   top: -8px;
+}
+.burger_item::before{
+    bottom: -8px;
+}
+
 /* Media
 ======================*/
 
@@ -421,7 +437,9 @@ span.active {
             padding-right: 40px;
             /* padding-bottom: 1px; */
         }
-       
+        .menu {
+            min-width: 135px;
+        }
         .bnt_menu{
             margin-right: 15px;
             margin-left: 40px;   
@@ -480,7 +498,8 @@ span.active {
         }
         .h1NavClass{
             font-size:12px; 
-            width: 70px 
+            width: 70px ;
+            padding: 5px 0;
         }
         .tabs__nav-btn{
             padding: 5px;
@@ -489,5 +508,71 @@ span.active {
         .container_buttons{
             margin-right: 20px; 
             margin-top: 120px;  
+        }
+     }
+
+     @media (max-width: 533px) {
+        .container {
+            padding: 5px 10px;
+        }
+        .header__logo{
+            width: 120px; 
+        }
+        .burger {
+            padding: 18px 0px;   
+        }
+        .burger_item {
+            width: 22px;
+            height: 2px;   
+        }
+      
+        .buttOrder{
+            width: 25px;
+            height: 20px;
+            margin-left: 8px;
+        }
+        .buttOrderCosult{
+            font-weight: 300;
+            font-size: 12px;
+            padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+        }
+        .tabs__nav {
+            display: flex;
+            flex-wrap:wrap;
+           
+           
+        }
+        .bnt_menu{
+            margin-right: 8px;
+           
+        }
+        .tabs__nav-btn {
+            border: 1px solid #7d7d7d;   
+            font-size: 10px;
+            flex: 0 0 25%;
+        }
+        .menu {
+            min-width:85px;
+        }
+        .h1NavClass{
+            font-size:12px; 
+            width: 70px ;
+            padding: 15px 0;
+        }
+        .bnt_menu{
+            /* margin-right: 7px; */
+            margin-left: 8px;   
+        }
+        .container_buttons{
+            margin-right: 15px; 
+            margin-top: 120px;  
+            width: 22px;
+            height:150px;
+        }
+        .butt, .buttRotate90, .icon {
+            height: 22px;
+            margin-bottom: 18px;
         }
      }

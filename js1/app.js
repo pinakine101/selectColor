@@ -66,11 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	//______Active Color_________//
-	let colorObj = [
-	'цвет потолка',
-	'цвет стен',
-	'цвет декора',	
-	]
+	
 
 	let textColor = document.createElement('textCol');
 	
@@ -152,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	//_______Buttuns_______///
 
 	icon.addEventListener('click', () => {
-		actColorCalc();
+		actCalcCouPus()
 		// changeColorSiwp();
 		// shuffleArray(arrTon2);
 		// shuffleArray(arrTon);
@@ -319,39 +315,35 @@ document.addEventListener('DOMContentLoaded', () => {
 				[r, g, b] = color.match(/\d+/g);
 			const colHsl = RGB2HSL(r, g, b);
 			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
-
 			return result;
 		});
 	};
-
-
-		
 
 	function actColorCalc(callback) {
 		sliceColor();
 		H = H1 = H2 = H3 = H4 = H5 = H6 = H7 = H8 = result[0]; 
 		S = S1 = S2 = S3 = S4 = S5 = S6 = S7 = S8 = result[1]; 
 		L = L1 = L2 = L3 = L4 = L5 = L6 = L7 = L8 = result[2];
-
 		
 	let	arrHue = [
-		+H + 10, +H1 + 20, +H2 + 30, +H3 + 40, 
-		+H4 + 50, +H5 + 60, +H6 + 70, +H7 + 10
+		+H + 10, +H1 + 21, +H2 + 48, +H3 + 94, 
+		+H4 + 160, +H5 + 20, +H6 + 240, +H7 + 280
 		];
 	let	arrSat = [
-		+S + 10, +S1 +20, +S2 + +30, +S3 + 40, 
-		+S4 + 50, +S5 + 10, +S6 + 100, +S7 + 30
+		+S + 10, +S1 +20, +S2  +30, +S3 + 40, 
+		+S4 + 50, +S5 + 60, +S6 + 70, +S7 + 80
 	];
 	let	arrLight = [
-		+L + 10, +L1 +10, +L2 + 30, +L3 + 10, 
-		+L4 + 15, +L5 + 20, +L6 + 30, +L7 + 40
+		+L + 10, +L1 +20, +L2 + 30, +L3 + 40, 
+		+L4 + 50, +L5 + 60, +L6 + 70, +L7 + 80
 		];
 
-		if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 < 4 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  + 10};
-		if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 > 100 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  - 50};
-		if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 < 20 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7  + 10};
-		if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 > 100 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7 - 50};
+		if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 <= 10 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  + 50};
+			if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 >= 99 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  - 20};
+			if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 <= 20 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7  + 50};
+			if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 >= 99 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7 - 20};
 
+		
 			// shuffleArray(arrHue, arrSat, arrLight);
 			
 			$('span.active').siblings('.color1').css("background", `hsl(${ arrHue[ cou1 ] }, ${ arrSat[ cou1 ] }%, ${ arrLight[ cou1 ] }%)`);
@@ -362,10 +354,16 @@ document.addEventListener('DOMContentLoaded', () => {
 			$('span.active').siblings('.color6').css("background", `hsl(${ arrHue[ cou6 ] }, ${ arrSat[ cou6 ] }%, ${ arrLight[ cou6 ] }%)`);
 			$('span.active').siblings('.color7').css("background", `hsl(${ arrHue[ cou7 ] }, ${ arrSat[ cou7 ] }%, ${ arrLight[ cou7 ] }%)`);
 			$('span.active').siblings('.color8').css("background", `hsl(${ arrHue[ cou8 ] }, ${ arrSat[ cou8 ] }%, ${ arrLight[ cou8 ] }%)`);
+
+			
+
 			
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
 			callback(arrHue, arrSat, arrLight);
+			console.log(H, H1, H2, H3, H4, H5, H6, H7,
+				S, S1, S2, S3, S4, S5, S6, S7,
+				L, L1, L2, L3, L4, L5, L6, L7)
 			// return arrHue, arrSat, arrLight;
 	};
 	// actColorCalc()
@@ -388,13 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	};
 
-	class calculationColor {
-		constructor(counter, tabsBtn, arrCol) {
-			this.counter = counter;
-			this.tabsBtn = tabsBtn;
-			this.arrCol = arrCol;
-		}
-	};
+	
 
 	class ColorType {
 		constructor(Hue, Sat, Light) {
@@ -599,6 +591,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		arryTable_5_Step[5],
 		arryTable_6_Step[0],
 		arryTable_8_Step[6],
+		arryTable_8_Step[3],
+		arryTable_1_Step[2],
+		arryTable_2_Step[0],
+		arryTable_3_Step[10],
+		arryTable_4_Step[14],
+		arryTable_5_Step[5],
+		arryTable_6_Step[0],
+		arryTable_8_Step[6]
 	];
 
 	function shuffleArray(array) {
@@ -609,8 +609,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			array[j] = temp;
 		}
 	};
-let color1Text; 
-let color2Text; 
 
 	function calcColor(callback) {
 
