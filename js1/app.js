@@ -99,8 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			editButt[0].addEventListener('click', actCalcCouPus);
 			editButt[1].addEventListener('click', actCalcCouMinus);
 			window.removeEventListener('mousemove', sorTable);
-
-			console.log(target)
+			sliceColor();
+			console.log(result[0],
+				result[1],
+				result[2])
 		});
 	});
 
@@ -119,17 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
 			let copied = document.createElement('div');
 			copied.classList.add('copied');
 			document.querySelector('body').append(copied);
-			copied.innerHTML = `<p>${textColorBuffer} Copied!</p>`;
+			copied.innerHTML = `<p>Copied!</p>`;
 			$(copied).css({
 				"left": e.pageX + "px",
 				"top": e.pageY + "px"
-				
 			});
 			function deleteCopied(){
 				copied.classList.remove('copied');
 			}
 			setTimeout(deleteCopied, 2000);
-			console.log(copied)
 		});
 	});
 
@@ -319,11 +319,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
+	
 	function actColorCalc(callback) {
 		sliceColor();
 		H =  result[0]; 
 		S =  result[1]; 
 		L =  result[2];
+
+		
 		
 	let	arrHue = [
 		+H + 10,
@@ -345,29 +348,73 @@ document.addEventListener('DOMContentLoaded', () => {
 		// 	if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 >= 99 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  - 20};
 		// 	if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 <= 20 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7  + 50};
 		// 	if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 >= 99 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7 - 20};
-
-		
-			// shuffleArray(arrHue, arrSat, arrLight);
-			$('span.active').siblings('.color1').css("background", `hsl(${ result[0] + 10 }, ${ result[1] =- 30 }%, ${ result[2]+ 10}%)`);
-			// $('span.active').siblings('.color1').css("background", `hsl(${ arrHue[ cou1 ] }, ${ arrSat[ cou1 ] }%, ${ arrLight[ cou1 ] }%)`);
-			// $('span.active').siblings('.color2').css("background", `hsl(${ arrHue[ cou2 ] }, ${ arrSat[ cou2 ] }%, ${ arrLight[ cou2 ] }%)`);
-			// $('span.active').siblings('.color3').css("background", `hsl(${ arrHue[ cou3 ] }, ${ arrSat[ cou3 ] }%, ${ arrLight[ cou3 ] }%)`);
-			// $('span.active').siblings('.color4').css("background", `hsl(${ arrHue[ cou4 ] }, ${ arrSat[ cou4 ] }%, ${ arrLight[ cou4 ] }%)`);
-			// $('span.active').siblings('.color5').css("background", `hsl(${ arrHue[ cou5 ] }, ${ arrSat[ cou5 ] }%, ${ arrLight[ cou5 ] }%)`);
-			// $('span.active').siblings('.color6').css("background", `hsl(${ arrHue[ cou6 ] }, ${ arrSat[ cou6 ] }%, ${ arrLight[ cou6 ] }%)`);
-			// $('span.active').siblings('.color7').css("background", `hsl(${ arrHue[ cou7 ] }, ${ arrSat[ cou7 ] }%, ${ arrLight[ cou7 ] }%)`);
-			// $('span.active').siblings('.color8').css("background", `hsl(${ arrHue[ cou8 ] }, ${ arrSat[ cou8 ] }%, ${ arrLight[ cou8 ] }%)`);
-
+		class ActColorType {
+			constructor(Hue, Sat, Light) {
+				this.Hue = Hue;
+				this.Sat = Sat;
+				this.Light = Light;
+			}
+			calcDelta() {
+				if (this.Sat > 99 && this.Sat < 1) {
+					res = `hsl(${this.Hue - h }, ${50}%, ${50}%)`;
+				}
+				return res;
+			};
+			calcTone(h, s, l) {
+				this.Hue =  result[0]; 
+				this.Sat=  result[1]; 
+				this.Light =  result[2];
+				let res;
+				res = `hsl(${this.Hue - h }, ${this.Sat - s}%, ${this.Light - l}%)`;
+				if(this.Sat < 10){res = `hsl(${h }, ${s}%, ${l}%)`;}
+				if(this.Sat > 99){res = `hsl(${h }, ${s}%, ${l}%)`;}
+				if(this.Light + l < 10){res = `hsl(${h }, ${s}%, ${l}%)`;}
+				if(this.Light + l > 95){res = `hsl(${h }, ${s}%, ${l}%)`;}
+				console.log(this.Sat);
+				return res;
+				
+			};
 			
+		};	
+	let mass = [
+		new ActColorType().calcTone(50,   10,  10),
+		new ActColorType().calcTone(150,  20,  20),
+		new ActColorType().calcTone(250,  30,  30),
+		new ActColorType().calcTone(350,  40,  40),
+		new ActColorType().calcTone(230,  50,  50),
+		new ActColorType().calcTone(30,   60,  60),
+		new ActColorType().calcTone(230,   70,  70),
+		new ActColorType().calcTone(30,   80,  80),
+		new ActColorType().calcTone(50,   10,  90),
+		new ActColorType().calcTone(150,   20,  10),
+		new ActColorType().calcTone(250,   30,  20),
+		new ActColorType().calcTone(350,   40,  30),
+		new ActColorType().calcTone(230,   50,  40),
+		new ActColorType().calcTone(30,   60,  50),
+		new ActColorType().calcTone(230,   70,  60),
+		new ActColorType().calcTone(30,   80,  70)
+	]
+			
+			$('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
+			// new ActColorType().calcTone(50,   50,  10));
+			// $('span.active').siblings('.color1').css("background",  new ActColorType().calcTone(20,   20,  30));
+			// $('span.active').siblings('.color1').css("background", `hsl(${ arrHue[ cou1 ] }, ${ arrSat[ cou1 ] }%, ${ arrLight[ cou1 ] }%)`);
+			$('span.active').siblings('.color2').css("background", 	mass[ cou2 ]);
+			$('span.active').siblings('.color3').css("background", 	mass[ cou3 ]);
+			$('span.active').siblings('.color4').css("background", 	mass[ cou4 ]);
+			$('span.active').siblings('.color5').css("background", 	mass[ cou5 ]);
+			$('span.active').siblings('.color6').css("background", 	mass[ cou6 ]);
+			$('span.active').siblings('.color7').css("background", 	mass[ cou7 ]);
+			$('span.active').siblings('.color8').css("background", 	mass[ cou8 ]);
 
 			
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
-			callback(arrHue, arrSat, arrLight);
-			console.log(result[0],
-				S, 
-				L);
-			// return arrHue, arrSat, arrLight;
+			
+			
+			callback(mass);
+		
+			return mass;
 	};
 	// actColorCalc()
 
@@ -911,18 +958,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		let xAbs = Math.abs(clickStartX - clickEndX);
 		let yAbs = Math.abs(clickStartY - clickEndY);
 		sliceColor();
+		counterPlus(spaRoomColor1);
+		counterMinus(spaRoomColor1);
 		if (xAbs >10 || yAbs > 10) {
 			
 			if (xAbs > yAbs) {
 				if (clickEndX < clickStartX) {
 					$('span.active').css('backgroundColor', 
-						`hsl(${result[0]}, ${result[1]}%, ${result[2] -5}%)`);
-						console.log(result[2])
-						console.log('left')
+					`${spaRoomColor1[ cou1++ ]}` );
+						console.log(cou1)
 				} else {
 					$('span.active').css('backgroundColor', 
-						`hsl(${result[0]}, ${result[1]}%, ${+result[2] + 5}%)`);
-						console.log(result[2])
+					`${spaRoomColor1[ cou1-- ]}`);
+						
 						console.log('right')
 				}
 			} else {
