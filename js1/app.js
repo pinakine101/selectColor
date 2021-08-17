@@ -321,39 +321,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function actColorCalc(callback) {
 		sliceColor();
-		H = H1 = H2 = H3 = H4 = H5 = H6 = H7 = H8 = result[0]; 
-		S = S1 = S2 = S3 = S4 = S5 = S6 = S7 = S8 = result[1]; 
-		L = L1 = L2 = L3 = L4 = L5 = L6 = L7 = L8 = result[2];
+		H =  result[0]; 
+		S =  result[1]; 
+		L =  result[2];
 		
 	let	arrHue = [
-		+H + 10, +H1 + 21, +H2 + 48, +H3 + 94, 
-		+H4 + 160, +H5 + 20, +H6 + 240, +H7 + 280
+		+H + 10,
+		//  +H1 + 21, +H2 + 48, +H3 + 94, 
+		// +H4 + 160, +H5 + 20, +H6 + 240, +H7 + 280
 		];
 	let	arrSat = [
-		+S + 10, +S1 +20, +S2  +30, +S3 + 40, 
-		+S4 + 50, +S5 + 60, +S6 + 70, +S7 + 80
+		+S + 50, 
+		// +S1 +20, +S2  +30, +S3 + 40, 
+		// +S4 + 50, +S5 + 60, +S6 + 70, +S7 + 80
 	];
 	let	arrLight = [
-		+L + 10, +L1 +20, +L2 + 30, +L3 + 40, 
-		+L4 + 50, +L5 + 60, +L6 + 70, +L7 + 80
+		+L + 10,
+		//  +L1 +20, +L2 + 30, +L3 + 40, 
+		// +L4 + 50, +L5 + 60, +L6 + 70, +L7 + 80
 		];
 
-		if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 <= 10 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  + 50};
-			if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 >= 99 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  - 20};
-			if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 <= 20 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7  + 50};
-			if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 >= 99 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7 - 20};
+		// if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 <= 10 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  + 50};
+		// 	if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 >= 99 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  - 20};
+		// 	if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 <= 20 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7  + 50};
+		// 	if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 >= 99 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7 - 20};
 
 		
 			// shuffleArray(arrHue, arrSat, arrLight);
-			
-			$('span.active').siblings('.color1').css("background", `hsl(${ arrHue[ cou1 ] }, ${ arrSat[ cou1 ] }%, ${ arrLight[ cou1 ] }%)`);
-			$('span.active').siblings('.color2').css("background", `hsl(${ arrHue[ cou2 ] }, ${ arrSat[ cou2 ] }%, ${ arrLight[ cou2 ] }%)`);
-			$('span.active').siblings('.color3').css("background", `hsl(${ arrHue[ cou3 ] }, ${ arrSat[ cou3 ] }%, ${ arrLight[ cou3 ] }%)`);
-			$('span.active').siblings('.color4').css("background", `hsl(${ arrHue[ cou4 ] }, ${ arrSat[ cou4 ] }%, ${ arrLight[ cou4 ] }%)`);
-			$('span.active').siblings('.color5').css("background", `hsl(${ arrHue[ cou5 ] }, ${ arrSat[ cou5 ] }%, ${ arrLight[ cou5 ] }%)`);
-			$('span.active').siblings('.color6').css("background", `hsl(${ arrHue[ cou6 ] }, ${ arrSat[ cou6 ] }%, ${ arrLight[ cou6 ] }%)`);
-			$('span.active').siblings('.color7').css("background", `hsl(${ arrHue[ cou7 ] }, ${ arrSat[ cou7 ] }%, ${ arrLight[ cou7 ] }%)`);
-			$('span.active').siblings('.color8').css("background", `hsl(${ arrHue[ cou8 ] }, ${ arrSat[ cou8 ] }%, ${ arrLight[ cou8 ] }%)`);
+			$('span.active').siblings('.color1').css("background", `hsl(${ result[0] + 10 }, ${ result[1] =- 30 }%, ${ result[2]+ 10}%)`);
+			// $('span.active').siblings('.color1').css("background", `hsl(${ arrHue[ cou1 ] }, ${ arrSat[ cou1 ] }%, ${ arrLight[ cou1 ] }%)`);
+			// $('span.active').siblings('.color2').css("background", `hsl(${ arrHue[ cou2 ] }, ${ arrSat[ cou2 ] }%, ${ arrLight[ cou2 ] }%)`);
+			// $('span.active').siblings('.color3').css("background", `hsl(${ arrHue[ cou3 ] }, ${ arrSat[ cou3 ] }%, ${ arrLight[ cou3 ] }%)`);
+			// $('span.active').siblings('.color4').css("background", `hsl(${ arrHue[ cou4 ] }, ${ arrSat[ cou4 ] }%, ${ arrLight[ cou4 ] }%)`);
+			// $('span.active').siblings('.color5').css("background", `hsl(${ arrHue[ cou5 ] }, ${ arrSat[ cou5 ] }%, ${ arrLight[ cou5 ] }%)`);
+			// $('span.active').siblings('.color6').css("background", `hsl(${ arrHue[ cou6 ] }, ${ arrSat[ cou6 ] }%, ${ arrLight[ cou6 ] }%)`);
+			// $('span.active').siblings('.color7').css("background", `hsl(${ arrHue[ cou7 ] }, ${ arrSat[ cou7 ] }%, ${ arrLight[ cou7 ] }%)`);
+			// $('span.active').siblings('.color8').css("background", `hsl(${ arrHue[ cou8 ] }, ${ arrSat[ cou8 ] }%, ${ arrLight[ cou8 ] }%)`);
 
 			
 
@@ -361,9 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
 			callback(arrHue, arrSat, arrLight);
-			console.log(H, H1, H2, H3, H4, H5, H6, H7,
-				S, S1, S2, S3, S4, S5, S6, S7,
-				L, L1, L2, L3, L4, L5, L6, L7)
+			console.log(result[0],
+				S, 
+				L);
 			// return arrHue, arrSat, arrLight;
 	};
 	// actColorCalc()
