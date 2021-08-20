@@ -10,79 +10,61 @@
 сайтmap octopus.do/ffvvih840cc
 
 */
+
+//  poem___________ChoCol______________   //
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
+// ___________character
 
-	let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
-	let tabsContent = document.querySelectorAll(".intro_1");
-	let tabsNav = document.querySelector(".tabs__nav");
-	let intro_1 = document.querySelectorAll(".intro_1")
-	let colors = document.querySelectorAll('span');
-	let icon = document.querySelector('.icon');
-	let editButt = document.querySelectorAll('.butt');
+	let tabsBtn = document.querySelectorAll(".tabs__nav-btn"); // кнопки на ТАБЕ
+	let tabsContent = document.querySelectorAll(".intro_1"); //содержимое в ТАБЕ
+	// let tabsNav = document.querySelector(".tabs__nav"); 
+	// let intro = document.querySelector(".intro")
+	// let colors = document.querySelectorAll('span');
+	let icon = document.querySelector('.icon'); // кнопка рандомного подбора
+	let editButtns = document.querySelectorAll('.butt'); // кнопки редактирования гаммы
+	let result; // цвет разделенный на HSL каналы в массиве из трёх значений
 
-	let result;
+	let cou1 = 0, cou2 = 1, cou3 = 2, cou4 = 3, 
+		cou5 = 4, cou6 = 5, cou7 = 6, cou8 = 7; //счётчики пребора цветов в каждом блоке
 
-	let cou1 = 0;
-	let cou2 = 1;
-	let cou3 = 2;
-	let cou4 = 3;
-	let cou5 = 4;
-	let cou6 = 5;
-	let cou7 = 6;
-	let cou8 = 7;
+	let textColorBuffer; // содержит имя цвета
+	let textColor = document.createElement('textCol'); // показывает имя цвета
 
+	//______Active Color_________//
 
-	let H, H1, H2, H3, H4, H5, H6, H7, H8;
-	let S, S1, S2, S3, S4, S5, S6, S7, S8;
-	let L, L1, L2, L3, L4, L5, L6, L7, L8;
 	
-	// function setHeiHeight() {
-	// 	$('.intro').css({
-	// 		height: $(window).height() + 'px'
-	// 	});
-	// }
-	// setHeiHeight(); // устанавливаем высоту окна при первой загрузке страницы
-	// $(window).resize( setHeiHeight ); // обновляем при изменении размеров окна
-	
-
-	let textColorBuffer;
-
-	function showColorText() {
-		intro_1.forEach((item, i) => {
+	function findColorName() {
+		// находим в активном табе активный цвет 
+		tabsContent.forEach((item, i) => {
 			if (tabsBtn[i].classList.contains('active')) {
-				const color = intro_1[i].querySelector('span.active');
-				$(color).each(function (i, el) {
-					const item = $(el).css("backgroundColor");
-					// textSpace = el.innerHTML;
-					// textColorBuffer = rgb2hex(item) +' '+	$(el).text();
-					textColorBuffer = rgb2hex(item) ;
-					
-			
-					// console.log(textColorBuffer);
-				})
+				const color = tabsContent[i].querySelector('span.active');
+				//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
+				let coco = color.style.background;
+				textColorBuffer = rgb2hex(coco);
+				sliceColor()
 			};
 		});
 	};
-
-	//______Active Color_________//
 	
-
-	let textColor = document.createElement('textCol');
-	
-	intro_1.forEach(function (item, i) {
-		item.addEventListener('click', (e) => {
-
+		function activeColor(e){ //функионал режима *span.active*
+			//получаем элемент клика	
 			const target = e.target;
-			
+			//если клик не на *span.active* убираем класс *active, скрываем контейнер с именем цвета
 			if (!target.classList.contains("active")) {
-				$(intro_1).children().removeClass('active');
+				$(tabsContent).children().removeClass('active');
 				textColor.classList.remove('textColor');
 			};
-			textColor.classList.add('textColor');
+			textColor.classList.add('textColor'); // показываем контейнер с именем цвета, добовляем *active,
 			target.classList.add('active');
-			showColorText();
-			
+
+			target.append(textColor);  //добовляем контейнер с именем цвета
+
+			findColorName(); //вызываем имя цвета
+
+			// проверяем на класс и добавляем имя цвета
 			if (target.classList.contains('color1')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет потолка </p>`; };
 			if (target.classList.contains('color2')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет стен </p>`; };
 			if (target.classList.contains('color3')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет декора </p>`; };
@@ -91,64 +73,77 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (target.classList.contains('color6')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет аксессуаров </p>`; };
 			if (target.classList.contains('color7')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет ковра </p>`; };
 			if (target.classList.contains('color8')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет пола </p>`; };
-			target.append(textColor);
-			
-			
-			editButt[0].removeEventListener('click', calcCouPlus);
-			editButt[1].removeEventListener('click', calcCouMinus);
-			editButt[0].addEventListener('click', actCalcCouPus);
-			editButt[1].addEventListener('click', actCalcCouMinus);
-			window.removeEventListener('mousemove', sorTable);
-			sliceColor();
-			console.log(result[0],
-				result[1],
-				result[2])
-		});
+
+
+			editButtns[0].removeEventListener('click', calcCouPlus);//удаляем пребор гаммы в "+" без *span.active*  
+			editButtns[1].removeEventListener('click', calcCouMinus); //удаляем пребор гаммы в "-" без *span.active*  
+			editButtns[0].addEventListener('click', actCalcCouPus); //добавляем пребор гаммы в "+" с *span.active*  
+			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
+			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
+
+			sliceColor();//вызываем разделение цвета на три значения в массиве *result*
+			console.log(result[0], result[1], result[2]);
+		}
+
+	tabsContent.forEach(function (item, i) { // вешаем на контейнер с цветами фунцию активного цвета
+		item.addEventListener('click', activeColor);
 	});
 
-
-	intro_1.forEach(function (item) {
-		item.addEventListener('dblclick', (e) => {
+		function deletActivColor(e){  //функионал режима БЕЗ *span.active*
 			const target = e.target;
-			target.classList.remove('active');
-			textColor.remove();
-			editButt[0].addEventListener('click', calcCouPlus);
-			editButt[1].addEventListener('click', calcCouMinus);
-			editButt[0].removeEventListener('click', actCalcCouPus);
-			editButt[1].removeEventListener('click', actCalcCouMinus);
-			window.addEventListener('mousemove', sorTable);
-			navigator.clipboard.writeText(textColorBuffer); 
-			let copied = document.createElement('div');
-			copied.classList.add('copied');
-			document.querySelector('body').append(copied);
-			copied.innerHTML = `<p>Copied!</p>`;
-			$(copied).css({
-				"left": e.pageX + "px",
-				"top": e.pageY + "px"
-			});
-			function deleteCopied(){
-				copied.classList.remove('copied');
-			}
-			setTimeout(deleteCopied, 2000);
-		});
+				target.classList.remove('active');
+				textColor.remove();
+				editButtns[0].addEventListener('click', calcCouPlus);  //добовляем оброботчики перебора гаммы в режиме  *span.active*
+				editButtns[1].addEventListener('click', calcCouMinus);
+				editButtns[0].removeEventListener('click', actCalcCouPus); //удаляем оброботчики перебора гаммы в режиме БЕЗ *span.active*
+				editButtns[1].removeEventListener('click', actCalcCouMinus);
+				window.addEventListener('mousemove', sorTable); //включаем возможность перетаскивания блоков
+
+				// оповещение о копировании имени цвета
+				navigator.clipboard.writeText(textColorBuffer); //пишем в буфер обмена имя цвета
+				let copied = document.createElement('div'); //созаем элемент оповещения о копировании
+				copied.classList.add('copied');// добовляем класс видимости
+				document.querySelector('body').append(copied);// добовляем элемент в тело
+				copied.innerHTML = `<p>Copied!</p>`; // добовляем элемент в тело
+				$(copied).css({ // привязываем элемент к позиции курсора
+					"left": e.pageX + "px",
+					"top": e.pageY + "px"
+				});
+				function deleteCopied(){ // удаляем элемент через 2 секунды
+					copied.classList.remove('copied');
+				}; setTimeout(deleteCopied, 2000);
+		}
+		
+	tabsContent.forEach(function (item) {  // вешаем функцию режима БЕЗ *span.active*
+		item.addEventListener('dblclick', deletActivColor);
 	});
 
-	function calcCouPlus(){
+	function calcCouPlus(){ // запускаем перебор гаммы в *+* режима БЕЗ *span.active*
 		calcColor(counterPlus)
+		console.log('privet')
 	};
-	function calcCouMinus(){
+	function calcCouMinus(){ // запускаем перебор гаммы в *-* режима БЕЗ *span.active*
 		calcColor(counterMinus)
+		console.log('privet2')
 	};
-    function actCalcCouPus(){
+    function actCalcCouPus(){ // запускаем перебор гаммы в *+* режима  *span.active*
 		actColorCalc(counterPlus)
 	};
-	function actCalcCouMinus(){
+	function actCalcCouMinus(){ // запускаем перебор гаммы в *-* режима *span.active*
 		actColorCalc(counterMinus)
+
 	}
 	//_______Buttuns_______///
 
+
+
+	const container_buttons = document.querySelector('.container_buttons');
+		container_buttons.addEventListener('click', (e)=>{
+			e.target.removeEventListener('click', activeColor);
+		})
+
 	icon.addEventListener('click', () => {
-		actCalcCouPus()
+		test()
 		// changeColorSiwp();
 		// shuffleArray(arrTon2);
 		// shuffleArray(arrTon);
@@ -156,10 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	});
 	
-	editButt[0].addEventListener('click', calcCouPlus);
-	editButt[1].addEventListener('click', calcCouMinus);
+	editButtns[0].addEventListener('click', calcCouPlus);
+	editButtns[1].addEventListener('click', calcCouMinus);
 
-	var y = 3;
+	var y = 0;
 
 	function addColor() {
 		let arryAddColor = [
@@ -173,33 +168,34 @@ document.addEventListener('DOMContentLoaded', () => {
 			'<span class = color8 ></span>'
 		];
 
-		intro_1.forEach((item, i) => {
+		tabsContent.forEach((item, i) => {
 			if (tabsBtn[i].classList.contains('active')) {
 				if (y >= arryAddColor.length-1) {
 					y = 1
 				};
+				counterPlus(arryTable_3_Step);
 				y++;
 				let newColor = $(arryAddColor[y]).insertAfter('span.active');
 				if (tabsBtn[0].classList.contains('active')){
-					$(newColor).css("background-color", `${arrTon[y]}`);
+					$(newColor).css("background-color", `${arryTable_1_Step[ cou1 ]}`);
 				};
 				if (tabsBtn[1].classList.contains('active')){
-					$(newColor).css("background-color", `${arrTon2[y]}`);
+					$(newColor).css("background-color", `${arryTable_5_Step[ cou1 ]}`);
 				};
 
 			};
 		});
 	};
 
-	editButt[2].addEventListener('click', addColor);
+	editButtns[2].addEventListener('click', addColor);
 
-	editButt[3].addEventListener('click', () => {
+	editButtns[3].addEventListener('click', () => {
 		document.querySelector('span.active').style.display = 'none';
 	});
 
-	editButt[4].addEventListener('click', () => {
-		editButt[4].classList.toggle('buttRotate90');
-		intro_1.forEach((i) => {
+	editButtns[4].addEventListener('click', () => {
+		editButtns[4].classList.toggle('buttRotate90');
+		tabsContent.forEach((i) => {
 			i.classList.toggle('row');
 			if (i.classList.contains('row')) {
 				axisSort = 'x'
@@ -240,23 +236,39 @@ document.addEventListener('DOMContentLoaded', () => {
 				};
 			});
 		}; 
+		
 	};
-	
+
+
+	// function colorGallery (colorClass, room, ){
+	// 	let colorClassTarget = colorClass.target;
+	// 	if (colorClassTarget && colorClassTarget.classList.contains('color1')) {
+	// 		counterPlus(arryTable_3_Step);
+	// 		colorClassTarget.style.background = arryTable_3_Step[ cou1 ];
+	// 		console.log('привет')
+	// 	}
+
+	// 	console.log(colorClassTarget);
+
+	// }
+	// $(tabsContent).on('click', colorGallery);
+
 	$(tabsBtn).on('click', clickTabsBtn);
 
-	function onClick(a){
-		a.addEventListener('click', ()=>{
+	function onClickTab(e){
+		e.addEventListener('click', ()=>{
 			sliceColor();
 			calcColor(counterPlus);
 		},{once:true});
 	}
-		onClick(tabsBtn[1]);
-		onClick(tabsBtn[2]);
-		onClick(tabsBtn[3]);
-		onClick(tabsBtn[4]);
-		onClick(tabsBtn[5]);
-		onClick(tabsBtn[6]);
-		onClick(tabsBtn[7]);
+		// onClick(tabsBtn[0]);
+		onClickTab(tabsBtn[1]);
+		onClickTab(tabsBtn[2]);
+		onClickTab(tabsBtn[3]);
+		onClickTab(tabsBtn[4]);
+		onClickTab(tabsBtn[5]);
+		onClickTab(tabsBtn[6]);
+		onClickTab(tabsBtn[7]);
 	
 
 	//______ColorPicker_________//
@@ -265,18 +277,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		$('.colorpickerHolder').remove();
 	};
 
-	intro_1.forEach(function (color) {
+	tabsContent.forEach(function (color) {
 		color.addEventListener("contextmenu", colorPicker);
 		color.addEventListener("click", deleteColPick);
 	});
 
-	$(intro_1).on("contextmenu", false);
+	$(tabsContent).on("contextmenu", false);
 
-	function rgb2hex(color) {
-		return "#" + (color.match(/\b(\d+)\b/g).map(function (digit) {
-			return ('0' + parseInt(digit).toString(16)).slice(-2)
-		})).join('');
-	};
+
 
 	function colorPicker(e) {
 		const contextBox = document.createElement('ColPick');
@@ -319,86 +327,70 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
-	
 	function actColorCalc(callback) {
-		sliceColor();
-		H =  result[0]; 
-		S =  result[1]; 
-		L =  result[2];
-
 		
-		
-	let	arrHue = [
-		+H + 10,
-		//  +H1 + 21, +H2 + 48, +H3 + 94, 
-		// +H4 + 160, +H5 + 20, +H6 + 240, +H7 + 280
-		];
-	let	arrSat = [
-		+S + 50, 
-		// +S1 +20, +S2  +30, +S3 + 40, 
-		// +S4 + 50, +S5 + 60, +S6 + 70, +S7 + 80
-	];
-	let	arrLight = [
-		+L + 10,
-		//  +L1 +20, +L2 + 30, +L3 + 40, 
-		// +L4 + 50, +L5 + 60, +L6 + 70, +L7 + 80
-		];
-
-		// if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 <= 10 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  + 50};
-		// 	if (S = S1 = S2 = S3 = S4 = S5 = S6 = S7 >= 99 ){S = S1 = S2 = S3 = S4 = S5 = S6 = S7  - 20};
-		// 	if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 <= 20 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7  + 50};
-		// 	if (  L = L1 = L2 = L3 = L4 = L5 = L6 = L7 >= 99 ){ L = L1 = L2 = L3 = L4 = L5 = L6 = L7 - 20};
 		class ActColorType {
 			constructor(Hue, Sat, Light) {
 				this.Hue = Hue;
 				this.Sat = Sat;
 				this.Light = Light;
 			}
-			calcDelta() {
-				if (this.Sat > 99 && this.Sat < 1) {
-					res = `hsl(${this.Hue - h }, ${50}%, ${50}%)`;
-				}
-				return res;
-			};
+			
 			calcTone(h, s, l) {
 				this.Hue =  result[0]; 
-				this.Sat=  result[1]; 
+				this.Sat =  result[1]; 
 				this.Light =  result[2];
 				let res;
-				res = `hsl(${this.Hue - h }, ${this.Sat - s}%, ${this.Light - l}%)`;
-				if(this.Sat < 10){res = `hsl(${h }, ${s}%, ${l}%)`;}
-				if(this.Sat > 99){res = `hsl(${h }, ${s}%, ${l}%)`;}
-				if(this.Light + l < 10){res = `hsl(${h }, ${s}%, ${l}%)`;}
-				if(this.Light + l > 95){res = `hsl(${h }, ${s}%, ${l}%)`;}
-				console.log(this.Sat);
-				return res;
+				// H = this.Hue + h, 
+				// S = this.Sat + s,  
+				// L = this.Light +l;
+						if( this.Hue < 180){this.Hue + h } else {this.Hue - h};
+				        if( this.Sat < 50){this.Sat + s } else {this.Sat - s};
+						if( this.Light < 50){this.Light + s } else {this.Light - s}//<<<<<<<<
+					
+					res = `hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`
+					// else if (this.Hue + h >180 && this.Sat + s > 90 && this.Light + l > 90)//>>>>>>>
+					// else{res = `hsl(${this.Hue - h}, ${this.Sat - s}%, ${this.Light - l}%)`}
+
+					// else if (this.Hue + h <180 && this.Sat + s < 50 && this.Light + l < 50) //<<<<<<<<
+					// {res = `hsl(${this.Hue + h}, ${this.Sat + s}%, ${this.Light + l}%)`}
+
+					// else if (this.Hue + h >180 && this.Sat + s > 50 && this.Light + l > 50)//>>>>>>>
+					// {res = `hsl(${this.Hue - h}, ${this.Sat - s}%, ${this.Light - l}%)`};
+				// if(this.Sat + s > 99 && this.Light + l > 95){res = `hsl(${h }, ${s}%, ${l}%)`;}
+				// if(this.Sat + s < 5 && this.Light + l < 5)
+				// 	{res = `hsl(${this.Hue + h}, ${this.Sat + s}%, ${this.Light + l}%)`;}
 				
+				return res;
 			};
 			
-		};	
+		};
+		
+		// dfe9f2 базовый цвет спальни
 	let mass = [
 		new ActColorType().calcTone(50,   10,  10),
-		new ActColorType().calcTone(150,  20,  20),
+		new ActColorType().calcTone(10,  20,  20),
 		new ActColorType().calcTone(250,  30,  30),
 		new ActColorType().calcTone(350,  40,  40),
+
 		new ActColorType().calcTone(230,  50,  50),
-		new ActColorType().calcTone(30,   60,  60),
-		new ActColorType().calcTone(230,   70,  70),
-		new ActColorType().calcTone(30,   80,  80),
-		new ActColorType().calcTone(50,   10,  90),
+		new ActColorType().calcTone(30,   10,  40),
+		new ActColorType().calcTone(230,   20,  10),
+		new ActColorType().calcTone(30,   10,  30),
+
+		new ActColorType().calcTone(50,   10,  40),
 		new ActColorType().calcTone(150,   20,  10),
 		new ActColorType().calcTone(250,   30,  20),
 		new ActColorType().calcTone(350,   40,  30),
+
 		new ActColorType().calcTone(230,   50,  40),
-		new ActColorType().calcTone(30,   60,  50),
-		new ActColorType().calcTone(230,   70,  60),
-		new ActColorType().calcTone(30,   80,  70)
+		new ActColorType().calcTone(30,   60,  40),
+		new ActColorType().calcTone(230,   40,  30),
+		new ActColorType().calcTone(30,   80,  20)
 	]
-			
+		
 			$('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
-			// new ActColorType().calcTone(50,   50,  10));
-			// $('span.active').siblings('.color1').css("background",  new ActColorType().calcTone(20,   20,  30));
-			// $('span.active').siblings('.color1').css("background", `hsl(${ arrHue[ cou1 ] }, ${ arrSat[ cou1 ] }%, ${ arrLight[ cou1 ] }%)`);
+		
 			$('span.active').siblings('.color2').css("background", 	mass[ cou2 ]);
 			$('span.active').siblings('.color3').css("background", 	mass[ cou3 ]);
 			$('span.active').siblings('.color4').css("background", 	mass[ cou4 ]);
@@ -407,14 +399,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			$('span.active').siblings('.color7').css("background", 	mass[ cou7 ]);
 			$('span.active').siblings('.color8').css("background", 	mass[ cou8 ]);
 
-			
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
-			
-			
 			
 			callback(mass);
 		
-			return mass;
+		
 	};
 	// actColorCalc()
 
@@ -450,14 +439,15 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.Sat = c, this.Light = d
 			}
 			let res = `hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`;
+		
 			return res;
 		};
 	};
-
+//21,  48,  100,  97
 	let arryTable_1_Step = [
-		[new ColorType().calcTone(0,   20,  100,  97)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(206, 208, 42,   10)],   /*КРАСНЫЙ*/
 		[new ColorType().calcTone(0,   20,  33,   97)],
-		[new ColorType().calcTone(21,  48,  100,  97)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(200,  208,  42,  91)],   /*ОРАНЖЕВЫЙ*/
 		[new ColorType().calcTone(21,  48,  33,   97)], 
 		[new ColorType().calcTone(49,  95,  100,  92)],   /*ЖЕЛТЫЙ*/
 		[new ColorType().calcTone(49,  95,  50,   92)], 
@@ -659,37 +649,80 @@ document.addEventListener('DOMContentLoaded', () => {
 			array[j] = temp;
 		}
 	};
+	
 
+	function massives(){
+		
+	}
+	
+	function test(){
+		tabsContent.forEach((item, i) => {
+			let span = item.querySelectorAll("span");
+			
+	let	sleepRoom = [
+							
+		arryTable_6_Step[ cou1 ],
+		arryTable_3_Step[ cou1 ]
+	];
+	
+	let	gostinaya = [
+	
+		arryTable_1_Step[ cou1 ],
+		arryTable_2_Step[ cou1 ]
+	];
+			function getColor(arraySpace){
+				counterPlus(arryTable_1_Step);
+				
+						span[0].style.background = `${arraySpace[0]}`;
+						span[1].style.background = `${arraySpace[1]}`;
+						};
+		
+			let idTabsContent = item.getAttribute('id');
+
+			if(tabsBtn[i].classList.contains('active') ){
+
+				
+				if (idTabsContent == 'sleepRoom'){getColor(sleepRoom)}
+				else if (idTabsContent == 'gostinaya'){getColor(gostinaya)};
+		
+				
+				console.log(idTabsContent);
+			};	
+		});	
+	}
+	
+	
+	
 	function calcColor(callback) {
+		
+		tabsContent.forEach((item, i) => {
 
-		intro_1.forEach((item, i) => {
-
-			let color1 = intro_1[i].querySelectorAll('.color1');
-			let color2 = intro_1[i].querySelectorAll('.color2');
-			let color3 = intro_1[i].querySelectorAll('.color3');
-			let color4 = intro_1[i].querySelectorAll('.color4');
-			let color5 = intro_1[i].querySelectorAll('.color5');
-			let color6 = intro_1[i].querySelectorAll('.color6');
-			let color7 = intro_1[i].querySelectorAll('.color7');
-			let color8 = intro_1[i].querySelectorAll('.color8');
+			let color1 =  tabsContent[i].querySelectorAll('.color1');
+			let color2 =  tabsContent[i].querySelectorAll('.color2');
+			let color3 =  tabsContent[i].querySelectorAll('.color3');
+			let color4 =  tabsContent[i].querySelectorAll('.color4');
+			let color5 =  tabsContent[i].querySelectorAll('.color5');
+			let color6 =  tabsContent[i].querySelectorAll('.color6');
+			let color7 =  tabsContent[i].querySelectorAll('.color7');
+			let color8 =  tabsContent[i].querySelectorAll('.color8');
 				
 
 			if (tabsBtn[i].classList.contains('active')) {
 				callback(arryTable_1_Step);
 				color1.forEach((item) => {
 				
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_1_Step[ cou1 ]).fillColor() ;
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_2_Step[ cou1 ]).fillColor() ;
 					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou1 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou1 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[7], arryTable_1_Step[ cou1 ]).fillColor();
 				});
 
 				color2.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_2_Step[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_1_Step[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou2 ]).fillColor();
@@ -742,7 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					// console.log(f);
 				});
 				color7.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[ cou7 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_7_Step[ cou8 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou7 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou7 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou7 ]).fillColor();
@@ -765,7 +798,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				});
 			};
 		});
-		// $('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 	};
 
 	calcColor(counterPlus);
@@ -884,6 +916,46 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	window.addEventListener('mousemove', sorTable);
+
+///____Convert RGB to HEX______////
+
+	function rgb2hex(rgb) {
+		// let sep = rgb.indexOf(",") > -1 ? "," : " ";
+		// rgb = rgb.substr(4).split(")")[0].split(sep);
+	  
+		// // Convert %s to 0–255
+		// for (let R in rgb) {
+		//   let r = rgb[R];
+		//   if (r.indexOf("%") > -1)
+		// 	rgb[R] = Math.round(r.substr(0,r.length - 1) / 100 * 255);
+		// 	/* Example:
+		// 	75% -> 191
+		// 	75/100 = 0.75, * 255 = 191.25 -> 191
+		// 	*/
+		// }
+
+		// Choose correct separator
+		let sep = rgb.indexOf(",") > -1 ? "," : " ";
+		// Turn "rgb(r,g,b)" into [r,g,b]
+		rgb = rgb.substr(4).split(")")[0].split(sep);
+	  
+		let r = (+rgb[0]).toString(16),
+			g = (+rgb[1]).toString(16),
+			b = (+rgb[2]).toString(16);
+	  
+		if (r.length == 1)
+		  r = "0" + r;
+		if (g.length == 1)
+		  g = "0" + g;
+		if (b.length == 1)
+		  b = "0" + b;
+	  
+		return "#" + r + g + b;
+
+		// return "#" + (rgb.match(/\b(\d+)\b/g).map(function (digit) {
+		// 	return ('0' + parseInt(digit).toString(16)).slice(-2)
+		// })).join('');
+	};
 	
 ///____Convert RGB to HSL______////
 
@@ -929,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let clickEndX = 0;
 	let clickEndY = 0;
 
-	intro_1.forEach(function (item) {
+	tabsContent.forEach(function (item) {
 		item.addEventListener('mouseover', (e) => {
 			
 					const target = e.target;
@@ -958,18 +1030,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		let xAbs = Math.abs(clickStartX - clickEndX);
 		let yAbs = Math.abs(clickStartY - clickEndY);
 		sliceColor();
-		counterPlus(spaRoomColor1);
-		counterMinus(spaRoomColor1);
+		
 		if (xAbs >10 || yAbs > 10) {
 			
 			if (xAbs > yAbs) {
 				if (clickEndX < clickStartX) {
+					counterPlus(spaRoomColor1);
 					$('span.active').css('backgroundColor', 
-					`${spaRoomColor1[ cou1++ ]}` );
+					`${arryTable_3_Step[ cou1 ]}`);
 						console.log(cou1)
 				} else {
+					counterMinus(spaRoomColor1);
 					$('span.active').css('backgroundColor', 
-					`${spaRoomColor1[ cou1-- ]}`);
+					`${arryTable_3_Step[ cou1 ]}`);
 						
 						console.log('right')
 				}
@@ -992,7 +1065,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	var initialPoint;
 	var finalPoint;
-	intro_1.forEach(function (item) {
+	tabsContent.forEach(function (item) {
 		item.addEventListener('touchstart', function (event) {
 			event.preventDefault();
 			event.stopPropagation();
