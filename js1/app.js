@@ -11,7 +11,7 @@
 
 */
 
-//  poem___________ChoCol______________   //
+//  poem___________ChooCol______________   //
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -327,79 +327,90 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
-	class ActColorType {
-		constructor(Hue, Sat, Light) {
-			this.Hue = Hue;
-			this.Sat = Sat;
-			this.Light = Light;
-		}
-		
-		calcTone(h, s, l) {
-			this.Hue =  result[0]; 
-			this.Sat =  result[1]; 
-			this.Light =  result[2];
-			let res;
-			// H = this.Hue + h, 
-			// S = this.Sat + s,  
-			// L = this.Light +l;
+	// class ActColorType {
+	// 	constructor(Hue, Sat, Light) {
+	// 		this.Hue = Hue;
+	// 		this.Sat = Sat;
+	// 		this.Light = Light;
 
-			
-			
-			// else if(this.Sat - s > 90){res = `hsl(${h }, ${s}%, ${l}%)`}
-			// else if(this.Light - l < 10){res = `hsl(${h }, ${s}%, ${l}%)`}
-			// else if(this.Light - l > 90){res = `hsl(${h }, ${s}%, ${l}%)`};
-			res = `hsl(${this.Hue - h}, ${this.Sat - s}%, ${this.Light - l}%)`;
-			if(this.Sat - s <= 10){this.Sat = s}
-			return res;
-		};
+	// 		this.Hue =  result[0]; 
+	// 		this.Sat =  result[1]; 
+	// 		this.Light =  result[2];
+	// 	}
 		
-	};
+	// 	calcTone(h, s, l) {
+			
+	// 		let res;
+		
+	// 		if(this.Sat < 50 ){this.Sat + s;}
+	// 		else {this.Sat = this.Sat - s};
+	// 		return h, s, l;
+	// 	};
+		
+		
+	// };
+
+	let arrHSL;
+
 function matrixOfColor (h, s, l){
-	// {result[1] +40};
-	let res 
-	if (result[1] < 10)
-		 {res  = `hsl(${result[0] - h }, ${s}%, ${result[2] - l}%)`
-		 }
-	else if (result[2] < 10)
-		 {res  = `hsl(${result[0] - h }, ${result[1] - s}%, ${l}%)`
-		 }
-	else if (result[1] < 50 && result[2] < 100){res  = `hsl(${result[0] + h }, ${result[1] + s}%, ${result[2] + l}%)`
-	}
-	else if (result[2] < 50){res  = `hsl(${result[0] + h }, ${result[1] + s}%, ${result[2] + l}%)`
-		 }
-	else {res  = `hsl(${result[0] - h }, ${result[1] - s}%, ${result[2] - l}%)`
-		} 
-		console.log(result[0], result[1], result[2])
-		return res; 
-};
+	// sliceColor();
+	// switch (result[1]) {
+	// 	case 43.5:
+	// 		s = s + result[1];
+	// 		break;
+	// 	case 20:
+	// 		s = s - result[1];
+	// 	break;
+	// }
+	if (result[1] < 60){s = result[1] + 10}
+	else {s = result[1] - 10};
 
+	if (result[2] < 20){l = result[2] + 10}
+	else {l = result[2] - 10};
+
+		// h = result[0] - h;
+		// s = result[1] - s;
+		// l = result[2] - l;
+
+		let	res = `hsl(${h }, ${s }%, ${l }%)`;
+	// console.log( result[0])
+	return res;
+
+};
+//
 
 	function actColorCalc(callback) {
 		
 		
-		
 		// dfe9f2 базовый цвет спальни
 	let mass = [
-		new ActColorType().calcTone(50,   10,  10),
-		matrixOfColor (100, 10, 10),
-		// new ActColorType().calcTone(10,  20,  20),
-		new ActColorType().calcTone(250,  30,  30),
-		new ActColorType().calcTone(350,  40,  40),
+		// new ActColorType().calcTone(50,   10,  10),
+		matrixOfColor(10, 10, 10),
+		matrixOfColor (110, 10, 10),
+		matrixOfColor(10, 10, 10),
+		matrixOfColor (110, 30, 10),
+		matrixOfColor(10, 10, 10),
+		matrixOfColor (110, 30, 10),
+		matrixOfColor(10, 10, 10),
+		matrixOfColor (110, 30, 10)
+		// new ActColorType().calcTone(50,   10,  10),
+		// new ActColorType().calcTone(250,  30,  30),
+		// new ActColorType().calcTone(350,  40,  40),
 
-		new ActColorType().calcTone(230,  50,  50),
-		new ActColorType().calcTone(30,   10,  40),
-		new ActColorType().calcTone(230,   20,  10),
-		new ActColorType().calcTone(30,   10,  30),
+		// new ActColorType().calcTone(230,  50,  50),
+		// new ActColorType().calcTone(30,   10,  40),
+		// new ActColorType().calcTone(230,   20,  10),
+		// new ActColorType().calcTone(30,   10,  30),
 
-		new ActColorType().calcTone(50,   10,  40),
-		new ActColorType().calcTone(150,   20,  10),
-		new ActColorType().calcTone(250,   30,  20),
-		new ActColorType().calcTone(350,   40,  30),
+		// new ActColorType().calcTone(50,   10,  40),
+		// new ActColorType().calcTone(150,   20,  10),
+		// new ActColorType().calcTone(250,   30,  20),
+		// new ActColorType().calcTone(350,   40,  30),
 
-		new ActColorType().calcTone(230,   50,  40),
-		new ActColorType().calcTone(30,   60,  40),
-		new ActColorType().calcTone(230,   40,  30),
-		new ActColorType().calcTone(30,   80,  20)
+		// new ActColorType().calcTone(230,   50,  40),
+		// new ActColorType().calcTone(30,   60,  40),
+		// new ActColorType().calcTone(230,   40,  30),
+		// new ActColorType().calcTone(30,   80,  20)
 	]
 		
 			$('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
