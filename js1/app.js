@@ -327,49 +327,62 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
+	class ActColorType {
+		constructor(Hue, Sat, Light) {
+			this.Hue = Hue;
+			this.Sat = Sat;
+			this.Light = Light;
+		}
+		
+		calcTone(h, s, l) {
+			this.Hue =  result[0]; 
+			this.Sat =  result[1]; 
+			this.Light =  result[2];
+			let res;
+			// H = this.Hue + h, 
+			// S = this.Sat + s,  
+			// L = this.Light +l;
+
+			
+			
+			// else if(this.Sat - s > 90){res = `hsl(${h }, ${s}%, ${l}%)`}
+			// else if(this.Light - l < 10){res = `hsl(${h }, ${s}%, ${l}%)`}
+			// else if(this.Light - l > 90){res = `hsl(${h }, ${s}%, ${l}%)`};
+			res = `hsl(${this.Hue - h}, ${this.Sat - s}%, ${this.Light - l}%)`;
+			if(this.Sat - s <= 10){this.Sat = s}
+			return res;
+		};
+		
+	};
+function matrixOfColor (h, s, l){
+	// {result[1] +40};
+	let res 
+	if (result[1] < 10)
+		 {res  = `hsl(${result[0] - h }, ${s}%, ${result[2] - l}%)`
+		 }
+	else if (result[2] < 10)
+		 {res  = `hsl(${result[0] - h }, ${result[1] - s}%, ${l}%)`
+		 }
+	else if (result[1] < 50 && result[2] < 100){res  = `hsl(${result[0] + h }, ${result[1] + s}%, ${result[2] + l}%)`
+	}
+	else if (result[2] < 50){res  = `hsl(${result[0] + h }, ${result[1] + s}%, ${result[2] + l}%)`
+		 }
+	else {res  = `hsl(${result[0] - h }, ${result[1] - s}%, ${result[2] - l}%)`
+		} 
+		console.log(result[0], result[1], result[2])
+		return res; 
+};
+
+
 	function actColorCalc(callback) {
 		
-		class ActColorType {
-			constructor(Hue, Sat, Light) {
-				this.Hue = Hue;
-				this.Sat = Sat;
-				this.Light = Light;
-			}
-			
-			calcTone(h, s, l) {
-				this.Hue =  result[0]; 
-				this.Sat =  result[1]; 
-				this.Light =  result[2];
-				let res;
-				// H = this.Hue + h, 
-				// S = this.Sat + s,  
-				// L = this.Light +l;
-						if( this.Hue < 180){this.Hue + h } else {this.Hue - h};
-				        if( this.Sat < 50){this.Sat + s } else {this.Sat - s};
-						if( this.Light < 50){this.Light + s } else {this.Light - s}//<<<<<<<<
-					
-					res = `hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`
-					// else if (this.Hue + h >180 && this.Sat + s > 90 && this.Light + l > 90)//>>>>>>>
-					// else{res = `hsl(${this.Hue - h}, ${this.Sat - s}%, ${this.Light - l}%)`}
-
-					// else if (this.Hue + h <180 && this.Sat + s < 50 && this.Light + l < 50) //<<<<<<<<
-					// {res = `hsl(${this.Hue + h}, ${this.Sat + s}%, ${this.Light + l}%)`}
-
-					// else if (this.Hue + h >180 && this.Sat + s > 50 && this.Light + l > 50)//>>>>>>>
-					// {res = `hsl(${this.Hue - h}, ${this.Sat - s}%, ${this.Light - l}%)`};
-				// if(this.Sat + s > 99 && this.Light + l > 95){res = `hsl(${h }, ${s}%, ${l}%)`;}
-				// if(this.Sat + s < 5 && this.Light + l < 5)
-				// 	{res = `hsl(${this.Hue + h}, ${this.Sat + s}%, ${this.Light + l}%)`;}
-				
-				return res;
-			};
-			
-		};
+		
 		
 		// dfe9f2 базовый цвет спальни
 	let mass = [
 		new ActColorType().calcTone(50,   10,  10),
-		new ActColorType().calcTone(10,  20,  20),
+		matrixOfColor (100, 10, 10),
+		// new ActColorType().calcTone(10,  20,  20),
 		new ActColorType().calcTone(250,  30,  30),
 		new ActColorType().calcTone(350,  40,  40),
 
@@ -390,7 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	]
 		
 			$('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
-		
 			$('span.active').siblings('.color2').css("background", 	mass[ cou2 ]);
 			$('span.active').siblings('.color3').css("background", 	mass[ cou3 ]);
 			$('span.active').siblings('.color4').css("background", 	mass[ cou4 ]);
