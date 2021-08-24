@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	let cou1 = 0, cou2 = 1, cou3 = 2, cou4 = 3, 
 		cou5 = 4, cou6 = 5, cou7 = 6, cou8 = 7; //счётчики пребора цветов в каждом блоке
-
+	let gg = $('span.active');
 	let textColorBuffer; // содержит имя цвета
 	let textColor = document.createElement('textCol'); // показывает имя цвета
 
@@ -81,8 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 
-			sliceColor();//вызываем разделение цвета на три значения в массиве *result*
+			sliceColor(gg);//вызываем разделение цвета на три значения в массиве *result*
 			console.log(result[0], result[1], result[2]);
+		
 		}
 
 	tabsContent.forEach(function (item, i) { // вешаем на контейнер с цветами фунцию активного цвета
@@ -318,8 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	function sliceColor(){
-		$('span.active').each(function (indx, el) {
-			const color = $(el).css("backgroundColor"),
+		$('span.active').each(function () {
+			const color = $(this).css("backgroundColor"),
 				[r, g, b] = color.match(/\d+/g);
 			const colHsl = RGB2HSL(r, g, b);
 			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
@@ -327,83 +328,86 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
-	// class ActColorType {
-	// 	constructor(Hue, Sat, Light) {
-	// 		this.Hue = Hue;
-	// 		this.Sat = Sat;
-	// 		this.Light = Light;
-
-	// 		this.Hue =  result[0]; 
-	// 		this.Sat =  result[1]; 
-	// 		this.Light =  result[2];
-	// 	}
-		
-	// 	calcTone(h, s, l) {
-			
-	// 		let res;
-		
-	// 		if(this.Sat < 50 ){this.Sat + s;}
-	// 		else {this.Sat = this.Sat - s};
-	// 		return h, s, l;
-	// 	};
-		
-		
-	// };
+	
 
 	let arrHSL;
 
-function matrixOfColor (h, s, l){
-	// sliceColor();
-	// switch (result[1]) {
-	// 	case 43.5:
-	// 		s = s + result[1];
-	// 		break;
-	// 	case 20:
-	// 		s = s - result[1];
-	// 	break;
-	// }
-	if (result[1] < 60){s = result[1] + 10}
-	else {s = result[1] - 10};
+// function matrixOfColor (h, s, l){
+// 	// sliceColor();
+// 	// switch (result[1]) {
+// 	// 	case 43.5:
+// 	// 		s = s + result[1];
+// 	// 		break;
+// 	// 	case 20:
+// 	// 		s = s - result[1];
+// 	// 	break;
+// 	// == randomInteger(0 , 50 )}
+// 	let	;
+// 	if (result[1] < 50 ){s = s + 40};
+// 	// else {s - 10 };
 
-	if (result[2] < 20){l = result[2] + 10}
-	else {l = result[2] - 10};
+// 	if (result[2] < 50){l = l  + 40};
+// 	// else {l - 10};
 
-		// h = result[0] - h;
-		// s = result[1] - s;
-		// l = result[2] - l;
+// 		// h = result[0] - h;
+// 		// s = result[1] - s;
+// 		// l = result[2] - l;
 
-		let	res = `hsl(${h }, ${s }%, ${l }%)`;
-	// console.log( result[0])
-	return res;
+	
+// 	// console.log( result[0])
+// 	return res;
+
+// };
+//
+class ActColorType {
+	constructor(Hue, Sat, Light) {
+		this.Hue = Hue;
+		this.Sat = Sat;
+		this.Light = Light;
+	}
+	
+	calcTone(h, s, l) {
+		this.Hue =  result[0]; 
+		this.Sat =  result[1]; 
+		this.Light =  result[2];
+		
+		let res;
+		
+		// h = + this.Hue + h;
+		if(this.Hue < 20 ){s = 33, l = 94}
+		// if(this.Sat < 10 ){s = + this.Sat + s +10}
+		// else if(this.Sat < 50 ){s =  +this.Sat + s}
+		// else if(this.Sat > 90 ){s =  this.Sat - s};
+
+		// if(this.Light < 13 ){l = + this.Light + l +10}
+		// else if(this.Light < 50 ){l = + this.Light + l}
+		// else if(this.Light > 95 ){l = this.Light - l};
+		
+		// else { s = this.Sat - s ; l = this.Light - l};
+
+		// h = -this.Hue - h;
+		res = `hsl(${ h }, ${ s }%, ${ l }%)`;
+		return res;
+	};
 
 };
-//
 
 	function actColorCalc(callback) {
 		
-		
-		// dfe9f2 базовый цвет спальни
 	let mass = [
-		// new ActColorType().calcTone(50,   10,  10),
-		matrixOfColor(10, 10, 10),
-		matrixOfColor (110, 10, 10),
-		matrixOfColor(10, 10, 10),
-		matrixOfColor (110, 30, 10),
-		matrixOfColor(10, 10, 10),
-		matrixOfColor (110, 30, 10),
-		matrixOfColor(10, 10, 10),
-		matrixOfColor (110, 30, 10)
-		// new ActColorType().calcTone(50,   10,  10),
-		// new ActColorType().calcTone(250,  30,  30),
-		// new ActColorType().calcTone(350,  40,  40),
+		
+		new ActColorType().calcTone(50,   10,  10),
+		new ActColorType().calcTone(1,   20,  15),
+		new ActColorType().calcTone(150,  20,  10),
+		new ActColorType().calcTone(100,  0,  10),
 
-		// new ActColorType().calcTone(230,  50,  50),
-		// new ActColorType().calcTone(30,   10,  40),
-		// new ActColorType().calcTone(230,   20,  10),
-		// new ActColorType().calcTone(30,   10,  30),
+		new ActColorType().calcTone(360,  30,  50),
+		new ActColorType().calcTone(360,   5,  10),
+		new ActColorType().calcTone(360,   20,  20),
+		new ActColorType().calcTone(200,   10,  15),
 
-		// new ActColorType().calcTone(50,   10,  40),
-		// new ActColorType().calcTone(150,   20,  10),
+		new ActColorType().calcTone(195,   1,  70),
+		new ActColorType().calcTone(50,   20,  10),
 		// new ActColorType().calcTone(250,   30,  20),
 		// new ActColorType().calcTone(350,   40,  30),
 
@@ -411,7 +415,7 @@ function matrixOfColor (h, s, l){
 		// new ActColorType().calcTone(30,   60,  40),
 		// new ActColorType().calcTone(230,   40,  30),
 		// new ActColorType().calcTone(30,   80,  20)
-	]
+	];
 		
 			$('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
 			$('span.active').siblings('.color2').css("background", 	mass[ cou2 ]);
