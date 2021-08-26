@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	let cou1 = 0, cou2 = 1, cou3 = 2, cou4 = 3, 
 		cou5 = 4, cou6 = 5, cou7 = 6, cou8 = 7; //счётчики пребора цветов в каждом блоке
-	let gg = $('span.active');
+	let spanActive = $('span.active');
 	let textColorBuffer; // содержит имя цвета
 	let textColor = document.createElement('textCol'); // показывает имя цвета
 
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 
-			sliceColor(gg);//вызываем разделение цвета на три значения в массиве *result*
+			sliceColor(spanActive);//вызываем разделение цвета на три значения в массиве *result*
 			console.log(result[0], result[1], result[2]);
 		
 		}
@@ -372,16 +372,20 @@ class ActColorType {
 		this.Light =  result[2];
 		
 		let res;
-		
+		if(this.Hue == randomInteger(0, 20)){
+			$('span.active').siblings('.color1').css("background",  
+			`hsl(${ 20 }, ${ randomInteger(5, 100) }%, ${ randomInteger(22, 28)}%)`)	
+	
+		}
 		// h = + this.Hue + h;
-		if(this.Hue < 20 ){s = 33, l = 94}
+		// // if(this.Hue < 20 ){s = 33, l = 94}
 		// if(this.Sat < 10 ){s = + this.Sat + s +10}
 		// else if(this.Sat < 50 ){s =  +this.Sat + s}
 		// else if(this.Sat > 90 ){s =  this.Sat - s};
 
 		// if(this.Light < 13 ){l = + this.Light + l +10}
 		// else if(this.Light < 50 ){l = + this.Light + l}
-		// else if(this.Light > 95 ){l = this.Light - l};
+		// else if(this.Light > 90 ){l = this.Light - l};
 		
 		// else { s = this.Sat - s ; l = this.Light - l};
 
@@ -392,43 +396,52 @@ class ActColorType {
 
 };
 
+const satSteps = [
+	100, 80, 60, 40, 20, 10 , 5, 3
+];
+
+const light_Red_Steps_6 =[
+	22, 24, 26, 26,28, 28, 28, 28
+];
+
+const hueSteps =[
+	353, 22, 48, 94, 159, 200, 242, 281
+];
+let arrStyleColor =[
+	'.color2',
+	'.color1',
+	'.color3',
+	'.color4',
+	'.color5',
+	'.color6',
+]
+
+let ColorsCalc  = new Object();
+ColorsCalc.sleepRoom = [
+	`hsl(${  hueSteps[cou1] }, ${ satSteps[ cou1] }%, ${ light_Red_Steps_6[cou1]}%)`
+]
+
+
 	function actColorCalc(callback) {
-		
-	let mass = [
-		
-		new ActColorType().calcTone(50,   10,  10),
-		new ActColorType().calcTone(1,   20,  15),
-		new ActColorType().calcTone(150,  20,  10),
-		new ActColorType().calcTone(100,  0,  10),
 
-		new ActColorType().calcTone(360,  30,  50),
-		new ActColorType().calcTone(360,   5,  10),
-		new ActColorType().calcTone(360,   20,  20),
-		new ActColorType().calcTone(200,   10,  15),
+	if( tabsBtn[0] ) {
+		$('span.active').siblings(arrStyleColor[cou1]).css("background", ColorsCalc.sleepRoom[0] 
+		),
+		 console.log(satSteps[cou1], )};
+	// 
 
-		new ActColorType().calcTone(195,   1,  70),
-		new ActColorType().calcTone(50,   20,  10),
-		// new ActColorType().calcTone(250,   30,  20),
-		// new ActColorType().calcTone(350,   40,  30),
-
-		// new ActColorType().calcTone(230,   50,  40),
-		// new ActColorType().calcTone(30,   60,  40),
-		// new ActColorType().calcTone(230,   40,  30),
-		// new ActColorType().calcTone(30,   80,  20)
-	];
-		
-			$('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
-			$('span.active').siblings('.color2').css("background", 	mass[ cou2 ]);
-			$('span.active').siblings('.color3').css("background", 	mass[ cou3 ]);
-			$('span.active').siblings('.color4').css("background", 	mass[ cou4 ]);
-			$('span.active').siblings('.color5').css("background", 	mass[ cou5 ]);
-			$('span.active').siblings('.color6').css("background", 	mass[ cou6 ]);
-			$('span.active').siblings('.color7').css("background", 	mass[ cou7 ]);
-			$('span.active').siblings('.color8').css("background", 	mass[ cou8 ]);
+			// $('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
+			// $('span.active').siblings('.color2').css("background", 	mass[ cou2 ]);
+			// $('span.active').siblings('.color3').css("background", 	mass[ cou3 ]);
+			// $('span.active').siblings('.color4').css("background", 	mass[ cou4 ]);
+			// $('span.active').siblings('.color5').css("background", 	mass[ cou5 ]);
+			// $('span.active').siblings('.color6').css("background", 	mass[ cou6 ]);
+			// $('span.active').siblings('.color7').css("background", 	mass[ cou7 ]);
+			// $('span.active').siblings('.color8').css("background", 	mass[ cou8 ]);
 
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
-			callback(mass);
+			callback(satSteps);
 		
 		
 	};
@@ -857,7 +870,7 @@ class ActColorType {
 			if (cou8 > a.length-1) {
 				cou8 = 0
 			};
-			console.log(cou1, cou2, cou3,'plus')
+			console.log('plus')
 			return a;
 			
 		};
@@ -897,7 +910,7 @@ class ActColorType {
 		if (cou8<0) {
 			cou8 = a.length-1
 		};
-		console.log(cou1, cou2, cou3, 'minus');
+		console.log('minus');
 		return a;
 	}
 	// cou1, cou2, cou3, cou4, cou5, cou6, cou7, cou8,
