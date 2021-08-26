@@ -27,8 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	let editButtns = document.querySelectorAll('.butt'); // кнопки редактирования гаммы
 	let result; // цвет разделенный на HSL каналы в массиве из трёх значений
 
-	let cou1 = 0, cou2 = 1, cou3 = 2, cou4 = 3, 
-		cou5 = 4, cou6 = 5, cou7 = 6, cou8 = 7; //счётчики пребора цветов в каждом блоке
+	// let cout = [
+		let cou1 = 0, cou2 = 1, cou3 = 2, cou4 = 3, 
+		cou5 = 4, cou6 = 5, cou7 = 6, cou8 = 7;
+	 //счётчики пребора цветов в каждом блоке
 	let spanActive = $('span.active');
 	let textColorBuffer; // содержит имя цвета
 	let textColor = document.createElement('textCol'); // показывает имя цвета
@@ -425,7 +427,8 @@ ColorsCalc.sleepRoom = [
 	function actColorCalc(callback) {
 
 	if( tabsBtn[0] ) {
-		$('span.active').siblings(arrStyleColor[cou1]).css("background", ColorsCalc.sleepRoom[0] 
+		$('span.active').siblings(arrStyleColor[cou1]).css("background", 
+		`hsl(${  hueSteps[cou1] }, ${ satSteps[ cou1] }%, ${ light_Red_Steps_6[cou1]}%)` 
 		),
 		 console.log(satSteps[cou1], )};
 	// 
@@ -845,7 +848,10 @@ ColorsCalc.sleepRoom = [
 	//___COUNTER____///
 	function counterPlus(a) {
 		cou1++; cou2++; cou3++; cou4++;  cou5++; cou6++; cou7++; cou8++;
-		
+		// cout.forEach((item)=>{
+		// 	item++
+		// 	if(item > a.length-1){ item = 0}
+		// 		})
 			if (cou1 > a.length-1) {
 				cou1 = 0
 			};
