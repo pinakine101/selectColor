@@ -406,36 +406,98 @@ const light_Red_Steps_6 =[
 	22, 24, 26, 26,28, 28, 28, 28
 ];
 
+const light_Delta =[
+	5, 10, 20, 5, 19, 20, 4, 84
+];
+
 const hueSteps =[
 	353, 22, 48, 94, 159, 200, 242, 281
 ];
+
+
+let massColors = [
+	
+];
+
+// function iLlWin (){
+// 	+result[0] + 10,
+// 	result[1]- satSteps [cou1], 
+// 	result[2] - light_Delta[cou1];
+
+// 	if( result[0] < 22 && result[0]>0 && result[2] >22 && result[2] <28 ) { 
+// 		massColors.push(result[2])
+// 		};
+// 		console.log[massColors]
+// }
+let arrayTon =[
+	97,	93,	72,	53,	48,	28,	18,	13, 5
+]
+
 let arrStyleColor =[
-	'.color2',
 	'.color1',
+	'.color2',
 	'.color3',
 	'.color4',
 	'.color5',
 	'.color6',
+	'.color7',
+	'.color8',
 ]
 
+<<<<<<< HEAD
 let ColorsCalc  = new Object();
 ColorsCalc.sleepRoom.color1 = [
 	`hsl(${  hueSteps[cou1] }, ${ satSteps[ cou1] }%, ${ light_Red_Steps_6[cou1]}%)`
 ]
 //нужно чтобы после проверки ID tabsContent каждому colorN присваивался массив из 12 цыетов
-
+=======
 	function actColorCalc(callback) {
+ 
+			arrStyleColor.forEach((item, i)=>{
+				let blabla = 81 - result[2];
 
+				if(blabla < 53){+blabla + 10}
+				if (result[2] ===100){result[2]= 56} 
+			
+				if( result[0] < 25&&result[2] < 20 ){
+					$('span.active').siblings(item).css("background", 
+				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] - 4}%)`);
+					}
+				    else if(result[2] < 20){{$('span.active').siblings(item).css("background", 
+					`hsl(${  +result[0]}, ${result[1]}%, ${+arrayTon[i]+13}%)`)};}
+					else {$('span.active').siblings(item).css("background", 
+					`hsl(${  +result[0]}, ${result[1]}%, ${arrayTon[i]-blabla}%)`)};
+				
+>>>>>>> d48cd45a3d22d83193b9ea064a2aa870322d4d8d
+
+				
+				console.log(blabla );
+			});
+
+<<<<<<< HEAD
 	if( tabsBtn[i] == tabsContent[i]) {
 		$('span.active').siblings('color1').css("background", 
 		`hsl(${  hueSteps[cou1] }, ${ satSteps[ cou1] }%, ${ light_Red_Steps_6[cou1]}%)` 
 		),
 		 console.log(atSteps[cou1], )};
 	// 
+=======
+			
+>>>>>>> d48cd45a3d22d83193b9ea064a2aa870322d4d8d
 
-			// $('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
-			// $('span.active').siblings('.color2').css("background", 	mass[ cou2 ]);
-			// $('span.active').siblings('.color3').css("background", 	mass[ cou3 ]);
+			// $('span.active').siblings('.color2').css("background",
+			//  	`hsl(${  +result[0]}, ${result[1]}%, ${  ton2}%)`);
+			// $('span.active').siblings('.color3').css("background", 
+			// `hsl(${  +result[0]}, ${result[1]}%, ${  ton3}%)`);
+			// $('span.active').siblings('.color4').css("background", 
+			// `hsl(${  +result[0]}, ${result[1]}%, ${  ton4}%)`);
+			
+			
+	// if(result[2] == 22)
+	// $('span.active').siblings('.color1').css("background",
+	
+	// ),
+			
 			// $('span.active').siblings('.color4').css("background", 	mass[ cou4 ]);
 			// $('span.active').siblings('.color5').css("background", 	mass[ cou5 ]);
 			// $('span.active').siblings('.color6').css("background", 	mass[ cou6 ]);
@@ -488,9 +550,9 @@ ColorsCalc.sleepRoom.color1 = [
 	};
 //21,  48,  100,  97
 	let arryTable_1_Step = [
-		[new ColorType().calcTone(206, 208, 42,   10)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(206, 208, 42,   97)],   /*КРАСНЫЙ*/
 		[new ColorType().calcTone(0,   20,  33,   97)],
-		[new ColorType().calcTone(200,  208,  42,  91)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(200, 208, 42,   91)],   /*ОРАНЖЕВЫЙ*/
 		[new ColorType().calcTone(21,  48,  33,   97)], 
 		[new ColorType().calcTone(49,  95,  100,  92)],   /*ЖЕЛТЫЙ*/
 		[new ColorType().calcTone(49,  95,  50,   92)], 
@@ -765,7 +827,7 @@ ColorsCalc.sleepRoom.color1 = [
 				});
 
 				color2.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_1_Step[ cou2 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_1_Step[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou2 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou2 ]).fillColor();
@@ -785,7 +847,7 @@ ColorsCalc.sleepRoom.color1 = [
 					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou3 ]).fillColor();
 				});
 				color4.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], spaRoomColor1[ cou4 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_4_Step[ cou3 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou4 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou4 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou4 ]).fillColor();
@@ -818,7 +880,7 @@ ColorsCalc.sleepRoom.color1 = [
 					// console.log(f);
 				});
 				color7.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_7_Step[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_7_Step[ cou7 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou7 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou7 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou7 ]).fillColor();
