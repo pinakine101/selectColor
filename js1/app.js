@@ -444,46 +444,41 @@ let arrStyleColor =[
 	'.color8',
 ]
 
-<<<<<<< HEAD
-let ColorsCalc  = new Object();
-ColorsCalc.sleepRoom.color1 = [
-	`hsl(${  hueSteps[cou1] }, ${ satSteps[ cou1] }%, ${ light_Red_Steps_6[cou1]}%)`
-]
-//нужно чтобы после проверки ID tabsContent каждому colorN присваивался массив из 12 цыетов
-=======
 	function actColorCalc(callback) {
  
 			arrStyleColor.forEach((item, i)=>{
-				let blabla = 81 - result[2];
+				let blabla =  result[2];
 
-				if(blabla < 53){+blabla + 10}
+				// if(blabla < 53){+blabla + 10}
 				if (result[2] ===100){result[2]= 56} 
 			
-				if( result[0] < 25&&result[2] < 20 ){
+				if( result[0] <  25){
+					arrayTon =[
+						95,	92,	79,	46,	43,	22,	14,	9, 5
+					]
 					$('span.active').siblings(item).css("background", 
-				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] - 4}%)`);
+				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] - (blabla/8)}%)`);
+					}
+					else if( result[0] <  48 && result[0] > 25 ){
+						arrayTon =[
+							91,	92,	65,	46,	43,	22,	14,	9, 5
+						]
+						$('span.active').siblings(item).css("background", 
+				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] }%)`);
+					
 					}
 				    else if(result[2] < 20){{$('span.active').siblings(item).css("background", 
-					`hsl(${  +result[0]}, ${result[1]}%, ${+arrayTon[i]+13}%)`)};}
+					`hsl(${  +result[0]}, ${result[1]}%, ${+arrayTon[i]+blabla}%)`)};}
 					else {$('span.active').siblings(item).css("background", 
 					`hsl(${  +result[0]}, ${result[1]}%, ${arrayTon[i]-blabla}%)`)};
 				
->>>>>>> d48cd45a3d22d83193b9ea064a2aa870322d4d8d
 
 				
 				console.log(blabla );
 			});
 
-<<<<<<< HEAD
-	if( tabsBtn[i] == tabsContent[i]) {
-		$('span.active').siblings('color1').css("background", 
-		`hsl(${  hueSteps[cou1] }, ${ satSteps[ cou1] }%, ${ light_Red_Steps_6[cou1]}%)` 
-		),
-		 console.log(atSteps[cou1], )};
-	// 
-=======
 			
->>>>>>> d48cd45a3d22d83193b9ea064a2aa870322d4d8d
+
 
 			// $('span.active').siblings('.color2').css("background",
 			//  	`hsl(${  +result[0]}, ${result[1]}%, ${  ton2}%)`);
