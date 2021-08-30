@@ -411,16 +411,7 @@ const light_Delta =[
 const hueSteps =[
 	353, 22, 48, 94, 159, 200, 242, 281
 ];
-let arrStyleColor =[
-	'.color2',
-	'.color1',
-	'.color3',
-	'.color4',
-	'.color5',
-	'.color6',
-	'.color7',
-	'.color8',
-]
+
 
 let massColors = [
 	
@@ -436,27 +427,53 @@ let massColors = [
 // 		};
 // 		console.log[massColors]
 // }
+let arrayTon =[
+	97,	93,	72,	53,	48,	28,	18,	13, 5
+]
 
-
+let arrStyleColor =[
+	'.color1',
+	'.color2',
+	'.color3',
+	'.color4',
+	'.color5',
+	'.color6',
+	'.color7',
+	'.color8',
+]
 
 	function actColorCalc(callback) {
  
-		if( result[2] ) { 
-			let blabla = 97 - result[2];
-			let ton1 = 93 - blabla;
-			let ton2 = 72 - blabla;
-			let ton3 = 53 - blabla;
-			let ton4 = 48 - blabla;
-			$('span.active').siblings('.color1').css("background", 
-				`hsl(${  +result[0]}, ${result[1]}%, ${ ton1}%)`);
-			$('span.active').siblings('.color2').css("background",
-			 	`hsl(${  +result[0]}, ${result[1]}%, ${  ton2}%)`);
-			$('span.active').siblings('.color3').css("background", 
-			`hsl(${  +result[0]}, ${result[1]}%, ${  ton3}%)`);
-			$('span.active').siblings('.color4').css("background", 
-			`hsl(${  +result[0]}, ${result[1]}%, ${  ton4}%)`);
-			};
-			console.log(massColors);
+			arrStyleColor.forEach((item, i)=>{
+				let blabla = 81 - result[2];
+
+				if(blabla < 53){+blabla + 10}
+				if (result[2] ===100){result[2]= 56} 
+			
+				if( result[0] < 25&&result[2] < 20 ){
+					$('span.active').siblings(item).css("background", 
+				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] - 4}%)`);
+					}
+				    else if(result[2] < 20){{$('span.active').siblings(item).css("background", 
+					`hsl(${  +result[0]}, ${result[1]}%, ${+arrayTon[i]+13}%)`)};}
+					else {$('span.active').siblings(item).css("background", 
+					`hsl(${  +result[0]}, ${result[1]}%, ${arrayTon[i]-blabla}%)`)};
+				
+
+				
+				console.log(blabla );
+			});
+
+			
+
+			// $('span.active').siblings('.color2').css("background",
+			//  	`hsl(${  +result[0]}, ${result[1]}%, ${  ton2}%)`);
+			// $('span.active').siblings('.color3').css("background", 
+			// `hsl(${  +result[0]}, ${result[1]}%, ${  ton3}%)`);
+			// $('span.active').siblings('.color4').css("background", 
+			// `hsl(${  +result[0]}, ${result[1]}%, ${  ton4}%)`);
+			
+			
 	// if(result[2] == 22)
 	// $('span.active').siblings('.color1').css("background",
 	
@@ -514,9 +531,9 @@ let massColors = [
 	};
 //21,  48,  100,  97
 	let arryTable_1_Step = [
-		[new ColorType().calcTone(206, 208, 42,   10)],   /*КРАСНЫЙ*/
+		[new ColorType().calcTone(206, 208, 42,   97)],   /*КРАСНЫЙ*/
 		[new ColorType().calcTone(0,   20,  33,   97)],
-		[new ColorType().calcTone(200,  208,  42,  91)],   /*ОРАНЖЕВЫЙ*/
+		[new ColorType().calcTone(200, 208, 42,   91)],   /*ОРАНЖЕВЫЙ*/
 		[new ColorType().calcTone(21,  48,  33,   97)], 
 		[new ColorType().calcTone(49,  95,  100,  92)],   /*ЖЕЛТЫЙ*/
 		[new ColorType().calcTone(49,  95,  50,   92)], 
@@ -844,7 +861,7 @@ let massColors = [
 					// console.log(f);
 				});
 				color7.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_7_Step[ cou8 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_7_Step[ cou7 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou7 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou7 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou7 ]).fillColor();
