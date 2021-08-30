@@ -419,18 +419,18 @@ let arrStyleColor =[
 ]
 
 let ColorsCalc  = new Object();
-ColorsCalc.sleepRoom = [
+ColorsCalc.sleepRoom.color1 = [
 	`hsl(${  hueSteps[cou1] }, ${ satSteps[ cou1] }%, ${ light_Red_Steps_6[cou1]}%)`
 ]
-
+//нужно чтобы после проверки ID tabsContent каждому colorN присваивался массив из 12 цыетов
 
 	function actColorCalc(callback) {
 
-	if( tabsBtn[0] ) {
-		$('span.active').siblings(arrStyleColor[cou1]).css("background", 
+	if( tabsBtn[i] == tabsContent[i]) {
+		$('span.active').siblings('color1').css("background", 
 		`hsl(${  hueSteps[cou1] }, ${ satSteps[ cou1] }%, ${ light_Red_Steps_6[cou1]}%)` 
 		),
-		 console.log(satSteps[cou1], )};
+		 console.log(atSteps[cou1], )};
 	// 
 
 			// $('span.active').siblings('.color1').css("background",  mass[ cou1 ]);
