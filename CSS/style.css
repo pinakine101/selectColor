@@ -25,7 +25,22 @@ p {
     color: #ffffff;
     font-family: sans-serif;
 }
-
+span.active {
+    border: 4px solid #ffffff;
+} 
+input {
+    border:none;
+    background:none;
+    outline:none;
+    width: 200px;
+    display: flex;
+    padding:0;
+    font-weight:lighter;
+    font-family: 'Ubundu', sans-serif;
+    font-size: 20px;
+    color: #fffbfb;
+    filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+}
 
 *,
 *:before,
@@ -310,16 +325,9 @@ p {
      position: absolute;
 }
 .textColor {
-    margin-left:30px;
+    /* margin-left:80px; */
     display: flex;
-    font-weight:lighter;
-    width: 200px;
-    /* position: absolute; */
-    font-family: 'Ubundu', sans-serif;
-    font-size: 20px;
-    color: #fffbfb;
-    -webkit-filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
-    filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+   
    
 }
 .copied {
@@ -354,9 +362,7 @@ p {
     overflow-y: hidden;
     overflow: hidden;
 }
-span.active {
-    border: 6px solid #ffffff;
-}  
+ 
 
 
 .color1 {

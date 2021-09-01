@@ -67,14 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			findColorName(); //вызываем имя цвета
 
 			// проверяем на класс и добавляем имя цвета
-			if (target.classList.contains('color1')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет потолка </p>`; };
-			if (target.classList.contains('color2')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет стен </p>`; };
-			if (target.classList.contains('color3')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет декора </p>`; };
-			if (target.classList.contains('color4')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет текстиля </p>`; };
-			if (target.classList.contains('color5')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет мебели </p>`; };
-			if (target.classList.contains('color6')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет аксессуаров </p>`; };
-			if (target.classList.contains('color7')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет ковра </p>`; };
-			if (target.classList.contains('color8')){textColor.innerHTML = `<p> ${textColorBuffer}  цвет пола </p>`; };
+			if (target.classList.contains('color1')){textColor.innerHTML = `<input type = "hide" value= "${textColorBuffer} цвет потолка" > </input>` };
+			if (target.classList.contains('color2')){textColor.innerHTML = `<input type = "hide" value= "${textColorBuffer} цвет стен" > </input>` };
+			if (target.classList.contains('color3')){textColor.innerHTML = `<input type = "hide" value= "${textColorBuffer} цвет декора" ></input>`};
+			if (target.classList.contains('color4')){textColor.innerHTML = `<input type = "hide" value= "${textColorBuffer} цвет текстиля" > </input>` };
+			if (target.classList.contains('color5')){textColor.innerHTML = `<input type = "hide" value= "${textColorBuffer} цвет мебели" > </input>` };
+			if (target.classList.contains('color6')){textColor.innerHTML = `<input type = "hide" value= "${textColorBuffer} цвет аксессуаров" > </input>` };
+			if (target.classList.contains('color7')){textColor.innerHTML = `<input type = "hide" value= "${textColorBuffer} цвет ковра" > </input>` };
+			if (target.classList.contains('color8')){textColor.innerHTML = `<input type = "hide" value= "${textColorBuffer} цвет пола" > </input>` };
 
 
 			editButtns[0].removeEventListener('click', calcCouPlus);//удаляем пребор гаммы в "+" без *span.active*  
@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.querySelector('body').append(copied);// добовляем элемент в тело
 				copied.innerHTML = `<p>Copied!</p>`; // добовляем элемент в тело
 				$(copied).css({ // привязываем элемент к позиции курсора
-					"left": e.pageX + "px",
-					"top": e.pageY + "px"
+					"left": e.clientX + "px",
+					"top": e.clientY + "px"
 				});
 				function deleteCopied(){ // удаляем элемент через 2 секунды
 					copied.classList.remove('copied');
@@ -429,9 +429,16 @@ let massColors = [
 // 		};
 // 		console.log[massColors]
 // }
-let arrayTon =[
-	97,	93,	72,	53,	48,	28,	18,	13, 5
-]
+let arrayLight =[
+	97,	93,	72,	53,	48,	28,	18,	13
+];
+
+let arrayHue = [
+	353, 22, 48, 94, 159, 200, 242, 281
+];
+let arraySatur = [
+	40, 40, 40, 60, 80, 90, 95, 100
+];
 
 let arrStyleColor =[
 	'.color1',
@@ -445,66 +452,33 @@ let arrStyleColor =[
 ]
 
 	function actColorCalc(callback) {
- 
 			arrStyleColor.forEach((item, i)=>{
-				let blabla =  result[2];
-
-				// if(blabla < 53){+blabla + 10}
-				if (result[2] ===100){result[2]= 56} 
-			
-				if( result[0] <  25){
-					arrayTon =[
-						95,	92,	79,	46,	43,	22,	14,	9, 5
-					]
+					// shuffleArray(arrayHue);
+					// shuffleArray(arraySatur);
+					// shuffleArray(arrayLight);
+					// shuffleArray(arrStyleColor)
 					$('span.active').siblings(item).css("background", 
-				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] - (blabla/8)}%)`);
-					}
-					else if( result[0] <  48 && result[0] > 25 ){
-						arrayTon =[
-							91,	92,	65,	46,	43,	22,	14,	9, 5
-						]
-						$('span.active').siblings(item).css("background", 
-				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] - (blabla/8)}%)`);
-					
-					}
-				    else if(result[2] < 20){{$('span.active').siblings(item).css("background", 
-					`hsl(${  +result[0]}, ${result[1]}%, ${+arrayTon[i]+blabla}%)`)};}
-					else {$('span.active').siblings(item).css("background", 
-					`hsl(${  +result[0]}, ${result[1]}%, ${arrayTon[i]-blabla}%)`)};
-				
-
-				
-				console.log(blabla );
+					`hsl(${arrayHue[i]-(result[0]/8)}, ${arrayLight[i]-(result[1]/8)}%, ${arrayLight[i]-(result[2]/8)}%)`)
+				   
+				console.log(item[5] );
 			});
-
-			
-
-
-			// $('span.active').siblings('.color2').css("background",
-			//  	`hsl(${  +result[0]}, ${result[1]}%, ${  ton2}%)`);
-			// $('span.active').siblings('.color3').css("background", 
-			// `hsl(${  +result[0]}, ${result[1]}%, ${  ton3}%)`);
-			// $('span.active').siblings('.color4').css("background", 
-			// `hsl(${  +result[0]}, ${result[1]}%, ${  ton4}%)`);
-			
-			
-	// if(result[2] == 22)
-	// $('span.active').siblings('.color1').css("background",
-	
-	// ),
-			
-			// $('span.active').siblings('.color4').css("background", 	mass[ cou4 ]);
-			// $('span.active').siblings('.color5').css("background", 	mass[ cou5 ]);
-			// $('span.active').siblings('.color6').css("background", 	mass[ cou6 ]);
-			// $('span.active').siblings('.color7').css("background", 	mass[ cou7 ]);
-			// $('span.active').siblings('.color8').css("background", 	mass[ cou8 ]);
 
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
-			callback(satSteps);
-		
-		
+			callback(arrayLight);
+			correctTone();
 	};
+
+function correctTone(){
+	tabsContent.forEach((i)=>{
+		
+		let ff = $(i).children('span').each(function(){
+			console.log(this);
+		});
+		
+		
+	});
+}
 	// actColorCalc()
 
 	function randomInteger(min, max) {
@@ -1053,7 +1027,7 @@ let arrStyleColor =[
 		if (b.length == 1)
 		  b = "0" + b;
 	  
-		return "#" + r + g + b;
+		return  r + g + b;
 
 		// return "#" + (rgb.match(/\b(\d+)\b/g).map(function (digit) {
 		// 	return ('0' + parseInt(digit).toString(16)).slice(-2)
