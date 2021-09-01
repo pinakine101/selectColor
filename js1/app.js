@@ -464,7 +464,7 @@ let arrStyleColor =[
 							91,	92,	65,	46,	43,	22,	14,	9, 5
 						]
 						$('span.active').siblings(item).css("background", 
-				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] }%)`);
+				`hsl(${  +result[0]}, ${result[1]}%, ${+ arrayTon[i] - (blabla/8)}%)`);
 					
 					}
 				    else if(result[2] < 20){{$('span.active').siblings(item).css("background", 
