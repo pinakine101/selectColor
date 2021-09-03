@@ -25,13 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	// let colors = document.querySelectorAll('span');
 	let icon = document.querySelector('.icon'); // кнопка рандомного подбора
 	let editButtns = document.querySelectorAll('.butt'); // кнопки редактирования гаммы
-	let result; // цвет разделенный на HSL каналы в массиве из трёх значений
+	let result = []; // цвет разделенный на HSL каналы в массиве из трёх значений
 
 	// let cout = [
 		let cou1 = 0, cou2 = 1, cou3 = 2, cou4 = 3, 
 		cou5 = 4, cou6 = 5, cou7 = 6, cou8 = 7;
 	 //счётчики пребора цветов в каждом блоке
-	let spanActive = $('span.active');
+	// let spanActive = $('span.active');
+	let spanActive = document.querySelector('span.active')
 	let textColorBuffer; // содержит имя цвета
 	let textColor = document.createElement('textCol'); // показывает имя цвета
 
@@ -44,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (tabsBtn[i].classList.contains('active')) {
 				const color = tabsContent[i].querySelector('span.active');
 				//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
-				let coco = color.style.background;
-				textColorBuffer = rgb2hex(coco);
+			
+				textColorBuffer = rgb2hex(color.style.background);
 				sliceColor()
 			};
 		});
@@ -82,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			editButtns[0].addEventListener('click', actCalcCouPus); //добавляем пребор гаммы в "+" с *span.active*  
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
-
-			sliceColor(spanActive);//вызываем разделение цвета на три значения в массиве *result*
+			forslice = document.querySelector('span.active');
+			sliceColor()
 			console.log(result[0], result[1], result[2]);
 		
 		}
@@ -319,17 +320,23 @@ document.addEventListener('DOMContentLoaded', () => {
 	из выбранного цвета генерируется массив цветов в 
 	8 параметрах тона и в 8 параметрах цвета_*/
 
+	let forslice ;
 
-	function sliceColor(){
-		$('span.active').each(function () {
+	function sliceColor(e){
+		e = forslice;
+		$(e).each(function () {
 			const color = $(this).css("backgroundColor"),
 				[r, g, b] = color.match(/\d+/g);
 			const colHsl = RGB2HSL(r, g, b);
 			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
+			
+			// console.log(result)
 			return result;
 		});
+		return e;
+	
 	};
-
+	
 	
 
 	let arrHSL;
@@ -453,30 +460,41 @@ let arrStyleColor =[
 
 	function actColorCalc(callback) {
 			arrStyleColor.forEach((item, i)=>{
-					// shuffleArray(arrayHue);
+					shuffleArray(arrayHue);
 					// shuffleArray(arraySatur);
 					// shuffleArray(arrayLight);
 					// shuffleArray(arrStyleColor)
 					$('span.active').siblings(item).css("background", 
 					`hsl(${arrayHue[i]-(result[0]/8)}, ${arrayLight[i]-(result[1]/8)}%, ${arrayLight[i]-(result[2]/8)}%)`)
 				   
-				console.log(item[5] );
+				// console.log(item);
 			});
 
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
-			callback(arrayLight);
-			correctTone();
+			callback(correctTone);
 	};
 
+	correctTone();
+
+let red = []; for(let i =1; i <=30; i++){red.push(i)} ;
+
 function correctTone(){
-	tabsContent.forEach((i)=>{
+	tabsContent.forEach((elem, i)=>{
 		
-		let ff = $(i).children('span').each(function(){
-			console.log(this);
+		 $(elem).children('span').each(function(index, el){
+			let ff = el.style.background;
+			forslice = this;
+			sliceColor();
+			
+			// RGB2HSL(ff);
+			if(	$('span').hasClass('color1')&&result[0]>32) {$('span.color2').css('backgroundColor', 'hsl(20, 30%, 20%)') };
+			// index =1;
+		
+			// console.log(ff);
+			
 		});
-		
-		
+		console.log(i);
 	});
 }
 	// actColorCalc()

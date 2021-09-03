@@ -26,7 +26,8 @@ p {
     font-family: sans-serif;
 }
 span.active {
-    border: 4px solid #ffffff;
+    border-left: 10px solid #78e4fa;;
+    border-right: 10px solid #78e4fa;;
 } 
 input {
     border:none;
@@ -327,6 +328,7 @@ input {
 .textColor {
     /* margin-left:80px; */
     display: flex;
+    width: 150px;
    
    
 }
