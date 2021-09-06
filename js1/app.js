@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
 			
 				textColorBuffer = rgb2hex(color.style.background);
-				sliceColor()
+				sliceColor(spanActive);
 			};
 		});
 	};
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 			forslice = document.querySelector('span.active');
-			sliceColor()
+			sliceColor(spanActive)
 			console.log(result[0], result[1], result[2]);
 		
 		}
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			// console.log(result)
 			return result;
 		});
-		return e;
+		// return e;
 	
 	};
 	
@@ -460,43 +460,31 @@ let arrStyleColor =[
 
 	function actColorCalc(callback) {
 			arrStyleColor.forEach((item, i)=>{
-					shuffleArray(arrayHue);
+					// shuffleArray(arrayHue);
 					// shuffleArray(arraySatur);
 					// shuffleArray(arrayLight);
-					// shuffleArray(arrStyleColor)
+					//  shuffleArray(arrStyleColor);
+					let delta;
+					// if(result[2] > arrayLight[cou2]){delta = +arrayLight[i] + delta};
+					if(result[2] < arrayLight[cou1]){delta = arrayLight[cou1] - result[2]};
+					if(delta <= 0){delta = +arrayLight[cou1] + delta}
+					
+			
 					$('span.active').siblings(item).css("background", 
-					`hsl(${arrayHue[i]-(result[0]/8)}, ${arrayLight[i]-(result[1]/8)}%, ${arrayLight[i]-(result[2]/8)}%)`)
+					`hsl(${arrayHue[i]}, ${arrayLight[i]}%, ${delta}%)`)
 				   
-				// console.log(item);
+				console.log(delta);
 			});
 
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
-			callback(correctTone);
+			callback(counterPlus);
+			
 	};
 
-	correctTone();
+	
 
-let red = []; for(let i =1; i <=30; i++){red.push(i)} ;
 
-function correctTone(){
-	tabsContent.forEach((elem, i)=>{
-		
-		 $(elem).children('span').each(function(index, el){
-			let ff = el.style.background;
-			forslice = this;
-			sliceColor();
-			
-			// RGB2HSL(ff);
-			if(	$('span').hasClass('color1')&&result[0]>32) {$('span.color2').css('backgroundColor', 'hsl(20, 30%, 20%)') };
-			// index =1;
-		
-			// console.log(ff);
-			
-		});
-		console.log(i);
-	});
-}
 	// actColorCalc()
 
 	function randomInteger(min, max) {
