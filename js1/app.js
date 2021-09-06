@@ -131,10 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		console.log('privet2')
 	};
     function actCalcCouPus(){ // запускаем перебор гаммы в *+* режима  *span.active*
-		actColorCalc(counterPlus)
+		actColorCalc(arrayLight, counterPlus)
+		
 	};
 	function actCalcCouMinus(){ // запускаем перебор гаммы в *-* режима *span.active*
-		actColorCalc(counterMinus)
+		actColorCalc(arrayLight, counterMinus)
 
 	}
 	//_______Buttuns_______///
@@ -447,6 +448,7 @@ let arraySatur = [
 	40, 40, 40, 60, 80, 90, 95, 100
 ];
 
+;
 let arrStyleColor =[
 	'.color1',
 	'.color2',
@@ -458,27 +460,47 @@ let arrStyleColor =[
 	'.color8',
 ]
 
-	function actColorCalc(callback) {
+	function actColorCalc(gamma, callback) {
+		
 			arrStyleColor.forEach((item, i)=>{
-					// shuffleArray(arrayHue);
-					// shuffleArray(arraySatur);
-					// shuffleArray(arrayLight);
-					//  shuffleArray(arrStyleColor);
-					let delta;
-					// if(result[2] > arrayLight[cou2]){delta = +arrayLight[i] + delta};
-					if(result[2] < arrayLight[cou1]){delta = arrayLight[cou1] - result[2]};
-					if(delta <= 0){delta = +arrayLight[cou1] + delta}
-					
 			
-					$('span.active').siblings(item).css("background", 
-					`hsl(${arrayHue[i]}, ${arrayLight[i]}%, ${delta}%)`)
-				   
-				console.log(delta);
-			});
+				// shuffleArray(arrStyleColor)
+			
+					let delta;
+					
+					// if (i > gamma.length-1) {
+					// 	i = 0
+					// };
+					let newArray = gamma.map((item, i) =>{
+						i++;
+							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.08)}
+						else if(result[2] <= 13 && result[2] >= 0) {delta =0}
 
+						else if(result[2] <= gamma[0]  && result[2] >=  gamma[1]){delta = gamma[0] - result[2]}
+						else if(result[2] <= gamma[1]  && result[2] >=  gamma[2]){delta = gamma[1] - result[2]}
+						else if(result[2] <= gamma[2]  && result[2] >=  gamma[3]){delta = gamma[2] - result[2]}
+						else if(result[2] <= gamma[3]  && result[2] >=  gamma[4]){delta = gamma[3] - result[2]}
+						else if(result[2] <= gamma[4]  && result[2] >=  gamma[5]){delta = gamma[4] - result[2]}
+						else if(result[2] <= gamma[5]  && result[2] >=  gamma[6]){delta = gamma[5] - result[2]}
+						else if(result[2] <= gamma[6]  && result[2] >=  gamma[7]){delta = gamma[6] - result[2]}
+						else if(result[2] <= gamma[7]  && result[2] >=  gamma[0]){delta = gamma[7] - result[2]};
+						 ;
+						return item - delta
+						
+					});
+					callback(newArray);
+					// shuffleArray(newArray);
+					$('span.active').siblings(item).css("background", 
+					`hsl(${arrayHue[i]}, ${arraySatur[i]}%, ${newArray[i++]}%)`);
+					
+				console.log(newArray);
+					
+			});
+			
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
-			callback(counterPlus);
+			// callback(counterPlus);
+			// return gamma
 			
 	};
 
@@ -914,7 +936,7 @@ let arrStyleColor =[
 				cou8 = 0
 			};
 			console.log('plus')
-			return a;
+			// return a;
 			
 		};
 
