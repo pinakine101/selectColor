@@ -495,12 +495,12 @@ let arrStyleColor =[
 					
 					let newArrayHue = gammaHue.map(item =>{
 						// let deltaHue;
-						// if(gammaHue[cou1]){ deltaHue = gammaHue[cou1] - (result[0]/18) };
+						// if(gammaHue[i]){ deltaHue = gammaHue[i] - (result[0]/18) };
 
 							
 
-						console.log(item)
-						return  item ;
+						// console.log(item)
+						return  item;
 						
 					});
 
@@ -511,18 +511,32 @@ let arrStyleColor =[
 					console.log(newArrayHue[cou2])
 
 					$('span.active').siblings(item).css("background", 
-					`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
+							`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
 
-					if(newArrayHue[cou2]<= 360  && newArrayHue[cou2]>= 100)  
-					{$('span.active').siblings(item).css("background", 
-					`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
-					// else if(item <= 48  && item >= 23)  {+newArrayLight[i] - 30}
-					// else if(item <= 94  && item >= 49)  {+newArrayLight[i] - 30}
-					// else if(item <= 159 && item >= 95)  {+newArrayLight[i] -15}
-					// else if(item <= 200 && item >= 160) {+newArrayLight[i] -14}
-					// else if(item <= 242 && item >= 201) {+newArrayLight[i] + 1}
-					// else if(item <= 281 && item >= 243) {+newArrayLight[i] + 27}
-					// else if(item <= 353 && item >= 282) {+newArrayLight[i] + 19}
+
+					if(newArrayHue[cou1]<= 22  && newArrayHue[cou1]>= 354)  
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 48  && newArrayHue[cou2] >= 23)  
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 94  && newArrayHue[cou2] >= 49) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 159 && newArrayHue[cou2] >= 95) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 200 && newArrayHue[cou2] >= 160) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 242 && newArrayHue[cou2] >= 201) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 281 && newArrayHue[cou2] >= 243) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 353 && newArrayHue[cou2] >= 282) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
 				
 			});
 			
