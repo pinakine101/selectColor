@@ -468,9 +468,9 @@ let arrStyleColor =[
 			
 					let delta;
 					
-					// if (i > gamma.length-1) {
-					// 	i = 0
-					// };
+					if (i > gamma.length-1) {
+						i = 0
+					};
 					let newArray = gamma.map((item, i) =>{
 						i++;
 							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.08)}
@@ -488,10 +488,10 @@ let arrStyleColor =[
 						return item - delta
 						
 					});
-					callback(newArray);
+					callback(arrayHue);
 					// shuffleArray(newArray);
-					$('span.active').siblings(item).css("background", 
-					`hsl(${arrayHue[i]}, ${arraySatur[i]}%, ${newArray[i++]}%)`);
+					$('span.active').siblings(arrStyleColor[i]).css("background", 
+					`hsl(${arrayHue[cou1]}, ${arraySatur[cou2]}%, ${newArray[cou3++]}%)`);
 					
 				console.log(newArray);
 					
@@ -526,8 +526,6 @@ let arrStyleColor =[
 			}
 		}
 	};
-
-	
 
 	class ColorType {
 		constructor(Hue, Sat, Light) {
