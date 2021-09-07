@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		item.addEventListener('dblclick', deletActivColor);
 	});
 
+
 	function calcCouPlus(){ // запускаем перебор гаммы в *+* режима БЕЗ *span.active*
 		calcColor(counterPlus)
 		console.log('privet')
@@ -131,11 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		console.log('privet2')
 	};
     function actCalcCouPus(){ // запускаем перебор гаммы в *+* режима  *span.active*
-		actColorCalc(arrayLight, counterPlus)
+		actColorCalc(arrayHue, arrayLight, counterPlus);
+		
 		
 	};
 	function actCalcCouMinus(){ // запускаем перебор гаммы в *-* режима *span.active*
-		actColorCalc(arrayLight, counterMinus)
+		actColorCalc(arrayHue, arrayLight, counterMinus)
 
 	}
 	//_______Buttuns_______///
@@ -438,14 +440,18 @@ let massColors = [
 // 		console.log[massColors]
 // }
 let arrayLight =[
-	97,	93,	72,	53,	48,	28,	18,	13
+	97,	93,	72,	53,  	48,	28,	18,	13
 ];
 
 let arrayHue = [
-	353, 22, 48, 94, 159, 200, 242, 281
+	353, 22, 48, 94,  159, 200, 242, 281
 ];
+
+// let arrayHue = [
+// 	240, 159, 94, 315,  296, 161, 308, 271
+// ];
 let arraySatur = [
-	40, 40, 40, 60, 80, 90, 95, 100
+	40, 40, 40, 60,  80, 90, 95, 100
 ];
 
 ;
@@ -458,45 +464,69 @@ let arrStyleColor =[
 	'.color6',
 	'.color7',
 	'.color8',
-]
+];
 
-	function actColorCalc(gamma, callback) {
-		
+
+
+	function actColorCalc(gammaHue, gammaLight, callback) {
 			arrStyleColor.forEach((item, i)=>{
-			
-				// shuffleArray(arrStyleColor)
-			
+		
 					let delta;
 					
-					if (i > gamma.length-1) {
-						i = 0
-					};
-					let newArray = gamma.map((item, i) =>{
-						i++;
+					// if (i > gamma.length-1) {
+					// 	i = 0
+					// };
+					let newArrayLight = gammaLight.map((item, i) =>{
+						
 							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.08)}
 						else if(result[2] <= 13 && result[2] >= 0) {delta =0}
 
-						else if(result[2] <= gamma[0]  && result[2] >=  gamma[1]){delta = gamma[0] - result[2]}
-						else if(result[2] <= gamma[1]  && result[2] >=  gamma[2]){delta = gamma[1] - result[2]}
-						else if(result[2] <= gamma[2]  && result[2] >=  gamma[3]){delta = gamma[2] - result[2]}
-						else if(result[2] <= gamma[3]  && result[2] >=  gamma[4]){delta = gamma[3] - result[2]}
-						else if(result[2] <= gamma[4]  && result[2] >=  gamma[5]){delta = gamma[4] - result[2]}
-						else if(result[2] <= gamma[5]  && result[2] >=  gamma[6]){delta = gamma[5] - result[2]}
-						else if(result[2] <= gamma[6]  && result[2] >=  gamma[7]){delta = gamma[6] - result[2]}
-						else if(result[2] <= gamma[7]  && result[2] >=  gamma[0]){delta = gamma[7] - result[2]};
-						 ;
-						return item - delta
+						else if(result[2] <= gammaLight[0]  && result[2] >=  gammaLight[1])   {delta = gammaLight[0] - result[2]}
+						else if(result[2] <= gammaLight[1]  && result[2] >=  gammaLight[2])   {delta = gammaLight[1] - result[2]}
+						else if(result[2] <= gammaLight[2]  && result[2] >=  gammaLight[3])   {delta = gammaLight[2] - result[2]}
+						else if(result[2] <= gammaLight[3]  && result[2] >=  gammaLight[4])   {delta = gammaLight[3] - result[2]}
+						else if(result[2] <= gammaLight[4]  && result[2] >=  gammaLight[5])   {delta = gammaLight[4] - result[2]}
+						else if(result[2] <= gammaLight[5]  && result[2] >=  gammaLight[6])   {delta = gammaLight[5] - result[2]}
+						else if(result[2] <= gammaLight[6]  && result[2] >=  gammaLight[7])   {delta = gammaLight[6] - result[2]}
+						else if(result[2] <= gammaLight[7]  && result[2] >=  gammaLight[0])   {delta = gammaLight[7] - result[2]}
+
+						return item - delta;
+					});
+					
+					let newArrayHue = gammaHue.map(item =>{
+						// let deltaHue;
+						// if(gammaHue[cou1]){ deltaHue = gammaHue[cou1] - (result[0]/18) };
+
+							
+
+						console.log(item)
+						return  item ;
 						
 					});
-					callback(arrayHue);
-					// shuffleArray(newArray);
-					$('span.active').siblings(arrStyleColor[i]).css("background", 
-					`hsl(${arrayHue[cou1]}, ${arraySatur[cou2]}%, ${newArray[cou3++]}%)`);
-					
-				console.log(newArray);
-					
+
+					    
+
+					// counterPlus(newArrayHue);
+					// counterPlus(newArrayLight);
+					console.log(newArrayHue[cou2])
+
+					$('span.active').siblings(item).css("background", 
+					`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
+
+					if(newArrayHue[cou2]<= 360  && newArrayHue[cou2]>= 100)  
+					{$('span.active').siblings(item).css("background", 
+					`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+					// else if(item <= 48  && item >= 23)  {+newArrayLight[i] - 30}
+					// else if(item <= 94  && item >= 49)  {+newArrayLight[i] - 30}
+					// else if(item <= 159 && item >= 95)  {+newArrayLight[i] -15}
+					// else if(item <= 200 && item >= 160) {+newArrayLight[i] -14}
+					// else if(item <= 242 && item >= 201) {+newArrayLight[i] + 1}
+					// else if(item <= 281 && item >= 243) {+newArrayLight[i] + 27}
+					// else if(item <= 353 && item >= 282) {+newArrayLight[i] + 19}
+				
 			});
 			
+			callback(arrStyleColor);
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
 			// callback(counterPlus);
@@ -750,10 +780,6 @@ let arrStyleColor =[
 		}
 	};
 	
-
-	function massives(){
-		
-	}
 	
 	function test(){
 		tabsContent.forEach((item, i) => {
@@ -1141,7 +1167,7 @@ let arrStyleColor =[
 					counterPlus(spaRoomColor1);
 					$('span.active').css('backgroundColor', 
 					`${arryTable_3_Step[ cou1 ]}`);
-						console.log(cou1)
+					console.log('left')
 				} else {
 					counterMinus(spaRoomColor1);
 					$('span.active').css('backgroundColor', 
