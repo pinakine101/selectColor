@@ -1,7 +1,8 @@
 /* CSS Document */
-html {
-    height: 100%; 
-}
+/* html {
+    width: 100%;
+    height:100%;
+} */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -9,8 +10,8 @@ body {
     color:#FFFFFF;
     -webkit-font-smoothing: antialiased;
     width: auto;
-    height: 100%;
-    /* overflow-x: hidden; */
+    height:auto;
+    
 }
 h1 {
     font-family: 'Roboto', sans-serif;
@@ -131,6 +132,9 @@ h1 {
     /* justify-content: space-between; */
     display: table;
     position:absolute;
+    /* top: 0;
+    left: 0; */
+    z-index: 1001;
     margin-left: 96%;
     margin-top: 5%;
     width: 30px;
@@ -144,12 +148,26 @@ h1 {
 .butt {
    
     position:relative;
+    /* display: flex; */
+    fill: rgb(251, 245, 245);
+    width: 100%;
+    height: 25px;
+    margin-bottom: 25px;
+    align-items:center;
+    transition-property: fill;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    -webkit-filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+  filter: drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5));
+}
+.buttRotate90 {
+    transform:rotate(90deg);
+    position:relative;
     display: flex;
     fill: rgb(251, 245, 245);
     width: 100%;
     height: 25px;
     margin-bottom: 25px;
-    justify-content: center;
     align-items:center;
     transition-property: fill;
     transition-duration: 0.2s;
@@ -163,6 +181,7 @@ h1 {
 }
 .butt:active{
     fill: rgb(251, 217, 65);
+    transform: translate(1px, 1px);
     
 }
 .icon {
@@ -190,13 +209,17 @@ h1 {
     20%  { transform: scale(0.8); }
 }
 .icon:active{
+    /* -webkit-animation: rotate 6s linear infinite; */
+   
     animation-name: spin;
     animation-duration: 400ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear; 
 }
 
-
+input {
+    border: 2px solid #ffffff;
+}
 @keyframes spin {
     from {
         transform:rotate(0deg);
@@ -211,72 +234,109 @@ h1 {
 .colorpickerHolder {
      position: absolute;
 }
-
 .intro {
-    display:flex;
-    width: 100%;
-    /* height: calc(100% - 114px); */
+    display:flex; 
+     width: 100%;
      }
 
- .intro_1 {
-     flex-direction: column;
-     flex-wrap: nowrap;
-    display:flex;
-    width: 100%;
-    height: 600px;
-    /* padding-top:20px; */
-    overflow:auto; 
-   }
-
-span.active {
-    border: 2px solid #e4e4e4;
-    
-}  
-span {
-    display: flex;
-    width: 100%;
-    overflow:inherit;
-    resize: vertical;
-    flex-shrink: 1;
-    flex-wrap: nowrap;
-    flex-shrink: 1;
+.intro_1 {
+    display:none;
+    /* padding-top:18px; */
+    flex-flow:column nowrap;
+    width:100%;
+    height: 790px; 
+    border: 2px solid #2e2e2e;
+    background:rgb(172, 172, 172);
+    overflow-x: hidden;
+    /* overflow: hidden; */
 }
+.row {
+    display:flex;
+    padding-top:18px;
+    flex-flow:row nowrap;
+    width:100%;
+    height: 790px; 
+    border: 2px solid #2e2e2e;
+    background:rgb(172, 172, 172);
+    overflow-y: hidden;
+    /* overflow: hidden; */
+}
+span.active {
+    border: 2px solid #ffffff;
+    /* overflow: auto;
+    resize:both; */
+}  
+
+
+/* span {
+   /* width: 100%;
+   height: 100%; */
+  /* display:revert; */
+ 
+
 
 .color1 {
-    background-color:rgb(196, 210, 235);
-    flex-grow: .1;
     
-    /* height: 52.7%; */
+    /* display:none; */
+    background-color:rgb(166, 255, 218);
+    /* height: 7.8%;
+    width: 100%; */
+    flex-grow: 7.8;
+    /* flex-grow: 1; */
 }
-
 .color2 {
-    background-color:rgb(137, 175, 159);
-    flex-grow: .2;
+     /* display:block; */
     
-    /* height: 9.2%; */
+    background-color:rgb(242, 166, 255);
+    /* height:35.4%; */
+    flex-grow:35.4;
+    /* flex-grow:1; */
 }
-
 .color3 {
-    background-color:rgb(201, 202, 138);
-    flex-grow: .3;
+    /* display:block; */
     
-    /* height: 4.8%; */
+    /* height: 5.7%; */
+    flex-grow:5.7;
+    /* flex-grow:1; */
+    background-color:rgb(59, 50, 18);
 }
 
 .color4 {
-    background-color:rgb(62, 63, 77);
-    flex-grow: .4;
-   
-    /* height: 33.3%; */
+    
+    /* display:none; */
+    /* height: 2.3%; */
+    flex-grow:2.3;
+    background-color:rgb(38, 42, 98);
 }
 
-
-
-
-
-
-
-
+.color5 {
+    order:5;
+    /* height: 19%; */
+    /* display:block; */
+    flex-grow:19;
+    background-color:rgb(50, 146, 82);
+}
+.color6 {
+    
+    /* display:none; */
+    /* height: 9.1%; */
+    flex-grow:9.1;
+    background-color:rgb(8, 177, 255);
+}
+.color7 {
+    
+    /* display:none; */
+    /* height: 4.4%; */
+    flex-grow:4.4;
+    background-color:rgb(60, 17, 250);
+}
+.color8 {
+    
+    /* display:none; */
+    /* height: 15%; */
+    flex-grow:15;
+    background-color:rgb(255, 58, 8);
+}
 
 
 

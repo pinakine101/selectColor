@@ -8,54 +8,100 @@
 6. Сверстать все страницы
 7. Добавить функционал поиска по сайту
 */
-*/задачи на 01 04: переделать табы, второй клик по спану убирает актив*/
 
-document.onmouseover = function() {
-    //User's mouse is inside the page.
-    window.innerDocClick = true;
-}
-
-document.onmouseleave = function() {
-    //User's mouse has left the page.
-    window.innerDocClick = false;
-}
-
-window.onhashchange = function() {
-    if (window.innerDocClick) {
-        //Your own in-page mechanism triggered the hash change
-    } else {
-        //Browser back button was clicked
-    }
-}
-  
 
 let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
 // let intro_1 = document.querySelectorAll(".intro_1");
 let tabsContent = document.querySelectorAll(".intro_1");
 let tabsNav = document.querySelector(".tabs__nav");
 
+let intro_1 = document.querySelectorAll(".intro_1")
 let colors = document.querySelectorAll('span');
-let butt = document.querySelector('.icon');
+let butt = document.querySelector('.butt');
+let contButt = document.querySelectorAll('.butt');
 
-let spa = document.querySelector('#Спальня');
-let gost = document.querySelector('#Гостинная');
-let kitch = document.querySelector('#Кухня');
-let dets = document.querySelector('#Детская');
 
-// let color1 = document.querySelectorAll('.color1');
-// let color2 = document.querySelectorAll('.color2');
-// let color3 = document.querySelectorAll('.color3');
-// let color4 = document.querySelectorAll('.color4');
-// let color5 = document.querySelectorAll('.color5');
-// let color6 = document.querySelectorAll('.color6');
+let color1 = document.querySelector('.color1');
+let color2 = document.querySelector('.color2');
+let color3 = document.querySelector('.color3');
+let color4 = document.querySelector('.color4');
+let color5 = document.querySelector('.color5');
+let color6 = document.querySelector('.color6');
+let color7 = document.querySelector('.color7');
+let color8 = document.querySelector('.color8');
 
-let res;
-let actColor = document.querySelector('intro_1.active');
-// let dd = $('intro_1.active').children('.color1');
+//______Active Color_________//
 
-butt.addEventListener('click',()=> {
-	 loadColor ();
-	;});
+// var isMenuShow = false;
+intro_1.forEach(function (item) {
+	item.addEventListener('click', (e) => {
+		const target = e.target;
+		if (!target.classList.contains("active")) {
+			let colors = document.querySelectorAll('span');
+			colors.forEach(function (item) {
+				item.classList.remove('active');
+			});
+		};
+		target.classList.toggle('active');
+	});
+});
+
+
+//_______Buttuns_______///
+
+contButt[2].addEventListener('click', () => {
+
+	contButt[2].classList.toggle('buttRotate90');
+
+	intro_1.forEach((i, ) => {
+		i.classList.toggle('row');
+	});
+});
+
+contButt[1].addEventListener('click', () => {
+	let colorActive = document.querySelector('span.active');
+	colorActive.style.display = 'none';
+});
+
+let arr = [
+	'color1',
+	'color2',
+	'color3',
+	'color4',
+	'color5',
+	'color6',
+	'color7',
+	'color8'
+];
+
+contButt[0].addEventListener('click', () => {
+	intro_1.forEach((item, i, ) => {
+		if (tabsBtn[i].classList.contains('active')) {
+			let newColor = document.createElement('span'),
+			spanActive = document.querySelector('span.active');
+			
+			// let art = arr[Math.floor(Math.random() * arr.length)];
+			arr.forEach((e, i)=> {
+				
+				newColor.classList.add(+arr[i]);
+			});
+				
+			item.append(newColor)
+			// art += arr[i];
+			// if ( ++i < arr.length ) {
+			// 	newColor.classList.add(art);
+			// }
+				
+			
+			// let art += arr.length[i];
+			
+			// newColor.classList.add(art);
+			// console.log(art)
+			
+			// $(newColor);
+		}
+	});
+});
 
 
 //_______Tabs_________//
@@ -69,17 +115,17 @@ function hideTabContent() {
 	});
 };
 
-function showTabsContent(i){
-	tabsContent[i].style.display = 'flex'; 
+function showTabsContent(i) {
+	tabsContent[i].style.display = 'flex';
 	tabsBtn[i].classList.add('active');
 };
 
-
 hideTabContent();
-showTabsContent(1);
+showTabsContent(0);
 
 let isCalled = false;
-tabsNav.addEventListener('click', (event) =>{
+
+tabsNav.addEventListener('click', (event) => {
 	const target = event.target;
 
 	if (target && target.classList.contains('tabs__nav-btn')) {
@@ -87,80 +133,48 @@ tabsNav.addEventListener('click', (event) =>{
 			if (target == item) {
 				hideTabContent();
 				showTabsContent(i);
-				if (item.classList.contains('active')){
-					if(!isCalled) {
+				if (item.classList.contains('active')) {
+					if (!isCalled) {
 						isCalled = true;
-						loadColor ()}};
+						loadColor()
+					}
+				};
 			};
 		});
 	};
 });
 
-// tabsBtn.forEach(function (item) {
-// 	item.addEventListener("click", function activeTab() {
-// 		let currentBtn = item;
-// 		let tabId = currentBtn.getAttribute("data-tab");
-// 		let currentTab = document.querySelector(tabId);
-
-// 			if (!currentBtn.classList.contains('active')) {
-               
-// 			tabsBtn.forEach(function (item) {
-// 				item.classList.remove('active');
-// 			});
-// 			intro_1.forEach(function (item) {
-// 				item.classList.remove('active');
-// 			});
-// 			colors.forEach(function (item) {
-// 				item.classList.remove('active');
-// 			});
-//           	currentBtn.classList.add('active');
-// 			currentTab.classList.add('active');
-// 		}
-// 	});
-// });
-// // document.querySelector('.tabs__nav-btn:nth-child(2)').click();
-// document.querySelector('.tabs__nav-btn').click();
-
-
 //______ColorPicker_________//
-let inputColor = document.querySelector('.colorpickerHolder');
 
-function hideInput(){
-	inputColor.style.display = 'none';
-}
-hideInput();
-
-function showInput(){
-	inputColor.style.display = 'block';
-}
 
 let deleteColPick = function () {
 	$('.colorpickerHolder').remove();
 };
 
-colors.forEach(function (color) {
+intro_1.forEach(function (color) {
 	color.addEventListener("contextmenu", colorPicker);
-	color.addEventListener("mouseup", deleteColPick);
-	
+	color.addEventListener("click", deleteColPick);
 });
 
-$(colors).on("contextmenu", false);
+$(intro_1).on("contextmenu", false);
 
 function colorPicker(e) {
-
-	const contextBox = document.createElement('div');
+	const contextBox = document.createElement('ColPick');
 	contextBox.classList.add('colorpickerHolder');
 	document.querySelector('body').append(contextBox);
-
 	let span = e.target;
 	let box = $('.colorpickerHolder');
 	let spanColor = $(span).css('backgroundColor');
 	let col = rgb2hex(spanColor);
 
-	function rgb2hex (color) { return "#"+(color.match(/\b(\d+)\b/g).map(function(digit)
-	{ return ('0' + parseInt(digit).toString(16)).slice(-2) })).join(''); };
 
-		$(box).css({
+	function rgb2hex(color) {
+		return "#" + (color.match(/\b(\d+)\b/g).map(function (digit) {
+			return ('0' + parseInt(digit).toString(16)).slice(-2)
+		})).join('');
+	};
+
+	$(box).css({
 		"position": "absolute",
 		"left": e.pageX + "px",
 		"top": e.pageY + "px"
@@ -169,188 +183,12 @@ function colorPicker(e) {
 	$(box).ColorPicker({
 		flat: true,
 		color: col,
-		onSubmit: deleteColPick,
 		onChange: function (hsb, hex, rgb) {
 			$(span).css('backgroundColor', '#' + hex, );
 		}
 	});
 }
 
-//______Active Color_________//
-
-colors.forEach(function (color) {
-	color.addEventListener("click", function select() {
-		
-		if (!color.classList.contains("active")) {
-			colors.forEach(function (color, i) {
-				color.classList.remove('active');
-				if (i > 1){
-					color.classList.remove('active');
-				}
-			});
-		};
-		color.classList.add('active');
-		
-	});
-	color.addEventListener("contextmenu", function () {
-		colors.forEach(function (color) {
-			color.classList.remove('active');
-		});
-	});
-});
-
-
-tabsBtn.forEach((item,)=>{
-    item.addEventListener("click", ()=>{
-        // $('.intro_1.active').children('.color1').addClass('active');
-        if (item.classList.contains('active')){
-            if(!isCalled) {
-                isCalled = true;
-                loadColor ()}};
-        });
-    });
-
-document.querySelector('.color1').classList.add('active');
-
-
-/*______CalcColor____________________
-из выбранного цвета генерируется массив цветов в 
-девяти параметрах тона и в 9 параметрах цвета_*/
-
-
-
-
-function createGamma(h, s, l) {
-    h = randomInteger(100, 170);
-    s = randomInteger(50,100);
-    l = randomInteger(50,100);
-   };
-
-function randomInteger(min, max) {
-	// случайное число от min до (max+1)
-	let rand = min + Math.random() * (max  - min);
-	return Math.floor(rand);
-}
-
-// document.addEventListener("DOMContentLoaded", fillColor() );
-
-  //   createGamma();
-//сделать так что бы при загрузке таба запускалась фунция.
-
-
-function splitColor (){	
-	$('span.active').each(function reuslt (indx, el) {
-		const  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-		const colHsl = RGB2HSL(r, g, b);
-		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
-		res = regexp.exec(colHsl).slice(1);
-	});
-	return res;
-};
-
-function calc(){
-    const HSL = splitColor();
-    const H = HSL[0],
-        S = HSL[1],
-        L = HSL[2];
-       return [H, S, L]
-}
-
-function randomInteger2(min, max) {
-    	let rand = min + Math.random() * (max - min);
-    	return Math.floor(rand);
-      }
-
-function loadColor (){
-   let calcCol = fillColor();
-
-    let kar = calc();
-    let rand = randomInteger2(100, 350);
-    let gamma = $('.intro_1').children();
-
-        if (tabsBtn[0].classList.contains('active')) { 
-            gamma[0].style.background = `hsl(${[kar[0]-150]}, ${kar[1]+10}%, ${kar[2]-10}%)`;
-            gamma[1].style.background = `hsl(${rand}, ${kar[1]+20}%, ${kar[2]-20}%)`;
-            gamma[2].style.background = `hsl(${rand}, ${kar[1]+10}%, ${kar[2]+10}%)`;
-            gamma[3].style.background = `hsl(${rand}, ${kar[1]-20}%, ${kar[2]+5}%)`;
-    
-        }
-        if (tabsBtn[1].classList.contains('active')){
-        gamma[0].style.background = `hsl(${rand}, ${kar[1]+20}%, ${kar[2]+10}%)`;
-        gamma[1].style.background = `hsl(${rand}, ${kar[1]-20}%, ${kar[2]+10}%)`;
-        };
-       
-        console.log( calcCol)
-};
-
-function fillColor (){
-    let colorActive =  document.querySelector('span.active');
-    
-       
-    let kar = splitColor();
-    let rand = randomInteger2(2, 360);
-
-	
-		
-		let gamma = $('.intro_1').children();
-	
-    
-  
-        if (tabsBtn[0].classList.contains('active')) { 
-		gamma[0].style.background = `hsl(${[kar[0]-150]}, ${kar[1]+10}%, ${kar[2]-10}%)`;
-		gamma[1].style.background = `hsl(${rand}, ${kar[1]+20}%, ${kar[2]-20}%)`;
-        gamma[2].style.background = `hsl(${rand}, ${kar[1]+10}%, ${kar[2]+10}%)`;
-        gamma[3].style.background = `hsl(${rand}, ${kar[1]-20}%, ${kar[2]+5}%)`;
-        }
-
-        if (tabsBtn[1].classList.contains('active')){
-            gamma[4].style.background = `hsl(${[rand]}, ${kar[1]+5}%, ${kar[2]-20}%)`;
-            gamma[5].style.background = `hsl(${rand}, ${kar[1]-15}%, ${kar[2]-4}%)`;
-            gamma[6].style.background = `hsl(${rand}, ${kar[1]+10}%, ${kar[2]+15}%)`;
-            gamma[7].style.background = `hsl(${rand}, ${kar[1]-5}%, ${kar[2]+5}%)`;
-        };
-   
-        colorActive.style.background = `hsl(${kar[0]}, ${kar[1]}%, ${kar[2]}%)`;
-		console.log(gamma);
-        // return karkar;
-       
-};
-	function RGB2HSL(r, g, b){
-			
-		r /= 255;
-		g /= 255;
-		b /= 255;
-		let cmin = Math.min(r,g,b),
-			cmax = Math.max(r,g,b),
-			delta = cmax - cmin,
-			h = 0,
-			s = 0,
-			l = 0;
-	  
-		if (delta == 0)
-		  h = 0;
-		else if (cmax == r)
-		  h = ((g - b) / delta) % 6;
-		else if (cmax == g)
-		  h = (b - r) / delta + 2;
-		else
-		  h = (r - g) / delta + 4;
-	  
-		h = Math.round(h * 60);
-	  
-		if (h < 0)
-		  h += 360;
-	  
-		l = (cmax + cmin) / 2;
-		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-		s = +(s * 100).toFixed(1);
-		l = +(l * 100).toFixed(1);
-		
-		return "hsl(" + h + "," + s + "%," + l + "%)";
-
-	};
-
-    
 //______Swip_________//
 
 let clickStartX = 0;
@@ -358,58 +196,51 @@ let clickStartY = 0;
 let clickEndX = 0;
 let clickEndY = 0;
 
-colors.forEach(function(color) { 
-	color.addEventListener('mousedown', function(event) {
+
+colors.forEach(function (color) {
+
+
+	color.addEventListener('mousedown', function (event) {
 		clickStartX = event.clientX;
 		clickStartY = event.clientY;
 		// console.log(event)
 	}, false);
-	color.addEventListener('mouseup', function(event) {
+
+	color.addEventListener('mouseup', function (event) {
 		clickEndX = event.clientX;
 		clickEndY = event.clientY;
 		handleGesure();
 		// console.log(event)
-	}, false); 
+	}, false);
 });
 
-
-
-function changeColorLeft(){	
-    let HSL = splitColor();
-    let colorActive =  document.querySelector('span.active');
-        colorActive.style.background = `hsl(${HSL[0]}, ${HSL[1]}%, ${HSL[2]-2}%)`;
- };
-
- 
-
 function handleGesure() {
-   
-		let xAbs = Math.abs(clickStartX - clickEndX);
-		let yAbs = Math.abs(clickStartY - clickEndY);
-		if (xAbs > 10 || yAbs > 10) {
-          
-			if (xAbs > yAbs) {
-				if (clickEndX <clickStartX) {
-                   changeColorLeft()
-					 console.log('left');
-				} else {
-                    changeColorRight();
-					console.log('right!');/*СВАЙП ВПРАВО*/
-				}
+	var xAbs = Math.abs(clickStartX - clickEndX);
+	var yAbs = Math.abs(clickStartY - clickEndY);
+	if (xAbs > 10 || yAbs > 10) {
+		if (xAbs > yAbs) {
+			if (clickEndX < clickStartX) {
+
+				changeColorLeft();
+
+				console.log('left!');
 			} else {
-				if (clickEndY < clickStartY) {
-                    changeColorUp()
-					console.log('up!');
-				} else {
-                    changeColorDown()
-					console.log('down!');
-				}
+				//  changeColorLeft (colAct)
+				console.log('right!'); /*СВАЙП ВПРАВО*/
 			}
+			// } else {
+			// 	if (clickEndY < clickStartY) {
+			//         changeColorUp()
+			// 		console.log('up!');
+			// 	} else {
+			//         changeColorDown()
+			// 		console.log('down!');
+			// 	}
 		}
-    };
+	}
+};
 
 
-    
 // var initialPoint;
 // var finalPoint;
 // colors.forEach(function (color) {
@@ -444,12 +275,180 @@ function handleGesure() {
 // 	}, false);
 // });
 
+/*______CalcColor____________________
+из выбранного цвета генерируется массив цветов в 
+девяти параметрах тона и в 9 параметрах цвета_*/
 
 
-//______DobMat_________//
+// let intro_1Active = document.querySelector('.tabs__nav-btn.active');
+
+// butt.addEventListener('click',()=> {
+
+// console.log(intro_1Active)});
+
+// document.addEventListener("DOMContentLoaded", 
+function createGamma(h, s, l) {
+
+	h = randomInteger(100, 170);
+	s = randomInteger(50, 100);
+	l = randomInteger(50, 100);
+
+	let a = h - 30,
+		b = s + 50,
+		c = l - 10;
+	let d = h - 20,
+		e = s - 20,
+		f = l - 5;
+	let H1 = h - 50,
+		S1 = s + 10,
+		L1 = l + 10;
+	let H2 = h + 20,
+		S2 = s - 5,
+		L2 = l + 5;
+
+	if (h >= 30 && h <= 100) {
+		s -= 10,
+			l -= 20;
+	};
+
+
+	color4.style.background = `hsl(${d}, ${e}%, ${f}%)`;
+	color3.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
+
+};
+
+function createGamma2(h, s, l) {
+
+	h = randomInteger(100, 170);
+	s = randomInteger(50, 100);
+	l = randomInteger(50, 100);
+
+	let a = h - 30,
+		b = s + 50,
+		c = l - 10;
+	let d = h - 20,
+		e = s - 20,
+		f = l - 5;
+	let H1 = h - 50,
+		S1 = s + 10,
+		L1 = l + 10;
+	let H2 = h + 20,
+		S2 = s - 5,
+		L2 = l + 5;
+
+	if (h >= 30 && h <= 100) {
+		s -= 10,
+			l -= 20;
+	};
+
+	color1.style.background = `hsl(${h}, ${s}%, ${l}%)`;
+	color2.style.background = `hsl(${a}, ${b}%, ${c}%)`;
+};
+//   createGamma();
+//сделать так что бы при загрузке таба запускалась фунция.
+
+function calcColor() {
+
+	$('span.active').each(function (indx, el) {
+
+		let colAct = document.querySelector('span.active');
+		const color = $(el).css("backgroundColor"),
+			[r, g, b] = color.match(/\d+/g);
+		const colHsl = RGB2HSL(r, g, b);
+		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
+		let res = regexp.exec(colHsl).slice(1);
+
+		let H = res[0],
+			S = res[1],
+			L = res[2];
+
+		let H1 = +res[0] + 150,
+			S1 = +res[1] + 10,
+			L1 = res[2] - 5;
+
+		if (H1 >= 30 && H1 <= 100) {
+			S1 -= 10,
+				L1 -= 10;
+		};
+
+		let H2 = res[0] - 10,
+			S2 = +res[1] + 10,
+			L2 = res[2] - 20;
+
+		let H3 = +res[0] + 50,
+			S3 = +res[1] + 10,
+			L3 = res[2] - 20;
+
+		color1.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
+		color2.style.background = `hsl(${H2}, ${S2}%, ${L2}%)`;
+		color3.style.background = `hsl(${H3}, ${S3}%, ${L3}%)`;
+		color4.style.background = `hsl(${H1}, ${S2}%, ${L1}%)`;
+
+		colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
+		return H, S, L, H1, S1, L1;
+
+	});
+};
+
+function changeColorLeft() {
+
+	$('span.active').each(function (indx, el) {
+
+		let colAct = document.querySelector('span.active');
+		const color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+		const colHsl = RGB2HSL(r, g, b);
+		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
+		let res = regexp.exec(colHsl).slice(1);
+		res[0] = + res[0] + 10;
+		colAct.style.backgroundColor = `hsl(${res[0]}, ${res[1]}%, ${res[2]}%)`;
+		console.log(colAct);
+		// return h, s, l;
+	});
+};
+
+//  let coco = RGB2HSL(r,g,b);
+
+//  function rgb2hex (color) { return "#"+(color.match(/\b(\d+)\b/g).map(function(digit)
+//  { return ('0' + parseInt(digit).toString(16)).slice(-2) })).join(''); };
+
+function RGB2HSL(r, g, b) {
+
+	r /= 255;
+	g /= 255;
+	b /= 255;
+	let cmin = Math.min(r, g, b),
+		cmax = Math.max(r, g, b),
+		delta = cmax - cmin,
+		h = 0,
+		s = 0,
+		l = 0;
+
+	if (delta == 0)
+		h = 0;
+	else if (cmax == r)
+		h = ((g - b) / delta) % 6;
+	else if (cmax == g)
+		h = (b - r) / delta + 2;
+	else
+		h = (r - g) / delta + 4;
+
+	h = Math.round(h * 60);
+
+	if (h < 0)
+		h += 360;
+
+	l = (cmax + cmin) / 2;
+	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+	s = +(s * 100).toFixed(1);
+	l = +(l * 100).toFixed(1);
+
+	return "hsl(" + h + "," + s + "%," + l + "%)";
+
+};
+
 
 // let colAct = document.querySelector('.color.active');
- 
+
 // let  coco = RGB2HSL(colAct);
 
 // coco = `hsl(${4}, ${54}%, ${45}%)`;
@@ -460,7 +459,11 @@ function handleGesure() {
 
 // let h = 360, s = 100, l = 50 ;
 
-
+function randomInteger(min, max) {
+	// случайное число от min до (max+1)
+	let rand = min + Math.random() * (max - min);
+	return Math.floor(rand);
+}
 //   function randomInteger2(min, max, e, r) {
 // 	// случайное число от min до (max+1)
 // 	let rand = min + Math.random() * (max  - min) + (r-e);
@@ -473,7 +476,7 @@ function handleGesure() {
 // if (h >= 30 && h <=100) {
 // 	s -=  10,
 // 	l -= 20;
-	
+
 // };
 
 // colAct.style.background = `hsl(${h}, ${s}%, ${l}%)`;
@@ -482,23 +485,88 @@ function handleGesure() {
 // 				// 		});
 // };
 
+
+
+
+
+
+
+
 // function generateHslaColors (saturation, lightness, alpha, amount) {
 // 	let colorsQ = []
 // 	let huedelta = Math.trunc(360 / amount)
-  
+
 // 	for (let i = 0; i < amount; i++) {
 // 	  let hue = i * huedelta
 // 	  colorsQ.style.backgroundColor = `hsla(${hue},${saturation}%,${lightness}%,${alpha})`;
 // 	}
-  
+
 // 	console.log(colorsQ);
 // };
 // generateHslaColors(100, 50, 50);
 
 
+// function setTheme(H, inputType) {
+// 	// Convert hex to RGB first
+// 	let r = 0, g = 0, b = 0;
+// 	// if (H.length == 4) {
+// 	//   r = "0x" + H[1] + H[1];
+// 	//   g = "0x" + H[2] + H[2];
+// 	//   b = "0x" + H[3] + H[3];
+// 	// } else if (H.length == 7) {
+// 	//   r = "0x" + H[1] + H[2];
+// 	//   g = "0x" + H[3] + H[4];
+// 	//   b = "0x" + H[5] + H[6];
+// 	// }
+// 	// Then to HSL
+//
+
+// 	document.documentElement.style.setProperty(`--${inputType}-color-h`, h);
+// 	document.documentElement.style.setProperty(`--${inputType}-color-s`, s + '%');
+// 	document.documentElement.style.setProperty(`--${inputType}-color-l`, l + '%');
+//   }
+
+//   console.log(setTheme(colors))
 
 
-	
 
 
 
+
+// $(colAct).each(function(indx, el){
+// 	$(el).css("backgroundColor").style.setProperty(' --primary-color--dark', el.target)
+//   });
+// $(colAct).each(function(indx, el){
+// 	let  color = root.setProperty(' --primary-color--dark', item);
+// 	// let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
+// 	setTheme();
+// 	//  r =+r+ 15;
+// 	//  g = +g+ 15;
+// 	//  b =+b+ 15;
+// 	 colAct.style.backgroundColor = color;
+//  colAct.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+// let colAct = document.querySelector('.color.active');
+// colAct.classList.add('.color4');
+// console.log(colAct);
+
+
+//
+
+// $(item).each(function(indx, el){
+
+// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
+// 	 h -= 15;
+// 	 s = +s+ 15;
+// 	 l =+l+ 15;
+// 	item.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+// 	rgb2Hsl(color);
+// 	console.log (item);
+// 		});
+
+// rgbToHsl();
+// let	x = 100,
+// 	y = 50,
+// 	z = 50;
+// let = ChangedColor;
+// ChangedColor = `hsl(${x}, ${y}%, ${z}%)`;
