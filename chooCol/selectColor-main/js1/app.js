@@ -483,7 +483,7 @@ let arrStyleColor =[
 					// 		`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
 
 						   if(newArrayHue[cou2]>= 0  && newArrayHue[cou2]<= 22)  
-					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 85 }%)`)
+					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 85 } %)`)
 					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 82 }%)`)
 					 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 79 }%)`)
 					 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 46 }%)`)
