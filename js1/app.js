@@ -3,9 +3,9 @@
 1. Сделать выбор цвета по клику на цвете - DONE
 2   выбор образца цвета по движению мыши - DONE
 3. Функция добавить/убрать блока - DONE
-4. Выпадающее меню для меню  DONE
+4. Выпадающее меню для меню
 5. Кнопка "canculate color" - DONE
-6. Сверстать три страницы
+6. Сверстать все страницы
 7. Добавить функционал поиска по сайту
 сайтmap octopus.do/ffvvih840cc
 
@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	let icon = document.querySelector('.icon'); // кнопка рандомного подбора
 	let editButtns = document.querySelectorAll('.butt'); // кнопки редактирования гаммы
 	let result = []; // цвет разделенный на HSL каналы в массиве из трёх значений
-	let color1 = document.querySelector('.color1')
 
 	// let cout = [
 		let cou1 = 0, cou2 = 1, cou3 = 2, cou4 = 3, 
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	let spanActive = document.querySelector('span.active')
 	let textColorBuffer; // содержит имя цвета
 	let textColor = document.createElement('textCol'); // показывает имя цвета
-	let forslice ;
 
 	//______Active Color_________//
 
@@ -49,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
 			
 				textColorBuffer = rgb2hex(color.style.background);
-				// sliceColor(spanActive);
+				sliceColor(spanActive);
 			};
 		});
 	};
@@ -86,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 			forslice = document.querySelector('span.active');
-		sliceColor()
+			sliceColor(spanActive)
 			console.log(result[0], result[1], result[2]);
 		
 		}
@@ -126,27 +124,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	function calcCouPlus(){ // запускаем перебор гаммы в *+* режима БЕЗ *span.active*
-		// calcColor(counterPlus)
+		calcColor(counterPlus)
 		console.log('privet')
 	};
 	function calcCouMinus(){ // запускаем перебор гаммы в *-* режима БЕЗ *span.active*
-		actColorCalc(color1, arrayHue, arraySatur, arrayLight, counterPlus);
-		
-	
-		// calcColor(counterMinus)
-		console.log('actColorCalc')
+		calcColor(counterMinus)
+		console.log('privet2')
 	};
     function actCalcCouPus(){ // запускаем перебор гаммы в *+* режима  *span.active*
-		actColorCalc(spanActive, arrayHue, arraySatur, arrayLight, counterPlus);
-		forslice = document.querySelector('span.active');
-		sliceColor()
+		actColorCalc(arrayHue, arrayLight, counterPlus);
 		
 		
 	};
 	function actCalcCouMinus(){ // запускаем перебор гаммы в *-* режима *span.active*
-		actColorCalc(spanActive, arrayHue,arraySatur, arrayLight, counterMinus);
-		forslice = document.querySelector('span.active');
-		sliceColor()
+		actColorCalc(arrayHue, arrayLight, counterMinus)
 
 	}
 	//_______Buttuns_______///
@@ -273,8 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function onClickTab(e){
 		e.addEventListener('click', ()=>{
-			
-			// calcColor(counterPlus);
+			sliceColor();
+			calcColor(counterPlus);
 		},{once:true});
 	}
 		// onClick(tabsBtn[0]);
@@ -331,8 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	/*______CalcColor____________________
 	из выбранного цвета генерируется массив цветов в 
 	8 параметрах тона и в 8 параметрах цвета_*/
-console.log($('.color1').css("backgroundColor"))
 
+	let forslice ;
 
 	function sliceColor(e){
 		e = forslice;
@@ -342,12 +333,16 @@ console.log($('.color1').css("backgroundColor"))
 			const colHsl = RGB2HSL(r, g, b);
 			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
 			
+			// console.log(result)
 			return result;
 		});
-		return e;
+		// return e;
+	
 	};
 	
 	
+
+	let arrHSL;
 
 // function matrixOfColor (h, s, l){
 // 	// sliceColor();
@@ -413,7 +408,37 @@ class ActColorType {
 
 };
 
+const satSteps = [
+	100, 80, 60, 40, 20, 10 , 5, 3
+];
 
+const light_Red_Steps_6 =[
+	22, 24, 26, 26,28, 28, 28, 28
+];
+
+const light_Delta =[
+	5, 10, 20, 5, 19, 20, 4, 84
+];
+
+const hueSteps =[
+	353, 22, 48, 94, 159, 200, 242, 281
+];
+
+
+let massColors = [
+	
+];
+
+// function iLlWin (){
+// 	+result[0] + 10,
+// 	result[1]- satSteps [cou1], 
+// 	result[2] - light_Delta[cou1];
+
+// 	if( result[0] < 22 && result[0]>0 && result[2] >22 && result[2] <28 ) { 
+// 		massColors.push(result[2])
+// 		};
+// 		console.log[massColors]
+// }
 let arrayLight =[
 	97,	93,	72,	53,  	48,	28,	18,	13
 ];
@@ -426,7 +451,7 @@ let arrayHue = [
 // 	240, 159, 94, 315,  296, 161, 308, 271
 // ];
 let arraySatur = [
-	50, 50, 50, 50,  50, 50, 50, 50
+	40, 40, 40, 60,  80, 90, 95, 100
 ];
 
 ;
@@ -442,17 +467,18 @@ let arrStyleColor =[
 ];
 
 
-	function actColorCalc( mainColor, gammaHue, gammaSat, gammaLight, callback) {
 
-		forslice = mainColor;
-		
+	function actColorCalc(gammaHue, gammaLight, callback) {
 			arrStyleColor.forEach((item, i)=>{
 		
 					let delta;
 					
+					// if (i > gamma.length-1) {
+					// 	i = 0
+					// };
 					let newArrayLight = gammaLight.map((item, i) =>{
 						
-							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.23)}
+							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.08)}
 						else if(result[2] <= 13 && result[2] >= 0) {delta =0}
 
 						else if(result[2] <= gammaLight[0]  && result[2] >=  gammaLight[1])   {delta = gammaLight[0] - result[2]}
@@ -467,128 +493,62 @@ let arrStyleColor =[
 						return item - delta;
 					});
 					
-					let newArrayHue = gammaHue.map(item1 =>{
-						let deltaHue = 360- result[0];
-						deltaHue/0.123
+					let newArrayHue = gammaHue.map(item =>{
+						// let deltaHue;
+						// if(gammaHue[i]){ deltaHue = gammaHue[i] - (result[0]/18) };
 
-						return  item1 - deltaHue;
+							
+
+						// console.log(item)
+						return  item;
 						
 					});
 
+					    
+
 					// counterPlus(newArrayHue);
-					counterPlus(arrStyleColor);
-					
+					// counterPlus(newArrayLight);
+					console.log(newArrayHue[cou2])
 
-					// $('span.active').siblings(item).css("background", 
-					// 		`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
+					$('span.active').siblings(item).css("background", 
+							`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
 
-						   if(newArrayHue[cou2]>= 0  && newArrayHue[cou2]<= 22)  
-					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 85 }%)`)
-					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 82 }%)`)
-					 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 79 }%)`)
-					 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 46 }%)`)
-					 $(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 43 }%)`)
-					 $(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 22 }%)`)
-					 $(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 14 }%)`)
-					 $(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[i]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 9  }%)`)
-					}
-					else if( newArrayHue[cou2] >= 23  && newArrayHue[cou2] <= 48)  
-					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 81 }%)`)
-					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 82 }%)`)
-					 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 65 }%)`)
-					 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 42 }%)`)
-					 $(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 36 }%)`)
-					 $(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 23 }%)`)
-					 $(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 13 }%)`)
-					 $(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 9  }%)`)
-					}
-					else if( newArrayHue[cou2] >= 49  && newArrayHue[cou2] <= 93) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 82 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 68 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 50 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 31 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 28 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 15 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 11 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 7  }%)`)
-					}
-					else if( newArrayHue[cou2] >= 94 && newArrayHue[cou2] <= 158) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 85 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 74 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 44 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 32 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 29 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 16 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 11 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 7  }%)`)
-				   }
-					else if( newArrayHue[cou2] >= 159 && newArrayHue[cou2] <= 199) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 86 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 79 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 44 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 33 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 27 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 17 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 11 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 7  }%)`)
-				   }
-					else if( newArrayHue[cou2] >= 200 && newArrayHue[cou2] <= 241) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 87 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 82 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 70 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 46 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 41 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 23 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 15 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 9  }%)`)
-				   }
-					else if( newArrayHue[cou2] >= 242 && newArrayHue[cou2] <= 280) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 88 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 86 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 85 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 72 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 67 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 49 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 30 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 26 }%)`)
-				   }
-					else if( newArrayHue[cou2] >= 281 && newArrayHue[cou2] <= 352) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 87 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 85 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 81 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 64 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 55 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 27 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 18 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 15 }%)`)
-				   }
-					else if(newArrayHue[cou2] >= 353  && newArrayHue[cou2] <= 360)  
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 85 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 82 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 79 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 46 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 43 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 22 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 14 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[i]}%, ${ +newArrayLight[i] + 9  }%)`)
-				   }
 
-					if(newArrayLight[i] == 100){$(tabsContent).siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${ newArrayLight[i]-11}%)`)}
-					else if(newArrayLight[i] == 0){$(tabsContent).siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${ newArrayLight[i]+11}%)`)}
+					if(newArrayHue[cou1]<= 22  && newArrayHue[cou1]>= 354)  
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-0}%)`)}
+
+					else if( newArrayHue[cou2] <= 48  && newArrayHue[cou2] >= 23)  
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 94  && newArrayHue[cou2] >= 49) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 159 && newArrayHue[cou2] >= 95) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 200 && newArrayHue[cou2] >= 160) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 242 && newArrayHue[cou2] >= 201) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 281 && newArrayHue[cou2] >= 243) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+
+					else if( newArrayHue[cou2] <= 353 && newArrayHue[cou2] >= 282) 
+					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+				
 			});
-
+			
 			callback(arrStyleColor);
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
 			// callback(counterPlus);
 			// return gamma
-		console.log('good')	
-	
+			
 	};
 
-	forslice = color1;
-		sliceColor()
-	actColorCalc(color1, arrayHue, arraySatur, arrayLight, counterPlus);
+	
 
 
 	// actColorCalc()
@@ -891,8 +851,8 @@ let arrStyleColor =[
 				callback(arryTable_1_Step);
 				color1.forEach((item) => {
 				
-					item.style.background = new colorGamma(tabsBtn[0], arrTon[ cou2 ]).fillColor() ;
-					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou3 ]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[0], arryTable_2_Step[ cou1 ]).fillColor() ;
+					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou1 ]).fillColor();
 					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou1 ]).fillColor();
@@ -980,7 +940,7 @@ let arrStyleColor =[
 		});
 	};
 
-	// calcColor(counterPlus);
+	calcColor(counterPlus);
 	
 	//___COUNTER____///
 	function counterPlus(a) {
@@ -1013,7 +973,7 @@ let arrStyleColor =[
 			if (cou8 > a.length-1) {
 				cou8 = 0
 			};
-			// console.log('plus')
+			console.log('plus')
 			// return a;
 			
 		};
@@ -1053,7 +1013,7 @@ let arrStyleColor =[
 		if (cou8<0) {
 			cou8 = a.length-1
 		};
-		// console.log('minus');
+		console.log('minus');
 		return a;
 	}
 	// cou1, cou2, cou3, cou4, cou5, cou6, cou7, cou8,
