@@ -442,19 +442,34 @@ let massColors = [
 let arrayLight =[
 	97,	93,	72,	53,  	48,	28,	18,	13
 ];
+// let arrayLight = [
+// 	60,	53,	483,	72, 72,	28,	90, 48
+// ];
 
+// let arrayHue = [
+// 	353, 22, 48, 94,  159, 200, 242, 281
+// ];
 let arrayHue = [
-	353, 22, 48, 94,  159, 200, 242, 281
+	159, 190, 210, 250,  220, 48, 70, 180
 ];
 
 // let arrayHue = [
 // 	240, 159, 94, 315,  296, 161, 308, 271
 // ];
+// let arraySatur = [
+// 	50, 50, 50, 50,  50, 50, 50, 50
+// ];
 let arraySatur = [
+<<<<<<< HEAD
 	40, 40, 40, 60,  80, 90, 95, 100
+=======
+	20, 15, 10, 5, 20, 15, 10, 5,
+>>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 ];
+// let arraySatur = [
+// 	97,	93,	72,	53,  	48,	28,	18,	13
+// ];
 
-;
 let arrStyleColor =[
 	'.color1',
 	'.color2',
@@ -470,15 +485,18 @@ let arrStyleColor =[
 
 	function actColorCalc(gammaHue, gammaLight, callback) {
 			arrStyleColor.forEach((item, i)=>{
-		
-					let delta;
 					
 					// if (i > gamma.length-1) {
 					// 	i = 0
 					// };
 					let newArrayLight = gammaLight.map((item, i) =>{
+<<<<<<< HEAD
 						
 							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.08)}
+=======
+						let delta;
+							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.23)}
+>>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 						else if(result[2] <= 13 && result[2] >= 0) {delta =0}
 
 						else if(result[2] <= gammaLight[0]  && result[2] >=  gammaLight[1])   {delta = gammaLight[0] - result[2]}
@@ -492,6 +510,7 @@ let arrStyleColor =[
 
 						return item - delta;
 					});
+<<<<<<< HEAD
 					
 					let newArrayHue = gammaHue.map(item =>{
 						// let deltaHue;
@@ -502,17 +521,29 @@ let arrStyleColor =[
 						// console.log(item)
 						return  item;
 						
+=======
+
+					let newArrayHue = gammaHue.map(item =>{
+						let deltaHue = (200- result[0]);
+						return  +item + deltaHue ;
+>>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 					});
 
 					    
 
 					// counterPlus(newArrayHue);
+<<<<<<< HEAD
 					// counterPlus(newArrayLight);
 					console.log(newArrayHue[cou2])
+=======
+					// counterPlus(arrStyleColor);
+					
+>>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 
 					$('span.active').siblings(item).css("background", 
 							`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
 
+<<<<<<< HEAD
 
 					if(newArrayHue[cou1]<= 22  && newArrayHue[cou1]>= 354)  
 					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-0}%)`)}
@@ -522,6 +553,102 @@ let arrStyleColor =[
 
 					else if( newArrayHue[cou2] <= 94  && newArrayHue[cou2] >= 49) 
 					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
+=======
+						   if(newArrayHue[cou2]>= 0  && newArrayHue[cou2]<= 22)  
+					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]}%, ${ +newArrayLight[i] + 85 }%)`)
+					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]}%, ${ +newArrayLight[i] + 82 }%)`)
+					 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]}%, ${ +newArrayLight[i] + 79 }%)`)
+					 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4]}%, ${ +newArrayLight[i] + 46 }%)`)
+					 $(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]}%, ${ +newArrayLight[i] + 43 }%)`)
+					 $(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]}%, ${ +newArrayLight[i] + 22 }%)`)
+					 $(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]}%, ${ +newArrayLight[i] + 14 }%)`)
+					 $(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8]}%, ${ +newArrayLight[i] + 9  }%)`)
+					}
+					else if( newArrayHue[cou2] >= 23  && newArrayHue[cou2] <= 48)  
+				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 81 }%)`)
+					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 75 }%)`)
+					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 65 }%)`)
+					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 42 }%)`)
+					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 36 }%)`)
+					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 23 }%)`)
+					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 13 }%)`)
+					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +30 }%, ${ +newArrayLight[i] + 9  }%)`)
+					}
+					else if( newArrayHue[cou2] >= 49  && newArrayHue[cou2] <= 93) 
+				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 78 }%)`)
+					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 68 }%)`)
+					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 53 }%)`)
+					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +35 }%, ${ +newArrayLight[i] + 31 }%)`)
+					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +5  }%, ${ +newArrayLight[i] + 28 }%)`)
+					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +30 }%, ${ +newArrayLight[i] + 15 }%)`)
+					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +5  }%, ${ +newArrayLight[i] + 11 }%)`)
+					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +10 }%, ${ +newArrayLight[i] + 7  }%)`)
+					}
+					else if( newArrayHue[cou2] >= 94 && newArrayHue[cou2] <= 158) 
+				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 81 }%)`)
+					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 74 }%)`)
+					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 55 }%)`)
+					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +20 }%, ${ +newArrayLight[i] + 32 }%)`)
+					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 29 }%)`)
+					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 18 }%)`)
+					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 13 }%)`)
+					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8]     }%, ${ +newArrayLight[i] + 9  }%)`)
+				   }
+					else if( newArrayHue[cou2] >= 159 && newArrayHue[cou2] <= 199) 
+				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 83 }%)`)
+					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 77 }%)`)
+					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 60 }%)`)
+					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 33 }%)`)
+					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +10 }%, ${ +newArrayLight[i] + 27 }%)`)
+					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +10 }%, ${ +newArrayLight[i] + 17 }%)`)
+					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +20 }%, ${ +newArrayLight[i] + 11 }%)`)
+					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +20 }%, ${ +newArrayLight[i] + 8  }%)`)
+				   }
+					else if( newArrayHue[cou2] >= 200 && newArrayHue[cou2] <= 241) 
+				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1] +30 }%, ${ +newArrayLight[i] + 85 }%)`)
+					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2] +50 }%, ${ +newArrayLight[i] + 82 }%)`)
+					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +70 }%, ${ +newArrayLight[i] + 74 }%)`)
+					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +20 }%, ${ +newArrayLight[i] + 53 }%)`)
+					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 41 }%)`)
+					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +5  }%, ${ +newArrayLight[i] + 28 }%)`)
+					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +10 }%, ${ +newArrayLight[i] + 20 }%)`)
+					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +20 }%, ${ +newArrayLight[i] + 15  }%)`)
+				   }
+					else if( newArrayHue[cou2] >= 242 && newArrayHue[cou2] <= 280) 
+				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1] +20  }%, ${ +newArrayLight[i] + 84 }%)`)
+					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2] +20  }%, ${ +newArrayLight[i] + 79 }%)`)
+					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +30  }%, ${ +newArrayLight[i] + 75 }%)`)
+					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +30  }%, ${ +newArrayLight[i] + 68 }%)`)
+					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +30  }%, ${ +newArrayLight[i] + 65 }%)`)
+					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +30  }%, ${ +newArrayLight[i] + 55 }%)`)
+					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +30  }%, ${ +newArrayLight[i] + 48 }%)`)
+					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +30  }%, ${ +newArrayLight[i] + 40 }%)`)
+				   }
+					else if( newArrayHue[cou2] >= 281 && newArrayHue[cou2] <= 352) 
+				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 85 }%)`)
+					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 83 }%)`)
+					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +10 }%, ${ +newArrayLight[i] + 77 }%)`)
+					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 64 }%)`)
+					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 55 }%)`)
+					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 33}%)`)
+					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 25 }%)`)
+					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] -5  }%, ${ +newArrayLight[i] + 18 }%)`)
+				   }
+					else if(newArrayHue[cou2] >= 353  && newArrayHue[cou2] <= 360)  
+					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 85 }%)`)
+					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 82 }%)`)
+					 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 75 }%)`)
+					 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4]     }%, ${ +newArrayLight[i] + 48 }%)`)
+					 $(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 35 }%)`)
+					 $(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 22 }%)`)
+					 $(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 14 }%)`)
+					 $(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8]     }%, ${ +newArrayLight[i] + 9  }%)`)
+					}
+
+					//    if(newArrayLight[i] == 100){$(tabsContent).siblings(item).css("background", `hsl(${newArrayHue[i]}, ${50}%, ${ newArrayLight[i]-11}%)`)}
+					// else if(newArrayLight[i] == 0){$(tabsContent).siblings(item).css("background", `hsl(${newArrayHue[i]}, ${50}%, ${ newArrayLight[i]+11}%)`)}
+			});
+>>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 
 					else if( newArrayHue[cou2] <= 159 && newArrayHue[cou2] >= 95) 
 					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
