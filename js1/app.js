@@ -1,14 +1,13 @@
-"use strict"
-/*Plan
+use strict"
+/*Plan_Committtttttttt
 1. Сделать выбор цвета по клику на цвете - DONE
 2   выбор образца цвета по движению мыши - DONE
 3. Функция добавить/убрать блока - DONE
-4. Выпадающее меню для меню
+4. Выпадающее меню для меню  DONE
 5. Кнопка "canculate color" - DONE
-6. Сверстать все страницы
+6. Сверстать три страницы
 7. Добавить функционал поиска по сайту
 сайтmap octopus.do/ffvvih840cc
-
 */
 
 //  poem___________ChooCol______________   //
@@ -26,8 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	let icon = document.querySelector('.icon'); // кнопка рандомного подбора
 	let editButtns = document.querySelectorAll('.butt'); // кнопки редактирования гаммы
 	let result = []; // цвет разделенный на HSL каналы в массиве из трёх значений
+	let color1 = document.querySelector('.color1')
 
-	// let cout = [
+	let counter = [0,1,2,3,4,5,6,7];
 		let cou1 = 0, cou2 = 1, cou3 = 2, cou4 = 3, 
 		cou5 = 4, cou6 = 5, cou7 = 6, cou8 = 7;
 	 //счётчики пребора цветов в каждом блоке
@@ -35,6 +35,46 @@ document.addEventListener('DOMContentLoaded', () => {
 	let spanActive = document.querySelector('span.active')
 	let textColorBuffer; // содержит имя цвета
 	let textColor = document.createElement('textCol'); // показывает имя цвета
+	let forslice ;
+
+
+let arrayLight =[
+	97,	93,	72,	53,  	48,	28,	18,	13
+];
+// let arrayLight = [
+// 	60,	53,	483,	72, 72,	28,	90, 48
+// ];
+
+// let arrayHue = [
+// 	353, 22, 48, 94,  159, 200, 242, 281
+// ];
+let arrayHue = [
+	159, 190, 210, 250,  220, 48, 70, 180
+];
+
+// let arrayHue = [
+// 	240, 159, 94, 315,  296, 161, 308, 271
+// ];
+let arraySatur = [
+	50, 50, 50, 50,  50, 50, 50, 50
+];
+// let arraySatur = [
+// 	20, 15, 10, 5, 20, 15, 10, 5,
+// ];
+// let arraySatur = [
+// 	97,	93,	72,	53,  	48,	28,	18,	13
+// ];
+
+let arrStyleColor =[
+	'.color1',
+	'.color2',
+	'.color3',
+	'.color4',
+	'.color5',
+	'.color6',
+	'.color7',
+	'.color8',
+];
 
 	//______Active Color_________//
 
@@ -47,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				//помещаем в  переменную *textColorBuffer*  имя HEX активного цвета
 			
 				textColorBuffer = rgb2hex(color.style.background);
-				sliceColor(spanActive);
+				// sliceColor(spanActive);
 			};
 		});
 	};
@@ -84,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			editButtns[1].addEventListener('click', actCalcCouMinus); //добавляем пребор гаммы в "-" с *span.active*  
 			window.removeEventListener('mousemove', sorTable); //удаляем возможность перетаскивания блоков
 			forslice = document.querySelector('span.active');
-			sliceColor(spanActive)
+				sliceColor()
 			console.log(result[0], result[1], result[2]);
 		
 		}
@@ -97,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			const target = e.target;
 				target.classList.remove('active');
 				textColor.remove();
-				editButtns[0].addEventListener('click', calcCouPlus);  //добовляем оброботчики перебора гаммы в режиме  *span.active*
-				editButtns[1].addEventListener('click', calcCouMinus);
+				editButtns[0].addEventListener('click', calcCouMinus);  //добовляем оброботчики перебора гаммы в режиме  *span.active*
+				editButtns[1].addEventListener('click', calcCouPlus);
 				editButtns[0].removeEventListener('click', actCalcCouPus); //удаляем оброботчики перебора гаммы в режиме БЕЗ *span.active*
 				editButtns[1].removeEventListener('click', actCalcCouMinus);
 				window.addEventListener('mousemove', sorTable); //включаем возможность перетаскивания блоков
@@ -123,21 +163,28 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 
-	function calcCouPlus(){ // запускаем перебор гаммы в *+* режима БЕЗ *span.active*
-		calcColor(counterPlus)
-		console.log('privet')
+	function calcCouPlus(){ // запускаем перебор гаммы в plus режима БЕЗ *span.active*
+		actColorCalc(color1, arrayHue, arraySatur, arrayLight, counterPlus);
+		
 	};
-	function calcCouMinus(){ // запускаем перебор гаммы в *-* режима БЕЗ *span.active*
-		calcColor(counterMinus)
-		console.log('privet2')
+	function calcCouMinus(){ // запускаем перебор гаммы в minus режима БЕЗ *span.active*
+		actColorCalc(color1, arrayHue, arraySatur, arrayLight, counterMinus);
+		
+	
+		// calcColor(counterMinus)
+		console.log('actColorCalc')
 	};
     function actCalcCouPus(){ // запускаем перебор гаммы в *+* режима  *span.active*
-		actColorCalc(arrayHue, arrayLight, counterPlus);
+		actColorCalc(spanActive, arrayHue, arraySatur, arrayLight, counterPlus);
+		forslice = document.querySelector('span.active');
+		sliceColor()
 		
 		
 	};
 	function actCalcCouMinus(){ // запускаем перебор гаммы в *-* режима *span.active*
-		actColorCalc(arrayHue, arrayLight, counterMinus)
+		actColorCalc(spanActive, arrayHue,arraySatur, arrayLight, counterMinus);
+		forslice = document.querySelector('span.active');
+		sliceColor()
 
 	}
 	//_______Buttuns_______///
@@ -180,14 +227,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (y >= arryAddColor.length-1) {
 					y = 1
 				};
-				counterPlus(arryTable_3_Step);
+				counterPlus(arrayHue);
 				y++;
-				let newColor = $(arryAddColor[y]).insertAfter('span.active');
+				let newColor = $(arrStyleColor[cou1]).insertAfter('span.active');
 				if (tabsBtn[0].classList.contains('active')){
-					$(newColor).css("background-color", `${arryTable_1_Step[ cou1 ]}`);
+					$(newColor).css("background-color", `hsl(${arrayHue[cou1]}, ${arraySatur[cou1]}%, ${ arrayLight[cou1]}%)`);
 				};
 				if (tabsBtn[1].classList.contains('active')){
-					$(newColor).css("background-color", `${arryTable_5_Step[ cou1 ]}`);
+					$(newColor).css("background-color", `hsl(${arrayHue[cou1]}, ${arraySatur[cou1]}%, ${ arrayLight[cou1]}%)`);
 				};
 
 			};
@@ -247,25 +294,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 
-	// function colorGallery (colorClass, room, ){
-	// 	let colorClassTarget = colorClass.target;
-	// 	if (colorClassTarget && colorClassTarget.classList.contains('color1')) {
-	// 		counterPlus(arryTable_3_Step);
-	// 		colorClassTarget.style.background = arryTable_3_Step[ cou1 ];
-	// 		console.log('привет')
-	// 	}
-
-	// 	console.log(colorClassTarget);
-
-	// }
-	// $(tabsContent).on('click', colorGallery);
 
 	$(tabsBtn).on('click', clickTabsBtn);
 
 	function onClickTab(e){
 		e.addEventListener('click', ()=>{
-			sliceColor();
-			calcColor(counterPlus);
+			
+			// calcColor(counterPlus);
 		},{once:true});
 	}
 		// onClick(tabsBtn[0]);
@@ -322,8 +357,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	/*______CalcColor____________________
 	из выбранного цвета генерируется массив цветов в 
 	8 параметрах тона и в 8 параметрах цвета_*/
+console.log($('.color1').css("backgroundColor"))
 
-	let forslice ;
 
 	function sliceColor(e){
 		e = forslice;
@@ -333,158 +368,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			const colHsl = RGB2HSL(r, g, b);
 			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
 			
-			// console.log(result)
 			return result;
 		});
-		// return e;
-	
-	};
-	
-	
-
-	let arrHSL;
-
-// function matrixOfColor (h, s, l){
-// 	// sliceColor();
-// 	// switch (result[1]) {
-// 	// 	case 43.5:
-// 	// 		s = s + result[1];
-// 	// 		break;
-// 	// 	case 20:
-// 	// 		s = s - result[1];
-// 	// 	break;
-// 	// == randomInteger(0 , 50 )}
-// 	let	;
-// 	if (result[1] < 50 ){s = s + 40};
-// 	// else {s - 10 };
-
-// 	if (result[2] < 50){l = l  + 40};
-// 	// else {l - 10};
-
-// 		// h = result[0] - h;
-// 		// s = result[1] - s;
-// 		// l = result[2] - l;
-
-	
-// 	// console.log( result[0])
-// 	return res;
-
-// };
-//
-class ActColorType {
-	constructor(Hue, Sat, Light) {
-		this.Hue = Hue;
-		this.Sat = Sat;
-		this.Light = Light;
-	}
-	
-	calcTone(h, s, l) {
-		this.Hue =  result[0]; 
-		this.Sat =  result[1]; 
-		this.Light =  result[2];
-		
-		let res;
-		if(this.Hue == randomInteger(0, 20)){
-			$('span.active').siblings('.color1').css("background",  
-			`hsl(${ 20 }, ${ randomInteger(5, 100) }%, ${ randomInteger(22, 28)}%)`)	
-	
-		}
-		// h = + this.Hue + h;
-		// // if(this.Hue < 20 ){s = 33, l = 94}
-		// if(this.Sat < 10 ){s = + this.Sat + s +10}
-		// else if(this.Sat < 50 ){s =  +this.Sat + s}
-		// else if(this.Sat > 90 ){s =  this.Sat - s};
-
-		// if(this.Light < 13 ){l = + this.Light + l +10}
-		// else if(this.Light < 50 ){l = + this.Light + l}
-		// else if(this.Light > 90 ){l = this.Light - l};
-		
-		// else { s = this.Sat - s ; l = this.Light - l};
-
-		// h = -this.Hue - h;
-		res = `hsl(${ h }, ${ s }%, ${ l }%)`;
-		return res;
+		return e;
 	};
 
-};
-
-const satSteps = [
-	100, 80, 60, 40, 20, 10 , 5, 3
-];
-
-const light_Red_Steps_6 =[
-	22, 24, 26, 26,28, 28, 28, 28
-];
-
-const light_Delta =[
-	5, 10, 20, 5, 19, 20, 4, 84
-];
-
-const hueSteps =[
-	353, 22, 48, 94, 159, 200, 242, 281
-];
-
-
-let massColors = [
 	
-];
+	function actColorCalc( mainColor, gammaHue, gammaSat, gammaLight, callback) {
 
-// function iLlWin (){
-// 	+result[0] + 10,
-// 	result[1]- satSteps [cou1], 
-// 	result[2] - light_Delta[cou1];
-
-// 	if( result[0] < 22 && result[0]>0 && result[2] >22 && result[2] <28 ) { 
-// 		massColors.push(result[2])
-// 		};
-// 		console.log[massColors]
-// }
-let arrayLight =[
-	97,	93,	72,	53,  	48,	28,	18,	13
-];
-// let arrayLight = [
-// 	60,	53,	483,	72, 72,	28,	90, 48
-// ];
-
-// let arrayHue = [
-// 	353, 22, 48, 94,  159, 200, 242, 281
-// ];
-let arrayHue = [
-	159, 190, 210, 250,  220, 48, 70, 180
-];
-
-// let arrayHue = [
-// 	240, 159, 94, 315,  296, 161, 308, 271
-// ];
-// let arraySatur = [
-// 	50, 50, 50, 50,  50, 50, 50, 50
-// ];
-let arraySatur = [
-	20, 15, 10, 5, 20, 15, 10, 5,
-];
-// let arraySatur = [
-// 	97,	93,	72,	53,  	48,	28,	18,	13
-// ];
-
-let arrStyleColor =[
-	'.color1',
-	'.color2',
-	'.color3',
-	'.color4',
-	'.color5',
-	'.color6',
-	'.color7',
-	'.color8',
-];
-
-
-
-	function actColorCalc(gammaHue, gammaLight, callback) {
+		forslice = mainColor;
+		
 			arrStyleColor.forEach((item, i)=>{
-					
-					// if (i > gamma.length-1) {
-					// 	i = 0
-					// };
+					i = counter[i];
 					let newArrayLight = gammaLight.map((item, i) =>{
 						let delta;
 							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.23)}
@@ -503,139 +398,124 @@ let arrStyleColor =[
 					});
 
 					let newArrayHue = gammaHue.map(item =>{
-						let deltaHue = (200- result[0]);
-						return  +item + deltaHue ;
+						let deltaHue = (180- result[0]);
+						return  +item - deltaHue ;
 					});
-
-					    
 
 					// counterPlus(newArrayHue);
 					// counterPlus(arrStyleColor);
 					
 
-					$('span.active').siblings(item).css("background", 
-							`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
+					// $('span.active').siblings(item).css("background", 
+					// 		`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
 
-						   if(newArrayHue[cou2]>= 0  && newArrayHue[cou2]<= 22)  
-					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]}%, ${ +newArrayLight[i] + 85 }%)`)
-					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]}%, ${ +newArrayLight[i] + 82 }%)`)
-					 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]}%, ${ +newArrayLight[i] + 79 }%)`)
-					 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4]}%, ${ +newArrayLight[i] + 46 }%)`)
-					 $(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]}%, ${ +newArrayLight[i] + 43 }%)`)
-					 $(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]}%, ${ +newArrayLight[i] + 22 }%)`)
-					 $(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]}%, ${ +newArrayLight[i] + 14 }%)`)
-					 $(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8]}%, ${ +newArrayLight[i] + 9  }%)`)
+						   if(newArrayHue[i++]>= 0  && newArrayHue[i++]<= 360)  
+					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[counter[0]]}, ${gammaSat[0]}%, ${ +newArrayLight[i] + 85 }%)`)
+					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[counter[1]]}, ${gammaSat[1]}%, ${ +newArrayLight[i] + 82 }%)`)
+					 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[counter[2]]}, ${gammaSat[2]}%, ${ +newArrayLight[i] + 79 }%)`)
+					 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[counter[3]]}, ${gammaSat[3]}%, ${ +newArrayLight[i] + 46 }%)`)
+					 $(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[counter[4]]}, ${gammaSat[4]}%, ${ +newArrayLight[i] + 43 }%)`)
+					 $(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[counter[5]]}, ${gammaSat[5]}%, ${ +newArrayLight[i] + 22 }%)`)
+					 $(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[counter[6]]}, ${gammaSat[6]}%, ${ +newArrayLight[i] + 14 }%)`)
+					 $(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[counter[7]]}, ${gammaSat[7]}%, ${ +newArrayLight[i] + 9  }%)`)
 					}
-					else if( newArrayHue[cou2] >= 23  && newArrayHue[cou2] <= 48)  
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 81 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 75 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 65 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 42 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 36 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 23 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 13 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +30 }%, ${ +newArrayLight[i] + 9  }%)`)
-					}
-					else if( newArrayHue[cou2] >= 49  && newArrayHue[cou2] <= 93) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 78 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 68 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 53 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +35 }%, ${ +newArrayLight[i] + 31 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +5  }%, ${ +newArrayLight[i] + 28 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +30 }%, ${ +newArrayLight[i] + 15 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +5  }%, ${ +newArrayLight[i] + 11 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +10 }%, ${ +newArrayLight[i] + 7  }%)`)
-					}
-					else if( newArrayHue[cou2] >= 94 && newArrayHue[cou2] <= 158) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 81 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 74 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 55 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +20 }%, ${ +newArrayLight[i] + 32 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 29 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 18 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 13 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8]     }%, ${ +newArrayLight[i] + 9  }%)`)
-				   }
-					else if( newArrayHue[cou2] >= 159 && newArrayHue[cou2] <= 199) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 83 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 77 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 60 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 33 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +10 }%, ${ +newArrayLight[i] + 27 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +10 }%, ${ +newArrayLight[i] + 17 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +20 }%, ${ +newArrayLight[i] + 11 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +20 }%, ${ +newArrayLight[i] + 8  }%)`)
-				   }
-					else if( newArrayHue[cou2] >= 200 && newArrayHue[cou2] <= 241) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1] +30 }%, ${ +newArrayLight[i] + 85 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2] +50 }%, ${ +newArrayLight[i] + 82 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +70 }%, ${ +newArrayLight[i] + 74 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +20 }%, ${ +newArrayLight[i] + 53 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 41 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +5  }%, ${ +newArrayLight[i] + 28 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +10 }%, ${ +newArrayLight[i] + 20 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +20 }%, ${ +newArrayLight[i] + 15  }%)`)
-				   }
-					else if( newArrayHue[cou2] >= 242 && newArrayHue[cou2] <= 280) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1] +20  }%, ${ +newArrayLight[i] + 84 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2] +20  }%, ${ +newArrayLight[i] + 79 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +30  }%, ${ +newArrayLight[i] + 75 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +30  }%, ${ +newArrayLight[i] + 68 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +30  }%, ${ +newArrayLight[i] + 65 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +30  }%, ${ +newArrayLight[i] + 55 }%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +30  }%, ${ +newArrayLight[i] + 48 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +30  }%, ${ +newArrayLight[i] + 40 }%)`)
-				   }
-					else if( newArrayHue[cou2] >= 281 && newArrayHue[cou2] <= 352) 
-				   {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 85 }%)`)
-					$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 83 }%)`)
-					$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +10 }%, ${ +newArrayLight[i] + 77 }%)`)
-					$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 64 }%)`)
-					$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 55 }%)`)
-					$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 33}%)`)
-					$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 25 }%)`)
-					$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] -5  }%, ${ +newArrayLight[i] + 18 }%)`)
-				   }
-					else if(newArrayHue[cou2] >= 353  && newArrayHue[cou2] <= 360)  
-					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 85 }%)`)
-					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 82 }%)`)
-					 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 75 }%)`)
-					 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4]     }%, ${ +newArrayLight[i] + 48 }%)`)
-					 $(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 35 }%)`)
-					 $(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 22 }%)`)
-					 $(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 14 }%)`)
-					 $(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8]     }%, ${ +newArrayLight[i] + 9  }%)`)
-					}
+				// 	else if( newArrayHue[cou2] >= 23  && newArrayHue[cou2] <= 48)  
+				//    {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 81 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 75 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 65 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 42 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 36 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 23 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 13 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +30 }%, ${ +newArrayLight[i] + 9  }%)`)
+				// 	}
+				// 	else if( newArrayHue[cou2] >= 49  && newArrayHue[cou2] <= 93) 
+				//    {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 78 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 68 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 53 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +35 }%, ${ +newArrayLight[i] + 31 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +5  }%, ${ +newArrayLight[i] + 28 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +30 }%, ${ +newArrayLight[i] + 15 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +5  }%, ${ +newArrayLight[i] + 11 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +10 }%, ${ +newArrayLight[i] + 7  }%)`)
+				// 	}
+				// 	else if( newArrayHue[cou2] >= 94 && newArrayHue[cou2] <= 158) 
+				//    {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 81 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 74 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 55 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +20 }%, ${ +newArrayLight[i] + 32 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 29 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 18 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 13 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8]     }%, ${ +newArrayLight[i] + 9  }%)`)
+				//    }
+				// 	else if( newArrayHue[cou2] >= 159 && newArrayHue[cou2] <= 199) 
+				//    {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 83 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 77 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 60 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 33 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +10 }%, ${ +newArrayLight[i] + 27 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +10 }%, ${ +newArrayLight[i] + 17 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +20 }%, ${ +newArrayLight[i] + 11 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +20 }%, ${ +newArrayLight[i] + 8  }%)`)
+				//    }
+				// 	else if( newArrayHue[cou2] >= 200 && newArrayHue[cou2] <= 241) 
+				//    {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1] +30 }%, ${ +newArrayLight[i] + 85 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2] +50 }%, ${ +newArrayLight[i] + 82 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +70 }%, ${ +newArrayLight[i] + 74 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +20 }%, ${ +newArrayLight[i] + 53 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 41 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +5  }%, ${ +newArrayLight[i] + 28 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +10 }%, ${ +newArrayLight[i] + 20 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +20 }%, ${ +newArrayLight[i] + 15  }%)`)
+				//    }
+				// 	else if( newArrayHue[cou2] >= 242 && newArrayHue[cou2] <= 280) 
+				//    {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1] +20  }%, ${ +newArrayLight[i] + 84 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2] +20  }%, ${ +newArrayLight[i] + 79 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +30  }%, ${ +newArrayLight[i] + 75 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +30  }%, ${ +newArrayLight[i] + 68 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5] +30  }%, ${ +newArrayLight[i] + 65 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6] +30  }%, ${ +newArrayLight[i] + 55 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7] +30  }%, ${ +newArrayLight[i] + 48 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] +30  }%, ${ +newArrayLight[i] + 40 }%)`)
+				//    }
+				// 	else if( newArrayHue[cou2] >= 281 && newArrayHue[cou2] <= 352) 
+				//    {$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 85 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 83 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3] +10 }%, ${ +newArrayLight[i] + 77 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4] +10 }%, ${ +newArrayLight[i] + 64 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 55 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 33}%)`)
+				// 	$(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 25 }%)`)
+				// 	$(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8] -5  }%, ${ +newArrayLight[i] + 18 }%)`)
+				//    }
+				// 	else if(newArrayHue[cou2] >= 353  && newArrayHue[cou2] <= 360)  
+				// 	{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]     }%, ${ +newArrayLight[i] + 85 }%)`)
+				// 	 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]     }%, ${ +newArrayLight[i] + 82 }%)`)
+				// 	 $(tabsContent).children(arrStyleColor[2]).css("background", `hsl(${newArrayHue[cou3]}, ${gammaSat[cou3]     }%, ${ +newArrayLight[i] + 75 }%)`)
+				// 	 $(tabsContent).children(arrStyleColor[3]).css("background", `hsl(${newArrayHue[cou4]}, ${gammaSat[cou4]     }%, ${ +newArrayLight[i] + 48 }%)`)
+				// 	 $(tabsContent).children(arrStyleColor[4]).css("background", `hsl(${newArrayHue[cou5]}, ${gammaSat[cou5]     }%, ${ +newArrayLight[i] + 35 }%)`)
+				// 	 $(tabsContent).children(arrStyleColor[5]).css("background", `hsl(${newArrayHue[cou6]}, ${gammaSat[cou6]     }%, ${ +newArrayLight[i] + 22 }%)`)
+				// 	 $(tabsContent).children(arrStyleColor[6]).css("background", `hsl(${newArrayHue[cou7]}, ${gammaSat[cou7]     }%, ${ +newArrayLight[i] + 14 }%)`)
+				// 	 $(tabsContent).children(arrStyleColor[7]).css("background", `hsl(${newArrayHue[cou8]}, ${gammaSat[cou8]     }%, ${ +newArrayLight[i] + 9  }%)`)
+				// 	}
 
 					//    if(newArrayLight[i] == 100){$(tabsContent).siblings(item).css("background", `hsl(${newArrayHue[i]}, ${50}%, ${ newArrayLight[i]-11}%)`)}
 					// else if(newArrayLight[i] == 0){$(tabsContent).siblings(item).css("background", `hsl(${newArrayHue[i]}, ${50}%, ${ newArrayLight[i]+11}%)`)}
 			});
-					if( newArrayHue[cou2] <= 159 && newArrayHue[cou2] >= 95) 
-					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
 
-					else if( newArrayHue[cou2] <= 200 && newArrayHue[cou2] >= 160) 
-					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
-
-					else if( newArrayHue[cou2] <= 242 && newArrayHue[cou2] >= 201) 
-					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
-
-					else if( newArrayHue[cou2] <= 281 && newArrayHue[cou2] >= 243) 
-					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
-
-					else if( newArrayHue[cou2] <= 353 && newArrayHue[cou2] >= 282) 
-					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
-				
-			
-			
-			callback(arrStyleColor);
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
 			
 			// callback(counterPlus);
-			// return gamma
+			// callback(counterPlus);
 			
+		
+		sliceColor()
 	};
 
-	
+	forslice = color1;
+		sliceColor()
+	actColorCalc(color1, arrayHue, arraySatur, arrayLight, counterPlus);
 
 
 	// actColorCalc()
@@ -645,232 +525,6 @@ let arrStyleColor =[
 		let rand = min + Math.random() * (max - min);
 		return Math.floor(rand);
 	}
-
-	class colorGamma {
-		constructor(tabsBtn, array) {
-			this.tabsBtn = tabsBtn;
-			this.array = array;
-		}
-		fillColor() {
-			if (this.tabsBtn.classList.contains('active')) {
-				return this.array;
-			}
-		}
-	};
-
-	class ColorType {
-		constructor(Hue, Sat, Light) {
-			this.Hue = Hue;
-			this.Sat = Sat;
-			this.Light = Light;
-		}
-		calcTone(a, b, c, d) {
-			this.Hue = randomInteger(a, b);
-			if (this.Hue > a && this.Hue < b) {
-				this.Sat = c, this.Light = d
-			}
-			let res = `hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`;
-		
-			return res;
-		};
-	};
-//21,  48,  100,  97
-	let arryTable_1_Step = [
-		[new ColorType().calcTone(206, 208, 42,   97)],   /*КРАСНЫЙ*/
-		[new ColorType().calcTone(0,   20,  33,   97)],
-		[new ColorType().calcTone(200, 208, 42,   91)],   /*ОРАНЖЕВЫЙ*/
-		[new ColorType().calcTone(21,  48,  33,   97)], 
-		[new ColorType().calcTone(49,  95,  100,  92)],   /*ЖЕЛТЫЙ*/
-		[new ColorType().calcTone(49,  95,  50,   92)], 
-		[new ColorType().calcTone(96,  158, 100,  95)],   /*ЗЕЛЕНЫЙ*/
-		[new ColorType().calcTone(96,  158, 75,   95)],
-		[new ColorType().calcTone(159, 200, 100,  96)],   /*БИРЮЗОВЫЙ*/
-		[new ColorType().calcTone(159, 200, 68,   96)],
-		[new ColorType().calcTone(201, 240, 100,  97)],   /*ГОЛУБОЙ*/
-		[new ColorType().calcTone(201, 240, 63,   97)],
-		[new ColorType().calcTone(241, 280, 100,  98)],   /*СИНИЙ*/
-		[new ColorType().calcTone(241, 280, 29,   97)],
-		[new ColorType().calcTone(280, 360, 100,  97)],    /*ФИОЛЕТОВЫЙ*/
-		[new ColorType().calcTone(280, 360, 33,   97)] 
-	];
-	
-	let arryTable_2_Step = [
-		[new ColorType().calcTone(0,   20,  100,  95)],   /*КРАСНЫЙ*/
-		[new ColorType().calcTone(0,   20,  43,   93)],
-		[new ColorType().calcTone(21,  48,  100,  92)],   /*ОРАНЖЕВЫЙ*/
-		[new ColorType().calcTone(21,  48,  78,   91)], 
-		[new ColorType().calcTone(49,  95,  100,  78)],   /*ЖЕЛТЫЙ*/
-		[new ColorType().calcTone(49,  95,  53,   85)], 
-		[new ColorType().calcTone(96,  158, 100,  84)],   /*ЗЕЛЕНЫЙ*/
-		[new ColorType().calcTone(96,  158, 58,   86)],
-		[new ColorType().calcTone(159, 200, 100,  89)],   /*БИРЮЗОВЫЙ*/
-		[new ColorType().calcTone(159, 200, 66,   88)],
-		[new ColorType().calcTone(201, 240, 100,  92)],   /*ГОЛУБОЙ*/
-		[new ColorType().calcTone(201, 240, 55,   91)],
-		[new ColorType().calcTone(241, 280, 100,  96)],   /*СИНИЙ*/
-		[new ColorType().calcTone(241, 280, 33,   94)],
-		[new ColorType().calcTone(280, 360, 100,  95)],    /*ФИОЛЕТОВЫЙ*/
-		[new ColorType().calcTone(280, 360, 43,   93)] 
-	];
-	
-	
-
-	let arryTable_3_Step = [
-		[new ColorType().calcTone(0,   20,  100,  79)],   /*КРАСНЫЙ*/
-		[new ColorType().calcTone(0,   20,  55,   78)],
-		[new ColorType().calcTone(21,  48,  100,  65)],   /*ОРАНЖЕВЫЙ*/
-		[new ColorType().calcTone(21,  48,  84,   69)], 
-		[new ColorType().calcTone(49,  95,  100,  50)],   /*ЖЕЛТЫЙ*/
-		[new ColorType().calcTone(49,  95,  53,   85)], 
-		[new ColorType().calcTone(96,  158, 100,  44)],   /*ЗЕЛЕНЫЙ*/
-		[new ColorType().calcTone(96,  158, 43,   63)],
-		[new ColorType().calcTone(159, 200, 100,  44)],   /*БИРЮЗОВЫЙ*/
-		[new ColorType().calcTone(159, 200, 59,   61)],
-		[new ColorType().calcTone(201, 240, 100,  70)],   /*ГОЛУБОЙ*/
-		[new ColorType().calcTone(201, 240, 70,   74)],
-		[new ColorType().calcTone(241, 280, 100,  85)],   /*СИНИЙ*/
-		[new ColorType().calcTone(241, 280, 50,   82)],
-		[new ColorType().calcTone(280, 360, 100,  81)],    /*ФИОЛЕТОВЫЙ*/
-		[new ColorType().calcTone(280, 360, 53,   89)] 
-	];
-	
-	let arryTable_4_Step = [
-		[new ColorType().calcTone(0,   20,  100,  46)],   /*КРАСНЫЙ*/
-		[new ColorType().calcTone(0,   20,  28,   48)],
-		[new ColorType().calcTone(21,  48,  100,  42)],   /*ОРАНЖЕВЫЙ*/
-		[new ColorType().calcTone(21,  48,  34,   50)], 
-		[new ColorType().calcTone(49,  95,  100,  31)],   /*ЖЕЛТЫЙ*/
-		[new ColorType().calcTone(49,  95,  36,   41)], 
-		[new ColorType().calcTone(96,  158, 100,  32)],   /*ЗЕЛЕНЫЙ*/
-		[new ColorType().calcTone(96,  158, 26,   44)],
-		[new ColorType().calcTone(159, 200, 100,  33)],   /*БИРЮЗОВЫЙ*/
-		[new ColorType().calcTone(159, 200, 22,   47)],
-		[new ColorType().calcTone(201, 240, 100,  46)],   /*ГОЛУБОЙ*/
-		[new ColorType().calcTone(201, 240, 39,   52)],
-		[new ColorType().calcTone(241, 280, 100,  72)],   /*СИНИЙ*/
-		[new ColorType().calcTone(241, 280, 44,   55)],
-		[new ColorType().calcTone(280, 360, 100,  64)],    /*ФИОЛЕТОВЫЙ*/
-		[new ColorType().calcTone(280, 360, 33,   58)] 
-	];
-
-	let arryTable_5_Step = [
-		[new ColorType().calcTone(0,   20,  93,   43)],   /*КРАСНЫЙ*/
-		[new ColorType().calcTone(0,   20,  34,   55)],
-		[new ColorType().calcTone(21,  48,  100,  36)],   /*ОРАНЖЕВЫЙ*/
-		[new ColorType().calcTone(21,  48,  38,   46)], 
-		[new ColorType().calcTone(49,  95,  100,  28)],   /*ЖЕЛТЫЙ*/
-		[new ColorType().calcTone(49,  95,  36,   39)], 
-		[new ColorType().calcTone(96,  158, 100,  29)],   /*ЗЕЛЕНЫЙ*/
-		[new ColorType().calcTone(96,  158, 33,   39)],
-		[new ColorType().calcTone(159, 200, 100,  27)],   /*БИРЮЗОВЫЙ*/
-		[new ColorType().calcTone(159, 200, 34,   40)],
-		[new ColorType().calcTone(201, 240, 100,  41)],   /*ГОЛУБОЙ*/
-		[new ColorType().calcTone(201, 240, 37,   48)],
-		[new ColorType().calcTone(241, 280, 100,  67)],   /*СИНИЙ*/
-		[new ColorType().calcTone(241, 280, 55,   63)],
-		[new ColorType().calcTone(280, 360, 100,  55)],    /*ФИОЛЕТОВЫЙ*/
-		[new ColorType().calcTone(280, 360, 41,   54)] 
-	];
-
-	let arryTable_6_Step = [
-		[new ColorType().calcTone(0,   20,  100,  22)],   /*КРАСНЫЙ*/
-		[new ColorType().calcTone(0,   20,  31,   29)],
-		[new ColorType().calcTone(21,  48,  100,  23)],   /*ОРАНЖЕВЫЙ*/
-		[new ColorType().calcTone(21,  48,  36,   27)], 
-		[new ColorType().calcTone(49,  95,  100,  15)],   /*ЖЕЛТЫЙ*/
-		[new ColorType().calcTone(49,  95,  35,   22)], 
-		[new ColorType().calcTone(96,  158, 100,  16)],   /*ЗЕЛЕНЫЙ*/
-		[new ColorType().calcTone(96,  158, 33,   23)],
-		[new ColorType().calcTone(159, 200, 100,  17)],   /*БИРЮЗОВЫЙ*/
-		[new ColorType().calcTone(159, 200, 33,   24)],
-		[new ColorType().calcTone(201, 240, 100,  23)],   /*ГОЛУБОЙ*/
-		[new ColorType().calcTone(201, 240, 36,   27)],
-		[new ColorType().calcTone(241, 280, 100,  49)],   /*СИНИЙ*/
-		[new ColorType().calcTone(241, 280, 38,   36)],
-		[new ColorType().calcTone(280, 360, 100,  27)],    /*ФИОЛЕТОВЫЙ*/
-		[new ColorType().calcTone(280, 360, 35,   30)] 
-	];
-
-	let arryTable_7_Step = [
-		[new ColorType().calcTone(0,   20,  100,  14)],   /*КРАСНЫЙ*/
-		[new ColorType().calcTone(0,   20,  31,   18)],
-		[new ColorType().calcTone(21,  48,  100,  13)],   /*ОРАНЖЕВЫЙ*/
-		[new ColorType().calcTone(21,  48,  33,   17)], 
-		[new ColorType().calcTone(49,  95,  100,  11)],   /*ЖЕЛТЫЙ*/
-		[new ColorType().calcTone(49,  95,  32,   14)], 
-		[new ColorType().calcTone(96,  158, 100,  11)],   /*ЗЕЛЕНЫЙ*/
-		[new ColorType().calcTone(96,  158, 32,   15)],
-		[new ColorType().calcTone(159, 200, 100,  11)],   /*БИРЮЗОВЫЙ*/
-		[new ColorType().calcTone(159, 200, 33,   16)],
-		[new ColorType().calcTone(201, 240, 100,  15)],   /*ГОЛУБОЙ*/
-		[new ColorType().calcTone(201, 240, 31,   18)],
-		[new ColorType().calcTone(241, 280, 100,  30)],   /*СИНИЙ*/
-		[new ColorType().calcTone(241, 280, 33,   23)],
-		[new ColorType().calcTone(280, 360, 100,  18)],    /*ФИОЛЕТОВЫЙ*/
-		[new ColorType().calcTone(280, 360, 32,   20)] 
-	];
-
-	let arryTable_8_Step = [
-		[new ColorType().calcTone(0,   20,  100,  9)],   /*КРАСНЫЙ*/
-		[new ColorType().calcTone(0,   20,  35,   13)],
-		[new ColorType().calcTone(21,  48,  100,  9)],   /*ОРАНЖЕВЫЙ*/
-		[new ColorType().calcTone(21,  48,  34,   13)], 
-		[new ColorType().calcTone(49,  95,  100,  7)],   /*ЖЕЛТЫЙ*/
-		[new ColorType().calcTone(49,  95,  33,   11)], 
-		[new ColorType().calcTone(96,  158, 100,  7)],   /*ЗЕЛЕНЫЙ*/
-		[new ColorType().calcTone(96,  158, 33,   11)],
-		[new ColorType().calcTone(159, 200, 100,  7)],   /*БИРЮЗОВЫЙ*/
-		[new ColorType().calcTone(159, 200, 33,   11)],
-		[new ColorType().calcTone(201, 240, 100,  9)],   /*ГОЛУБОЙ*/
-		[new ColorType().calcTone(201, 240, 33,   12)],
-		[new ColorType().calcTone(241, 280, 100,  26)],   /*СИНИЙ*/
-		[new ColorType().calcTone(241, 280, 34,   18)],
-		[new ColorType().calcTone(280, 360, 100,  15)],    /*ФИОЛЕТОВЫЙ*/
-		[new ColorType().calcTone(280, 360, 26,   14)] 
-	];
-
-	let arrTon = [
-		[new ColorType().calcTone(0, 40, 100, 17)],
-		[new ColorType().calcTone(41, 96, 100, 22)],
-		[new ColorType().calcTone(97, 153, 100, 34)],
-		[new ColorType().calcTone(154, 200, 100, 46)],
-
-		[new ColorType().calcTone(200, 281, 100, 57)],
-		[new ColorType().calcTone(281, 324, 50, 68)],
-		[new ColorType().calcTone(225, 350, 50, 57)],
-		[new ColorType().calcTone(125, 250, 30, 47)]
-	];
-
-	let arrTon2 = [
-		[new ColorType().calcTone(0, 40, 20, 57)],
-		[new ColorType().calcTone(41, 96, 20, 52)],
-		[new ColorType().calcTone(97, 153, 20, 54)],
-		[new ColorType().calcTone(154, 200, 10, 56)],
-
-		[new ColorType().calcTone(200, 281, 10, 57)],
-		[new ColorType().calcTone(281, 324, 10, 58)],
-		[new ColorType().calcTone(125, 260, 10, 37)],
-		[new ColorType().calcTone(225, 160, 15, 37)]
-	];
-
-	let spaRoomColor1 = [
-		arryTable_8_Step[3],
-		arryTable_1_Step[2],
-		arryTable_2_Step[0],
-		arryTable_3_Step[10],
-		arryTable_4_Step[14],
-		arryTable_5_Step[5],
-		arryTable_6_Step[0],
-		arryTable_8_Step[6],
-		arryTable_8_Step[3],
-		arryTable_1_Step[2],
-		arryTable_2_Step[0],
-		arryTable_3_Step[10],
-		arryTable_4_Step[14],
-		arryTable_5_Step[5],
-		arryTable_6_Step[0],
-		arryTable_8_Step[6]
-	];
 
 	function shuffleArray(array) {
 		for (var i = array.length - 1; i > 0; i--) {
@@ -919,191 +573,34 @@ let arrStyleColor =[
 	}
 	
 	
-	
-	function calcColor(callback) {
-		
-		tabsContent.forEach((item, i) => {
-
-			let color1 =  tabsContent[i].querySelectorAll('.color1');
-			let color2 =  tabsContent[i].querySelectorAll('.color2');
-			let color3 =  tabsContent[i].querySelectorAll('.color3');
-			let color4 =  tabsContent[i].querySelectorAll('.color4');
-			let color5 =  tabsContent[i].querySelectorAll('.color5');
-			let color6 =  tabsContent[i].querySelectorAll('.color6');
-			let color7 =  tabsContent[i].querySelectorAll('.color7');
-			let color8 =  tabsContent[i].querySelectorAll('.color8');
-				
-
-			if (tabsBtn[i].classList.contains('active')) {
-				callback(arryTable_1_Step);
-				color1.forEach((item) => {
-				
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_2_Step[ cou1 ]).fillColor() ;
-					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou1 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou1 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou1 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou1 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou1 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou1 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arryTable_1_Step[ cou1 ]).fillColor();
-				});
-
-				color2.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_1_Step[ cou1 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou2 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou2 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou2 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou2 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou2 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou2 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou2 ]).fillColor();
-				});
-				color3.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0],  arryTable_3_Step[ cou2 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou3 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou3 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou3 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou3 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou3 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou3 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou3 ]).fillColor();
-				});
-				color4.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_4_Step[ cou3 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou4 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou4 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou4 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou4 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou4 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou4 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou4 ]).fillColor();
-					// console.log(d);
-				});
-				color5.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_8_Step[ cou5 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou5 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou5 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou5 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou5 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou5 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou5 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou5 ]).fillColor();
-					// console.log(e);
-				});
-				color6.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], spaRoomColor1[ cou6 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou6 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou6 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou6 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou6 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou6 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou6 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou6 ]).fillColor();
-					// console.log(f);
-				});
-				color7.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_7_Step[ cou7 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon2[ cou7 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou7 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou7 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou7 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou7 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou7 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou7 ]).fillColor();
-					// console.log(g);
-				});
-				color8.forEach((item) => {
-					item.style.background = new colorGamma(tabsBtn[0], arryTable_7_Step[ cou8 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[1], arrTon[ cou8 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[2], arrTon[ cou8 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[3], arrTon[ cou8 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[4], arrTon[ cou8 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[5], arrTon[ cou8 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[6], arrTon[ cou8 ]).fillColor();
-					item.style.background = new colorGamma(tabsBtn[7], arrTon[ cou8 ]).fillColor();
-					console.log(cou8);
-				});
-			};
-		});
-	};
-
-	calcColor(counterPlus);
-	
 	//___COUNTER____///
 	function counterPlus(a) {
-		cou1++; cou2++; cou3++; cou4++;  cou5++; cou6++; cou7++; cou8++;
-		// cout.forEach((item)=>{
-		// 	item++
-		// 	if(item > a.length-1){ item = 0}
-		// 		})
-			if (cou1 > a.length-1) {
-				cou1 = 0
+
+		counter.forEach((item, i)=>{
+			item++;
+			if (item > a.length-1) {
+				item = 0
 			};
-			if (cou2 > a.length-1) {
-				cou2 = 0
-			};
-			if (cou3 > a.length-1) {
-				cou3 = 0
-			};
-			if (cou4 > a.length-1) {
-				cou4 = 0
-			};
-			if (cou5 > a.length-1) {
-				cou5 = 0
-			};
-			if (cou6 > a.length-1) {
-				cou6 = 0
-			};
-			if (cou7 > a.length-1) {
-				cou7 = 0
-			};
-			if (cou8 > a.length-1) {
-				cou8 = 0
-			};
+		});
 			console.log('plus')
-			// return a;
+			return a;
 			
 		};
 
 	function counterMinus(a) {
-		cou1--; cou2--; cou3--; cou4--; cou5--; cou6--; cou7--;  cou8--;
-		if (cou1 < 0) {
-			cou1 = a.length-1 
-		};
-		if (cou2 < 0) {
-			cou2 = a.length-1
-		};
-		if (cou3 < 0) {
-			cou3 = a.length-1
-		};
-		if (cou1 <0 )  {
-			cou1 = a.length-1
-		};
-		if (cou2 <0 ) {
-			cou2 = a.length-1
-		};
-		if (cou3 <0 ) {
-			cou3 = a.length-1
-		};
-		if (cou4 <0) {
-			cou4 = a.length-1
-		};
-		if (cou5<0) {
-			cou5 = a.length-1
-		};
-		if (cou6 <0) {
-			cou6 = a.length-1
-		};
-		if (cou7 <0) {
-			cou7 = a.length-1
-		};
-		if (cou8<0) {
-			cou8 = a.length-1
-		};
-		console.log('minus');
+		counter.forEach((item, i)=>{
+			item--;
+			if (item < 0) {
+				item = a.length-1 
+			};
+			console.log('minus');
+
+		});
+		
+		
 		return a;
 	}
-	// cou1, cou2, cou3, cou4, cou5, cou6, cou7, cou8,
+	
 	
 	// function wheel() {
 		// window.addEventListener("mousewheel", function (e) {
@@ -1150,20 +647,7 @@ let arrStyleColor =[
 ///____Convert RGB to HEX______////
 
 	function rgb2hex(rgb) {
-		// let sep = rgb.indexOf(",") > -1 ? "," : " ";
-		// rgb = rgb.substr(4).split(")")[0].split(sep);
-	  
-		// // Convert %s to 0–255
-		// for (let R in rgb) {
-		//   let r = rgb[R];
-		//   if (r.indexOf("%") > -1)
-		// 	rgb[R] = Math.round(r.substr(0,r.length - 1) / 100 * 255);
-		// 	/* Example:
-		// 	75% -> 191
-		// 	75/100 = 0.75, * 255 = 191.25 -> 191
-		// 	*/
-		// }
-
+		
 		// Choose correct separator
 		let sep = rgb.indexOf(",") > -1 ? "," : " ";
 		// Turn "rgb(r,g,b)" into [r,g,b]
@@ -1182,9 +666,6 @@ let arrStyleColor =[
 	  
 		return  r + g + b;
 
-		// return "#" + (rgb.match(/\b(\d+)\b/g).map(function (digit) {
-		// 	return ('0' + parseInt(digit).toString(16)).slice(-2)
-		// })).join('');
 	};
 	
 ///____Convert RGB to HSL______////
