@@ -2,171 +2,210 @@
 /*Plan
 1. Сделать выбор цвета по клику на цвете - DONE
 2   выбор образца цвета по движению мыши - DONE
-3. Функция добавить/убрать блока
+3. Функция добавить/убрать блока - DONE
 4. Выпадающее меню для меню
-5. Кнопка "canculate color"
+5. Кнопка "canculate color" - DONE
 6. Сверстать все страницы
 7. Добавить функционал поиска по сайту
+сайтmap octopus.do/ffvvih840cc
+
 */
+document.addEventListener('DOMContentLoaded', () => {
 
 
-let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
-// let intro_1 = document.querySelectorAll(".intro_1");
-let tabsContent = document.querySelectorAll(".intro_1");
-let tabsNav = document.querySelector(".tabs__nav");
+	let tabsBtn = document.querySelectorAll(".tabs__nav-btn");
+	let tabsContent = document.querySelectorAll(".intro_1");
+	let tabsNav = document.querySelector(".tabs__nav");
+	let intro_1 = document.querySelectorAll(".intro_1")
+	let colors = document.querySelectorAll('span');
+	let icon = document.querySelector('.icon');
+	let editButt = document.querySelectorAll('.butt');
+	let cou = 1;
+	let cou1 = 2;
+	let cou2 = 3;
+	let cou3 = 4;
+	let cou4 = 5;
+	let buff;
+	let textColor = document.createElement('textCol');
 
-let intro_1 = document.querySelectorAll(".intro_1")
-let colors = document.querySelectorAll('span');
-let butt = document.querySelector('.butt');
-let contButt = document.querySelectorAll('.butt');
-
-
-let color1 = document.querySelector('.color1');
-let color2 = document.querySelector('.color2');
-let color3 = document.querySelector('.color3');
-let color4 = document.querySelector('.color4');
-let color5 = document.querySelector('.color5');
-let color6 = document.querySelector('.color6');
-let color7 = document.querySelector('.color7');
-let color8 = document.querySelector('.color8');
-
-//______Active Color_________//
-
-// var isMenuShow = false;
-intro_1.forEach(function (item) {
-	item.addEventListener('click', (e) => {
-		const target = e.target;
-		if (!target.classList.contains("active")) {
-			let colors = document.querySelectorAll('span');
-			colors.forEach(function (item) {
-				item.classList.remove('active');
-			});
-		};
-		target.classList.toggle('active');
-	});
-});
-
-
-//_______Buttuns_______///
-
-contButt[2].addEventListener('click', () => {
-
-	contButt[2].classList.toggle('buttRotate90');
-
-	intro_1.forEach((i, ) => {
-		i.classList.toggle('row');
-	});
-});
-
-contButt[1].addEventListener('click', () => {
-	let colorActive = document.querySelector('span.active');
-	colorActive.style.display = 'none';
-});
-
-let arr = [
-	'color1',
-	'color2',
-	'color3',
-	'color4',
-	'color5',
-	'color6',
-	'color7',
-	'color8'
-];
-
-contButt[0].addEventListener('click', () => {
-	intro_1.forEach((item, i, ) => {
-		if (tabsBtn[i].classList.contains('active')) {
-			let newColor = document.createElement('span'),
-			spanActive = document.querySelector('span.active');
-			
-			// let art = arr[Math.floor(Math.random() * arr.length)];
-			arr.forEach((e, i)=> {
-				
-				newColor.classList.add(+arr[i]);
-			});
-				
-			item.append(newColor)
-			// art += arr[i];
-			// if ( ++i < arr.length ) {
-			// 	newColor.classList.add(art);
-			// }
-				
-			
-			// let art += arr.length[i];
-			
-			// newColor.classList.add(art);
-			// console.log(art)
-			
-			// $(newColor);
-		}
-	});
-});
-
-
-//_______Tabs_________//
-
-function hideTabContent() {
-	tabsContent.forEach(item => {
-		item.style.display = 'none';
-	});
-	tabsBtn.forEach(item => {
-		item.classList.remove('active');
-	});
-};
-
-function showTabsContent(i) {
-	tabsContent[i].style.display = 'flex';
-	tabsBtn[i].classList.add('active');
-};
-
-hideTabContent();
-showTabsContent(0);
-
-let isCalled = false;
-
-tabsNav.addEventListener('click', (event) => {
-	const target = event.target;
-
-	if (target && target.classList.contains('tabs__nav-btn')) {
-		tabsBtn.forEach((item, i) => {
-			if (target == item) {
-				hideTabContent();
-				showTabsContent(i);
-				if (item.classList.contains('active')) {
-					if (!isCalled) {
-						isCalled = true;
-						loadColor()
-					}
-				};
+	function showColorText() {
+		intro_1.forEach((item, i) => {
+			if (tabsBtn[i].classList.contains('active')) {
+				const color = intro_1[i].querySelector('span.active');
+				$(color).each(function (i, el) {
+					const item = $(el).css("backgroundColor");
+					let col = rgb2hex(item);
+					buff = col;
+				})
 			};
 		});
 	};
-});
 
-//______ColorPicker_________//
+	//______Active Color_________//
 
+	intro_1.forEach(function (item) {
+		item.addEventListener('click', (e) => {
+			const target = e.target;
+			
+			if (!target.classList.contains("active")) {
+				$(intro_1).children().removeClass('active');
+				textColor.classList.remove('textColor');
+			};
 
-let deleteColPick = function () {
-	$('.colorpickerHolder').remove();
-};
+			textColor.classList.add('textColor');
+			target.classList.add('active');
+			showColorText();
+			textColor.innerHTML = `<p> ${buff}</p>`;
+			target.append(textColor);
+			editButt[0].removeEventListener('click', gammaListPlus);
+			editButt[1].removeEventListener('click', gammaListMinus);
+			editButt[0].addEventListener('click', actColorCalc);
+			sliceColor();
+		});
+	});
 
-intro_1.forEach(function (color) {
-	color.addEventListener("contextmenu", colorPicker);
-	color.addEventListener("click", deleteColPick);
-});
+	intro_1.forEach(function (item) {
+		item.addEventListener('dblclick', (e) => {
+			const target = e.target;
+			target.classList.remove('active');
+			textColor.remove();
+			editButt[0].addEventListener('click', gammaListPlus);
+			editButt[1].addEventListener('click', gammaListMinus);
+		});
+	});
 
-$(intro_1).on("contextmenu", false);
+	//_______Buttuns_______///
 
-function colorPicker(e) {
-	const contextBox = document.createElement('ColPick');
-	contextBox.classList.add('colorpickerHolder');
-	document.querySelector('body').append(contextBox);
-	let span = e.target;
-	let box = $('.colorpickerHolder');
-	let spanColor = $(span).css('backgroundColor');
-	let col = rgb2hex(spanColor);
+	icon.addEventListener('click', () => {
+		actColorCalc();
+		// changeColorSiwp();
+		// shuffleArray(arrTon2);
+		// shuffleArray(arrTon);
+		// calcColor(cou, cou1, cou2)
 
+	});
+	
+	function gammaListPlus(){
+		counterPlus(arrTon);
+		cou++, cou1++, cou2++; cou3++; cou4++;
+		calcColor(cou, cou1, cou2, cou3, cou4)
+	};
+
+	function gammaListMinus(){
+		counterMinus(arrTon);
+		cou--, cou1--, cou2--; cou3--; cou4--;
+		calcColor(cou, cou1, cou2, cou3, cou4)
+	};
+
+	editButt[0].addEventListener('click', gammaListPlus);
+	editButt[1].addEventListener('click', gammaListMinus);
+
+	var y = 3;
+
+	function addColor() {
+		let arryAddColor = [
+			'<span class = color1 ></span>',
+			'<span class = color2 ></span>',
+			'<span class = color3 ></span>',
+			'<span class = color4 ></span>',
+			'<span class = color5 ></span>',
+			'<span class = color6 ></span>',
+			'<span class = color7 ></span>',
+			'<span class = color8 ></span>'
+		];
+
+		intro_1.forEach((item, i) => {
+			if (tabsBtn[i].classList.contains('active')) {
+				if (y >= arryAddColor.length) {
+					y = 0
+				};
+				let newColor = $(arryAddColor[y++]).insertAfter('span.active');
+				if (tabsBtn[0].classList.contains('active')) {
+					$(newColor).css("background-color", `${arrTon[y]}`);
+				}
+				if (tabsBtn[1].classList.contains('active')) {
+					$(newColor).css("background-color", `${arrTon2[y]}`);
+				}
+				console.log(y);
+			};
+		});
+	};
+
+	editButt[2].addEventListener('click', addColor);
+
+	editButt[3].addEventListener('click', () => {
+		document.querySelector('span.active').style.display = 'none';
+	});
+
+	editButt[4].addEventListener('click', () => {
+		contButt[4].classList.toggle('buttRotate90');
+		intro_1.forEach((i) => {
+			i.classList.toggle('row');
+			if (i.classList.contains('row')) {
+				axisSort = 'x'
+			} else {
+				axisSort = 'y'
+			};
+			console.log(axisSort);
+		});
+	});
+
+	//_______Tabs_________//
+
+	function hideTabContent() {
+		tabsContent.forEach(item => {
+			item.style.display = 'none';
+		});
+		tabsBtn.forEach(item => {
+			item.classList.remove('active');
+		});
+	};
+
+	function showTabsContent(i) {
+		tabsContent[i].style.display = 'flex';
+		tabsBtn[i].classList.add('active');
+		
+	};
+
+	hideTabContent();
+	showTabsContent(0);
+
+	function clickTabsBtn(event){
+		let target = event.target;
+		if (target && target.classList.contains('tabs__nav-btn')) {
+			tabsBtn.forEach((item, i) => {
+				if (target == item) {
+					hideTabContent();
+					showTabsContent(i);
+				};
+			});
+		}; 
+	};
+	
+	$(tabsBtn).on('click', clickTabsBtn);
+
+	function onClick(a){
+		a.addEventListener('click', ()=>{
+			calcColor(cou, cou1, cou2);
+		},{once:true});
+	}
+	onClick(tabsBtn[1]);
+	onClick(tabsBtn[2]);
+	onClick(tabsBtn[3]);
+	onClick(tabsBtn[4]);
+
+	//______ColorPicker_________//
+
+	let deleteColPick = function () {
+		$('.colorpickerHolder').remove();
+	};
+
+	intro_1.forEach(function (color) {
+		color.addEventListener("contextmenu", colorPicker);
+		color.addEventListener("click", deleteColPick);
+	});
+
+	$(intro_1).on("contextmenu", false);
 
 	function rgb2hex(color) {
 		return "#" + (color.match(/\b(\d+)\b/g).map(function (digit) {
@@ -174,399 +213,482 @@ function colorPicker(e) {
 		})).join('');
 	};
 
-	$(box).css({
-		"position": "absolute",
-		"left": e.pageX + "px",
-		"top": e.pageY + "px"
-	});
+	function colorPicker(e) {
+		const contextBox = document.createElement('ColPick');
+		contextBox.classList.add('colorpickerHolder');
+		document.querySelector('body').append(contextBox);
+		let span = e.target;
+		let box = $('.colorpickerHolder');
+		let spanColor = $(span).css('backgroundColor');
+		let col = rgb2hex(spanColor);
 
-	$(box).ColorPicker({
-		flat: true,
-		color: col,
-		onChange: function (hsb, hex, rgb) {
-			$(span).css('backgroundColor', '#' + hex, );
-		}
-	});
-}
+		$(box).css({
+			"position": "absolute",
+			"left": e.pageX + "px",
+			"top": e.pageY + "px"
+		});
 
-//______Swip_________//
+		$(box).ColorPicker({
 
-let clickStartX = 0;
-let clickStartY = 0;
-let clickEndX = 0;
-let clickEndY = 0;
-
-
-colors.forEach(function (color) {
-
-
-	color.addEventListener('mousedown', function (event) {
-		clickStartX = event.clientX;
-		clickStartY = event.clientY;
-		// console.log(event)
-	}, false);
-
-	color.addEventListener('mouseup', function (event) {
-		clickEndX = event.clientX;
-		clickEndY = event.clientY;
-		handleGesure();
-		// console.log(event)
-	}, false);
-});
-
-function handleGesure() {
-	var xAbs = Math.abs(clickStartX - clickEndX);
-	var yAbs = Math.abs(clickStartY - clickEndY);
-	if (xAbs > 10 || yAbs > 10) {
-		if (xAbs > yAbs) {
-			if (clickEndX < clickStartX) {
-
-				changeColorLeft();
-
-				console.log('left!');
-			} else {
-				//  changeColorLeft (colAct)
-				console.log('right!'); /*СВАЙП ВПРАВО*/
+			flat: true,
+			color: col,
+			onChange: function (hsb, hex, rgb) {
+				$(span).css('backgroundColor', '#' + hex, );
 			}
-			// } else {
-			// 	if (clickEndY < clickStartY) {
-			//         changeColorUp()
-			// 		console.log('up!');
-			// 	} else {
-			//         changeColorDown()
-			// 		console.log('down!');
-			// 	}
-		}
+		});
+
 	}
-};
+
+	/*______CalcColor____________________
+	из выбранного цвета генерируется массив цветов в 
+	8 параметрах тона и в 8 параметрах цвета_*/
+	let result;
+
+	function sliceColor(){
+		$('span.active').each(function (indx, el) {
+			const color = $(el).css("backgroundColor"),
+				[r, g, b] = color.match(/\d+/g);
+			const colHsl = RGB2HSL(r, g, b);
+			result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(colHsl).slice(1);
+			// console.log(result)
+			return result;
+		});
+	};
+	
+	function actColorCalc() {
+			let i =0;
+
+			let h = result[0],
+				s = result[1],
+				l = result[2],
+				r;
+				r = 10;
+		
+		
+		let	ArrHue = [
+			result[0]-10,
+			result[0]-60,
+			result[0]-120
+			];
+			shuffleArray(ArrHue)
+			
+			$('span.active').siblings('.color1').css("background", `hsl(${ ArrHue[0] }, ${ result[1] }%, ${  result[2] }%)`);
+			$('span.active').siblings('.color2').css("background", `hsl(${ ArrHue[1] }, ${ result[1] }%, ${  result[2] }%)`);
+			$('span.active').siblings('.color3').css("background", `hsl(${ ArrHue[2] }, ${ result[1] }%, ${  result[2] }%)`);;
+			// $('span.active').siblings('.color4').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			// $('span.active').siblings('.color5').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			// $('span.active').siblings('.color6').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			// $('span.active').siblings('.color7').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			// $('span.active').siblings('.color8').css("background", `hsl(${ ArrLig }, ${ arrSatLight}%, ${arrSatLight}%)`);
+			
 
 
-// var initialPoint;
-// var finalPoint;
-// colors.forEach(function (color) {
-// 	color.addEventListener('touchstart', function (event) {
-// 		event.preventDefault();
-// 		event.stopPropagation();
-// 		initialPoint = event.changedTouches[0];
-// 	}, false);
+			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
+			
+			console.log(result[2]);
+	};
+	// actColorCalc()
 
-// 	color.addEventListener('touchend', function (event) {
-// 		event.preventDefault();
-// 		event.stopPropagation();
-// 		finalPoint = event.changedTouches[0];
-// 		var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
-// 		var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
-// 		if (xAbs > 10 || yAbs > 10) {
-// 			if (xAbs > yAbs) {
-// 				if (finalPoint.pageX < initialPoint.pageX) {
-// 					changeColorLeft();
-// 					console.log('left!');
-// 				} else {
-// 					console.log('right!');/*СВАЙП ВПРАВО*/
-// 				}
-// 			} else {
-// 				if (finalPoint.pageY < initialPoint.pageY) {
-// 					console.log('up!');
-// 				} else {
-// 					console.log('down!');
-// 				}
-// 			}
-// 		}
-// 	}, false);
-// });
+	function randomInteger(min, max) {
+		// случайное число от min до (max+1)
+		let rand = min + Math.random() * (max - min);
+		return Math.floor(rand);
+	}
 
-/*______CalcColor____________________
-из выбранного цвета генерируется массив цветов в 
-девяти параметрах тона и в 9 параметрах цвета_*/
-
-
-// let intro_1Active = document.querySelector('.tabs__nav-btn.active');
-
-// butt.addEventListener('click',()=> {
-
-// console.log(intro_1Active)});
-
-// document.addEventListener("DOMContentLoaded", 
-function createGamma(h, s, l) {
-
-	h = randomInteger(100, 170);
-	s = randomInteger(50, 100);
-	l = randomInteger(50, 100);
-
-	let a = h - 30,
-		b = s + 50,
-		c = l - 10;
-	let d = h - 20,
-		e = s - 20,
-		f = l - 5;
-	let H1 = h - 50,
-		S1 = s + 10,
-		L1 = l + 10;
-	let H2 = h + 20,
-		S2 = s - 5,
-		L2 = l + 5;
-
-	if (h >= 30 && h <= 100) {
-		s -= 10,
-			l -= 20;
+	class colorGamma {
+		constructor(tabsBtn, array) {
+			this.tabsBtn = tabsBtn;
+			this.array = array;
+		}
+		fillColor() {
+			if (this.tabsBtn.classList.contains('active')) {
+				return this.array;
+			}
+		}
 	};
 
-
-	color4.style.background = `hsl(${d}, ${e}%, ${f}%)`;
-	color3.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
-
-};
-
-function createGamma2(h, s, l) {
-
-	h = randomInteger(100, 170);
-	s = randomInteger(50, 100);
-	l = randomInteger(50, 100);
-
-	let a = h - 30,
-		b = s + 50,
-		c = l - 10;
-	let d = h - 20,
-		e = s - 20,
-		f = l - 5;
-	let H1 = h - 50,
-		S1 = s + 10,
-		L1 = l + 10;
-	let H2 = h + 20,
-		S2 = s - 5,
-		L2 = l + 5;
-
-	if (h >= 30 && h <= 100) {
-		s -= 10,
-			l -= 20;
+	class calculationColor {
+		constructor(counter, tabsBtn, arrCol) {
+			this.counter = counter;
+			this.tabsBtn = tabsBtn;
+			this.arrCol = arrCol;
+		}
 	};
 
-	color1.style.background = `hsl(${h}, ${s}%, ${l}%)`;
-	color2.style.background = `hsl(${a}, ${b}%, ${c}%)`;
-};
-//   createGamma();
-//сделать так что бы при загрузке таба запускалась фунция.
+	class ColorType {
+		constructor(Hue, Sat, Light) {
+			this.Hue = Hue;
+			this.Sat = Sat;
+			this.Light = Light;
+		}
+		calcTone(a, b, c, d) {
+			this.Hue = randomInteger(a, b);
+			if (this.Hue > a && this.Hue < b) {
+				this.Sat = c, this.Light = d
+			}
+			let res = `hsl(${this.Hue}, ${this.Sat}%, ${this.Light}%)`;
+			return res;
+		};
+	};
 
-function calcColor() {
+	let arrTon = [
+		[new ColorType().calcTone(0, 40, 100, 17)],
+		[new ColorType().calcTone(41, 96, 100, 22)],
+		[new ColorType().calcTone(97, 153, 100, 34)],
+		[new ColorType().calcTone(154, 200, 100, 46)],
+		[new ColorType().calcTone(200, 281, 100, 57)],
+		[new ColorType().calcTone(281, 324, 50, 68)],
+		[new ColorType().calcTone(325, 360, 100, 77)],
+	];
 
-	$('span.active').each(function (indx, el) {
+	let arrTon2 = [
+		[new ColorType().calcTone(0, 40, 20, 57)],
+		[new ColorType().calcTone(41, 96, 20, 52)],
+		[new ColorType().calcTone(97, 153, 20, 54)],
+		[new ColorType().calcTone(154, 200, 20, 56)],
+		[new ColorType().calcTone(200, 281, 20, 57)],
+		[new ColorType().calcTone(281, 324, 20, 58)],
+		[new ColorType().calcTone(325, 360, 10, 57)]
+	];
 
-		let colAct = document.querySelector('span.active');
-		const color = $(el).css("backgroundColor"),
-			[r, g, b] = color.match(/\d+/g);
-		const colHsl = RGB2HSL(r, g, b);
-		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
-		let res = regexp.exec(colHsl).slice(1);
 
-		let H = res[0],
-			S = res[1],
-			L = res[2];
+	function shuffleArray(array) {
+		for (var i = array.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+	};
 
-		let H1 = +res[0] + 150,
-			S1 = +res[1] + 10,
-			L1 = res[2] - 5;
+	function calcColor(a, b, c, d, e) {
 
-		if (H1 >= 30 && H1 <= 100) {
-			S1 -= 10,
-				L1 -= 10;
+		intro_1.forEach((item, i) => {
+
+			let color1 = intro_1[i].querySelectorAll('.color1');
+			let color2 = intro_1[i].querySelectorAll('.color2');
+			let color3 = intro_1[i].querySelectorAll('.color3');
+			let color4 = intro_1[i].querySelectorAll('.color4');
+			let color5 = intro_1[i].querySelectorAll('.color5');
+				
+				
+
+			if (tabsBtn[i].classList.contains('active')) {
+
+				
+
+				color1.forEach((item) => {
+					
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[a]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[a]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[a]).fillColor();
+					console.log(a);
+				});
+
+				color2.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[b]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[b]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[b]).fillColor();
+					console.log(b);
+				});
+
+				color3.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[c]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[c]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[c]).fillColor();
+					console.log(c);
+				})
+				color4.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[d]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[d]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[d]).fillColor();
+					console.log(c);
+				})
+				color5.forEach((item) => {
+					item.style.background = new colorGamma(tabsBtn[0], arrTon[e]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[1], arrTon2[e]).fillColor();
+					item.style.background = new colorGamma(tabsBtn[2], arrTon[e]).fillColor();
+					console.log(c);
+				})
+			
+			};
+
+		});
+		// $('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
+	};
+
+	calcColor(cou, cou1, cou2)
+	
+	//___COUNTER____///
+
+	function counterPlus(a) {
+		
+			if (cou == a.length-1) {
+				cou =-1
+			};
+			if (cou1 == a.length-1) {
+				cou1 = -1
+			};
+			if (cou2 == a.length-1) {
+				cou2 = -1
+			};
+			if (cou3 == a.length-1) {
+				cou3 = -1
+			};
+			if (cou4 == a.length-1) {
+				cou4 = -1
+			};
 		};
 
-		let H2 = res[0] - 10,
-			S2 = +res[1] + 10,
-			L2 = res[2] - 20;
+	function counterMinus(a) {
+		
+		if (cou == 0) {
+			cou = a.length 
+		};
+		if (cou1 == 0) {
+			cou1 = a.length
+		};
+		if (cou2 == 0) {
+			cou2 = a.length
+		};
+		if (cou3 == 0) {
+			cou4 = a.length
+		};
+		if (cou4 == 0) {
+			cou4 = a.length
+		};
+	}
+	
+	// function wheel() {
+		// window.addEventListener("mousewheel", function (e) {
+			
+		// 	if (e.wheelDelta / 120 > 0) {
+		// 		calcColor(cou++, cou1++, cou2++);
+		// 		console.log('plus');
+		// 	} else {
+		// 		calcColor(cou--, cou1--, cou2--);
+		// 		console.log('minus');
+		// 	}
+		// });
+	// }
+	// wheel();
 
-		let H3 = +res[0] + 50,
-			S3 = +res[1] + 10,
-			L3 = res[2] - 20;
+	
 
-		color1.style.background = `hsl(${H1}, ${S1}%, ${L1}%)`;
-		color2.style.background = `hsl(${H2}, ${S2}%, ${L2}%)`;
-		color3.style.background = `hsl(${H3}, ${S3}%, ${L3}%)`;
-		color4.style.background = `hsl(${H1}, ${S2}%, ${L1}%)`;
 
-		colAct.style.backgroundColor = `hsl(${H}, ${S}%, ${L}%)`;
-		return H, S, L, H1, S1, L1;
+	//______SORTABLE_______////
+
+	let axisSort = 'y';
+	
+	window.addEventListener('mousemove', function (event) {
+		
+	
+		if (event.clientX > 0 && event.clientX < 30 ||
+			event.clientY > 115 && event.clientY < 145) {
+				
+			document.documentElement.style.cursor = "move";
+			$(function () {
+				$('div').sortable({
+					"disabled": false,
+					axis: axisSort
+				});
+			});
+
+		} else {
+			document.documentElement.style.cursor = "default";
+			$(function () {
+				$('div').sortable({
+					"disabled": true
+				});
+				
+			});
+		};
 
 	});
-};
+	
+///____Convert RGB to HSL______////
 
-function changeColorLeft() {
+	function RGB2HSL(r, g, b) {
 
-	$('span.active').each(function (indx, el) {
+		r /= 255;
+		g /= 255;
+		b /= 255;
+		let cmin = Math.min(r, g, b),
+			cmax = Math.max(r, g, b),
+			delta = cmax - cmin,
+			h = 0,
+			s = 0,
+			l = 0;
 
-		let colAct = document.querySelector('span.active');
-		const color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-		const colHsl = RGB2HSL(r, g, b);
-		const regexp = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g;
-		let res = regexp.exec(colHsl).slice(1);
-		res[0] = + res[0] + 10;
-		colAct.style.backgroundColor = `hsl(${res[0]}, ${res[1]}%, ${res[2]}%)`;
-		console.log(colAct);
-		// return h, s, l;
+		if (delta == 0)
+			h = 0;
+		else if (cmax == r)
+			h = ((g - b) / delta) % 6;
+		else if (cmax == g)
+			h = (b - r) / delta + 2;
+		else
+			h = (r - g) / delta + 4;
+
+		h = Math.round(h * 60);
+
+		if (h < 0)
+			h += 360;
+
+		l = (cmax + cmin) / 2;
+		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+		s = +(s * 100).toFixed(1);
+		l = +(l * 100).toFixed(1);
+
+		return "hsl(" + h + "," + s + "%," + l + "%)";
+
+	};
+
+	//______Swip_________//
+
+	let clickStartX = 0;
+	let clickStartY = 0;
+	let clickEndX = 0;
+	let clickEndY = 0;
+
+	intro_1.forEach(function (item) {
+		item.addEventListener('mouseover', (e) => {
+			
+					const target = e.target;
+		
+				target.addEventListener('mousedown', function (event) {
+					
+					clickStartX = event.clientX;
+					clickStartY = event.clientY;
+					
+					// console.log(event)
+				}, false);
+	
+				target.addEventListener('mouseup', function (event) {
+					
+					clickEndX = event.clientX;
+					clickEndY = event.clientY;
+					
+					handleGesure();
+					
+				}, false);
+			// }
+		});
 	});
-};
 
-//  let coco = RGB2HSL(r,g,b);
+	function handleGesure() {
+		let xAbs = Math.abs(clickStartX - clickEndX);
+		let yAbs = Math.abs(clickStartY - clickEndY);
 
-//  function rgb2hex (color) { return "#"+(color.match(/\b(\d+)\b/g).map(function(digit)
-//  { return ('0' + parseInt(digit).toString(16)).slice(-2) })).join(''); };
-
-function RGB2HSL(r, g, b) {
-
-	r /= 255;
-	g /= 255;
-	b /= 255;
-	let cmin = Math.min(r, g, b),
-		cmax = Math.max(r, g, b),
-		delta = cmax - cmin,
-		h = 0,
-		s = 0,
-		l = 0;
-
-	if (delta == 0)
-		h = 0;
-	else if (cmax == r)
-		h = ((g - b) / delta) % 6;
-	else if (cmax == g)
-		h = (b - r) / delta + 2;
-	else
-		h = (r - g) / delta + 4;
-
-	h = Math.round(h * 60);
-
-	if (h < 0)
-		h += 360;
-
-	l = (cmax + cmin) / 2;
-	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-	s = +(s * 100).toFixed(1);
-	l = +(l * 100).toFixed(1);
-
-	return "hsl(" + h + "," + s + "%," + l + "%)";
-
-};
+		if (xAbs >30 || yAbs > 30) {
+			
+			if (xAbs > yAbs) {
+				if (clickEndX < clickStartX) {
+					$('span.active').css('backgroundColor', 
+						`hsl(${result[0]}, ${result[1]}%, ${result[2] -5}%)`);
+						console.log(result[2])
+						console.log('left')
+				} else {
+					$('span.active').css('backgroundColor', 
+						`hsl(${result[0]}, ${result[1]}%, ${+result[2] + 5}%)`);
+						console.log(result[2])
+						console.log('right')
+				}
+			} else {
+				if (clickEndY < clickStartY) {
+					$('span.active').css('backgroundColor', 
+						`hsl(${result[0]}, ${+result[1]+ 10}%, ${result[2] }%)`);
+						console.log('up')
+				} else {
+					$('span.active').css('backgroundColor', 
+						`hsl(${result[0]}, ${result[1]- 10}%, ${result[2] }%)`);
+						console.log('down')
+				}
+			}
+		}
+	};
 
 
-// let colAct = document.querySelector('.color.active');
+	var initialPoint;
+	var finalPoint;
+	intro_1.forEach(function (item) {
+		item.addEventListener('touchstart', function (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			initialPoint = event.changedTouches[0];
+		}, false);
 
-// let  coco = RGB2HSL(colAct);
+		item.addEventListener('touchend', function (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			finalPoint = event.changedTouches[0];
+			var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
+			var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
+			if (xAbs > 10 || yAbs > 10) {
+				if (xAbs > yAbs) {
+					if (finalPoint.pageX < initialPoint.pageX) {
+						changeColorSiwp();
+						console.log('left!');
+					} else {
+						console.log('right!');/*СВАЙП ВПРАВО*/
+					}
+				} else {
+					if (finalPoint.pageY < initialPoint.pageY) {
+						// calcColor(cou++, cou1++, cou2++);
+						console.log('up!');
+					} else {
+						// calcColor(cou--, cou1--, cou2--);
+						console.log('down!');
+					}
+				}
+			}
+		}, false);
+	});
 
-// coco = `hsl(${4}, ${54}%, ${45}%)`;
-
-// colActh = 360, s = 100, l = 50
-
-
-
-// let h = 360, s = 100, l = 50 ;
-
-function randomInteger(min, max) {
-	// случайное число от min до (max+1)
-	let rand = min + Math.random() * (max - min);
-	return Math.floor(rand);
-}
-//   function randomInteger2(min, max, e, r) {
-// 	// случайное число от min до (max+1)
-// 	let rand = min + Math.random() * (max  - min) + (r-e);
-// 	return Math.floor(rand);
-//   }
-
-// h = randomInteger2(20, 50, 80, 90);
-
-
-// if (h >= 30 && h <=100) {
-// 	s -=  10,
-// 	l -= 20;
-
-// };
-
-// colAct.style.background = `hsl(${h}, ${s}%, ${l}%)`;
-// // 					/
-// 					console.log (h, s, l);
-// 				// 		});
-// };
-
-
-
-
+// ХОРОШАЯ ГАММА 
+	// H_2 = H_1 - 100; S_2 = 100;	L_2 =  L_1 + 3;
+	// H_3 = H_1 - 180;	S_3 = 32;	L_3 = 14;
 
 
+	// let colAct = document.querySelector('.color.active');
+
+	// let  coco = RGB2HSL(colAct);
+
+	// coco = `hsl(${4}, ${54}%, ${45}%)`;
+
+	// colActh = 360, s = 100, l = 50
+
+	// let h = 360, s = 100, l = 50 ;
+
+	//   function randomInteger2(min, max, e, r) {
+	// 	// случайное число от min до (max+1)
+	// 	let rand = min + Math.random() * (max  - min) + (r-e);
+	// 	return Math.floor(rand);
+	//   }
+
+	// h = randomInteger2(20, 50, 80, 90);
 
 
-// function generateHslaColors (saturation, lightness, alpha, amount) {
-// 	let colorsQ = []
-// 	let huedelta = Math.trunc(360 / amount)
+	// if (h >= 30 && h <=100) {
+	// 	s -=  10,
+	// 	l -= 20;
 
-// 	for (let i = 0; i < amount; i++) {
-// 	  let hue = i * huedelta
-// 	  colorsQ.style.backgroundColor = `hsla(${hue},${saturation}%,${lightness}%,${alpha})`;
-// 	}
-
-// 	console.log(colorsQ);
-// };
-// generateHslaColors(100, 50, 50);
-
-
-// function setTheme(H, inputType) {
-// 	// Convert hex to RGB first
-// 	let r = 0, g = 0, b = 0;
-// 	// if (H.length == 4) {
-// 	//   r = "0x" + H[1] + H[1];
-// 	//   g = "0x" + H[2] + H[2];
-// 	//   b = "0x" + H[3] + H[3];
-// 	// } else if (H.length == 7) {
-// 	//   r = "0x" + H[1] + H[2];
-// 	//   g = "0x" + H[3] + H[4];
-// 	//   b = "0x" + H[5] + H[6];
-// 	// }
-// 	// Then to HSL
-//
-
-// 	document.documentElement.style.setProperty(`--${inputType}-color-h`, h);
-// 	document.documentElement.style.setProperty(`--${inputType}-color-s`, s + '%');
-// 	document.documentElement.style.setProperty(`--${inputType}-color-l`, l + '%');
-//   }
-
-//   console.log(setTheme(colors))
+	// };
 
 
 
+	// function generateHslaColors (saturation, lightness, alpha, amount) {
+	// 	let colorsQ = []
+	// 	let huedelta = Math.trunc(360 / amount)
+
+	// 	for (let i = 0; i < amount; i++) {
+	// 	  let hue = i * huedelta
+	// 	  colorsQ.style.backgroundColor = `hsla(${hue},${saturation}%,${lightness}%,${alpha})`;
+	// 	}
+
+	// 	console.log(colorsQ);
+	// };
+	// generateHslaColors(100, 50, 50);
 
 
 
-// $(colAct).each(function(indx, el){
-// 	$(el).css("backgroundColor").style.setProperty(' --primary-color--dark', el.target)
-//   });
-// $(colAct).each(function(indx, el){
-// 	let  color = root.setProperty(' --primary-color--dark', item);
-// 	// let  color = $(el).css("backgroundColor"), [r,g,b] = color.match(/\d+/g);
-// 	setTheme();
-// 	//  r =+r+ 15;
-// 	//  g = +g+ 15;
-// 	//  b =+b+ 15;
-// 	 colAct.style.backgroundColor = color;
-//  colAct.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-
-// let colAct = document.querySelector('.color.active');
-// colAct.classList.add('.color4');
-// console.log(colAct);
-
-
-//
-
-// $(item).each(function(indx, el){
-
-// 	let  color = $(el).css("backgroundColor"), [h,s,l] = color.match(/\d+/g);
-// 	 h -= 15;
-// 	 s = +s+ 15;
-// 	 l =+l+ 15;
-// 	item.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
-// 	rgb2Hsl(color);
-// 	console.log (item);
-// 		});
-
-// rgbToHsl();
-// let	x = 100,
-// 	y = 50,
-// 	z = 50;
-// let = ChangedColor;
-// ChangedColor = `hsl(${x}, ${y}%, ${z}%)`;
+});
