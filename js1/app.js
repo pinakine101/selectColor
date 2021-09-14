@@ -460,11 +460,7 @@ let arrayHue = [
 // 	50, 50, 50, 50,  50, 50, 50, 50
 // ];
 let arraySatur = [
-<<<<<<< HEAD
-	40, 40, 40, 60,  80, 90, 95, 100
-=======
 	20, 15, 10, 5, 20, 15, 10, 5,
->>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 ];
 // let arraySatur = [
 // 	97,	93,	72,	53,  	48,	28,	18,	13
@@ -490,13 +486,8 @@ let arrStyleColor =[
 					// 	i = 0
 					// };
 					let newArrayLight = gammaLight.map((item, i) =>{
-<<<<<<< HEAD
-						
-							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.08)}
-=======
 						let delta;
 							 if(result[2]<= 100 && result[2] > 97){delta = 100 - (result[2]/1.23)}
->>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 						else if(result[2] <= 13 && result[2] >= 0) {delta =0}
 
 						else if(result[2] <= gammaLight[0]  && result[2] >=  gammaLight[1])   {delta = gammaLight[0] - result[2]}
@@ -510,50 +501,21 @@ let arrStyleColor =[
 
 						return item - delta;
 					});
-<<<<<<< HEAD
-					
-					let newArrayHue = gammaHue.map(item =>{
-						// let deltaHue;
-						// if(gammaHue[i]){ deltaHue = gammaHue[i] - (result[0]/18) };
-
-							
-
-						// console.log(item)
-						return  item;
-						
-=======
 
 					let newArrayHue = gammaHue.map(item =>{
 						let deltaHue = (200- result[0]);
 						return  +item + deltaHue ;
->>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 					});
 
 					    
 
 					// counterPlus(newArrayHue);
-<<<<<<< HEAD
-					// counterPlus(newArrayLight);
-					console.log(newArrayHue[cou2])
-=======
 					// counterPlus(arrStyleColor);
 					
->>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
 
 					$('span.active').siblings(item).css("background", 
 							`hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]}%)`);
 
-<<<<<<< HEAD
-
-					if(newArrayHue[cou1]<= 22  && newArrayHue[cou1]>= 354)  
-					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-0}%)`)}
-
-					else if( newArrayHue[cou2] <= 48  && newArrayHue[cou2] >= 23)  
-					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
-
-					else if( newArrayHue[cou2] <= 94  && newArrayHue[cou2] >= 49) 
-					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
-=======
 						   if(newArrayHue[cou2]>= 0  && newArrayHue[cou2]<= 22)  
 					{$(tabsContent).children(arrStyleColor[0]).css("background", `hsl(${newArrayHue[cou1]}, ${gammaSat[cou1]}%, ${ +newArrayLight[i] + 85 }%)`)
 					 $(tabsContent).children(arrStyleColor[1]).css("background", `hsl(${newArrayHue[cou2]}, ${gammaSat[cou2]}%, ${ +newArrayLight[i] + 82 }%)`)
@@ -648,9 +610,7 @@ let arrStyleColor =[
 					//    if(newArrayLight[i] == 100){$(tabsContent).siblings(item).css("background", `hsl(${newArrayHue[i]}, ${50}%, ${ newArrayLight[i]-11}%)`)}
 					// else if(newArrayLight[i] == 0){$(tabsContent).siblings(item).css("background", `hsl(${newArrayHue[i]}, ${50}%, ${ newArrayLight[i]+11}%)`)}
 			});
->>>>>>> 172a8b6e33bf7dcd8b9e94e2be0f27462ada0ae2
-
-					else if( newArrayHue[cou2] <= 159 && newArrayHue[cou2] >= 95) 
+					if( newArrayHue[cou2] <= 159 && newArrayHue[cou2] >= 95) 
 					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
 
 					else if( newArrayHue[cou2] <= 200 && newArrayHue[cou2] >= 160) 
@@ -665,7 +625,7 @@ let arrStyleColor =[
 					else if( newArrayHue[cou2] <= 353 && newArrayHue[cou2] >= 282) 
 					{$('span.active').siblings(item).css("background", `hsl(${newArrayHue[cou2]}, ${100}%, ${newArrayLight[i]-20}%)`)}
 				
-			});
+			
 			
 			callback(arrStyleColor);
 			$('span.active').css('backgroundColor', `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`);
