@@ -39,9 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	let forslice ;
 
 
+// let arrayLight =[
+// 	97,	93,	72,	53,  	48,	28,	18,	13
+// ];
 let arrayLight =[
-	97,	93,	72,	53,  	48,	28,	18,	13
+	4,	2,	18,	13, 48,	28,	18,	13
 ];
+
 // let arrayLight = [
 // 	60,	53,	483,	72, 72,	28,	90, 48
 // ];
@@ -230,7 +234,8 @@ let arrStyleColor =[
 				};
 				counterPlus(arrayHue);
 				y++;
-				let newColor = $(arrStyleColor[cou1]).insertAfter('span.active');
+				
+				let newColor = $(arryAddColor[y]).insertAfter('span.active');
 				if (tabsBtn[0].classList.contains('active')){
 					$(newColor).css("background-color", `hsl(${arrayHue[cou1]}, ${arraySatur[cou1]}%, ${ arrayLight[cou1]}%)`);
 				};
