@@ -57,8 +57,8 @@ let arrayHueMain = [ 353, 22, 48, 94,  159, 200, 242, 281 ];
 let arrayLight =[ 95, 92,	79,	46, 43,	22,	14,	9 ];
 
 
-let arrayHueSleep = [	259, 190, 210, 190,  70, 48, 70, 180 ];
-let arraySaturSleep = [ 20, 25,20, 10 , 40, 20, 10, 5 ];
+let arrayHueSleep = [	150, 190, 210, 190,  70, 48, 70, 180 ];
+let arraySaturSleep = [ 20, 55, 50, 50 , 70, 20, 10, 5 ];
 let arrayLightSleep =[ 95, 92,	79,	46, 43,	43,	79,	92 ];
 
 
